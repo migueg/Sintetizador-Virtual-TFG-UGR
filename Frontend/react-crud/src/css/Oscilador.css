@@ -1,0 +1,110 @@
+.container{
+   
+    border-radius: 5%;
+    
+  
+}
+.col{
+    float: left;
+    width: 45%;
+    padding: 10px;
+    height: 300px; /* Should be removed. Only for demonstration */
+    border-style: solid;
+}
+
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  /* Responsive layout- las columnas se ponen una encima de otra*/
+@media screen and (max-width: 600px) {
+    .col {
+      width: 100%;
+    }
+  }
+
+.toggle-switch{
+  float: left;
+  width: 60px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  text-align: left;
+
+}
+
+.toggle-switch-checkbox{
+  margin-left: 10%;
+  margin-top: 10%;
+  /*Icrementamos tamaño checkbox*/ 
+  -ms-transform: scale(3); /* IE */
+  -moz-transform: scale(3); /* FF */
+  -webkit-transform: scale(3); /* Safari y Chrome */
+  -o-transform: scale(3); /* Opera */
+  padding: 10px;
+}
+
+.WaveSelector{
+  
+}
+
+/* Selector de onda*/
+
+.WaveSelector{
+  width: 100%;
+  padding-bottom: 5%;
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  
+}
+.selector  {
+    font-family: 'Arial';
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
+    padding: 24px 20px;
+    outline: 0;
+    border: 4px groove #34b2da;
+    border-radius: 13px;
+    background: #b2fffc;
+    color: #7b7b7b;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+  .selector::-ms-expand {
+      display: none;
+  }
+  .selector:hover,
+  .selector:focus {
+      color: #000000;
+      background: #b9abab;
+  }
+  .selector:disabled {
+      opacity: 0.2;
+      pointer-events: none;
+  }
+.select_arrow {
+  position: absolute;
+  top: 27px;
+  right: 23px;
+  width: 17px;
+  height: 17px;
+  border: solid #141414;
+  border-width: 0 4px 4px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+.selector:hover ~ .select_arrow,
+.selector:focus ~ .select_arrow {
+  border-color: #000000;
+}
+.selector:disabled ~ .select_arrow {
+  border-top-color: #cccccc;
+}
