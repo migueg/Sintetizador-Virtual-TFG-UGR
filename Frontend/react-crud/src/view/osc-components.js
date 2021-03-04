@@ -1,9 +1,15 @@
-import  {React,Component,Text,View} from 'react';
+import  React, {Component,Text,View} from 'react';
 import {synth} from '../controller/synth' ;
 import {Container,Row,Col } from 'react-bootstrap';
+import {Knob,types as knobTypes} from './elements/limitedKnob';
+//import {Knob} from 'react-rotary-knob';
+//import * as skins from 'react-rotary-knob-skin-pack';
+
 import '../css/Oscilador.css';
 
-var sinte = new synth();
+export var sinte = new synth();
+
+
 
 // Comprueba si esta encendido o apagado el interruptor
 function checkChecked() {
@@ -51,7 +57,7 @@ function checkWave(osc) {
                 sinte.selectWave('B',"sine");
                 break;
             case "square":
-                console.log("Aqui");
+              
                 sinte.selectWave('B',"square");
                 break;
             case "sawtooth":
@@ -120,8 +126,7 @@ export const Osciladorx = () => {
               <option value="square" >Square</option>
               <option value="sawtooth">Sawtooth</option>
           </select>
-          <div class="select_arrow">
-        </div>
+          <div className="select_arrow"></div>
       </div>
     
       
@@ -130,13 +135,50 @@ export const Osciladorx = () => {
 }
 
 const Oscilador2 = () => {
-    return(
    
+    return(
+       
         <div style={{marginLeft: 10}} >
         <InterruptorB/>
         <h3>Oscilador B</h3> 
-
-      
+        <Knob
+            style={{ display: "inline-block" }}
+            min={0}
+            max={100}
+            unlockDistance={0}
+            preciseMode={false}
+            width={200} 
+            height={200}
+            type={knobTypes.OSC_VOLUM}
+            osc = {'B'}
+            
+            
+        />
+       {/*  <Knob  
+            min={0} 
+            max={100}
+            skin={skins.s15} 
+            rotateDegrees={180}  //Se situa el  0 abajo
+            defaultValue={40} 
+            //value={state.volumen}
+            unlockDistance={0} //Distancia minima para desbloquear la perilla 
+            onChange={(val)=>{
+                const maxDistance = 200;
+                console.log("Val" +val);
+                console.log("Vol" + state.volumen);
+                let distance = Math.abs(val - state.volumen);
+                console.log(distance);
+                if (distance > maxDistance) {
+                  return;
+                } else {
+                    state.volumen = val;
+                }
+              }
+            } 
+                
+        
+        /> */}
+     
         <div className="WaveSelector">
           <select className="selector" name="selector" onClick={()=>checkWave('B')} id="selectorB">
               <option value="sine"  >Sine</option>
@@ -144,8 +186,8 @@ const Oscilador2 = () => {
               <option value="square" >Square</option>
               <option value="sawtooth">Sawtooth</option>
           </select>
+          <div className="select_arrow"></div>
       </div>
-      
         </div>
 
     )
