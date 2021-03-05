@@ -51,15 +51,17 @@ class Synth{
             case 'B':
                 this.#osciladorB.setWave(wave);
                 break;
+            default:
+                break;
         }
     }
 
     getVolum(osc){
-        if(osc == 'A'){
+        if(osc === 'A'){
             return this.#osciladorA.getVolum();
         }
 
-        if(osc == 'B'){
+        if(osc === 'B'){
             return this.#osciladorB.getVolum();
         }
 
@@ -68,11 +70,15 @@ class Synth{
     setVolum(osc, vol){
         switch(osc){
             case 'A':
+              
                 this.#osciladorA.setVolum(vol);
             break;
             
             case 'B':
                 this.#osciladorB.setVolum(vol);
+                break;
+            default:
+                break;
         }
     }
 }

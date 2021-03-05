@@ -1,8 +1,9 @@
 
-import  React, {Component} from 'react';
+import  React from 'react';
 import {Knob} from 'react-rotary-knob';
 import {sinte} from '../osc-components';
 import * as skins from 'react-rotary-knob-skin-pack';
+import { AutoFilter } from 'tone';
 
 export const types = {
   OSC_VOLUM: "oscVol",
@@ -18,7 +19,7 @@ class LimitedKnob extends React.Component {
       };
       
       this.#type = props.type;
-      if(this.#type == types.OSC_VOLUM){
+      if(this.#type === types.OSC_VOLUM){
         this.#skin = skins.s10;
       }
    
@@ -41,14 +42,21 @@ class LimitedKnob extends React.Component {
             this.setState({ value: val });
             switch(this.osc){
               case 'A':
+                sinte.setVolum('A',this.state.value);
                 break;
 
               case 'B':
                 sinte.setVolum('B',this.state.value);
                 break;
+
+              default:
+                break;
             }
 
           break;
+
+          default:
+            break;
         }
         
          
@@ -62,8 +70,9 @@ class LimitedKnob extends React.Component {
     let { value, ...rest } = this.props;
   
       return (
-          
-        <Knob value={this.state.value} onChange={this.handleOnChange} rotateDegrees={180} skin={this.#skin}  {...rest} />
+        
+       <Knob value={this.state.value} onChange={this.handleOnChange} rotateDegrees={180} skin={this.#skin}  {...rest} />
+       
       );
     }
   }

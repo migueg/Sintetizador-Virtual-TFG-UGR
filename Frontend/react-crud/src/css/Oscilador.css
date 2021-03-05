@@ -20,11 +20,25 @@
   }
 
   /* Responsive layout- las columnas se ponen una encima de otra*/
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 728px) {
     .col {
       width: 100%;
     }
+
+    #mobileKnob{
+      
+      display: inline-block;
+    }
   }
+  @media screen and (min-width: 727px) {
+    
+
+    #mobileKnob{
+      
+      display: none;
+    }
+  }
+
 
 .toggle-switch{
   float: left;
@@ -68,10 +82,10 @@
     cursor: pointer;
     padding: 24px 20px;
     outline: 0;
-    border: 4px groove #34b2da;
-    border-radius: 13px;
-    background: #b2fffc;
-    color: #7b7b7b;
+    border: 4px groove #1b98beb4;
+    font-size: 100%;
+    background: #e4b7cc;
+    color: #494242;
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
