@@ -1,9 +1,9 @@
 import  React, {Component} from 'react';
 import {synth} from '../controller/synth' ;
 import {Container,Row,Col } from 'react-bootstrap';
-import {Knob,types as knobTypes} from './elements/limitedKnob';
-//import {Knob} from 'react-rotary-knob';
-//import * as skins from 'react-rotary-knob-skin-pack';
+import {Knob} from './elements/limitedKnob';
+import {types as knobTypes} from './elements/knobtypes';
+import {Envelope} from './elements/envelope';
 
 import '../css/Oscilador.css';
 
@@ -14,7 +14,10 @@ class Oscilador extends React.Component{
     constructor(props){
         super();
         this.#osc = props.osc;
-        this.checkChecked = this.checkChecked.bind(this)
+        this._KnobVol = React.createRef(); 
+        this.checkChecked = this.checkChecked.bind(this);
+        this.addmobileVolume = this.addmobileVolume.bind(this);
+        this.restmobileVolume = this.restmobileVolume.bind(this);
         
     }
 
@@ -22,16 +25,16 @@ class Oscilador extends React.Component{
     checkChecked() {
         if(document.getElementById('interruptorA').checked){
             this.checkWave();
-             sinte.play1();
+             sinte.play('A');
         }else{
-            sinte.stopA();
+            sinte.stop('A');
         }
     
         if(document.getElementById('interruptorB').checked){
             this.checkWave();
-            sinte.play2();
+            sinte.play('B');
        }else{
-           sinte.stopB();
+           sinte.stop('B');
        }
     }
 
@@ -63,7 +66,14 @@ class Oscilador extends React.Component{
         
     }
 
+    addmobileVolume(){
     
+        this._KnobVol.current.changeVolume('add')
+    }
+
+    restmobileVolume(){
+        this._KnobVol.current.changeVolume('rest')
+    }
 
     render(){
         var id= ""
@@ -72,7 +82,8 @@ class Oscilador extends React.Component{
         }else{
              id = "selectorB"
         }
-        
+
+    
         return(
             <div style={{marginLeft: 10}} >
             
@@ -90,11 +101,12 @@ class Oscilador extends React.Component{
             <h3 style={{float: 'left'}}>Oscilador {this.#osc}</h3> 
             <div className="volumOsc" style={{float: 'right'}}>
             <div id="mobileKnob" >
-                <p onClick={()=>{alert('HH')}}>+</p>
-                <p>-</p>
+                <p onClick={this.addmobileVolume}>+</p>
+                <p onClick={this.restmobileVolume}>-</p>
             </div>
             
             <Knob
+                ref={this._KnobVol}
                 style={{ display: "inline-block" }}
                 min={0}
                 max={100}
@@ -104,7 +116,8 @@ class Oscilador extends React.Component{
                 height={200}
                 type={knobTypes.OSC_VOLUM}
                 osc = {this.#osc}
-                className="volume"
+                val={0}
+              
             
             />
            
@@ -118,9 +131,10 @@ class Oscilador extends React.Component{
               </select>
               <div className="select_arrow"></div>
           </div>
-        
+            
+            <Envelope osc={this.#osc} />
           
-            </div>
+          </div>
         )
     }
 }
@@ -128,12 +142,15 @@ export class OscComponents extends Component{
     render(){
         return(
             <div>
+                
+
+
                 <Container >
                     <Row>
-                        <Col xs >
+                        <Col className="oscilador"xs >
                         <Oscilador osc={'A'} />
                         </Col>
-                        <Col xs >
+                        <Col className="oscilador" xs >
                         <Oscilador osc={'B'}/>
                         </Col>
                     </Row>

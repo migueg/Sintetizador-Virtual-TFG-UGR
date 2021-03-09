@@ -4,11 +4,11 @@
     
   
 }
-.col{
+.oscilador.col{
     float: left;
     width: 45%;
     padding: 10px;
-    height: 300px; /* Should be removed. Only for demonstration */
+
     border-style: solid;
 }
 
@@ -21,8 +21,11 @@
 
   /* Responsive layout- las columnas se ponen una encima de otra*/
 @media screen and (max-width: 728px) {
-    .col {
-      width: 100%;
+    .oscilador .col {
+      width: 95%;
+    }
+    .Envelope .col{
+      width: 95%;
     }
 
     #mobileKnob{
@@ -121,4 +124,15 @@
 }
 .selector:disabled ~ .select_arrow {
   border-top-color: #cccccc;
+}
+
+.Envelope .row{
+  justify-content: center;
+}
+.Envelope .col{
+  align-items: center;
+  width: 45%;
+  padding: 2% ;
+  display: inline-block;
+  text-align: center;
 }

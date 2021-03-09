@@ -1,55 +1,52 @@
-import {oscilador} from './oscillator';
+import {oscillator} from './oscillator';
 import * as Tone from 'tone';
 
 class Synth{
-    #osciladorA;
-    #osciladorB;
+    #oscillatorA;
+    #oscillatorB;
 
     constructor(){
-        this.#osciladorA = new oscilador("sine");
-        this.#osciladorB = new oscilador("square");
+        this.#oscillatorA = new oscillator("sine");
+        this.#oscillatorB = new oscillator("square");
         
         this.merge = new Tone.Merge().toDestination();
     }
 
-    //Apagar osciladores
-    stopA(){
-        this.#osciladorA.stop();
-        
-    }
-    stopB(){
-        this.#osciladorB.stop();
-    }
 
-    //Encender osciladores
-    play1() {
-      
-        //this.#osciladorA.connect(this.merge,0,0).start();
-        
+    //Apagar oscillatores
+    stop(osc){
+        if(osc === 'A'){
+            this.#oscillatorA.stop();
 
-        //this.merge.toDestination();
-        this.#osciladorA.toca();
+        }
+
+        if(osc === 'B'){
+            this.#oscillatorB.stop();
+        }
     }
-    play2() {
-     
-        //this.#osciladorA.connect(this.merge,0,1).start();
-        //this.#osciladorB.connect(this.#osciladorA);
+   
+    //Encender oscillatores
+    play(osc){
+        if(osc === 'A'){
+            this.#oscillatorA.toca();
 
-        //this.merge.toDestination();
-        this.#osciladorB.toca();
+        }
+
+        if(osc === 'B'){
+            this.#oscillatorB.toca();
+        }
     }
 
-
-    //Seleccionar Onda osciladores
+    //Seleccionar Onda oscillatores
 
     selectWave(osc, wave){
 
         switch(osc){
             case 'A':
-                this.#osciladorA.setWave(wave);
+                this.#oscillatorA.setWave(wave);
                 break;
             case 'B':
-                this.#osciladorB.setWave(wave);
+                this.#oscillatorB.setWave(wave);
                 break;
             default:
                 break;
@@ -58,11 +55,11 @@ class Synth{
 
     getVolum(osc){
         if(osc === 'A'){
-            return this.#osciladorA.getVolum();
+            return this.#oscillatorA.getVolum();
         }
 
         if(osc === 'B'){
-            return this.#osciladorB.getVolum();
+            return this.#oscillatorB.getVolum();
         }
 
     }
@@ -71,15 +68,62 @@ class Synth{
         switch(osc){
             case 'A':
               
-                this.#osciladorA.setVolum(vol);
+                this.#oscillatorA.setVolum(vol);
             break;
             
             case 'B':
-                this.#osciladorB.setVolum(vol);
+                this.#oscillatorB.setVolum(vol);
                 break;
             default:
                 break;
         }
+    }
+
+
+    //Establece los parametros de la envolvente
+    setEnvolve(osc,val,param){
+        if(osc === 'A'){
+            switch(param){
+                case 'attack':
+                    this.#oscillatorA.setAttack(val);
+                    break;
+                case 'release':
+                    this.#oscillatorA.setRelease(val);
+                    break;
+                case 'decay':
+                    this.#oscillatorA.setDecay(val);
+                    break;
+                case 'sustain':
+                    this.#oscillatorA.setSustain(val);
+                    break;
+
+                default:
+                    break;
+
+            }
+        }
+
+        if(osc === 'B'){
+            switch(param){
+                case 'attack':
+                    this.#oscillatorB.setAttack(val);
+                    break;
+                case 'release':
+                    this.#oscillatorB.setRelease(val);
+                    break;
+                case 'decay':
+                    this.#oscillatorB.setDecay(val);
+                    break;
+                case 'sustain':
+                    this.#oscillatorB.setSustain(val);
+                    break;
+                    
+                default:
+                    break;
+
+            }
+        }
+        
     }
 }
 

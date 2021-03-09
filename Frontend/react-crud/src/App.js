@@ -1,5 +1,5 @@
 
-import './App.css';
+import './css/App.css';
 import React from 'react'
 
 import OscComponents from './view/osc-components'

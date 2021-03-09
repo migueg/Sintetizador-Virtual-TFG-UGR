@@ -3,49 +3,51 @@ import * as Tone from 'tone';
 
 
 
-class Oscilador  {
-   #oscilador
+class oscillator  {
+   #oscillator
    #volume //Variable privada
+   #envelope // envolvente del sonido
 
  constructor(type){
-    this.#oscilador = new Tone.Oscillator(); //Crea e inicia la fuente al tiempo actual
-    this.#oscilador.type = "sine";
-    this.env = new Tone.AmplitudeEnvelope();
-    this.#oscilador.frequency.value = "C5";
-    this.#oscilador.connect(this.env);
+  
+   this.#envelope = new Tone.AmplitudeEnvelope().toDestination();
+
+    this.#oscillator = new Tone.Oscillator({
+       type: "sine",
+   
+    }).connect(this.#envelope).start();  //Conectamos la envolvente al oscilador
+    
+    this.#oscillator.frequency.value = "C5";
     this.#volume = -100;
-    this.#oscilador.volume.value = this.#volume;
+
+    this.#oscillator.volume.value = this.#volume;
     this.mute = false;
+   
+   
+    
  }
 
- /*connect(merge,n1,n2){
-    
-    return this.oscilador.connect(merge,n1,n2);
- }*/
 
 stop(){
-   this.#oscilador.mute= true;
+   this.#oscillator.mute= true;
    this.mute = true;
 }
- connect(osc){
-     return this.#oscilador.connect(osc,0,0);
- }
+
  toca(){
    this.mute = false;
-   this.#oscilador.mute= false;
-    this.#oscilador.toDestination().start();
-     //this.env.toMaster();
-    // this.env.triggerAttack();
-
+   this.#oscillator.mute= false;
+ 
+   this.#envelope.triggerAttack()
+   this.#envelope.triggerRelease("+0.5") // Establecemos que el Release empieze a los 0.5 ms de la amplitud del audio
+   Tone.start() // Necesario para que suene en navegadores mobiles
  }
-
  setWave(wave){
-    this.#oscilador.type = wave;
+    this.#oscillator.type = wave;
  }
  
  getVolum(){
-    console.log(this.#oscilador.volume.immediate());
-    return this.#oscilador.volume;
+    console.log(this.#oscillator.volume.immediate());
+    return this.#oscillator.volume;
  }
 
  setVolum(level){
@@ -54,11 +56,30 @@ stop(){
   
 
    if(this.mute === true){
-      this.#oscilador.mute = true;
+      this.#oscillator.mute = true;
    }else{
-      this.#oscilador.volume.value = level -100;
+      this.#oscillator.volume.value = level -100;
    }
+ }
+
+
+ //Metodos que modifican los parametros de la envolvente
+ setAttack(val){
+    this.#envelope.attack = val;
+ }
+
+ setRelease(val){
+    this.#envelope.release = val;
+   
+ }
+
+ setSustain(val){
+    this.#envelope.sustain = val;
+ }
+
+ setDecay(val){
+    this.#envelope.decay = val;
  }
 }
 
-export {Oscilador as oscilador};
+export {oscillator };
