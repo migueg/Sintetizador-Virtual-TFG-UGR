@@ -21,8 +21,9 @@
 
   /* Responsive layout- las columnas se ponen una encima de otra*/
 @media screen and (max-width: 728px) {
-    .oscilador .col {
+    .oscilador.col {
       width: 95%;
+      flex-basis: auto;
     }
     .Envelope .col{
       width: 95%;

@@ -5,6 +5,7 @@ import {Knob} from './elements/limitedKnob';
 import {types as knobTypes} from './elements/knobtypes';
 import {Envelope} from './elements/envelope';
 
+import 'bootstrap/dist/css/bootstrap.css';
 import '../css/Oscilador.css';
 
 export var sinte = new synth();
@@ -28,6 +29,7 @@ class Oscilador extends React.Component{
              sinte.play('A');
         }else{
             sinte.stop('A');
+            return;
         }
     
         if(document.getElementById('interruptorB').checked){
@@ -94,6 +96,7 @@ class Oscilador extends React.Component{
                 name={"onOff"+this.#osc}
                 id={"interruptor"+this.#osc}
                 onClick = {this.checkChecked}
+               
                 />
             
             </div>
@@ -145,7 +148,7 @@ export class OscComponents extends Component{
                 
 
 
-                <Container >
+                <Container  >
                     <Row>
                         <Col className="oscilador"xs >
                         <Oscilador osc={'A'} />

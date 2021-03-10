@@ -28,11 +28,13 @@ class Synth{
     //Encender oscillatores
     play(osc){
         if(osc === 'A'){
+            console.log('HolaA')
             this.#oscillatorA.toca();
 
         }
 
         if(osc === 'B'){
+            console.log('HolaB')
             this.#oscillatorB.toca();
         }
     }
