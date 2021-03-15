@@ -4,6 +4,7 @@ import React from 'react'
 import { BrowserRouter,Route } from 'react-router-dom'
 import Nav from './view/navbar'
 import OscComponents from './view/osc-components'
+import Header from './view/head-component';
 
 function App() {
   return (
@@ -14,9 +15,14 @@ function App() {
       <BrowserRouter>
         <div>
             <Nav />
-            <div className="oscillators">
-            <Route exact path="/" component={OscComponents} /> 
+            <div className="header">
+              <Header />
             </div>
+           
+            <div className="oscillators">
+              <Route exact path="/" component={OscComponents} /> 
+            </div>
+
         </div>
       </BrowserRouter>
   
