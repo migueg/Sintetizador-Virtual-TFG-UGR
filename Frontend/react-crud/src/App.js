@@ -5,6 +5,7 @@ import { BrowserRouter,Route } from 'react-router-dom'
 import Nav from './view/navbar'
 import OscComponents from './view/osc-components'
 import Header from './view/head-component';
+import Piano from './view/piano-component'
 
 function App() {
   return (
@@ -21,6 +22,10 @@ function App() {
            
             <div className="oscillators">
               <Route exact path="/" component={OscComponents} /> 
+            </div>
+
+            <div className="piano">
+              <Piano /> 
             </div>
 
         </div>

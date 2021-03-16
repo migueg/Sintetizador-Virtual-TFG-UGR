@@ -8,7 +8,7 @@ class Synth{
     constructor(){
         this.#oscillatorA = new oscillator("sine");
         this.#oscillatorB = new oscillator("square");
-        
+    
         this.merge = new Tone.Merge().toDestination();
     }
 
@@ -39,8 +39,12 @@ class Synth{
         }
     }
 
-    //Seleccionar Onda oscillatores
+    playNote(){
+        this.#oscillatorA.toca()
+        this.#oscillatorB.toca()
+    }
 
+    //Seleccionar Onda oscillatores
     selectWave(osc, wave){
 
         switch(osc){
