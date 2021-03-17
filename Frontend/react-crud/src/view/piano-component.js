@@ -9,10 +9,13 @@ class Piano extends React.Component{
     constructor(){
         super();
         this.#octave = 0;
+        this.pressedKeys = {}
 
 
     }
-
+    noNotePress(obj){
+        return Object.keys(obj).length === 0;
+    }
     upOctave(){
         if(this.#octave === 6){
             this.#octave = 6;
@@ -78,7 +81,41 @@ class Piano extends React.Component{
                 <li className="white o2 B" id='B' onClick={()=>{this.notePlayed()}}><p>B{this.#octave + 1}</p></li>
                 <li className="white o2 C1" id='C' onClick={()=>{this.notePlayed()}}><p>C{this.#octave + 1}</p></li>
             </ul>
-        </div>
+           
+            {
+            
+                document.addEventListener('keydown', (event) => {
+                     const keyName = event.key;
+                     switch(keyName){
+                         case 'v':
+                             sinte.playNote('220')
+                             this.pressedKeys[keyName] = true;
+                             break;
+                             
+                        case 'b':
+                            sinte.playNote('300')
+                            this.pressedKeys[keyName] = true;
+                            break;
+                          
+                     }
+             
+                 }
+                )
+
+            
+            }
+
+            {
+                document.addEventListener('keyup', (event) =>{
+                    delete this.pressedKeys[event.key]
+                    if(this.noNotePress(this.pressedKeys)){
+                        sinte.keyUp()
+
+                    }
+                })
+            }
+
+            </div>
         )
     }
 }

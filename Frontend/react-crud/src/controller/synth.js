@@ -24,26 +24,56 @@ class Synth{
             this.#oscillatorB.stop();
         }
     }
+
+
+    //Encender Oscilador
+
+    onOscillator(osc){
+        if(osc === 'A'){
+            this.#oscillatorA.onOscillator()
+        }
+
+        if(osc === 'B'){
+            this.#oscillatorB.onOscillator();
+        }
+
+    }
    
+
+    
+    offOscillator(osc){
+        if(osc === 'A'){
+            this.#oscillatorA.offOscillator()
+        }
+
+        if(osc === 'B'){
+            this.#oscillatorB.offOscillator();
+        }
+
+    }
     //Encender oscillatores
     play(osc){
         if(osc === 'A'){
             console.log('HolaA')
-            this.#oscillatorA.toca();
+            this.#oscillatorA.toca('C5');
 
         }
 
         if(osc === 'B'){
             console.log('HolaB')
-            this.#oscillatorB.toca();
+            this.#oscillatorB.toca('C5');
         }
     }
 
-    playNote(){
-        this.#oscillatorA.toca()
-        this.#oscillatorB.toca()
+    playNote(key){
+        this.#oscillatorA.toca(key)
+        this.#oscillatorB.toca(key)
     }
 
+    keyUp(){
+        this.#oscillatorA.silence()
+        this.#oscillatorB.silence()
+    }
     //Seleccionar Onda oscillatores
     selectWave(osc, wave){
 

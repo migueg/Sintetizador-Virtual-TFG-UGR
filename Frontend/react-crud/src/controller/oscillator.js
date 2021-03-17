@@ -1,28 +1,49 @@
 
 import * as Tone from 'tone';
-
-
-
+import Envelope from './envelopeGenerator';
 class oscillator  {
+   #ctx
+   #audioCtx 
    #oscillator
-   #volume //Variable privada
+   #gainNode //Variable privada
    #envelope // envolvente del sonido
+   #volume
+   #available
+   #played
 
  constructor(type){
+   this.#audioCtx = new window.AudioContext ()
+   this.#envelope =new Envelope(this.#audioCtx, {
+      attack: 0.1,
+      decay: 3,
+      sustain: 0.4,
+      release: 0.1,
+      
+      
+    });
+   this.#oscillator = this.#audioCtx.createOscillator();
+   this.#oscillator.type = 'sine'
+   this.#oscillator.frequency.setValueAtTime(440, this.#audioCtx.currentTime); // value in hertz
+   this.#gainNode = this.#audioCtx.createGain();
+
   
-   this.#envelope = new Tone.AmplitudeEnvelope().toDestination();
+   this.#volume = 0;
+   this.#available = false;
+   this.#gainNode.gain.value = 0;
 
-    this.#oscillator = new Tone.Oscillator({
-       type: "sine",
+      
    
-    }).connect(this.#envelope).start();  //Conectamos la envolvente al oscilador
-    
-    this.#oscillator.frequency.value = "C5";
-    this.#volume = -100;
+   this.#oscillator.connect(this.#gainNode)
+  // this.#envelope.connect(this.#gainNode)
+   this.#gainNode.connect(this.#audioCtx.destination);
+   this.#envelope.connect(this.#gainNode.gain)
+   this.#oscillator.start(0);
 
-    this.#oscillator.volume.value = this.#volume;
-    this.mute = false;
+   this.#played = false;
    
+
+ 
+  // console.log(this.outputNode.gain.value)
    
     
  }
@@ -33,33 +54,35 @@ stop(){
    this.mute = true;
 }
 
- toca(){
-   this.mute = false;
-   this.#oscillator.mute= false;
+ onOscillator(){
+    this.#available = true;
+ }
  
-   this.#envelope.triggerAttack()
-   this.#envelope.triggerRelease("+0.5") // Establecemos que el Release empieze a los 0.5 ms de la amplitud del audio
-   Tone.start() // Necesario para que suene en navegadores mobiles
+ offOscillator(){
+    this.#available = false;
+    this.#gainNode.gain.value = 0;
+ }
+
+ toca(key){
+   this.mute = false;
+   
+   if(this.#available && !this.#played){
+      this.#oscillator.frequency.value = key;
+      //this.#gainNode.gain.value = this.#volume;
+      this.envelopeGeneratorOn();
+      this.#played = true;
+      
+   }
  }
  setWave(wave){
     this.#oscillator.type = wave;
  }
  
- getVolum(){
-    console.log(this.#oscillator.volume.immediate());
-    return this.#oscillator.volume;
- }
-
+ 
  setVolum(level){
-
-   this.#volume = level -100;
-  
-
-   if(this.mute === true){
-      this.#oscillator.mute = true;
-   }else{
-      this.#oscillator.volume.value = level -100;
-   }
+    this.#volume = level / 100;
+   
+   
  }
 
 
@@ -79,6 +102,31 @@ stop(){
 
  setDecay(val){
     this.#envelope.decay = val;
+ }
+
+ silence(){
+   this.#gainNode.gain.linearRampToValueAtTime(0, this.#audioCtx.currentTime + 0.3 + 0.5)
+   this.#played = false;
+ }
+
+
+ envelopeGeneratorOn( a , d ,s){
+    console.log('envelope')
+    var current = this.#gainNode.gain.value = this.#volume
+    var now = this.#audioCtx.currentTime
+   
+    this.#envelope.setAmplitude(current);
+    this.#envelope.action(now)
+    //this.#envelope.release(now + 0.5 )
+
+   // let stopAt = this.#envelope.getReleaseCompleteTime();
+
+    //this.#envelope.stop(stopAt);
+    /* this.#gainNode.gain.cancelScheduledValues(now)
+    this.#gainNode.gain.setValueAtTime(0 ,now)
+    this.#gainNode.gain.linearRampToValueAtTime(current, now + 0.3);
+    this.#gainNode.gain.linearRampToValueAtTime(current, now  + 0.1);
+    this.#gainNode.gain.linearRampToValueAtTime(0, now + 0.3 + 0.5); */
  }
 }
 

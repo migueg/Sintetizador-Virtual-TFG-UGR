@@ -26,17 +26,17 @@ class Oscilador extends React.Component{
     checkChecked() {
         if(document.getElementById('interruptorA').checked){
             this.checkWave();
-             sinte.play('A');
+             sinte.onOscillator('A');
         }else{
-            sinte.stop('A');
+            sinte.offOscillator('A');
             return;
         }
     
         if(document.getElementById('interruptorB').checked){
             this.checkWave();
-            sinte.play('B');
+            sinte.onOscillator('B');
        }else{
-           sinte.stop('B');
+           sinte.offOscillator('B');
        }
     }
 
