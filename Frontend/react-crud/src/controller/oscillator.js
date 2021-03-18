@@ -1,6 +1,6 @@
 
 import * as Tone from 'tone';
-import Envelope from './envelopeGenerator';
+
 class oscillator  {
    #ctx
    #audioCtx 
@@ -10,17 +10,19 @@ class oscillator  {
    #volume
    #available
    #played
+   #keyUp
 
  constructor(type){
    this.#audioCtx = new window.AudioContext ()
-   this.#envelope =new Envelope(this.#audioCtx, {
-      attack: 0.1,
-      decay: 3,
-      sustain: 0.4,
-      release: 0.1,
+   this.#envelope = {
+      attack : 0,
+      decay: 0.6,
+      sustain: 0.5,
+      release: 2.5
+   }
       
       
-    });
+
    this.#oscillator = this.#audioCtx.createOscillator();
    this.#oscillator.type = 'sine'
    this.#oscillator.frequency.setValueAtTime(440, this.#audioCtx.currentTime); // value in hertz
@@ -35,11 +37,13 @@ class oscillator  {
    
    this.#oscillator.connect(this.#gainNode)
   // this.#envelope.connect(this.#gainNode)
+  
    this.#gainNode.connect(this.#audioCtx.destination);
-   this.#envelope.connect(this.#gainNode.gain)
+   
    this.#oscillator.start(0);
 
    this.#played = false;
+   this.#keyUp = false
    
 
  
@@ -65,7 +69,8 @@ stop(){
 
  toca(key){
    this.mute = false;
-   
+   this.#keyUp = false;
+
    if(this.#available && !this.#played){
       this.#oscillator.frequency.value = key;
       //this.#gainNode.gain.value = this.#volume;
@@ -88,45 +93,58 @@ stop(){
 
  //Metodos que modifican los parametros de la envolvente
  setAttack(val){
+    console.log("Attack: " + val)
     this.#envelope.attack = val;
  }
 
  setRelease(val){
+   console.log("Release: " + val)
+
     this.#envelope.release = val;
    
  }
 
  setSustain(val){
+   console.log("Sustain: " + val)
+
     this.#envelope.sustain = val;
  }
 
  setDecay(val){
+   console.log("Decay: " + val)
+
     this.#envelope.decay = val;
  }
 
  silence(){
-   this.#gainNode.gain.linearRampToValueAtTime(0, this.#audioCtx.currentTime + 0.3 + 0.5)
+   this.#keyUp = true
+ //  this.#gainNode.gain.linearRampToValueAtTime(0, this.#audioCtx.currentTime + 0.3 + 0.5)
    this.#played = false;
  }
 
 
  envelopeGeneratorOn( a , d ,s){
-    console.log('envelope')
     var current = this.#gainNode.gain.value = this.#volume
     var now = this.#audioCtx.currentTime
    
-    this.#envelope.setAmplitude(current);
-    this.#envelope.action(now)
-    //this.#envelope.release(now + 0.5 )
-
-   // let stopAt = this.#envelope.getReleaseCompleteTime();
-
-    //this.#envelope.stop(stopAt);
-    /* this.#gainNode.gain.cancelScheduledValues(now)
+    this.#gainNode.gain.cancelScheduledValues(now)
     this.#gainNode.gain.setValueAtTime(0 ,now)
-    this.#gainNode.gain.linearRampToValueAtTime(current, now + 0.3);
-    this.#gainNode.gain.linearRampToValueAtTime(current, now  + 0.1);
-    this.#gainNode.gain.linearRampToValueAtTime(0, now + 0.3 + 0.5); */
+
+    //Fase de ataque
+    this.#gainNode.gain.linearRampToValueAtTime(current, now + this.#envelope.attack );
+  
+    
+    //Fase de decay
+    current = current / 2
+    
+    this.#gainNode.gain.linearRampToValueAtTime(current, now + this.#envelope.attack + this.#envelope.decay);
+
+    //Fase de sustain
+    current = current-0.1
+       
+    this.#gainNode.gain.linearRampToValueAtTime(current, now + this.#envelope.attack + this.#envelope.decay +this.#envelope.sustain)
+    //Fase de release
+    this.#gainNode.gain.linearRampToValueAtTime(0, now +this.#envelope.attack + this.#envelope.decay +this.#envelope.sustain + this.#envelope.release);
  }
 }
 

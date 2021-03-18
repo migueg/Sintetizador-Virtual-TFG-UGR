@@ -24,16 +24,17 @@ class Oscilador extends React.Component{
 
     // Comprueba si esta encendido o apagado el interruptor
     checkChecked() {
+        console.log('HHH')
         if(document.getElementById('interruptorA').checked){
             this.checkWave();
              sinte.onOscillator('A');
         }else{
             sinte.offOscillator('A');
-            return;
         }
     
         if(document.getElementById('interruptorB').checked){
             this.checkWave();
+           
             sinte.onOscillator('B');
        }else{
            sinte.offOscillator('B');

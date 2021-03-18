@@ -1,12 +1,21 @@
+
+
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
+const dbController = require("./controllers/dbcontroller");
+
 const app = express();
+
 
 var corsOptions = {
   origin: "http://localhost:8081"
 };
+
+require('./dbhandler')
+
 
 app.use(cors(corsOptions));
 
@@ -18,8 +27,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to Migue application." });
+  res.json({ message: "Welcome to Server." });
 });
+
+
+app.get("/createNotes", (req,res) =>{
+  dbController.createNotes();
+})
+/* app.get("/notes", (req, res) => {
+   console.log('HOLA')
+   var notes = dbHandler.getNotes()
+   console.log(notes)
+}) */
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
