@@ -267,7 +267,7 @@ module.exports = [
         value: 1567.98
     },
     {
-        key: 'G#5',
+        key: 'G#6',
         value: 1661.22
     },
     {
@@ -326,11 +326,11 @@ module.exports = [
         value: 3729.31
     },
     {
-        key: 'B5',
+        key: 'B7',
         value: 3951.07
     },
     {
-        key: 'C5',
+        key: 'C8',
         value: 4186.01 
     }
     

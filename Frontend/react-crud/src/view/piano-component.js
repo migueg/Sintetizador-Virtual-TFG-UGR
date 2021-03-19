@@ -10,8 +10,18 @@ class Piano extends React.Component{
         super();
         this.#octave = 0;
         this.pressedKeys = {}
+        this.notes = this.fetchNotes();
 
+    }
 
+    fetchNotes(){
+        fetch('http://localhost:8080/notes')
+        .then(res => res.json())
+        .then((data) => {
+            this.notes = data.notes[0]
+        })
+        .catch(console.log)
+        
     }
     noNotePress(obj){
         return Object.keys(obj).length === 0;
@@ -35,6 +45,30 @@ class Piano extends React.Component{
 
     }
 
+    playNote(oct , key){
+        if(oct === 'down' || oct=== 'up'){
+            if(oct === 'down'){
+            
+                var octave = this.#octave + 1
+                
+                if(octave === 7 ){
+                    octave = 6;
+                }
+            }
+    
+            if(oct === 'up'){
+                var octave = this.#octave + 2
+               
+                    if(octave === 8){
+                        octave = 7;
+                    }
+            }
+    
+            key = key + octave
+            sinte.playNote(this.notes[key])
+        }
+        
+    }
     notePlayed(e){
         e = e || window.event;
         e = e.target || e.srcElement; // obtenemos el elemento que lanzo el evento
@@ -42,7 +76,20 @@ class Piano extends React.Component{
     
        if(e.nodeName === 'LI'){
             //(e.textContent)
-            sinte.playNote()
+            if(e.className != "white" && e.className != "black" ){
+                
+                
+                var key =  e.id 
+                this.playNote('up', key);
+
+            }else{
+               
+     
+                var key =  e.id 
+            
+                this.playNote('down', key);
+            }
+            
        }
     }
 
@@ -55,7 +102,7 @@ class Piano extends React.Component{
                     <button id='down' onClick={()=>{this.downOctave()}} >Down</button>
                     <button id='up' onClick={()=>{this.upOctave()}}>UP</button>
                 </div>
-                <li className="white" id="C" onClick={()=>{this.notePlayed()}}><p>C{this.#octave}</p></li>
+                <li className="white" id="C" name = "first" onClick={()=>{this.notePlayed()}}><p>C{this.#octave}</p></li>
                 <li className="black" id="C#"onClick={()=>{this.notePlayed()}}><p>C#{this.#octave}</p></li>
                 <li className="white" id='D'onClick={()=>{this.notePlayed()}}><p>D{this.#octave}</p></li>
                 <li className="black" id="D#"onClick={()=>{this.notePlayed()}}><p>D#{this.#octave}</p></li>
@@ -66,7 +113,7 @@ class Piano extends React.Component{
                 <li className="black" id='G#'onClick={()=>{this.notePlayed()}}><p>G#{this.#octave}</p></li>
                 <li className="white" id='A'onClick={()=>{this.notePlayed()}}><p>A{this.#octave}</p></li>
                 <li className="black" id='A#'onClick={()=>{this.notePlayed()}}><p>A#{this.#octave}</p></li>
-                <li className="white " id='B'onClick={()=>{this.notePlayed()}}><p>B{this.#octave}</p></li>
+                <li className="white" id='B'onClick={()=>{this.notePlayed()}}><p>B{this.#octave}</p></li>
                 <li className="white o2 C" id='C'onClick={()=>{this.notePlayed()}}><p>C{this.#octave + 1}</p></li>
                 <li className="black o2 CS" id="C#"onClick={()=>{this.notePlayed()}}><p>C#{this.#octave + 1}</p></li>
                 <li className="white o2 D" id='D'onClick={()=>{this.notePlayed()}}><p>D{this.#octave + 1}</p></li>
@@ -87,13 +134,14 @@ class Piano extends React.Component{
                 document.addEventListener('keydown', (event) => {
                      const keyName = event.key;
                      switch(keyName){
-                         case 'v':
-                             sinte.playNote('220')
-                             this.pressedKeys[keyName] = true;
-                             break;
+                         case 'z':
+                          
+                            this.playNote('down','C')
+                            this.pressedKeys[keyName] = true;
+                            break;
                              
                         case 'b':
-                            sinte.playNote('300')
+                            sinte.playNote(this.notes.D6)
                             this.pressedKeys[keyName] = true;
                             break;
                           

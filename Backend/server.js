@@ -11,7 +11,7 @@ const app = express();
 
 
 var corsOptions = {
-  origin: "http://localhost:8081"
+  origin: "http://localhost:3000"
 };
 
 require('./dbhandler')
@@ -32,13 +32,15 @@ app.get("/", (req, res) => {
 
 
 app.get("/createNotes", (req,res) =>{
-  dbController.createNotes();
+  dbController.createNotes(req,res);
+  
+  
 })
-/* app.get("/notes", (req, res) => {
-   console.log('HOLA')
-   var notes = dbHandler.getNotes()
-   console.log(notes)
-}) */
+app.get("/notes", (req, res) => {
+   
+  dbController.getNotes(req,res)
+
+}) 
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

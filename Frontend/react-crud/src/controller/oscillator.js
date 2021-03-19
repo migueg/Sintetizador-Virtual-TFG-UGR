@@ -71,11 +71,11 @@ stop(){
    this.mute = false;
    this.#keyUp = false;
 
-   if(this.#available && !this.#played){
+   if(this.#available ){
       this.#oscillator.frequency.value = key;
       //this.#gainNode.gain.value = this.#volume;
       this.envelopeGeneratorOn();
-      this.#played = true;
+    
       
    }
  }
