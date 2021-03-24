@@ -49,6 +49,7 @@ li  p{
     background:linear-gradient(to bottom,#eee 0%,#fff 100%);
 }
 
+.white-active,
 .white:active{
     border-top:4px solid  rgb(97, 179, 255);
     border-left:3px solid rgb(97, 179, 255);
@@ -69,6 +70,7 @@ li  p{
     
 }
 
+.black-active,
 .black:active{
     box-shadow:-1px -1px 2px rgba(255,255,255,0.2) inset,0 -2px 2px 3px rgba(0,0,0,0.6) inset,0 1px 2px rgba(0,0,0,0.5);
     background:linear-gradient(to right,#444 0%,#222 100%)
@@ -78,8 +80,14 @@ li  p{
 #D, #E, #G ,#A, #B{
     margin-left: -2em;
 }
-#C,#D ,#F ,#G, #A{
+#C, #C2,#D ,#F ,#G, #A{
     margin-right: -2em;
+}
+#D1, #E1, #G1 ,#A1, #B1{
+  margin-left: -2em;
+}
+#C1,#D1 ,#F1 ,#G1, #A1{
+  margin-right: -2em;
 }
 ul li:first-child {
     border-radius:5px 0 5px 5px

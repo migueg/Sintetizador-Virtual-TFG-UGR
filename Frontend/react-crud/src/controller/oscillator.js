@@ -1,6 +1,6 @@
 
 import * as Tone from 'tone';
-
+import Voice from './voice';
 class oscillator  {
    #ctx
    #audioCtx 
@@ -21,8 +21,8 @@ class oscillator  {
       release: 2.5
    }
       
-      
-
+   
+   this.voice = new Voice('sine',this.#audioCtx, this.#envelope);
    this.#oscillator = this.#audioCtx.createOscillator();
    this.#oscillator.type = 'sine'
    this.#oscillator.frequency.setValueAtTime(440, this.#audioCtx.currentTime); // value in hertz
@@ -72,7 +72,10 @@ stop(){
    this.#keyUp = false;
 
    if(this.#available ){
-      this.#oscillator.frequency.value = key;
+      this.#gainNode.gain.value = this.#volume
+      
+      this.voice.start(key,this.#gainNode.gain.value)
+      //this.#oscillator.frequency.value = key;
       //this.#gainNode.gain.value = this.#volume;
       this.envelopeGeneratorOn();
     
@@ -93,27 +96,31 @@ stop(){
 
  //Metodos que modifican los parametros de la envolvente
  setAttack(val){
-    console.log("Attack: " + val)
-    this.#envelope.attack = val;
+
+   this.voice.setAttack(val)
+    /* console.log("Attack: " + val)
+    this.#envelope.attack = val; */
  }
 
  setRelease(val){
-   console.log("Release: " + val)
-
+    this.voice.setRelease(val)
+   /* console.log("Release: " + val)
     this.#envelope.release = val;
-   
+    */
  }
 
  setSustain(val){
-   console.log("Sustain: " + val)
+    this.voice.setSustain(val)
+   /* console.log("Sustain: " + val)
 
-    this.#envelope.sustain = val;
+    this.#envelope.sustain = val; */
  }
 
  setDecay(val){
-   console.log("Decay: " + val)
+    this.voice.setDecay(val)
+   /* console.log("Decay: " + val)
 
-    this.#envelope.decay = val;
+    this.#envelope.decay = val; */
  }
 
  silence(){
@@ -123,7 +130,7 @@ stop(){
  }
 
 
- envelopeGeneratorOn( a , d ,s){
+ envelopeGeneratorOn( ){
     var current = this.#gainNode.gain.value = this.#volume
     var now = this.#audioCtx.currentTime
    
