@@ -7,10 +7,12 @@ class Voice {
     #type 
     #context
     #envelope
-    constructor(type,context,envelope){
+    #masterNode
+    constructor(type,context,envelope,gain){
         this.#type = type;
         this.#context = context;
         this.#envelope = envelope;
+        this.#masterNode = gain;
         this.#gains = {};
         this.#voices = {};
         this.fetchNotes();
@@ -42,8 +44,8 @@ class Voice {
             this.#gains[this.notes[i]] = gainVoice;
             
             voice.connect(gainVoice);
-            gainVoice.connect(this.#context.destination);
-
+            //gainVoice.connect(this.#context.destination);
+            gainVoice.connect(this.#masterNode);
             voice.start(0);
 
             this.#voices[this.notes[i]] = voice;
@@ -94,6 +96,12 @@ class Voice {
    console.log("Decay: " + val)
 
     this.#envelope.decay = val;
+ }
+
+ setType(type){
+     for(var i in this.#voices){
+         this.#voices[i].type = type
+     }
  }
     envelopeGeneratorOn(key,gain){
         var gainN = this.#gains[key].gain

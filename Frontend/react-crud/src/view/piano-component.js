@@ -199,76 +199,100 @@ class Piano extends React.Component{
                      
                      switch(keyName.toLowerCase()){
                          case 'z':
-                            this.handleNotesUpEvents('white','C',keyName,'down');
+                            if(!this.pressedKeys['z'])
+                                this.handleNotesUpEvents('white','C',keyName,'down');
                             break;
                         case 's':
-                            this.handleNotesUpEvents('black','C#',keyName,'down');
+                            if(!this.pressedKeys['s'])
+                                this.handleNotesUpEvents('black','C#',keyName,'down');
                             break;
                         case 'x':
-                            this.handleNotesUpEvents('white','D',keyName,'down');
+                            if(!this.pressedKeys['x'])
+                                this.handleNotesUpEvents('white','D',keyName,'down');
                             break;
                         case 'd':
-                            this.handleNotesUpEvents('black','D#',keyName,'down');
+                            if(!this.pressedKeys['d'])
+                                this.handleNotesUpEvents('black','D#',keyName,'down');
                             break;
                         case 'c':
-                            this.handleNotesUpEvents('white','E',keyName,'down');
+                            if(!this.pressedKeys['c'])
+                                this.handleNotesUpEvents('white','E',keyName,'down');
                             break;
                         case 'v':
-                            this.handleNotesUpEvents('white','F',keyName,'down');
+                            if(!this.pressedKeys['v'])
+                                this.handleNotesUpEvents('white','F',keyName,'down');
                             break;
                         case 'g':
-                            this.handleNotesUpEvents('black','F#',keyName,'down');
+                            if(!this.pressedKeys['g'])
+                                this.handleNotesUpEvents('black','F#',keyName,'down');
                             break;
                         case 'b':
-                            this.handleNotesUpEvents('white','G',keyName,'down');
+                            if(!this.pressedKeys['b'])
+                                this.handleNotesUpEvents('white','G',keyName,'down');
                             break;
                         case 'h':
-                            this.handleNotesUpEvents('black','G#',keyName,'down');
+                            if(!this.pressedKeys['h'])
+                                this.handleNotesUpEvents('black','G#',keyName,'down');
                             break;
                         case 'n':
-                            this.handleNotesUpEvents('white','A',keyName,'down');
+                            if(!this.pressedKeys['n'])
+                                this.handleNotesUpEvents('white','A',keyName,'down');
                             break;
                         case 'j':
-                            this.handleNotesUpEvents('black','A#',keyName,'down');
+                            if(!this.pressedKeys['j'])
+                                this.handleNotesUpEvents('black','A#',keyName,'down');
                             break;
                         case 'm':
-                            this.handleNotesUpEvents('white','B',keyName,'down');
+                            if(!this.pressedKeys['m'])
+                                this.handleNotesUpEvents('white','B',keyName,'down');
                             break;
                          case 'q':
-                            this.handleNotesUpEvents('white','C',keyName,'up');
+                            if(!this.pressedKeys['q'])
+                                this.handleNotesUpEvents('white','C',keyName,'up');
                             break;
                         case '2':
-                            this.handleNotesUpEvents('black','C#',keyName,'up');
+                            if(!this.pressedKeys['2'])
+                                this.handleNotesUpEvents('black','C#',keyName,'up');
                             break;
                         case 'w':
-                            this.handleNotesUpEvents('white','D',keyName,'up');
+                            if(!this.pressedKeys['w'])
+                                this.handleNotesUpEvents('white','D',keyName,'up');
                             break;
                         case '3':
-                            this.handleNotesUpEvents('black','D#',keyName,'up');
+                            if(!this.pressedKeys['3'])
+                                this.handleNotesUpEvents('black','D#',keyName,'up');
                             break;
                         case 'e':
-                            this.handleNotesUpEvents('white','E',keyName,'up');
+                            if(!this.pressedKeys['e'])
+                                this.handleNotesUpEvents('white','E',keyName,'up');
                             break;
                         case 'r':
-                            this.handleNotesUpEvents('white','F',keyName,'up');
+                            if(!this.pressedKeys['r'])
+                                this.handleNotesUpEvents('white','F',keyName,'up');
                             break;
                         case '5':
-                            this.handleNotesUpEvents('black','F#',keyName,'up');
+                            if(!this.pressedKeys['5'])
+                                this.handleNotesUpEvents('black','F#',keyName,'up');
                             break;
                         case 't':
-                            this.handleNotesUpEvents('white','G',keyName,'up');
+                            if(!this.pressedKeys['t'])
+                                this.handleNotesUpEvents('white','G',keyName,'up');
                             break;
                         case '6':
-                            this.handleNotesUpEvents('black','G#',keyName,'up');
+                            if(!this.pressedKeys['6'])
+                                this.handleNotesUpEvents('black','G#',keyName,'up');
                             break;
                         case 'y':
-                            this.handleNotesUpEvents('white','A',keyName,'up');
+                            if(!this.pressedKeys['y'])
+                                this.handleNotesUpEvents('white','A',keyName,'up');
                             break;
                         case '7':
-                            this.handleNotesUpEvents('black','A#',keyName,'up');
+                            if(!this.pressedKeys['d'])
+                                this.handleNotesUpEvents('black','A#',keyName,'up');
                             break;
                         case 'u':
-                            this.handleNotesUpEvents('white','B',keyName,'up');
+                            if(!this.pressedKeys['d'])
+                                this.handleNotesUpEvents('white','B',keyName,'up');
                             break;
                      
                          
@@ -283,10 +307,7 @@ class Piano extends React.Component{
             {
                 document.addEventListener('keyup', (event) =>{
                     delete this.pressedKeys[event.key]
-                    if(this.noNotePress(this.pressedKeys)){
-                        sinte.keyUp()
-
-                    }
+                   
 
                     switch(event.key){
                         case 'z':

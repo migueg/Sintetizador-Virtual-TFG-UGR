@@ -1,29 +1,19 @@
 import {oscillator} from './oscillator';
-import * as Tone from 'tone';
+
 
 class Synth{
     #oscillatorA;
     #oscillatorB;
 
     constructor(){
-        this.#oscillatorA = new oscillator("sine");
-        this.#oscillatorB = new oscillator("square");
+        this.#oscillatorA = new oscillator();
+        this.#oscillatorB = new oscillator();
     
-        this.merge = new Tone.Merge().toDestination();
+       
     }
 
 
-    //Apagar oscillatores
-    stop(osc){
-        if(osc === 'A'){
-            this.#oscillatorA.stop();
-
-        }
-
-        if(osc === 'B'){
-            this.#oscillatorB.stop();
-        }
-    }
+    
 
 
     //Encender Oscilador
@@ -51,29 +41,14 @@ class Synth{
         }
 
     }
-    //Encender oscillatores
-    play(osc){
-        if(osc === 'A'){
-            console.log('HolaA')
-            this.#oscillatorA.toca('C5');
-
-        }
-
-        if(osc === 'B'){
-            console.log('HolaB')
-            this.#oscillatorB.toca('C5');
-        }
-    }
+   
 
     playNote(key){
-        this.#oscillatorA.toca(key)
-        this.#oscillatorB.toca(key)
+        this.#oscillatorA.play(key)
+        this.#oscillatorB.play(key)
     }
 
-    keyUp(){
-        this.#oscillatorA.silence()
-        this.#oscillatorB.silence()
-    }
+   
     //Seleccionar Onda oscillatores
     selectWave(osc, wave){
 
