@@ -1,5 +1,47 @@
-import { context } from "tone";
 
+/**
+ * Clase que implementa la polifinia a partir de un conjunto de voces.
+ * Cada voz se corresponde con un oscilador real de la Web Audio API
+ * 
+ * @class Voice
+ * @constructor
+ * @param {type} 
+ */
+
+/**
+ * Contexto de audio para la aplicación de la Web Audio API
+ * @property audioCtx
+ * @type Object
+ * @private
+ */
+
+/**
+ * Nodo de ganancia del oscilador para controlar el volumen de este
+ * @property gainNode
+ * @type Object
+ * @private
+ */
+
+/**
+ * Guarda los valores de la envolvente
+ * @property envelope
+ * @type JSON
+ * @private
+ */
+
+/**
+ * Volumen del oscilador
+ * @property volume
+ * @type Float
+ * @private
+ */
+
+/**
+ * Flag que representa la disponibilidad del oscilador
+ * @property available
+ * @type Boolean
+ * @private
+ */
 
 class Voice {
     #voices

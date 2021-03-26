@@ -8,7 +8,33 @@ import {Envelope} from './elements/envelope';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../css/Oscilador.css';
 
+
 export var sinte = new synth();
+
+/**
+ * Esta clase contiene el componente de la interfaz que simula
+ * un oscilador analógico, de manera que el usuario pueda modificar sus parámetros
+ *
+ * @class Oscilador
+ * @constructor
+ */
+
+/**
+ * Identificador del oscilador
+ * 
+ * @property #osc 
+ * @type Char
+ * @private
+ */
+
+/**
+ * Referencia a la clase Knob
+ * 
+ * @property _KnobVol 
+ * @type Ref
+ * 
+ */
+
 
 class Oscilador extends React.Component{
     #osc;
@@ -16,15 +42,21 @@ class Oscilador extends React.Component{
         super();
         this.#osc = props.osc;
         this._KnobVol = React.createRef(); 
+        
+        //Asignamos la variable this de la clase a las siguientes funciones
         this.checkChecked = this.checkChecked.bind(this);
-        this.addmobileVolume = this.addmobileVolume.bind(this);
-        this.restmobileVolume = this.restmobileVolume.bind(this);
+      
+    
         
     }
 
-    // Comprueba si esta encendido o apagado el interruptor
+    /**
+     * Método que se encarga de comprobar si esta encendido o apagado 
+     * el oscilador
+     * 
+     * @method checkChecked
+     */
     checkChecked() {
-        console.log('HHH')
         if(document.getElementById('interruptorA').checked){
             this.checkWave();
              sinte.onOscillator('A');
@@ -42,7 +74,12 @@ class Oscilador extends React.Component{
     }
 
 
-    // Comprueba que onda esta seleccionada
+    /**
+     * Método que se encarga de comprobar que onda esta seleccionada en el 
+     * momento de la llamada
+     * 
+     * @method checkWave
+     */
     checkWave() {
         var select = 'selector'+this.#osc;
         var selector = document.getElementById(select).value;
@@ -69,14 +106,14 @@ class Oscilador extends React.Component{
         
     }
 
-    addmobileVolume(){
-    
-        this._KnobVol.current.changeVolume('add')
-    }
-
-    restmobileVolume(){
-        this._KnobVol.current.changeVolume('rest')
-    }
+  
+   /**
+    * Método que construlle el componente de la interfaz relativo a el oscilador, que contiene los Knobs de la envolvente,
+    * el selector de onda, el knob de volumen y el botón de encendido y apagado.
+    * 
+    * @method render
+    * @returns Código html del componente oscilador
+    */
 
     render(){
         var id= ""
@@ -104,11 +141,7 @@ class Oscilador extends React.Component{
 
             <h3 style={{float: 'left'}}>Oscilador {this.#osc}</h3> 
             <div className="volumOsc" style={{float: 'right'}}>
-            <div id="mobileKnob" >
-                <p onClick={this.addmobileVolume}>+</p>
-                <p onClick={this.restmobileVolume}>-</p>
-            </div>
-            
+        
             <Knob
                 ref={this._KnobVol}
                 style={{ display: "inline-block" }}
@@ -142,6 +175,14 @@ class Oscilador extends React.Component{
         )
     }
 }
+
+
+/**
+ * Proporciona la interfaz correspondiente a los dos osciladores contruida
+ * 
+ * @module OscComponents
+ */
+
 export class OscComponents extends Component{
     render(){
         return(

@@ -1,6 +1,27 @@
 import {oscillator} from './oscillator';
 
+/**
+ * Clase Fachada del controlador que se comunica con los elementos de la vista.
+ *
+ * @class Synth
+ * @constructor
+ */
 
+/**
+ * Instancia del osciladorA
+ * 
+ * @property #osciladorA 
+ * @type Object
+ * @private
+ */
+
+/**
+ * Instancia del osciladorB
+ * 
+ * @property #osciladorB
+ * @type Object
+ * @private
+ */
 class Synth{
     #oscillatorA;
     #oscillatorB;
@@ -12,12 +33,13 @@ class Synth{
        
     }
 
-
+    /**
+     * Método que se encarga de encender un oscilador
+     * 
+     * @method onOscillator
+     * @param {Char} osc Id del oscildor
+     */
     
-
-
-    //Encender Oscilador
-
     onOscillator(osc){
         if(osc === 'A'){
             this.#oscillatorA.onOscillator()
@@ -30,7 +52,12 @@ class Synth{
     }
    
 
-    
+    /**
+     * Método que se encarga de apagar un oscilador
+     * 
+     * @method offOscillator
+     * @param {Char} osc Id del oscildor
+     */
     offOscillator(osc){
         if(osc === 'A'){
             this.#oscillatorA.offOscillator()
@@ -42,14 +69,25 @@ class Synth{
 
     }
    
-
+    /**
+     * Método que se encarga de tocar una nota de los osciladores
+     * 
+     * @method playNote
+     * @param {Char} key Nota
+     */
     playNote(key){
         this.#oscillatorA.play(key)
         this.#oscillatorB.play(key)
     }
 
    
-    //Seleccionar Onda oscillatores
+    /**
+     * Método que se encarga de seleccionar el tipo de onda de los osciladores
+     * 
+     * @method selectWave
+     * @param {Char} osc Id del oscilador
+     * @param {String} wave Forma de la onda
+     */
     selectWave(osc, wave){
 
         switch(osc){
@@ -64,6 +102,13 @@ class Synth{
         }
     }
 
+    /**
+     * Getter del volumen de los osciladores
+     * 
+     * @method getVolum
+     * @param {Char} osc Id del oscilador
+     * @return Volumen
+     */
     getVolum(osc){
         if(osc === 'A'){
             return this.#oscillatorA.getVolum();
@@ -74,7 +119,12 @@ class Synth{
         }
 
     }
-
+    /**
+     * Setter del volumen de los osciladores
+     * 
+     * @method setVolum
+     * @param {Char} osc Id del oscilador
+     */
     setVolum(osc, vol){
         switch(osc){
             case 'A':
@@ -91,7 +141,14 @@ class Synth{
     }
 
 
-    //Establece los parametros de la envolvente
+    /**
+     * Setter de los parámetros de la envolvente de los osciladores
+     * 
+     * @method setEnvolve
+     * @param {Char} osc Id del oscilador
+     * @param {Float} val Valor a cambiar
+     * @param {String} param Parámetro de la envolvente a cambiar
+     */
     setEnvolve(osc,val,param){
         if(osc === 'A'){
             switch(param){
@@ -138,6 +195,11 @@ class Synth{
     }
 }
 
+/**
+ * Proporciona una clase fachada para el controlador
+ * 
+ * @module synth
+ */
 
 export {
     Synth as synth

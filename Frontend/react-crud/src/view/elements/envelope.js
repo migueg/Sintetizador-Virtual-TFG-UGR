@@ -3,6 +3,25 @@ import { Container, Row,Col } from 'react-bootstrap';
 import {Knob} from './limitedKnob';
 import {types as knobTypes} from './knobtypes';
 
+/**
+ * La clase Envelope contiene el componente de la interfaz relativo a
+ * la envolvente de un oscilador. Proporciona un conjunto de knobs para modificar
+ * sus respectivos parametros (Attack,Sustain,Deacay,Release). 
+ * clicando en este.
+ *
+ * @class Envelope
+ * @constructor
+ * @param {Object} props Propiedades de la envolvente
+ */
+
+/**
+ *  Id del oscilador que posee la envolvente
+ * 
+ * @property #osc
+ * @type Char
+ * @private
+ */
+
 class Envelope extends React.Component{
     #osc;
     constructor(props){
@@ -11,7 +30,13 @@ class Envelope extends React.Component{
         
     }
 
-
+    /**
+     * Método que devuelve el componente Envelope para ser renderizado
+     * 
+     * @method render
+     * @return Código html del componente Envelope
+     * 
+     */
     render(){
         return(
             <Container className="Envelope">
@@ -103,4 +128,9 @@ class Envelope extends React.Component{
     }
 }
 
+/**
+ * Proporciona los elementos de la interfaz para la envolvente
+ * 
+ * @module Knob
+ */
 export {Envelope}

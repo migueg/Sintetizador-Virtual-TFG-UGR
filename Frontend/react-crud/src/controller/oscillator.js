@@ -1,5 +1,53 @@
 
 import Voice from './voice';
+
+/**
+ * Clase que representa un oscilador analógico
+ * 
+ * @class oscillator
+ * @constructor
+ */
+
+/**
+ * Contexto de audio para la aplicación de la Web Audio API
+ * @property audioCtx
+ * @type Object
+ * @private
+ */
+
+/**
+ * Nodo de ganancia del oscilador para controlar el volumen de este
+ * @property gainNode
+ * @type Object
+ * @private
+ */
+
+/**
+ * Guarda los valores de la envolvente
+ * @property envelope
+ * @type JSON
+ * @private
+ */
+
+/**
+ * Volumen del oscilador
+ * @property volume
+ * @type Float
+ * @private
+ */
+
+/**
+ * Flag que representa la disponibilidad del oscilador
+ * @property available
+ * @type Boolean
+ * @private
+ */
+
+/**
+ * Contiene una instancia de la clase Voice para lograr la polifonia
+ * @property voice
+ * @type Object
+ */
 class oscillator  {
    #audioCtx 
    #gainNode //Variable privada
@@ -33,15 +81,33 @@ class oscillator  {
  }
 
 
+ /**
+  * Método que enciende el oscilador
+  * 
+  * @method onOscillator
+  */
 
  onOscillator(){
     this.#available = true;
  }
- 
+ /**
+  * Método que apaga el oscilador
+  * 
+  * @method offOscillator
+  */
+
  offOscillator(){
     this.#available = false;
     this.#gainNode.gain.value = 0;
  }
+
+ /**
+  * Método que reproduce una de las voces, dependiendo de la nota pasada 
+  * como argumento
+  * 
+  * @method play
+  * @param {String} key Nota
+  */
 
  play(key){
    this.mute = false;
@@ -56,12 +122,24 @@ class oscillator  {
       
    }
  }
+
+ /**
+  * Setter del tipo de onda
+  * 
+  * @method setWave
+  * @param {String} wave Onda
+  */
  setWave(wave){
   
     this.voice.setType(wave);
  }
  
- 
+ /**
+  * Setter del volumen
+  * 
+  * @method setVolum
+  * @param {Float} level Volumen
+  */
  setVolum(level){
     this.#volume = level / 100;
    
@@ -70,24 +148,51 @@ class oscillator  {
 
 
  //Metodos que modifican los parametros de la envolvente
+
+ /**
+  * Setter del Attack
+  * 
+  * @method setAttack
+  * @param {Float} val Valor
+  */
  setAttack(val){
 
    this.voice.setAttack(val)
  }
 
+ /**
+  * Setter del Release
+  * 
+  * @method setRelease
+  * @param {Float} val Valor
+  */
  setRelease(val){
     this.voice.setRelease(val)
  }
 
+ /**
+  * Setter del Release
+  * 
+  * @method setRelease
+  * @param {Float} val Valor
+  */
  setSustain(val){
     this.voice.setSustain(val)
  }
 
+ /**
+  * Setter del Decay
+  * 
+  * @method setDecay
+  * @param {Float} val Valor
+  */
  setDecay(val){
     this.voice.setDecay(val)
  }
 
 
 }
+
+
 
 export {oscillator };

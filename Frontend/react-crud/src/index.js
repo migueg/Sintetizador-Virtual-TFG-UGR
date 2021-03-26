@@ -6,6 +6,13 @@ import App from './App';
 //import * as serviceWorker from "ser";
 import reportWebVitals from './reportWebVitals';
 
+/**
+ * Renderiza toda la aplicación
+ *
+ * @class Index
+ * @constructor
+ */
+
 ReactDOM.render(
   <Router>
     <Route path="/" component={App}/>

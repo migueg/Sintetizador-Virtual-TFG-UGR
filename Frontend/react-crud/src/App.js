@@ -7,6 +7,13 @@ import OscComponents from './view/osc-components'
 import Header from './view/head-component';
 import Piano from './view/piano-component'
 
+/**
+ * Es la clase principal que contiene todos los componentes organizados
+ *
+ * @class App
+ * @constructor
+ */
+
 function App() {
   return (
     <div className="App" 
@@ -35,5 +42,10 @@ function App() {
     </div>
   );
 }
+/**
+ * Modulo de la aplicación
+ * 
+ * @module App
+ */
 
 export default App;

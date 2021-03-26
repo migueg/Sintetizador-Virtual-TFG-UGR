@@ -6,11 +6,58 @@ import * as skins from 'react-rotary-knob-skin-pack';
 
 import {types as knobTypes} from './knobtypes';
 
+//Enumerado con los tipos posibles de knob
 const types = knobTypes;
+
+/**
+ * Esta clase genera el componente de la interfaz para un knob limitado
+ * que puede ser usado para disitintos fines atendiendo a su tipo
+ *
+ * @class LimitedKnob
+ * @constructor
+ * @param {Object} props Objeto que contiene las propiedades del componente
+ */
+/**
+ *  Tipo de knob
+ * 
+ * @property type
+ * @type Object
+ * @private
+ */
+/**
+ * Tipo de skin del knob
+ * 
+ * @property skin 
+ * @type Object
+ * @private
+ */
+/**
+ *  Valor actual del knob
+ * 
+ * @property value
+ * @type Float
+ * @private
+ */
+/**
+ * Estado del Knob
+ * 
+ * @property state 
+ * @type Object
+ * 
+ */
+
+/**
+ * Id del oscilador que contiene el Knob
+ * 
+ * @property osc 
+ * @type char
+ */
+
 class LimitedKnob extends React.Component {
-    #type; //tipo de knob
+    #type; 
     #skin;
-    #value; //valor del knob
+    #value; 
+   
     constructor(props) {
       super();
       this.state = {
@@ -27,44 +74,96 @@ class LimitedKnob extends React.Component {
       }else{
         this.#skin = skins.s17;
       }
-      
-/*       if(this.#type === types.RELEASE){
-        this.handleOnChangeRelease(50)
-      } */
+
    
       this.osc = props.osc ;
       this.handleOnChange = this.handleOnChange.bind(this); //Le decimos a la funcion que el this de la clase es su this
     }
-  
-    handleOnChangeOscillator(val){
+    
+     //METODOS PRIVADOS 
+
+    /**
+     * Método que se encarga de llamar al controlador para que 
+     * modifque el volumen general del oscilador
+     * 
+     * @method handleOnChangeOscillator
+     * @param {Float} val Valor del Knob
+     * @private
+     */
+   
+    __handleOnChangeOscillator(val){
       this.setState({ value: val });
       sinte.setVolum(this.osc,this.state.value);
         
     }
 
-
-    handleOnChangeAttack(val){
+    /**
+     * Método que se encarga de llamar al controlador para que 
+     * modifque el Attack del oscilador
+     * 
+     * @method handleOnChangeAttack
+     * @param {Float} val Valor del Knob
+     * @private
+     */
+    __handleOnChangeAttack(val){
       this.setState({ value: val });
       var attack = (2 * val ) /100;
       sinte.setEnvolve(this.osc,attack,'attack');
     
 
     }
-    handleOnChangeDecay(val){
+    /**
+     * Método que se encarga de llamar al controlador para que 
+     * modifque el Decay del oscilador
+     * 
+     * @method handleOnChangeDecay
+     * @param {Float} val Valor del Knob
+     * @private
+     */
+    __handleOnChangeDecay(val){
       this.setState({ value: val });
       var decay = (2 * val ) /100;
       sinte.setEnvolve(this.osc,decay,'decay');
     }
-    handleOnChangeSustain(val){
+    
+    /**
+     * Método que se encarga de llamar al controlador para que 
+     * modifque el Sustain del oscilador
+     * 
+     * @method handleOnChangeSustain
+     * @param {Float} val Valor del Knob
+     * @private
+     */
+    __handleOnChangeSustain(val){
       this.setState({ value: val });
       var sustain = ( val ) /100;
       sinte.setEnvolve(this.osc,sustain,'sustain');
     }
-    handleOnChangeRelease(val){
+    /**
+     * Método que se encarga de llamar al controlador para que 
+     * modifque el Release del oscilador
+     * 
+     * @method handleOnChangeRelease
+     * @param {Float} val Valor del Knob
+     * @private
+     */
+    __handleOnChangeRelease(val){
       this.setState({ value: val });
       var release = ( 5 * val)/100
       sinte.setEnvolve(this.osc,release,'release')
     }
+
+    //MÉTODOS PÚBLICOS
+
+    /**
+     * Método que es llamado cada vez que un Knob es alterado y que redirige la llamada
+     * al método adecuado para modificar el parámetro que esta modificando el usuario al 
+     * mover el Knob
+     * 
+     * @method handleOnChange
+     * @param {Float} val Valor del Knob
+     * 
+     */
     handleOnChange(val) {
       
       this.#value = val;
@@ -77,19 +176,19 @@ class LimitedKnob extends React.Component {
        
         switch(this.#type){
           case types.OSC_VOLUM:
-            this.handleOnChangeOscillator(val);
+            this.__handleOnChangeOscillator(val);
             break;
           case types.ATTACK:
-            this.handleOnChangeAttack(val);
+            this.__handleOnChangeAttack(val);
             break;
           case types.DECAY:
-            this.handleOnChangeDecay(val);
+            this.__handleOnChangeDecay(val);
             break;
           case types.SUSTAIN:
-            this.handleOnChangeSustain(val);
+            this.__handleOnChangeSustain(val);
             break;
           case types.RELEASE:
-            this.handleOnChangeRelease(val);
+            this.__handleOnChangeRelease(val);
             break;
           
           default:
@@ -100,36 +199,25 @@ class LimitedKnob extends React.Component {
       }
     }
 
-    //Cambia el volumen cuando se hace pulsando en los simbolos
-    changeVolume(option){
-     
-      if(option === 'add' || option === 'rest'){
-     
-        if(option === 'add'){
-          if(this.#value > 98){
-            this.#value = 99;
-          }else{
-            this.#value = this.#value + 2;
-          }
-        }else{
-          if(this.#value < 2){
-            this.#value = 0;
-          }else{
-            this.#value = this.#value - 2;
-          }
-        }
-
-        this.setState({value: this.#value});
-        sinte.setVolum(this.osc,this.state.value);
-           
-
-      }
-    }
+   /**
+     * Getter del estado del Knob
+     * 
+     * @method getState
+     * @return Estado del Knob
+     * 
+     */
 
     getState(){
       return this.state;
     }
   
+    /**
+     * Método que devuelve el componente Knob para ser renderizado
+     * 
+     * @method render
+     * @return Código html del componente Knob
+     * 
+     */
     render() {
     let { value, ...rest } = this.props;
   
@@ -141,5 +229,11 @@ class LimitedKnob extends React.Component {
     }
   }
 
+
+/**
+ * Proporciona los elementos de la interfaz para los knobs
+ * 
+ * @module Knob
+ */
 export {LimitedKnob as Knob} ;
 

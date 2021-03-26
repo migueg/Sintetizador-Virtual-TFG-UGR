@@ -5,6 +5,39 @@ import 'bootstrap/dist/css/bootstrap.css';
 import '../css/piano.css';
 
 
+/**
+ * La clase piano contiene el componente de la interfaz que simula
+ * un piano real, de manera que el usuario pueda repodrucir sonidos 
+ * clicando en este.
+ *
+ * @class Piano
+ * @constructor
+ */
+
+/**
+ * Octava en la que se encuentra el piano
+ * 
+ * @property #octave 
+ * @type String
+ * @private
+ */
+
+/**
+ * Lista de las teclas presionadas por el usuario
+ * 
+ * @property pressedKeys 
+ * @type JSON
+ * 
+ */
+
+/**
+ * Lista con las notas y sus frecuencias
+ * 
+ * @property notes 
+ * @type JSON
+ * 
+ */
+
 class Piano extends React.Component{
     #octave
     constructor(){
@@ -14,6 +47,52 @@ class Piano extends React.Component{
         this.notes = this.fetchNotes();
 
     }
+    //METODOS PRIVADOS 
+
+    /**
+     * Método que se encarga de identificar que nota ha sido accionada por el usuario
+     * y una vez identificada, mandarla al controlador para que se reproduzca.
+     * 
+     * @method playNote
+     * @param {String} oct Inidica si la nota es de la octava de arriba o de abajo del piano
+     * @param {String} key Nota presionada
+     * @private
+     */
+      __playNote(oct , key){
+        if(oct === 'down' || oct=== 'up'){
+            
+            if(oct === 'down'){
+                
+                var octave = this.#octave + 1;
+                
+                if(octave === 7 ){
+                    octave = 6;
+                }
+            }
+    
+            if(oct === 'up'){
+                var octave = this.#octave + 2
+               
+                    if(octave === 8){
+                        octave = 7;
+                    }
+            }
+    
+            key = key + octave
+            sinte.playNote(this.notes[key])
+      
+            
+        }
+        
+    }
+
+    //MÉTODOS PUBLICOS
+
+    /**
+     * Método que realiza una petición a la base de datos para obtener un listado
+     * de las notas con sus frecuencias. Este listado lo almacena en una variable de clase
+     * @method fetchNotes
+     */
 
     fetchNotes(){
         fetch('http://localhost:8080/notes')
@@ -24,12 +103,15 @@ class Piano extends React.Component{
         .catch(console.log)
         
     }
-    noNotePress(obj){
-        return Object.keys(obj).length === 0;
-    }
 
-    //Cambia el nombre de las notas en la interfaz
-    changeHtmlNotes(option){
+  
+    /**
+     * Este método cambia el número de la octava que aparece junto a cada nota
+     * en el piano.
+     * @method changeHtmlNotes 
+     * 
+     */
+    changeHtmlNotes(){
         var that  =this;
         $("ul li").each(function() {
             var note = $(this).text();
@@ -64,6 +146,11 @@ class Piano extends React.Component{
             $(this).children().text(note);
         })
     }
+    /**
+     * Cuando el usuario pulsa en el botón de subir octava, se llama a este método
+     * para que actualice la octava de las notas.
+     * @method upOctave
+     */
     upOctave(){
         if(this.#octave === 6){
             this.#octave = 6;
@@ -71,10 +158,15 @@ class Piano extends React.Component{
             this.#octave += 2;
         }
         
-        this.changeHtmlNotes('up');
+        this.changeHtmlNotes();
      
     }
 
+    /**
+     * Cuando el usuario pulsa en el botón de bajar octava, se llama a este método
+     * para que actualice la octava de las notas.
+     * @method downOctave
+     */
     downOctave(){
         if(this.#octave === 0){
             this.#octave = 0;
@@ -82,36 +174,17 @@ class Piano extends React.Component{
             this.#octave -= 2;
         }
 
-        this.changeHtmlNotes('down');
+        this.changeHtmlNotes();
     }
 
-    playNote(oct , key){
-        if(oct === 'down' || oct=== 'up'){
-            
-            if(oct === 'down'){
-                
-                var octave = this.#octave + 1;
-                
-                if(octave === 7 ){
-                    octave = 6;
-                }
-            }
-    
-            if(oct === 'up'){
-                var octave = this.#octave + 2
-               
-                    if(octave === 8){
-                        octave = 7;
-                    }
-            }
-    
-            key = key + octave
-            sinte.playNote(this.notes[key])
-      
-            
-        }
-        
-    }
+   /**
+    * Método que recibe como argumento el evento que se produce cuando el usuario clica en una
+    * nota del piano y que se encarga de identificar esta nota e indicarsela al método que se encarga de 
+    * enviarsela al controlador 
+    * 
+    * @method notePlayed
+    * @param {Event} e Evento que se corresponde con el click en una nota
+    */
     notePlayed(e){
         e = e || window.event;
         e = e.target || e.srcElement; // obtenemos el elemento que lanzo el evento
@@ -125,20 +198,32 @@ class Piano extends React.Component{
                 var key =  e.id.split("1") 
                 
                 
-                this.playNote('up', key[0]);
+                this.__playNote('up', key[0]);
 
             }else{
                
      
                 var key =  e.id 
             
-                this.playNote('down', key);
+                this.__playNote('down', key);
             }
             
        }
     }
     
-    handleNotesUpEvents(type,note,keyname,octave){
+   /**
+    * Método que se llama cuando el usuario presiona una de tecla del teclado asiganada a una
+    * nota del piano y que se encarga de identificar esta nota para simular que se clica en ella 
+    * e indicarsela al método que se encarga de enviarsela al controlador 
+    * 
+    * @method notePlayed
+    * @param {String} type Tipo de la not, si es negra o blanca
+    * @param {String} note Nota presionada
+    * @param {Char} keyname Tecla presionada
+    * @param {String} octave  Octava del piano de la nota presionada
+    */
+   
+    handleKeydownEvent(type,note,keyname,octave){
         var aux = note
         if(octave === 'up'){
             aux = note + '1';
@@ -152,9 +237,16 @@ class Piano extends React.Component{
                 document.getElementById(aux).classList.toggle('black-active');
             }
         
-            this.playNote(octave,note)
+            this.__playNote(octave,note)
             this.pressedKeys[keyname] = true;
     }
+   
+   /**
+    * Método que devuelve el código necesario para renderizar el componente
+    * 
+    * @method render
+    * @returns Código html del componente piano y escuchadores de eventos
+    */
 
     render(){
         return(
@@ -193,106 +285,110 @@ class Piano extends React.Component{
             </ul>
             
             {
-            
+              /**
+               * Se acciona cada vez que se pulsa una tecla del teclado
+               * 
+               * @event keydown
+               */
                 document.addEventListener('keydown', (event) => {
                      const keyName = event.key;
                      
                      switch(keyName.toLowerCase()){
                          case 'z':
                             if(!this.pressedKeys['z'])
-                                this.handleNotesUpEvents('white','C',keyName,'down');
+                                this.handleKeydownEvent('white','C',keyName,'down');
                             break;
                         case 's':
                             if(!this.pressedKeys['s'])
-                                this.handleNotesUpEvents('black','C#',keyName,'down');
+                                this.handleKeydownEvent('black','C#',keyName,'down');
                             break;
                         case 'x':
                             if(!this.pressedKeys['x'])
-                                this.handleNotesUpEvents('white','D',keyName,'down');
+                                this.handleKeydownEvent('white','D',keyName,'down');
                             break;
                         case 'd':
                             if(!this.pressedKeys['d'])
-                                this.handleNotesUpEvents('black','D#',keyName,'down');
+                                this.handleKeydownEvent('black','D#',keyName,'down');
                             break;
                         case 'c':
                             if(!this.pressedKeys['c'])
-                                this.handleNotesUpEvents('white','E',keyName,'down');
+                                this.handleKeydownEvent('white','E',keyName,'down');
                             break;
                         case 'v':
                             if(!this.pressedKeys['v'])
-                                this.handleNotesUpEvents('white','F',keyName,'down');
+                                this.handleKeydownEvent('white','F',keyName,'down');
                             break;
                         case 'g':
                             if(!this.pressedKeys['g'])
-                                this.handleNotesUpEvents('black','F#',keyName,'down');
+                                this.handleKeydownEvent('black','F#',keyName,'down');
                             break;
                         case 'b':
                             if(!this.pressedKeys['b'])
-                                this.handleNotesUpEvents('white','G',keyName,'down');
+                                this.handleKeydownEvent('white','G',keyName,'down');
                             break;
                         case 'h':
                             if(!this.pressedKeys['h'])
-                                this.handleNotesUpEvents('black','G#',keyName,'down');
+                                this.handleKeydownEvent('black','G#',keyName,'down');
                             break;
                         case 'n':
                             if(!this.pressedKeys['n'])
-                                this.handleNotesUpEvents('white','A',keyName,'down');
+                                this.handleKeydownEvent('white','A',keyName,'down');
                             break;
                         case 'j':
                             if(!this.pressedKeys['j'])
-                                this.handleNotesUpEvents('black','A#',keyName,'down');
+                                this.handleKeydownEvent('black','A#',keyName,'down');
                             break;
                         case 'm':
                             if(!this.pressedKeys['m'])
-                                this.handleNotesUpEvents('white','B',keyName,'down');
+                                this.handleKeydownEvent('white','B',keyName,'down');
                             break;
                          case 'q':
                             if(!this.pressedKeys['q'])
-                                this.handleNotesUpEvents('white','C',keyName,'up');
+                                this.handleKeydownEvent('white','C',keyName,'up');
                             break;
                         case '2':
                             if(!this.pressedKeys['2'])
-                                this.handleNotesUpEvents('black','C#',keyName,'up');
+                                this.handleKeydownEvent('black','C#',keyName,'up');
                             break;
                         case 'w':
                             if(!this.pressedKeys['w'])
-                                this.handleNotesUpEvents('white','D',keyName,'up');
+                                this.handleKeydownEvent('white','D',keyName,'up');
                             break;
                         case '3':
                             if(!this.pressedKeys['3'])
-                                this.handleNotesUpEvents('black','D#',keyName,'up');
+                                this.handleKeydownEvent('black','D#',keyName,'up');
                             break;
                         case 'e':
                             if(!this.pressedKeys['e'])
-                                this.handleNotesUpEvents('white','E',keyName,'up');
+                                this.handleKeydownEvent('white','E',keyName,'up');
                             break;
                         case 'r':
                             if(!this.pressedKeys['r'])
-                                this.handleNotesUpEvents('white','F',keyName,'up');
+                                this.handleKeydownEvent('white','F',keyName,'up');
                             break;
                         case '5':
                             if(!this.pressedKeys['5'])
-                                this.handleNotesUpEvents('black','F#',keyName,'up');
+                                this.handleKeydownEvent('black','F#',keyName,'up');
                             break;
                         case 't':
                             if(!this.pressedKeys['t'])
-                                this.handleNotesUpEvents('white','G',keyName,'up');
+                                this.handleKeydownEvent('white','G',keyName,'up');
                             break;
                         case '6':
                             if(!this.pressedKeys['6'])
-                                this.handleNotesUpEvents('black','G#',keyName,'up');
+                                this.handleKeydownEvent('black','G#',keyName,'up');
                             break;
                         case 'y':
                             if(!this.pressedKeys['y'])
-                                this.handleNotesUpEvents('white','A',keyName,'up');
+                                this.handleKeydownEvent('white','A',keyName,'up');
                             break;
                         case '7':
                             if(!this.pressedKeys['d'])
-                                this.handleNotesUpEvents('black','A#',keyName,'up');
+                                this.handleKeydownEvent('black','A#',keyName,'up');
                             break;
                         case 'u':
                             if(!this.pressedKeys['d'])
-                                this.handleNotesUpEvents('white','B',keyName,'up');
+                                this.handleKeydownEvent('white','B',keyName,'up');
                             break;
                      
                          
@@ -305,6 +401,11 @@ class Piano extends React.Component{
             }
 
             {
+              /**
+               * Se acciona cuando se levanta una tecla del teclado presionada
+               * 
+               * @event keyup
+               */
                 document.addEventListener('keyup', (event) =>{
                     delete this.pressedKeys[event.key]
                    
@@ -393,5 +494,12 @@ class Piano extends React.Component{
         )
     }
 }
+
+
+/**
+ * Proporciona la interfaz correspondiente a el piano
+ * 
+ * @module Piano
+ */
 
 export default Piano;
