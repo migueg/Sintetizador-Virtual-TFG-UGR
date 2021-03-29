@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>App</title>
+    <title>src\controller\synth.js</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -92,77 +92,217 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>App Class</h1>
-<div class="box meta">
+<h1 class="file-heading">File: src\controller\synth.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+import {oscillator} from &#x27;./oscillator&#x27;;
+
+/**
+ * Clase Fachada del controlador que se comunica con los elementos de la vista.
+ *
+ * @class Synth
+ * @constructor
+ */
+
+/**
+ * Instancia del osciladorA
+ * 
+ * @property #osciladorA 
+ * @type Object
+ * @private
+ */
+
+/**
+ * Instancia del osciladorB
+ * 
+ * @property #osciladorB
+ * @type Object
+ * @private
+ */
+class Synth{
+    #oscillatorA;
+    #oscillatorB;
+
+    constructor(){
+        this.#oscillatorA = new oscillator();
+        this.#oscillatorB = new oscillator();
+    
+       
+    }
+
+    /**
+     * Método que se encarga de encender un oscilador
+     * 
+     * @method onOscillator
+     * @param {Char} osc Id del oscildor
+     */
+    
+    onOscillator(osc){
+        if(osc === &#x27;A&#x27;){
+            this.#oscillatorA.onOscillator()
+        }
+
+        if(osc === &#x27;B&#x27;){
+            this.#oscillatorB.onOscillator();
+        }
+
+    }
+   
+
+    /**
+     * Método que se encarga de apagar un oscilador
+     * 
+     * @method offOscillator
+     * @param {Char} osc Id del oscildor
+     */
+    offOscillator(osc){
+        if(osc === &#x27;A&#x27;){
+            this.#oscillatorA.offOscillator()
+        }
+
+        if(osc === &#x27;B&#x27;){
+            this.#oscillatorB.offOscillator();
+        }
+
+    }
+   
+    /**
+     * Método que se encarga de tocar una nota de los osciladores
+     * 
+     * @method playNote
+     * @param {Char} key Nota
+     */
+    playNote(key){
+        this.#oscillatorA.play(key)
+        this.#oscillatorB.play(key)
+    }
+
+   
+    /**
+     * Método que se encarga de seleccionar el tipo de onda de los osciladores
+     * 
+     * @method selectWave
+     * @param {Char} osc Id del oscilador
+     * @param {String} wave Forma de la onda
+     */
+    selectWave(osc, wave){
+
+        switch(osc){
+            case &#x27;A&#x27;:
+                this.#oscillatorA.setWave(wave);
+                break;
+            case &#x27;B&#x27;:
+                this.#oscillatorB.setWave(wave);
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * Getter del volumen de los osciladores
+     * 
+     * @method getVolum
+     * @param {Char} osc Id del oscilador
+     * @return Volumen
+     */
+    getVolum(osc){
+        if(osc === &#x27;A&#x27;){
+            return this.#oscillatorA.getVolum();
+        }
+
+        if(osc === &#x27;B&#x27;){
+            return this.#oscillatorB.getVolum();
+        }
+
+    }
+    /**
+     * Setter del volumen de los osciladores
+     * 
+     * @method setVolum
+     * @param {Char} osc Id del oscilador
+     */
+    setVolum(osc, vol){
+        switch(osc){
+            case &#x27;A&#x27;:
+              
+                this.#oscillatorA.setVolum(vol);
+            break;
+            
+            case &#x27;B&#x27;:
+                this.#oscillatorB.setVolum(vol);
+                break;
+            default:
+                break;
+        }
+    }
 
 
-        <div class="foundat">
-            Defined in: <a href="../files/src_App.js.html#l10"><code>src\App.js:10</code></a>
-        </div>
+    /**
+     * Setter de los parámetros de la envolvente de los osciladores
+     * 
+     * @method setEnvolve
+     * @param {Char} osc Id del oscilador
+     * @param {Float} val Valor a cambiar
+     * @param {String} param Parámetro de la envolvente a cambiar
+     */
+    setEnvolve(osc,val,param){
+        if(osc === &#x27;A&#x27;){
+            switch(param){
+                case &#x27;attack&#x27;:
+                    this.#oscillatorA.setAttack(val);
+                    break;
+                case &#x27;release&#x27;:
+                    this.#oscillatorA.setRelease(val);
+                    break;
+                case &#x27;decay&#x27;:
+                    this.#oscillatorA.setDecay(val);
+                    break;
+                case &#x27;sustain&#x27;:
+                    this.#oscillatorA.setSustain(val);
+                    break;
 
-            Module: <a href="../modules/App.html">App</a>
+                default:
+                    break;
 
-</div>
+            }
+        }
 
+        if(osc === &#x27;B&#x27;){
+            switch(param){
+                case &#x27;attack&#x27;:
+                    this.#oscillatorB.setAttack(val);
+                    break;
+                case &#x27;release&#x27;:
+                    this.#oscillatorB.setRelease(val);
+                    break;
+                case &#x27;decay&#x27;:
+                    this.#oscillatorB.setDecay(val);
+                    break;
+                case &#x27;sustain&#x27;:
+                    this.#oscillatorB.setSustain(val);
+                    break;
+                    
+                default:
+                    break;
 
-<div class="box intro">
-    <p>Es la clase principal que contiene todos los componentes organizados</p>
-
-</div>
-
-    <div class="constructor">
-        <h2>Constructor</h2>
-<div id="method_App" class="method item">
-    <h3 class="name"><code>App</code></h3>
-
-        <span class="paren">()</span>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_App.js.html#l10"><code>src\App.js:10</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
+            }
+        }
         
-    </div>
+    }
+}
 
+/**
+ * Proporciona una clase fachada para el controlador
+ * 
+ * @module synth
+ */
 
-
-
-</div>
-    </div>
-
-<div id="classdocs" class="tabview">
-    <ul class="api-class-tabs">
-        <li class="api-class-tab index"><a href="#index">Index</a></li>
-
-    </ul>
-
-    <div>
-        <div id="index" class="api-class-tabpanel index">
-            <h2 class="off-left">Item Index</h2>
-
-
-
-
-        </div>
-
-
-
-
-    </div>
+export {
+    Synth as synth
+};
+    </pre>
 </div>
                     </div>
                 </div>

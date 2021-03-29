@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>LimitedKnob</title>
+    <title>Voice</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -92,34 +92,43 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>LimitedKnob Class</h1>
+<h1>Voice Class</h1>
 <div class="box meta">
 
 
         <div class="foundat">
-            Defined in: <a href="../files/src_view_elements_limitedKnob.js.html#l12"><code>src\view\elements\limitedKnob.js:12</code></a>
+            Defined in: <a href="../files/src_controller_voice.js.html#l2"><code>src\controller\voice.js:2</code></a>
         </div>
 
-            Module: <a href="../modules/Knob.html">Knob</a>
+            Module: <a href="../modules/synth.html">synth</a>
 
 </div>
 
 
 <div class="box intro">
-    <p>Esta clase genera el componente de la interfaz para un knob limitado
-que puede ser usado para disitintos fines atendiendo a su tipo</p>
+    <p>Clase que implementa la polifinia a partir de un conjunto de voces.
+Cada voz se corresponde con un oscilador real de la Web Audio API</p>
 
 </div>
 
     <div class="constructor">
         <h2>Constructor</h2>
-<div id="method_LimitedKnob" class="method item">
-    <h3 class="name"><code>LimitedKnob</code></h3>
+<div id="method_Voice" class="method item">
+    <h3 class="name"><code>Voice</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>props</code>
+                        <code>type</code>
+                </li>
+                <li class="arg">
+                        <code>context</code>
+                </li>
+                <li class="arg">
+                        <code>envelope</code>
+                </li>
+                <li class="arg">
+                        <code>gain</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
@@ -134,7 +143,7 @@ que puede ser usado para disitintos fines atendiendo a su tipo</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_view_elements_limitedKnob.js.html#l12"><code>src\view\elements\limitedKnob.js:12</code></a>
+        <a href="../files/src_controller_voice.js.html#l2"><code>src\controller\voice.js:2</code></a>
         </p>
 
 
@@ -150,12 +159,45 @@ que puede ser usado para disitintos fines atendiendo a su tipo</p>
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">props</code>
+                        <code class="param-name">type</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Tipo de la onda</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">context</code>
                         <span class="type">Object</span>
 
 
                     <div class="param-description">
-                        <p>Objeto que contiene las propiedades del componente</p>
+                        <p>Contexto de audi</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">envelope</code>
+                        <span class="type">JSON</span>
+
+
+                    <div class="param-description">
+                        <p>Parametros de la envolvente</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">gain</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Nodo de la ganancia del oscilador al que pertenece</p>
 
                     </div>
 
@@ -185,35 +227,39 @@ que puede ser usado para disitintos fines atendiendo a su tipo</p>
 
                     <ul class="index-list methods">
                             <li class="index-item method">
-                                <a href="#method_getState">getState</a>
+                                <a href="#method_createVocies">createVocies</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_handleOnChange">handleOnChange</a>
-
-                            </li>
-                            <li class="index-item method private">
-                                <a href="#method_handleOnChangeAttack">handleOnChangeAttack</a>
-
-                            </li>
-                            <li class="index-item method private">
-                                <a href="#method_handleOnChangeDecay">handleOnChangeDecay</a>
-
-                            </li>
-                            <li class="index-item method private">
-                                <a href="#method_handleOnChangeOscillator">handleOnChangeOscillator</a>
-
-                            </li>
-                            <li class="index-item method private">
-                                <a href="#method_handleOnChangeRelease">handleOnChangeRelease</a>
-
-                            </li>
-                            <li class="index-item method private">
-                                <a href="#method_handleOnChangeSustain">handleOnChangeSustain</a>
+                                <a href="#method_envelopeGeneratorOn">envelopeGeneratorOn</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_render">render</a>
+                                <a href="#method_setAttack">setAttack</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setDecay">setDecay</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setGain">setGain</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setRelease">setRelease</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setSustain">setSustain</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setType">setType</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_start">start</a>
 
                             </li>
                     </ul>
@@ -223,16 +269,28 @@ que puede ser usado para disitintos fines atendiendo a su tipo</p>
                     <h3>Properties</h3>
 
                     <ul class="index-list properties">
-                            <li class="index-item property">
-                                <a href="#property_osc">osc</a>
+                            <li class="index-item property private">
+                                <a href="#property_activeVoices">activeVoices</a>
 
                             </li>
                             <li class="index-item property private">
-                                <a href="#property_skin">skin</a>
+                                <a href="#property_context">context</a>
 
                             </li>
-                            <li class="index-item property">
-                                <a href="#property_state">state</a>
+                            <li class="index-item property private">
+                                <a href="#property_envelope">envelope</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_gains">gains</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_masterNode">masterNode</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_notes">notes</a>
 
                             </li>
                             <li class="index-item property private">
@@ -240,7 +298,7 @@ que puede ser usado para disitintos fines atendiendo a su tipo</p>
 
                             </li>
                             <li class="index-item property private">
-                                <a href="#property_value">value</a>
+                                <a href="#property_voices">voices</a>
 
                             </li>
                     </ul>
@@ -252,14 +310,11 @@ que puede ser usado para disitintos fines atendiendo a su tipo</p>
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
-<div id="method_getState" class="method item">
-    <h3 class="name"><code>getState</code></h3>
+<div id="method_createVocies" class="method item">
+    <h3 class="name"><code>createVocies</code></h3>
 
         <span class="paren">()</span>
 
-        <span class="returns-inline">
-            <span class="type"></span>
-        </span>
 
 
 
@@ -268,10 +323,9 @@ que puede ser usado para disitintos fines atendiendo a su tipo</p>
 
 
     <div class="meta">
-                    <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_view_elements_limitedKnob.js.html#l202"><code>src\view\elements\limitedKnob.js:202</code></a>
+        <a href="../files/src_controller_voice.js.html#l101"><code>src\controller\voice.js:101</code></a>
         </p>
 
 
@@ -279,24 +333,87 @@ que puede ser usado para disitintos fines atendiendo a su tipo</p>
     </div>
 
     <div class="description">
-        <p>Getter del estado del Knob</p>
+        <p>Método que se encarga de crear una voz para cada una de las notas, es decir,
+para cada nota se crea un oscilador y lo conecta con un nodo de ganancia para
+lograr la polifonia</p>
 
     </div>
 
 
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                    <p>Estado del Knob</p>
-
-            </div>
-        </div>
 
 
 </div>
-<div id="method_handleOnChange" class="method item">
-    <h3 class="name"><code>handleOnChange</code></h3>
+<div id="method_envelopeGeneratorOn" class="method item">
+    <h3 class="name"><code>envelopeGeneratorOn</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>key</code>
+                </li>
+                <li class="arg">
+                        <code>gain</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_controller_voice.js.html#l210"><code>src\controller\voice.js:210</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método que simula el comportamiento de una envolvente sobre una
+señal de audio y que es llamado cada vez que se presiona una nota</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">key</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Nota presionada</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">gain</code>
+                        <span class="type">Float</span>
+
+
+                    <div class="param-description">
+                        <p>Volumen actual del oscilador</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_setAttack" class="method item">
+    <h3 class="name"><code>setAttack</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
@@ -314,10 +431,9 @@ que puede ser usado para disitintos fines atendiendo a su tipo</p>
 
 
     <div class="meta">
-                    <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_view_elements_limitedKnob.js.html#l158"><code>src\view\elements\limitedKnob.js:158</code></a>
+        <a href="../files/src_controller_voice.js.html#l159"><code>src\controller\voice.js:159</code></a>
         </p>
 
 
@@ -325,9 +441,7 @@ que puede ser usado para disitintos fines atendiendo a su tipo</p>
     </div>
 
     <div class="description">
-        <p>Método que es llamado cada vez que un Knob es alterado y que redirige la llamada
-al método adecuado para modificar el parámetro que esta modificando el usuario al
-mover el Knob</p>
+        <p>Setter del Attack</p>
 
     </div>
 
@@ -341,7 +455,7 @@ mover el Knob</p>
 
 
                     <div class="param-description">
-                        <p>Valor del Knob</p>
+                        <p>Valor</p>
 
                     </div>
 
@@ -352,8 +466,8 @@ mover el Knob</p>
 
 
 </div>
-<div id="method_handleOnChangeAttack" class="method item private">
-    <h3 class="name"><code>handleOnChangeAttack</code></h3>
+<div id="method_setDecay" class="method item">
+    <h3 class="name"><code>setDecay</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
@@ -365,17 +479,15 @@ mover el Knob</p>
 
 
 
-        <span class="flag private">private</span>
 
 
 
 
 
     <div class="meta">
-                    <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_view_elements_limitedKnob.js.html#l100"><code>src\view\elements\limitedKnob.js:100</code></a>
+        <a href="../files/src_controller_voice.js.html#l189"><code>src\controller\voice.js:189</code></a>
         </p>
 
 
@@ -383,8 +495,7 @@ mover el Knob</p>
     </div>
 
     <div class="description">
-        <p>Método que se encarga de llamar al controlador para que
-modifque el Attack del oscilador</p>
+        <p>Setter del Decay</p>
 
     </div>
 
@@ -398,7 +509,7 @@ modifque el Attack del oscilador</p>
 
 
                     <div class="param-description">
-                        <p>Valor del Knob</p>
+                        <p>Valor</p>
 
                     </div>
 
@@ -409,8 +520,76 @@ modifque el Attack del oscilador</p>
 
 
 </div>
-<div id="method_handleOnChangeDecay" class="method item private">
-    <h3 class="name"><code>handleOnChangeDecay</code></h3>
+<div id="method_setGain" class="method item">
+    <h3 class="name"><code>setGain</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>key</code>
+                </li>
+                <li class="arg">
+                        <code>gain</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_controller_voice.js.html#l146"><code>src\controller\voice.js:146</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Setter del volumen</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">key</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Nota tocada</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">gain</code>
+                        <span class="type">Float</span>
+
+
+                    <div class="param-description">
+                        <p>Volumen del oscilador</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_setRelease" class="method item">
+    <h3 class="name"><code>setRelease</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
@@ -422,17 +601,15 @@ modifque el Attack del oscilador</p>
 
 
 
-        <span class="flag private">private</span>
 
 
 
 
 
     <div class="meta">
-                    <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_view_elements_limitedKnob.js.html#l115"><code>src\view\elements\limitedKnob.js:115</code></a>
+        <a href="../files/src_controller_voice.js.html#l169"><code>src\controller\voice.js:169</code></a>
         </p>
 
 
@@ -440,8 +617,7 @@ modifque el Attack del oscilador</p>
     </div>
 
     <div class="description">
-        <p>Método que se encarga de llamar al controlador para que
-modifque el Decay del oscilador</p>
+        <p>Setter del Release</p>
 
     </div>
 
@@ -455,7 +631,7 @@ modifque el Decay del oscilador</p>
 
 
                     <div class="param-description">
-                        <p>Valor del Knob</p>
+                        <p>Valor</p>
 
                     </div>
 
@@ -466,8 +642,8 @@ modifque el Decay del oscilador</p>
 
 
 </div>
-<div id="method_handleOnChangeOscillator" class="method item private">
-    <h3 class="name"><code>handleOnChangeOscillator</code></h3>
+<div id="method_setSustain" class="method item">
+    <h3 class="name"><code>setSustain</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
@@ -479,17 +655,15 @@ modifque el Decay del oscilador</p>
 
 
 
-        <span class="flag private">private</span>
 
 
 
 
 
     <div class="meta">
-                    <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_view_elements_limitedKnob.js.html#l85"><code>src\view\elements\limitedKnob.js:85</code></a>
+        <a href="../files/src_controller_voice.js.html#l179"><code>src\controller\voice.js:179</code></a>
         </p>
 
 
@@ -497,8 +671,7 @@ modifque el Decay del oscilador</p>
     </div>
 
     <div class="description">
-        <p>Método que se encarga de llamar al controlador para que
-modifque el volumen general del oscilador</p>
+        <p>Setter del Sustain</p>
 
     </div>
 
@@ -512,7 +685,7 @@ modifque el volumen general del oscilador</p>
 
 
                     <div class="param-description">
-                        <p>Valor del Knob</p>
+                        <p>Valor</p>
 
                     </div>
 
@@ -523,30 +696,28 @@ modifque el volumen general del oscilador</p>
 
 
 </div>
-<div id="method_handleOnChangeRelease" class="method item private">
-    <h3 class="name"><code>handleOnChangeRelease</code></h3>
+<div id="method_setType" class="method item">
+    <h3 class="name"><code>setType</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>val</code>
+                        <code>type</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
 
 
 
-        <span class="flag private">private</span>
 
 
 
 
 
     <div class="meta">
-                    <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_view_elements_limitedKnob.js.html#l142"><code>src\view\elements\limitedKnob.js:142</code></a>
+        <a href="../files/src_controller_voice.js.html#l198"><code>src\controller\voice.js:198</code></a>
         </p>
 
 
@@ -554,8 +725,7 @@ modifque el volumen general del oscilador</p>
     </div>
 
     <div class="description">
-        <p>Método que se encarga de llamar al controlador para que
-modifque el Release del oscilador</p>
+        <p>Setter del tipo de onda para cada una de las voces</p>
 
     </div>
 
@@ -564,12 +734,12 @@ modifque el Release del oscilador</p>
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">val</code>
-                        <span class="type">Float</span>
+                        <code class="param-name">type</code>
+                        <span class="type">String</span>
 
 
                     <div class="param-description">
-                        <p>Valor del Knob</p>
+                        <p>Tipo de onda</p>
 
                     </div>
 
@@ -580,30 +750,31 @@ modifque el Release del oscilador</p>
 
 
 </div>
-<div id="method_handleOnChangeSustain" class="method item private">
-    <h3 class="name"><code>handleOnChangeSustain</code></h3>
+<div id="method_start" class="method item">
+    <h3 class="name"><code>start</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>val</code>
+                        <code>key</code>
+                </li>
+                <li class="arg">
+                        <code>gain</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
 
 
 
-        <span class="flag private">private</span>
 
 
 
 
 
     <div class="meta">
-                    <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_view_elements_limitedKnob.js.html#l129"><code>src\view\elements\limitedKnob.js:129</code></a>
+        <a href="../files/src_controller_voice.js.html#l133"><code>src\controller\voice.js:133</code></a>
         </p>
 
 
@@ -611,8 +782,8 @@ modifque el Release del oscilador</p>
     </div>
 
     <div class="description">
-        <p>Método que se encarga de llamar al controlador para que
-modifque el Sustain del oscilador</p>
+        <p>Método que es llamado cuando se toca una nota. Almacena que voz se ha tocado
+y llama al metodo de la envolvente</p>
 
     </div>
 
@@ -621,12 +792,23 @@ modifque el Sustain del oscilador</p>
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">val</code>
+                        <code class="param-name">key</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Nota tocada</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">gain</code>
                         <span class="type">Float</span>
 
 
                     <div class="param-description">
-                        <p>Valor del Knob</p>
+                        <p>Volumen del oscilador</p>
 
                     </div>
 
@@ -634,49 +816,6 @@ modifque el Sustain del oscilador</p>
             </ul>
         </div>
 
-
-
-</div>
-<div id="method_render" class="method item">
-    <h3 class="name"><code>render</code></h3>
-
-        <span class="paren">()</span>
-
-        <span class="returns-inline">
-            <span class="type"></span>
-        </span>
-
-
-
-
-
-
-
-    <div class="meta">
-                    <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
-                <p>
-                Defined in
-        <a href="../files/src_view_elements_limitedKnob.js.html#l214"><code>src\view\elements\limitedKnob.js:214</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Método que devuelve el componente Knob para ser renderizado</p>
-
-    </div>
-
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                    <p>Código html del componente Knob</p>
-
-            </div>
-        </div>
 
 
 </div>
@@ -685,34 +824,34 @@ modifque el Sustain del oscilador</p>
             <div id="properties" class="api-class-tabpanel">
                 <h2 class="off-left">Properties</h2>
 
-<div id="property_osc" class="property item">
-    <h3 class="name"><code>osc</code></h3>
-    <span class="type">Char</span>
+<div id="property_activeVoices" class="property item private">
+    <h3 class="name"><code>activeVoices</code></h3>
+    <span class="type">JSON</span>
 
 
+        <span class="flag private">private</span>
 
 
 
     <div class="meta">
-                    <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_view_elements_limitedKnob.js.html#l49"><code>src\view\elements\limitedKnob.js:49</code></a>
+        <a href="../files/src_controller_voice.js.html#l56"><code>src\controller\voice.js:56</code></a>
         </p>
 
 
     </div>
 
     <div class="description">
-        <p>Id del oscilador que contiene el Knob</p>
+        <p>Contiene las voces que se estan reproduciendo</p>
 
     </div>
 
 
 
 </div>
-<div id="property_skin" class="property item private">
-    <h3 class="name"><code>skin</code></h3>
+<div id="property_context" class="property item private">
+    <h3 class="name"><code>context</code></h3>
     <span class="type">Object</span>
 
 
@@ -721,43 +860,120 @@ modifque el Sustain del oscilador</p>
 
 
     <div class="meta">
-                    <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_view_elements_limitedKnob.js.html#l27"><code>src\view\elements\limitedKnob.js:27</code></a>
+        <a href="../files/src_controller_voice.js.html#l14"><code>src\controller\voice.js:14</code></a>
         </p>
 
 
     </div>
 
     <div class="description">
-        <p>Tipo de skin del knob</p>
+        <p>Contexto de audio para la aplicación de la Web Audio API</p>
 
     </div>
 
 
 
 </div>
-<div id="property_state" class="property item">
-    <h3 class="name"><code>state</code></h3>
-    <span class="type">Object</span>
+<div id="property_envelope" class="property item private">
+    <h3 class="name"><code>envelope</code></h3>
+    <span class="type">JSON</span>
 
 
+        <span class="flag private">private</span>
 
 
 
     <div class="meta">
-                    <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_view_elements_limitedKnob.js.html#l41"><code>src\view\elements\limitedKnob.js:41</code></a>
+        <a href="../files/src_controller_voice.js.html#l28"><code>src\controller\voice.js:28</code></a>
         </p>
 
 
     </div>
 
     <div class="description">
-        <p>Estado del Knob</p>
+        <p>Guarda los valores de la envolvente</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_gains" class="property item private">
+    <h3 class="name"><code>gains</code></h3>
+    <span class="type">JSON</span>
+
+
+        <span class="flag private">private</span>
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_controller_voice.js.html#l42"><code>src\controller\voice.js:42</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Contiene las ganacias particulares de cada voz</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_masterNode" class="property item private">
+    <h3 class="name"><code>masterNode</code></h3>
+    <span class="type">Object</span>
+
+
+        <span class="flag private">private</span>
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_controller_voice.js.html#l35"><code>src\controller\voice.js:35</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Nodo de ganancia del oscilador</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_notes" class="property item private">
+    <h3 class="name"><code>notes</code></h3>
+    <span class="type">JSON</span>
+
+
+        <span class="flag private">private</span>
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_controller_voice.js.html#l63"><code>src\controller\voice.js:63</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Contiene las notas con sus frecuencias</p>
 
     </div>
 
@@ -766,7 +982,7 @@ modifque el Sustain del oscilador</p>
 </div>
 <div id="property_type" class="property item private">
     <h3 class="name"><code>type</code></h3>
-    <span class="type">Object</span>
+    <span class="type">String</span>
 
 
         <span class="flag private">private</span>
@@ -774,26 +990,25 @@ modifque el Sustain del oscilador</p>
 
 
     <div class="meta">
-                    <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_view_elements_limitedKnob.js.html#l20"><code>src\view\elements\limitedKnob.js:20</code></a>
+        <a href="../files/src_controller_voice.js.html#l21"><code>src\controller\voice.js:21</code></a>
         </p>
 
 
     </div>
 
     <div class="description">
-        <p>Tipo de knob</p>
+        <p>Tipo de onda del oscilador</p>
 
     </div>
 
 
 
 </div>
-<div id="property_value" class="property item private">
-    <h3 class="name"><code>value</code></h3>
-    <span class="type">Float</span>
+<div id="property_voices" class="property item private">
+    <h3 class="name"><code>voices</code></h3>
+    <span class="type">JSON</span>
 
 
         <span class="flag private">private</span>
@@ -801,17 +1016,16 @@ modifque el Sustain del oscilador</p>
 
 
     <div class="meta">
-                    <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_view_elements_limitedKnob.js.html#l34"><code>src\view\elements\limitedKnob.js:34</code></a>
+        <a href="../files/src_controller_voice.js.html#l49"><code>src\controller\voice.js:49</code></a>
         </p>
 
 
     </div>
 
     <div class="description">
-        <p>Valor actual del knob</p>
+        <p>Contiene las voces correspondientes a cada nota</p>
 
     </div>
 

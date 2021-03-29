@@ -1,6 +1,35 @@
 {
     "project": {},
     "files": {
+        "src\\controller\\oscillator.js": {
+            "name": "src\\controller\\oscillator.js",
+            "modules": {},
+            "classes": {
+                "oscillator": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\controller\\synth.js": {
+            "name": "src\\controller\\synth.js",
+            "modules": {
+                "synth": 1
+            },
+            "classes": {
+                "Synth": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\controller\\voice.js": {
+            "name": "src\\controller\\voice.js",
+            "modules": {},
+            "classes": {
+                "Voice": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "src\\view\\elements\\envelope.js": {
             "name": "src\\view\\elements\\envelope.js",
             "modules": {},
@@ -85,6 +114,22 @@
         }
     },
     "modules": {
+        "synth": {
+            "name": "synth",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "oscillator": 1,
+                "Synth": 1,
+                "Voice": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src\\controller\\voice.js",
+            "line": 2,
+            "description": "Proporciona una clase fachada para el controlador"
+        },
         "Knob": {
             "name": "Knob",
             "submodules": {
@@ -173,6 +218,71 @@
         }
     },
     "classes": {
+        "oscillator": {
+            "name": "oscillator",
+            "shortname": "oscillator",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "synth",
+            "file": "src\\controller\\oscillator.js",
+            "line": 4,
+            "description": "Clase que representa un oscilador analógico",
+            "is_constructor": 1
+        },
+        "Synth": {
+            "name": "Synth",
+            "shortname": "Synth",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "synth",
+            "file": "src\\controller\\synth.js",
+            "line": 3,
+            "description": "Clase Fachada del controlador que se comunica con los elementos de la vista.",
+            "is_constructor": 1
+        },
+        "Voice": {
+            "name": "Voice",
+            "shortname": "Voice",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "synth",
+            "namespace": "",
+            "file": "src\\controller\\voice.js",
+            "line": 2,
+            "description": "Clase que implementa la polifinia a partir de un conjunto de voces.\nCada voz se corresponde con un oscilador real de la Web Audio API",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "type",
+                    "description": "Tipo de la onda",
+                    "type": "String"
+                },
+                {
+                    "name": "context",
+                    "description": "Contexto de audi",
+                    "type": "Object"
+                },
+                {
+                    "name": "envelope",
+                    "description": "Parametros de la envolvente",
+                    "type": "JSON"
+                },
+                {
+                    "name": "gain",
+                    "description": "Nodo de la ganancia del oscilador al que pertenece",
+                    "type": "Object"
+                }
+            ]
+        },
         "Envelope": {
             "name": "Envelope",
             "shortname": "Envelope",
@@ -182,6 +292,7 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "Knob",
+            "namespace": "",
             "file": "src\\view\\elements\\envelope.js",
             "line": 6,
             "description": "La clase Envelope contiene el componente de la interfaz relativo a\nla envolvente de un oscilador. Proporciona un conjunto de knobs para modificar\nsus respectivos parametros (Attack,Sustain,Deacay,Release). \nclicando en este.",
@@ -295,25 +406,606 @@
     "elements": {},
     "classitems": [
         {
-            "file": "src\\view\\elements\\envelope.js",
-            "line": 17,
+            "file": "src\\controller\\oscillator.js",
+            "line": 11,
+            "description": "Contexto de audio para la aplicación de la Web Audio API",
             "itemtype": "property",
-            "name": "#osc Id del oscilador que posee la envolvente",
-            "type": "Char",
+            "name": "audioCtx",
+            "type": "Object",
             "access": "private",
             "tagname": "",
-            "class": "Envelope"
+            "class": "oscillator"
+        },
+        {
+            "file": "src\\controller\\oscillator.js",
+            "line": 18,
+            "description": "Nodo de ganancia del oscilador para controlar el volumen de este",
+            "itemtype": "property",
+            "name": "gainNode",
+            "type": "Object",
+            "access": "private",
+            "tagname": "",
+            "class": "oscillator"
+        },
+        {
+            "file": "src\\controller\\oscillator.js",
+            "line": 25,
+            "description": "Guarda los valores de la envolvente",
+            "itemtype": "property",
+            "name": "envelope",
+            "type": "JSON",
+            "access": "private",
+            "tagname": "",
+            "class": "oscillator"
+        },
+        {
+            "file": "src\\controller\\oscillator.js",
+            "line": 32,
+            "description": "Volumen del oscilador",
+            "itemtype": "property",
+            "name": "volume",
+            "type": "Float",
+            "access": "private",
+            "tagname": "",
+            "class": "oscillator"
+        },
+        {
+            "file": "src\\controller\\oscillator.js",
+            "line": 39,
+            "description": "Flag que representa la disponibilidad del oscilador",
+            "itemtype": "property",
+            "name": "available",
+            "type": "Boolean",
+            "access": "private",
+            "tagname": "",
+            "class": "oscillator"
+        },
+        {
+            "file": "src\\controller\\oscillator.js",
+            "line": 46,
+            "description": "Contiene una instancia de la clase Voice para lograr la polifonia",
+            "itemtype": "property",
+            "name": "voice",
+            "type": "Object",
+            "class": "oscillator"
+        },
+        {
+            "file": "src\\controller\\oscillator.js",
+            "line": 84,
+            "description": "Método que enciende el oscilador",
+            "itemtype": "method",
+            "name": "onOscillator",
+            "class": "oscillator"
+        },
+        {
+            "file": "src\\controller\\oscillator.js",
+            "line": 93,
+            "description": "Método que apaga el oscilador",
+            "itemtype": "method",
+            "name": "offOscillator",
+            "class": "oscillator"
+        },
+        {
+            "file": "src\\controller\\oscillator.js",
+            "line": 104,
+            "description": "Método que reproduce una de las voces, dependiendo de la nota pasada \ncomo argumento",
+            "itemtype": "method",
+            "name": "play",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "Nota",
+                    "type": "String"
+                }
+            ],
+            "class": "oscillator"
+        },
+        {
+            "file": "src\\controller\\oscillator.js",
+            "line": 126,
+            "description": "Setter del tipo de onda",
+            "itemtype": "method",
+            "name": "setWave",
+            "params": [
+                {
+                    "name": "wave",
+                    "description": "Onda",
+                    "type": "String"
+                }
+            ],
+            "class": "oscillator"
+        },
+        {
+            "file": "src\\controller\\oscillator.js",
+            "line": 137,
+            "description": "Setter del volumen",
+            "itemtype": "method",
+            "name": "setVolum",
+            "params": [
+                {
+                    "name": "level",
+                    "description": "Volumen",
+                    "type": "Float"
+                }
+            ],
+            "class": "oscillator"
+        },
+        {
+            "file": "src\\controller\\oscillator.js",
+            "line": 152,
+            "description": "Setter del Attack",
+            "itemtype": "method",
+            "name": "setAttack",
+            "params": [
+                {
+                    "name": "val",
+                    "description": "Valor",
+                    "type": "Float"
+                }
+            ],
+            "class": "oscillator"
+        },
+        {
+            "file": "src\\controller\\oscillator.js",
+            "line": 163,
+            "description": "Setter del Release",
+            "itemtype": "method",
+            "name": "setRelease",
+            "params": [
+                {
+                    "name": "val",
+                    "description": "Valor",
+                    "type": "Float"
+                }
+            ],
+            "class": "oscillator"
+        },
+        {
+            "file": "src\\controller\\oscillator.js",
+            "line": 173,
+            "description": "Setter del Sustain",
+            "itemtype": "method",
+            "name": "setSustain",
+            "params": [
+                {
+                    "name": "val",
+                    "description": "Valor",
+                    "type": "Float"
+                }
+            ],
+            "class": "oscillator"
+        },
+        {
+            "file": "src\\controller\\oscillator.js",
+            "line": 183,
+            "description": "Setter del Decay",
+            "itemtype": "method",
+            "name": "setDecay",
+            "params": [
+                {
+                    "name": "val",
+                    "description": "Valor",
+                    "type": "Float"
+                }
+            ],
+            "class": "oscillator"
+        },
+        {
+            "file": "src\\controller\\synth.js",
+            "line": 10,
+            "description": "Instancia del osciladorA",
+            "itemtype": "property",
+            "name": "#osciladorA",
+            "type": "Object",
+            "access": "private",
+            "tagname": "",
+            "class": "Synth"
+        },
+        {
+            "file": "src\\controller\\synth.js",
+            "line": 18,
+            "description": "Instancia del osciladorB",
+            "itemtype": "property",
+            "name": "#osciladorB",
+            "type": "Object",
+            "access": "private",
+            "tagname": "",
+            "class": "Synth"
+        },
+        {
+            "file": "src\\controller\\synth.js",
+            "line": 36,
+            "description": "Método que se encarga de encender un oscilador",
+            "itemtype": "method",
+            "name": "onOscillator",
+            "params": [
+                {
+                    "name": "osc",
+                    "description": "Id del oscildor",
+                    "type": "Char"
+                }
+            ],
+            "class": "Synth"
+        },
+        {
+            "file": "src\\controller\\synth.js",
+            "line": 55,
+            "description": "Método que se encarga de apagar un oscilador",
+            "itemtype": "method",
+            "name": "offOscillator",
+            "params": [
+                {
+                    "name": "osc",
+                    "description": "Id del oscildor",
+                    "type": "Char"
+                }
+            ],
+            "class": "Synth"
+        },
+        {
+            "file": "src\\controller\\synth.js",
+            "line": 72,
+            "description": "Método que se encarga de tocar una nota de los osciladores",
+            "itemtype": "method",
+            "name": "playNote",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "Nota",
+                    "type": "Char"
+                }
+            ],
+            "class": "Synth"
+        },
+        {
+            "file": "src\\controller\\synth.js",
+            "line": 84,
+            "description": "Método que se encarga de seleccionar el tipo de onda de los osciladores",
+            "itemtype": "method",
+            "name": "selectWave",
+            "params": [
+                {
+                    "name": "osc",
+                    "description": "Id del oscilador",
+                    "type": "Char"
+                },
+                {
+                    "name": "wave",
+                    "description": "Forma de la onda",
+                    "type": "String"
+                }
+            ],
+            "class": "Synth"
+        },
+        {
+            "file": "src\\controller\\synth.js",
+            "line": 105,
+            "description": "Getter del volumen de los osciladores",
+            "itemtype": "method",
+            "name": "getVolum",
+            "params": [
+                {
+                    "name": "osc",
+                    "description": "Id del oscilador",
+                    "type": "Char"
+                }
+            ],
+            "return": {
+                "description": "Volumen"
+            },
+            "class": "Synth"
+        },
+        {
+            "file": "src\\controller\\synth.js",
+            "line": 122,
+            "description": "Setter del volumen de los osciladores",
+            "itemtype": "method",
+            "name": "setVolum",
+            "params": [
+                {
+                    "name": "osc",
+                    "description": "Id del oscilador",
+                    "type": "Char"
+                }
+            ],
+            "class": "Synth"
+        },
+        {
+            "file": "src\\controller\\synth.js",
+            "line": 144,
+            "description": "Setter de los parámetros de la envolvente de los osciladores",
+            "itemtype": "method",
+            "name": "setEnvolve",
+            "params": [
+                {
+                    "name": "osc",
+                    "description": "Id del oscilador",
+                    "type": "Char"
+                },
+                {
+                    "name": "val",
+                    "description": "Valor a cambiar",
+                    "type": "Float"
+                },
+                {
+                    "name": "param",
+                    "description": "Parámetro de la envolvente a cambiar",
+                    "type": "String"
+                }
+            ],
+            "class": "Synth"
+        },
+        {
+            "file": "src\\controller\\voice.js",
+            "line": 14,
+            "description": "Contexto de audio para la aplicación de la Web Audio API",
+            "itemtype": "property",
+            "name": "context",
+            "type": "Object",
+            "access": "private",
+            "tagname": "",
+            "class": "Voice",
+            "module": "synth"
+        },
+        {
+            "file": "src\\controller\\voice.js",
+            "line": 21,
+            "description": "Tipo de onda del oscilador",
+            "itemtype": "property",
+            "name": "type",
+            "type": "String",
+            "access": "private",
+            "tagname": "",
+            "class": "Voice",
+            "module": "synth"
+        },
+        {
+            "file": "src\\controller\\voice.js",
+            "line": 28,
+            "description": "Guarda los valores de la envolvente",
+            "itemtype": "property",
+            "name": "envelope",
+            "type": "JSON",
+            "access": "private",
+            "tagname": "",
+            "class": "Voice",
+            "module": "synth"
+        },
+        {
+            "file": "src\\controller\\voice.js",
+            "line": 35,
+            "description": "Nodo de ganancia del oscilador",
+            "itemtype": "property",
+            "name": "masterNode",
+            "type": "Object",
+            "access": "private",
+            "tagname": "",
+            "class": "Voice",
+            "module": "synth"
+        },
+        {
+            "file": "src\\controller\\voice.js",
+            "line": 42,
+            "description": "Contiene las ganacias particulares de cada voz",
+            "itemtype": "property",
+            "name": "gains",
+            "type": "JSON",
+            "access": "private",
+            "tagname": "",
+            "class": "Voice",
+            "module": "synth"
+        },
+        {
+            "file": "src\\controller\\voice.js",
+            "line": 49,
+            "description": "Contiene las voces correspondientes a cada nota",
+            "itemtype": "property",
+            "name": "voices",
+            "type": "JSON",
+            "access": "private",
+            "tagname": "",
+            "class": "Voice",
+            "module": "synth"
+        },
+        {
+            "file": "src\\controller\\voice.js",
+            "line": 56,
+            "description": "Contiene las voces que se estan reproduciendo",
+            "itemtype": "property",
+            "name": "activeVoices",
+            "type": "JSON",
+            "access": "private",
+            "tagname": "",
+            "class": "Voice",
+            "module": "synth"
+        },
+        {
+            "file": "src\\controller\\voice.js",
+            "line": 63,
+            "description": "Contiene las notas con sus frecuencias",
+            "itemtype": "property",
+            "name": "notes",
+            "type": "JSON",
+            "access": "private",
+            "tagname": "",
+            "class": "Voice",
+            "module": "synth"
+        },
+        {
+            "file": "src\\controller\\voice.js",
+            "line": 101,
+            "description": "Método que se encarga de crear una voz para cada una de las notas, es decir,\npara cada nota se crea un oscilador y lo conecta con un nodo de ganancia para\nlograr la polifonia",
+            "itemtype": "method",
+            "name": "createVocies",
+            "class": "Voice",
+            "module": "synth"
+        },
+        {
+            "file": "src\\controller\\voice.js",
+            "line": 133,
+            "description": "Método que es llamado cuando se toca una nota. Almacena que voz se ha tocado\ny llama al metodo de la envolvente",
+            "itemtype": "method",
+            "name": "start",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "Nota tocada",
+                    "type": "String"
+                },
+                {
+                    "name": "gain",
+                    "description": "Volumen del oscilador",
+                    "type": "Float"
+                }
+            ],
+            "class": "Voice",
+            "module": "synth"
+        },
+        {
+            "file": "src\\controller\\voice.js",
+            "line": 146,
+            "description": "Setter del volumen",
+            "itemtype": "method",
+            "name": "setGain",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "Nota tocada",
+                    "type": "String"
+                },
+                {
+                    "name": "gain",
+                    "description": "Volumen del oscilador",
+                    "type": "Float"
+                }
+            ],
+            "class": "Voice",
+            "module": "synth"
+        },
+        {
+            "file": "src\\controller\\voice.js",
+            "line": 159,
+            "description": "Setter del Attack",
+            "itemtype": "method",
+            "name": "setAttack",
+            "params": [
+                {
+                    "name": "val",
+                    "description": "Valor",
+                    "type": "Float"
+                }
+            ],
+            "class": "Voice",
+            "module": "synth"
+        },
+        {
+            "file": "src\\controller\\voice.js",
+            "line": 169,
+            "description": "Setter del Release",
+            "itemtype": "method",
+            "name": "setRelease",
+            "params": [
+                {
+                    "name": "val",
+                    "description": "Valor",
+                    "type": "Float"
+                }
+            ],
+            "class": "Voice",
+            "module": "synth"
+        },
+        {
+            "file": "src\\controller\\voice.js",
+            "line": 179,
+            "description": "Setter del Sustain",
+            "itemtype": "method",
+            "name": "setSustain",
+            "params": [
+                {
+                    "name": "val",
+                    "description": "Valor",
+                    "type": "Float"
+                }
+            ],
+            "class": "Voice",
+            "module": "synth"
+        },
+        {
+            "file": "src\\controller\\voice.js",
+            "line": 189,
+            "description": "Setter del Decay",
+            "itemtype": "method",
+            "name": "setDecay",
+            "params": [
+                {
+                    "name": "val",
+                    "description": "Valor",
+                    "type": "Float"
+                }
+            ],
+            "class": "Voice",
+            "module": "synth"
+        },
+        {
+            "file": "src\\controller\\voice.js",
+            "line": 198,
+            "description": "Setter del tipo de onda para cada una de las voces",
+            "itemtype": "method",
+            "name": "setType",
+            "params": [
+                {
+                    "name": "type",
+                    "description": "Tipo de onda",
+                    "type": "String"
+                }
+            ],
+            "class": "Voice",
+            "module": "synth"
+        },
+        {
+            "file": "src\\controller\\voice.js",
+            "line": 210,
+            "description": "Método que simula el comportamiento de una envolvente sobre una \nseñal de audio y que es llamado cada vez que se presiona una nota",
+            "itemtype": "method",
+            "name": "envelopeGeneratorOn",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "Nota presionada",
+                    "type": "String"
+                },
+                {
+                    "name": "gain",
+                    "description": "Volumen actual del oscilador",
+                    "type": "Float"
+                }
+            ],
+            "class": "Voice",
+            "module": "synth"
         },
         {
             "file": "src\\view\\elements\\envelope.js",
-            "line": 31,
+            "line": 17,
+            "description": "Id del oscilador que posee la envolvente",
+            "itemtype": "property",
+            "name": "#osc",
+            "type": "Char",
+            "access": "private",
+            "tagname": "",
+            "class": "Envelope",
+            "module": "synth"
+        },
+        {
+            "file": "src\\view\\elements\\envelope.js",
+            "line": 33,
             "description": "Método que devuelve el componente Envelope para ser renderizado",
             "itemtype": "method",
             "name": "render",
             "return": {
                 "description": "Código html del componente Envelope"
             },
-            "class": "Envelope"
+            "class": "Envelope",
+            "module": "synth"
         },
         {
             "file": "src\\view\\elements\\limitedKnob.js",
@@ -532,8 +1224,9 @@
         {
             "file": "src\\view\\osc-components.js",
             "line": 22,
+            "description": "Identificador del oscilador",
             "itemtype": "property",
-            "name": "#osc Identificador del oscilador",
+            "name": "#osc",
             "type": "Char",
             "access": "private",
             "tagname": "",
@@ -542,16 +1235,17 @@
         },
         {
             "file": "src\\view\\osc-components.js",
-            "line": 28,
+            "line": 30,
+            "description": "Referencia a la clase Knob",
             "itemtype": "property",
-            "name": "_KnobVol Referencia a la clase Knob",
+            "name": "_KnobVol",
             "type": "Ref",
             "class": "Oscilador",
             "module": "Navigator"
         },
         {
             "file": "src\\view\\osc-components.js",
-            "line": 49,
+            "line": 53,
             "description": "Método que se encarga de comprobar si esta encendido o apagado \nel oscilador",
             "itemtype": "method",
             "name": "checkChecked",
@@ -560,7 +1254,7 @@
         },
         {
             "file": "src\\view\\osc-components.js",
-            "line": 73,
+            "line": 77,
             "description": "Método que se encarga de comprobar que onda esta seleccionada en el \nmomento de la llamada",
             "itemtype": "method",
             "name": "checkWave",
@@ -569,7 +1263,7 @@
         },
         {
             "file": "src\\view\\osc-components.js",
-            "line": 106,
+            "line": 110,
             "description": "Método que construlle el componente de la interfaz relativo a el oscilador, que contiene los Knobs de la envolvente,\nel selector de onda, el knob de volumen y el botón de encendido y apagado.",
             "itemtype": "method",
             "name": "render",
@@ -582,8 +1276,9 @@
         {
             "file": "src\\view\\piano-component.js",
             "line": 17,
+            "description": "Octava en la que se encuentra el piano",
             "itemtype": "property",
-            "name": "#octave Octava en la que se encuentra el piano",
+            "name": "#octave",
             "type": "String",
             "access": "private",
             "tagname": "",
@@ -592,25 +1287,27 @@
         },
         {
             "file": "src\\view\\piano-component.js",
-            "line": 23,
+            "line": 25,
+            "description": "Lista de las teclas presionadas por el usuario",
             "itemtype": "property",
-            "name": "pressedKeys Lista de las teclas presionadas por el usuario",
+            "name": "pressedKeys",
             "type": "JSON",
             "class": "Piano",
             "module": "OscComponents"
         },
         {
             "file": "src\\view\\piano-component.js",
-            "line": 29,
+            "line": 33,
+            "description": "Lista con las notas y sus frecuencias",
             "itemtype": "property",
-            "name": "notes Lista con las notas y sus frecuencias",
+            "name": "notes",
             "type": "JSON",
             "class": "Piano",
             "module": "OscComponents"
         },
         {
             "file": "src\\view\\piano-component.js",
-            "line": 46,
+            "line": 52,
             "description": "Método que se encarga de identificar que nota ha sido accionada por el usuario\ny una vez identificada, mandarla al controlador para que se reproduzca.",
             "itemtype": "method",
             "name": "playNote",
@@ -633,7 +1330,7 @@
         },
         {
             "file": "src\\view\\piano-component.js",
-            "line": 85,
+            "line": 91,
             "description": "Método que realiza una petición a la base de datos para obtener un listado\nde las notas con sus frecuencias. Este listado lo almacena en una variable de clase",
             "itemtype": "method",
             "name": "fetchNotes",
@@ -642,7 +1339,7 @@
         },
         {
             "file": "src\\view\\piano-component.js",
-            "line": 102,
+            "line": 108,
             "description": "Este método cambia el número de la octava que aparece junto a cada nota\nen el piano.",
             "itemtype": "method",
             "name": "changeHtmlNotes",
@@ -651,7 +1348,7 @@
         },
         {
             "file": "src\\view\\piano-component.js",
-            "line": 143,
+            "line": 149,
             "description": "Cuando el usuario pulsa en el botón de subir octava, se llama a este método\npara que actualice la octava de las notas.",
             "itemtype": "method",
             "name": "upOctave",
@@ -660,7 +1357,7 @@
         },
         {
             "file": "src\\view\\piano-component.js",
-            "line": 159,
+            "line": 165,
             "description": "Cuando el usuario pulsa en el botón de bajar octava, se llama a este método\npara que actualice la octava de las notas.",
             "itemtype": "method",
             "name": "downOctave",
@@ -669,7 +1366,7 @@
         },
         {
             "file": "src\\view\\piano-component.js",
-            "line": 174,
+            "line": 180,
             "description": "Método que recibe como argumento el evento que se produce cuando el usuario clica en una\nnota del piano y que se encarga de identificar esta nota e indicarsela al método que se encarga de \nenviarsela al controlador",
             "itemtype": "method",
             "name": "notePlayed",
@@ -685,7 +1382,7 @@
         },
         {
             "file": "src\\view\\piano-component.js",
-            "line": 208,
+            "line": 214,
             "description": "Método que se llama cuando el usuario presiona una de tecla del teclado asiganada a una\nnota del piano y que se encarga de identificar esta nota para simular que se clica en ella \ne indicarsela al método que se encarga de enviarsela al controlador",
             "itemtype": "method",
             "name": "notePlayed",
@@ -716,7 +1413,7 @@
         },
         {
             "file": "src\\view\\piano-component.js",
-            "line": 238,
+            "line": 244,
             "description": "Método que devuelve el código necesario para renderizar el componente",
             "itemtype": "method",
             "name": "render",
@@ -728,7 +1425,7 @@
         },
         {
             "file": "src\\view\\piano-component.js",
-            "line": 282,
+            "line": 288,
             "description": "Se acciona cada vez que se pulsa una tecla del teclado",
             "itemtype": "event",
             "name": "keydown",
@@ -737,7 +1434,7 @@
         },
         {
             "file": "src\\view\\piano-component.js",
-            "line": 398,
+            "line": 404,
             "description": "Se acciona cuando se levanta una tecla del teclado presionada",
             "itemtype": "event",
             "name": "keyup",
@@ -752,11 +1449,11 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\view\\osc-components.js:106"
+            "line": " src\\view\\osc-components.js:110"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\view\\piano-component.js:238"
+            "line": " src\\view\\piano-component.js:244"
         }
     ]
 }

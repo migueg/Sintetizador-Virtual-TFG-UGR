@@ -171,9 +171,9 @@ class oscillator  {
  }
 
  /**
-  * Setter del Release
+  * Setter del Sustain
   * 
-  * @method setRelease
+  * @method setSustain
   * @param {Float} val Valor
   */
  setSustain(val){

@@ -7,7 +7,10 @@ YUI.add("yuidoc-meta", function(Y) {
         "LimitedKnob",
         "Navigator",
         "Oscilador",
-        "Piano"
+        "Piano",
+        "Synth",
+        "Voice",
+        "oscillator"
     ],
     "modules": [
         "App",
@@ -15,6 +18,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Navigator",
         "OscComponents",
         "Piano",
+        "synth",
         "types"
     ],
     "allModules": [
@@ -42,6 +46,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "Piano",
             "name": "Piano",
             "description": "Proporciona la interfaz correspondiente a el piano"
+        },
+        {
+            "displayName": "synth",
+            "name": "synth",
+            "description": "Proporciona una clase fachada para el controlador"
         },
         {
             "displayName": "types",
