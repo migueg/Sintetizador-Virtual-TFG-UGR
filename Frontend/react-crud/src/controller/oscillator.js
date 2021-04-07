@@ -1,6 +1,7 @@
 
 import Voice from './voice';
 
+
 /**
  * Clase que representa un oscilador analógico
  * 
@@ -65,12 +66,14 @@ class oscillator  {
       sustain: 0.5,
       release: 2.5
    }
-      
+
    this.#gainNode = this.#audioCtx.createGain();
-  
+   
    this.#volume = 0;
    this.#available = false;
    this.#gainNode.gain.value = 0;
+
+  
 
    this.#gainNode.connect(this.#audioCtx.destination);
    this.voice = new Voice('sine',this.#audioCtx, this.#envelope,this.#gainNode);

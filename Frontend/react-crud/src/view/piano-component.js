@@ -228,6 +228,7 @@ class Piano extends React.Component{
         if(octave === 'up'){
             aux = note + '1';
         }
+            //Se activa el elemento HTML de la nota para emular que se ha pulsado una nota
             if(type === 'white'){  
                 document.getElementById(aux).classList.toggle('white-active');
  

@@ -217,9 +217,10 @@ class Voice {
      */
     envelopeGeneratorOn(key,gain){
         var gainN = this.#gains[key].gain
-        var current = gainN.value  = gain
+        var current = gainN.value  = gain //Representa el volumen en cada una de las fases
         var now = this.#context.currentTime
        
+        //Se cancelan todos los valores de ganancia del nodo y se establecen a 0
         gainN.cancelScheduledValues(now)
         gainN.setValueAtTime(0 ,now)
     
