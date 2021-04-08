@@ -1,7 +1,6 @@
 
 import Voice from './voice';
-
-
+import Reverb from './reverb';
 /**
  * Clase que representa un oscilador analógico
  * 
@@ -74,8 +73,10 @@ class oscillator  {
    this.#gainNode.gain.value = 0;
 
   
-
+   
    this.#gainNode.connect(this.#audioCtx.destination);
+   this.reverb = new Reverb(this.#audioCtx,this.#gainNode);
+
    this.voice = new Voice('sine',this.#audioCtx, this.#envelope,this.#gainNode);
 
  
@@ -119,8 +120,9 @@ class oscillator  {
    if(this.#available ){
       this.#gainNode.gain.value = this.#volume
       
+      
       this.voice.start(key,this.#gainNode.gain.value)
-
+      this.reverb.apply()
     
       
    }
