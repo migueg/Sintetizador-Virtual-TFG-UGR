@@ -1,6 +1,8 @@
 import  React from 'react';
 import {sinte} from './osc-components';
 import $ from 'jquery';
+
+
 import 'bootstrap/dist/css/bootstrap.css';
 import '../css/piano.css';
 

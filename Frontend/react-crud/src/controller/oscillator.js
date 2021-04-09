@@ -1,6 +1,6 @@
 
 import Voice from './voice';
-import Reverb from './reverb';
+
 /**
  * Clase que representa un oscilador analógico
  * 
@@ -57,8 +57,9 @@ class oscillator  {
   
  
 
- constructor(){
-   this.#audioCtx = new window.AudioContext ()
+ constructor(master,context){
+   //this.#audioCtx = new window.AudioContext ()
+   this.#audioCtx = context
    this.#envelope = {
       attack : 0,
       decay: 0.6,
@@ -74,8 +75,9 @@ class oscillator  {
 
   
    
-   this.#gainNode.connect(this.#audioCtx.destination);
-   this.reverb = new Reverb(this.#audioCtx,this.#gainNode);
+   //this.#gainNode.connect(this.#audioCtx.destination);
+   this.#gainNode.connect(master);
+   
 
    this.voice = new Voice('sine',this.#audioCtx, this.#envelope,this.#gainNode);
 
@@ -122,9 +124,7 @@ class oscillator  {
       
       
       this.voice.start(key,this.#gainNode.gain.value)
-      this.reverb.apply()
     
-      
    }
  }
 

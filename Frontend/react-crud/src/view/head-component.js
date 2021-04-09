@@ -8,14 +8,28 @@ import '../css/header.css';
 
 
 class Header extends React.Component{
-    constructor(){
+    constructor(props){
         super();
+        this.props = props;
+   
+        this.showOsc = this.showOsc.bind(this)
+        this.showFX = this.showFX.bind(this)
     }
-
+    showOsc(){
+       this.props.showOsc()
+    }
+    showFX(){
+        this.props.showFX()
+    }
     render(){
         return(
             <Container>
                 <Row>
+                    <Col>
+                    <button  onClick={()=>this.showOsc()}>Oscs</button>
+                    <button  onClick={()=>this.showFX()}>FX</button>
+                    </Col>
+                   
                     <Col>
                         <img   src={disquete} style={{width: 50, float: 'right' , marginTop: '2%'}}></img>
                     </Col>

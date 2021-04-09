@@ -45,6 +45,9 @@ class Reverb extends Effect{
 
     }
 
+    disapply(){
+        this.effect.disconnect(this.audioctx.destination)
+    }
     apply(){
        
         this.effect.buffer = this.impulseResponse(5,4,0);

@@ -1,4 +1,5 @@
 import {oscillator} from './oscillator';
+import Reverb from './reverb';
 
 /**
  * Clase Fachada del controlador que se comunica con los elementos de la vista.
@@ -22,17 +23,73 @@ import {oscillator} from './oscillator';
  * @type Object
  * @private
  */
+
+/**
+ *  Contexto de audio para la aplicación de la Web Audio API
+ * 
+ * @property audioCtx
+ * @type Object
+ * @private
+ */
+
+/**
+ *  Nodo de ganancia para controlar el volumen general de la aplicación
+ * 
+ * @property masterVolumeNode
+ * @type Object
+ * @private
+ */
+
+
 class Synth{
     #oscillatorA;
     #oscillatorB;
+    #audioCtx;
+    #masterVolumeNode;
+    #reverbOn;
 
     constructor(){
-        this.#oscillatorA = new oscillator();
-        this.#oscillatorB = new oscillator();
-    
+        this.#audioCtx = new window.AudioContext();
+        this.#masterVolumeNode = this.#audioCtx.createGain();
+
+        this.#oscillatorA = new oscillator(this.#masterVolumeNode,this.#audioCtx);
+        this.#oscillatorB = new oscillator(this.#masterVolumeNode,this.#audioCtx);
+        
+        this.reverb = new Reverb(this.#audioCtx,this.#masterVolumeNode);
+        this.#masterVolumeNode.connect(this.#audioCtx.destination)
+       
        
     }
 
+    /**
+     * Método que se encarga de activar un efecto
+     * 
+     * @method applyEffect
+     * @param {String} effect Efecto que se va a aplicar
+     */
+
+    applyEffect(effect){
+        switch(effect){
+            case 'reverb':
+                this.reverb.apply()
+                break;
+        }
+    }
+
+    /**
+     * Método que se encarga de desactivar un efecto
+     * 
+     * @method disapplyEffect
+     * @param {String} effect Efecto que se va a desactivar
+     */
+
+     disapplyEffect(effect){
+        switch(effect){
+            case 'reverb':
+                this.reverb.disapply()
+                break;
+        }
+    }
     /**
      * Método que se encarga de encender un oscilador
      * 
@@ -78,6 +135,7 @@ class Synth{
     playNote(key){
         this.#oscillatorA.play(key)
         this.#oscillatorB.play(key)
+    
     }
 
    
