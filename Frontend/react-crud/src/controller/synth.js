@@ -251,6 +251,42 @@ class Synth{
         }
         
     }
+
+    /**
+     * Setter del volume general de la aplicación
+     * 
+     * @method setMaster
+     * @param {Float} val Valor de volumen en db
+     */
+    setMaster(val){
+        this.#masterVolumeNode.gain.value = val;
+    }
+
+    /**
+     * Modificador del efecto reverb
+     * 
+     * @method setReverbWet
+     * @param {Float} val Nivel de Reverb que se quiere aplicar
+     */
+    setReverb(val,param){
+        switch(param){
+            case "wet":
+                this.reverb.setWet(val);
+                break;
+            case "decay":
+                this.reverb.setDecay(val);
+                break;
+            case "hpf":
+                this.reverb.setHPF(val);
+                break;
+            case "lpf":
+                this.reverb.setLPF(val);
+                break;
+            default:
+                break;
+        }
+        
+    }
 }
 
 /**

@@ -69,7 +69,7 @@ class LimitedKnob extends React.Component {
       
       this.#type = props.type;
    
-      if(this.#type === types.OSC_VOLUM){
+      if(this.#type === types.OSC_VOLUM || this.#type === types.REVERBWET){
         this.#skin = skins.s10;
       }else{
         this.#skin = skins.s17;
@@ -125,6 +125,19 @@ class LimitedKnob extends React.Component {
       var decay = (2 * val ) /100;
       sinte.setEnvolve(this.osc,decay,'decay');
     }
+    /**
+     * Método que se encarga de llamar al controlador para que 
+     * modifque el volumen Master de la aplicacion
+     * 
+     * @method handleOnChangeMaster
+     * @param {Float} val Valor del Knob
+     * @private
+     */
+    __handleOnChangeMaster(val){
+      this.setState({ value: val });
+      var master = ( val ) /100;
+      sinte.setMaster(master)
+    }
     
     /**
      * Método que se encarga de llamar al controlador para que 
@@ -153,6 +166,60 @@ class LimitedKnob extends React.Component {
       sinte.setEnvolve(this.osc,release,'release')
     }
 
+    /**
+     * Método que se encarga de llamar al controlador para que 
+     * modifque el nivel de Decay del Reverb aplicado
+     * 
+     * @method handelOnChangeReverbDecay
+     * @param {Float} val Valor del Knob
+     * @private
+     */
+    __handelOnChangeReverbDecay(val){
+      this.setState({ value: val });
+      var decay = (100 - val) / 10; //se resta el valor a 100 porque el valor es inverso a mas nivel de dacay se necesita menos valor
+      sinte.setReverb(decay,"decay");
+    }
+    /**
+     * Método que se encarga de llamar al controlador para que 
+     * modifque el filtro pasa alto del Reverb aplicado
+     * 
+     * @method handelOnChangeReverbHP
+     * @param {Float} val Valor del Knob
+     * @private
+     */
+    __handleOnChangeReverbHP(val){
+      this.setState({ value: val });
+      sinte.setReverb(val,"hpf")
+    }
+
+    /**
+     * Método que se encarga de llamar al controlador para que 
+     * modifque el filtro pasa bajos del Reverb aplicado
+     * 
+     * @method handelOnChangeReverbLP
+     * @param {Float} val Valor del Knob
+     * @private
+     */
+     __handleOnChangeReverbLP(val){
+      this.setState({ value: val });
+      sinte.setReverb(val,"hpf")
+    }
+    
+    /**
+     * Método que se encarga de llamar al controlador para que 
+     * modifque el nivel de Reverb aplicado
+     * 
+     * @method handleOnChangeReverbWet
+     * @param {Float} val Valor del Knob
+     * @private
+     */
+    __handleOnChangeReverbWet(val){
+      this.setState({ value: val });
+      var wet = ( val ) /100;
+      sinte.setReverb(wet,"wet");
+
+    }
+
     //MÉTODOS PÚBLICOS
 
     /**
@@ -167,7 +234,13 @@ class LimitedKnob extends React.Component {
     handleOnChange(val) {
       
       this.#value = val;
-      const maxDistance = 10;
+      var maxDistance = 10
+      if(this.#type === types.REVERBHPF){
+         maxDistance = 4400;
+      }else{
+         maxDistance = 10;
+      }
+      
       let distance = Math.abs(val - this.state.value);
       if (distance > maxDistance) {
         
@@ -190,7 +263,20 @@ class LimitedKnob extends React.Component {
           case types.RELEASE:
             this.__handleOnChangeRelease(val);
             break;
-          
+          case types.MASTER:
+            this.__handleOnChangeMaster(val);
+            break;
+          case types.REVERBWET:
+            this.__handleOnChangeReverbWet(val);
+            break;
+          case types.REVERBDECAY:
+            this.__handelOnChangeReverbDecay(val);
+            break;
+          case types.REVERBHPF:
+            this.__handleOnChangeReverbHP(val);
+            break;
+          case types.REVERBLPF:
+            this.__handleOnChangeReverbLP(val);
           default:
             break;
         }

@@ -1,7 +1,8 @@
 import  React from 'react';
 import {Knob} from './elements/limitedKnob';
-import {Container,Row,Col } from 'react-bootstrap';
 import {types as knobTypes} from './elements/knobtypes';
+import {Container,Row,Col } from 'react-bootstrap';
+
 import disquete from '../img/disquete.png'
 import 'bootstrap/dist/css/bootstrap.css';
 import '../css/header.css';
@@ -39,9 +40,17 @@ class Header extends React.Component{
                         </div>
                     </Col>
                     <Col>
-                    <Knob>
+                    <Knob 
+                     min={0}
+                     max={100}
+                     unlockDistance={0}
+                     preciseMode={false}
+                     width={200} 
+                     height={200}
+                     val={97}
+                     type={knobTypes.MASTER}/>
 
-                    </Knob>
+                 
                     </Col>
                 </Row>
             </Container>

@@ -10,5 +10,11 @@ export const types = {
     ATTACK: "attack",
     RELEASE: "release",
     DECAY: "decay",
-    SUSTAIN: "sustain"
+    SUSTAIN: "sustain",
+    MASTER: "master",
+    REVERBWET: "reverbwet",
+    REVERBDECAY: "reverbdeacay",
+    REVERBRELEASE: "reverbrelease",
+    REVERBHPF: "reverbHPF",
+    REVERBLPF: "reverbLPF"
   }
