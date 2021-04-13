@@ -1,5 +1,6 @@
 import {oscillator} from './oscillator';
-import Reverb from './reverb';
+import {Reverb} from './reverb';
+import {Delay} from './delay';
 
 /**
  * Clase Fachada del controlador que se comunica con los elementos de la vista.
@@ -40,22 +41,48 @@ import Reverb from './reverb';
  * @private
  */
 
+/**
+ *  Efecto de reverb
+ * 
+ * @property reverb
+ * @type Object
+ * @private
+ */
+
+/**
+ *  Efecto de Delay
+ * 
+ * @property delay
+ * @type Object
+ * @private
+ */
+
+
+
 
 class Synth{
     #oscillatorA;
     #oscillatorB;
     #audioCtx;
     #masterVolumeNode;
-    #reverbOn;
-
+    #gainCleanNode;
+    #reverb;
+    #delay;
+    
     constructor(){
         this.#audioCtx = new window.AudioContext();
         this.#masterVolumeNode = this.#audioCtx.createGain();
+        this.#gainCleanNode = this.#audioCtx.createGain();
 
-        this.#oscillatorA = new oscillator(this.#masterVolumeNode,this.#audioCtx);
-        this.#oscillatorB = new oscillator(this.#masterVolumeNode,this.#audioCtx);
+        this.#oscillatorA = new oscillator(this.#masterVolumeNode,this.#audioCtx,this.#gainCleanNode);
+        this.#oscillatorB = new oscillator(this.#masterVolumeNode,this.#audioCtx,this.#gainCleanNode);
         
-        this.reverb = new Reverb(this.#audioCtx,this.#masterVolumeNode);
+        
+        this.#reverb = new Reverb(this.#audioCtx,this.#gainCleanNode,this.#masterVolumeNode);
+        this.#delay = new Delay(this.#audioCtx,this.#gainCleanNode,this.#masterVolumeNode);
+
+
+
         this.#masterVolumeNode.connect(this.#audioCtx.destination)
        
        
@@ -71,7 +98,13 @@ class Synth{
     applyEffect(effect){
         switch(effect){
             case 'reverb':
-                this.reverb.apply()
+                this.#reverb.apply();
+                break;
+            case 'delay':
+                this.#delay.apply();
+                
+                break;
+            default:
                 break;
         }
     }
@@ -86,7 +119,12 @@ class Synth{
      disapplyEffect(effect){
         switch(effect){
             case 'reverb':
-                this.reverb.disapply()
+                this.#reverb.disapply();
+                break;
+            case 'delay':
+                this.#delay.disapply();
+                break;
+            default:
                 break;
         }
     }
@@ -271,16 +309,16 @@ class Synth{
     setReverb(val,param){
         switch(param){
             case "wet":
-                this.reverb.setWet(val);
+                this.#reverb.setWet(val);
                 break;
             case "decay":
-                this.reverb.setDecay(val);
+                this.#reverb.setDecay(val);
                 break;
             case "hpf":
-                this.reverb.setHPF(val);
+                this.#reverb.setHPF(val);
                 break;
             case "lpf":
-                this.reverb.setLPF(val);
+                this.#reverb.setLPF(val);
                 break;
             default:
                 break;

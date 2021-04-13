@@ -3,11 +3,16 @@ import {Filter} from './filter';
 
 class Reverb extends Effect{
     #decay
+    #gainAux
+    #gainFilter
     
    
-    constructor(context,input){
-        super(context,input);
+    constructor(context,input,output){
+        super(context,input,output);
         this.effect = this.audioctx.createConvolver();
+        this.#gainAux = this.audioctx.createGain();
+        this.#gainFilter = this.audioctx.createGain();
+
         this.#decay = 5;
         this.lpF = new Filter(context,this.effect,"lowpass");
         this.hpF = new Filter(context, this.effect,"highpass");
@@ -40,9 +45,10 @@ class Reverb extends Effect{
     apply(){
        
         this.effect.buffer = this.impulseResponse(5,5,0);
+        this.effect.connect(this.#gainAux);
         super.apply();
-        this.lpF.connect(this.wet);
-        this.hpF.connect(this.wet);
+        this.lpF.connect(this.#gainAux,this.#gainFilter);
+        this.hpF.connect(this.#gainFilter,this.wet);
         
     }
     
@@ -52,6 +58,7 @@ class Reverb extends Effect{
     
     setLPF(val){
         this.lpF.setFrecuency(val);
+       
     }
 
     setDecay(val){
@@ -63,4 +70,4 @@ class Reverb extends Effect{
     
 }
 
-export default Reverb;
+export  {Reverb};

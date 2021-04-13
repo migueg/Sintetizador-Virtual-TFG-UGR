@@ -202,7 +202,7 @@ class LimitedKnob extends React.Component {
      */
      __handleOnChangeReverbLP(val){
       this.setState({ value: val });
-      sinte.setReverb(val,"hpf")
+      sinte.setReverb(val,"lpf")
     }
     
     /**
@@ -235,8 +235,8 @@ class LimitedKnob extends React.Component {
       
       this.#value = val;
       var maxDistance = 10
-      if(this.#type === types.REVERBHPF){
-         maxDistance = 4400;
+      if(this.#type === types.REVERBHPF || this.#type === types.REVERBLPF){
+         maxDistance = 2300;
       }else{
          maxDistance = 10;
       }

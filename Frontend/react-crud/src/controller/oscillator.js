@@ -57,7 +57,7 @@ class oscillator  {
   
  
 
- constructor(master,context){
+ constructor(master,context,cleanNode){
    //this.#audioCtx = new window.AudioContext ()
    this.#audioCtx = context
    this.#envelope = {
@@ -74,7 +74,7 @@ class oscillator  {
    this.#gainNode.gain.value = 0;
 
   
-   
+   this.#gainNode.connect(cleanNode);
    //this.#gainNode.connect(this.#audioCtx.destination);
    this.#gainNode.connect(master);
    

@@ -31,12 +31,14 @@ class Filter extends Effect{
     
     init(type){
         this.effect.type= type;
+        console.log(this.effect.type)
         switch(type){
             case types.LP:
-                this.effect.frequency.value = 44000;
+                this.effect.frequency.value = 22050;
                 break;
             case types.HP:
                 this.effect.frequency.value = 0;
+              
                 break;
 
             default:
@@ -45,9 +47,10 @@ class Filter extends Effect{
         }
     }
     //Para el reverb
-    connect(node){
-        node.connect(this.effect);
-        this.effect.connect(this.audioctx.destination);
+    connect(input,output){
+        input.connect(this.effect);
+        this.effect.connect(output);
+        //this.effect.connect(this.audioctx.destination);
     }
 
     setFrecuency(val){
