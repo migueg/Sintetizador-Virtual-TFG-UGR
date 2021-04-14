@@ -26,13 +26,14 @@ class Effect {
         
     }
     /**
-     * Setter de la cantidad de reverb aplicada
+     * Setter de la cantidad de efecto aplicada
      * 
-     * @method setReverbWet
-     * @param {Float} val Nivel de Reverb que se quiere aplicar
+     * @method setWet
+     * @param {Float} val Nivel de volumen que se quiere aplicar
      */
      setWet(val){
-        this.wet.gain.value = val;
+        
+        this.wet.gain.value = val/100;
     }
 
 }

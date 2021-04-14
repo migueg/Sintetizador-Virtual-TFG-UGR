@@ -1,6 +1,7 @@
 import {oscillator} from './oscillator';
 import {Reverb} from './reverb';
 import {Delay} from './delay';
+import {Filter} from './filter';
 
 /**
  * Clase Fachada del controlador que se comunica con los elementos de la vista.
@@ -42,6 +43,15 @@ import {Delay} from './delay';
  */
 
 /**
+ *  Nodo de ganancia que representa a los osciladores sin aplicarle ningún efecto
+ * 
+ * @property gainCleanNode
+ * @type Object
+ * @private
+ */
+
+
+/**
  *  Efecto de reverb
  * 
  * @property reverb
@@ -57,6 +67,14 @@ import {Delay} from './delay';
  * @private
  */
 
+/**
+ *  Efecto de Filtro
+ * 
+ * @property filter
+ * @type Object
+ * @private
+ */
+
 
 
 
@@ -68,19 +86,22 @@ class Synth{
     #gainCleanNode;
     #reverb;
     #delay;
+    #filter;
     
     constructor(){
+        //Nodos
         this.#audioCtx = new window.AudioContext();
         this.#masterVolumeNode = this.#audioCtx.createGain();
         this.#gainCleanNode = this.#audioCtx.createGain();
 
+        //Osciladores
         this.#oscillatorA = new oscillator(this.#masterVolumeNode,this.#audioCtx,this.#gainCleanNode);
         this.#oscillatorB = new oscillator(this.#masterVolumeNode,this.#audioCtx,this.#gainCleanNode);
         
-        
+        //Efectos
         this.#reverb = new Reverb(this.#audioCtx,this.#gainCleanNode,this.#masterVolumeNode);
         this.#delay = new Delay(this.#audioCtx,this.#gainCleanNode,this.#masterVolumeNode);
-
+        this.#filter = new Filter(this.#audioCtx,this.#gainCleanNode,this.#masterVolumeNode,"highpass")
 
 
         this.#masterVolumeNode.connect(this.#audioCtx.destination)
@@ -104,6 +125,10 @@ class Synth{
                 this.#delay.apply();
                 
                 break;
+            case 'filter':
+                this.#filter.apply();
+                break;
+
             default:
                 break;
         }
@@ -124,6 +149,11 @@ class Synth{
             case 'delay':
                 this.#delay.disapply();
                 break;
+            
+            case 'filter':
+                this.#filter.disapply();
+                break;
+                
             default:
                 break;
         }
@@ -215,28 +245,31 @@ class Synth{
         }
 
     }
+
     /**
-     * Setter del volumen de los osciladores
+     * Setter de los parámetros del delay
      * 
-     * @method setVolum
-     * @param {Char} osc Id del oscilador
+     * @method setEnvolve
+     * @param {Char} type Parámetro a modificar
+     * @param {String} val Valor a cambiar
      */
-    setVolum(osc, vol){
-        switch(osc){
-            case 'A':
-              
-                this.#oscillatorA.setVolum(vol);
-            break;
-            
-            case 'B':
-                this.#oscillatorB.setVolum(vol);
+    setDelay(type,val){
+        switch(type){
+            case 'time':
+                this.#delay.setTime(val);
+                break;
+            case 'feedback':
+                this.#delay.setFeedback(val);
+                break;
+            case 'wet':
+                this.#delay.setWet(val);
                 break;
             default:
+                console.error('ERROR: valor incorrecto');
                 break;
         }
     }
-
-
+    
     /**
      * Setter de los parámetros de la envolvente de los osciladores
      * 
@@ -293,6 +326,29 @@ class Synth{
     /**
      * Setter del volume general de la aplicación
      * 
+     * @method setFilter
+     * @param {String} param Parametro a modificar
+     * @param {String} val  Valor del parametro a modificar
+     */
+     setFilter(param,val){
+        switch(param){
+            case 'wet':
+                this.#filter.setWet(val);
+                break;
+            case 'freq':
+                this.#filter.setFrecuency(val);
+                break;
+            case 'type':
+                this.#filter.setType(val);
+                break;
+            default:
+                console.error("Error: valor incorrecto ")
+        }
+    }
+
+    /**
+     * Setter del volume general de la aplicación
+     * 
      * @method setMaster
      * @param {Float} val Valor de volumen en db
      */
@@ -325,6 +381,29 @@ class Synth{
         }
         
     }
+
+    /**
+     * Setter del volumen de los osciladores
+     * 
+     * @method setVolum
+     * @param {Char} osc Id del oscilador
+     */
+     setVolum(osc, vol){
+        switch(osc){
+            case 'A':
+              
+                this.#oscillatorA.setVolum(vol);
+            break;
+            
+            case 'B':
+                this.#oscillatorB.setVolum(vol);
+                break;
+            default:
+                break;
+        }
+    }
+
+
 }
 
 /**

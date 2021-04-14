@@ -2,6 +2,8 @@ import  React from 'react';
 import {Container,Row,Col } from 'react-bootstrap';
 import Reverb from './elements/reverb';
 import Delay from './elements/delay';
+import Filter from './elements/filter';
+
 import {sinte} from './osc-components';
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -24,6 +26,14 @@ class FX extends React.Component{
                     <Col className='reverb' xs>
                         <Delay synth={sinte}/>
                     </Col>
+
+                    
+                </Row>
+                <Row>
+                    <Col className='reverb' xs>
+                        <Filter synth={sinte}/>
+                    </Col>
+                    
                 </Row>
             </Container>
         </div>

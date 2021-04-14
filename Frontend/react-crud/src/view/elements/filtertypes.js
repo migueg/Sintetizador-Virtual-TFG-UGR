@@ -4,7 +4,7 @@ export const types = {
     LP: "lowpass",
     HP: "highpass",
     LS: "lowshelf",
-    BP: "bandPass",
+    BP: "bandpass",
     HS: "highshelf",
     PI: "peaking",
     NT: "notch",

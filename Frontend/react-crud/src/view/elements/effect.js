@@ -1,23 +1,20 @@
 import  React from 'react';
-import {Container,Row,Col } from 'react-bootstrap';
-import {Knob} from './limitedKnob';
-import {types as knobTypes} from './knobtypes';
 import 'bootstrap/dist/css/bootstrap.css';
 
 class Effect extends React.Component{
-    #synth
+    synth
     #type
     constructor(props,type){
         super()
-        this.#synth = props.synth;
+        this.synth = props.synth;
         this.#type = type;
     }
     checkEffect(){
         var check = 'interruptor'+this.#type
         if(document.getElementById(check).checked){
-            this.#synth.applyEffect(this.#type);
+            this.synth.applyEffect(this.#type);
         }else{
-            this.#synth.disapplyEffect(this.#type);
+            this.synth.disapplyEffect(this.#type);
         }
         
     }

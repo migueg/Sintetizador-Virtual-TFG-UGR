@@ -16,5 +16,10 @@ export const types = {
     REVERBDECAY: "reverbdeacay",
     REVERBRELEASE: "reverbrelease",
     REVERBHPF: "reverbHPF",
-    REVERBLPF: "reverbLPF"
+    REVERBLPF: "reverbLPF",
+    DELAYWET: "delaywet",
+    DELAYFEEDBACK: "delayfeedback",
+    FILTERWET: "filterwet",
+    FILTERCONTROL: "filtercontrol"
+    
   }

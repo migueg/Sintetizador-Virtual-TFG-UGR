@@ -390,7 +390,7 @@ class Piano extends React.Component{
                                 this.handleKeydownEvent('black','A#',keyName,'up');
                             break;
                         case 'u':
-                            if(!this.pressedKeys['d'])
+                            if(!this.pressedKeys['u'])
                                 this.handleKeydownEvent('white','B',keyName,'up');
                             break;
                      

@@ -4,6 +4,7 @@ import {Knob} from 'react-rotary-knob';
 import {sinte} from '../osc-components';
 import * as skins from 'react-rotary-knob-skin-pack';
 
+import {types as filterTypes} from './filtertypes';
 import {types as knobTypes} from './knobtypes';
 
 //Enumerado con los tipos posibles de knob
@@ -56,6 +57,7 @@ const types = knobTypes;
 class LimitedKnob extends React.Component {
     #type; 
     #skin;
+    #filter
     #value; 
    
     constructor(props) {
@@ -68,8 +70,13 @@ class LimitedKnob extends React.Component {
       this.#value = props.val;
       
       this.#type = props.type;
+
+      if(props.filter){
+        this.#filter = props.filter;
+      }
    
-      if(this.#type === types.OSC_VOLUM || this.#type === types.REVERBWET){
+      if(this.#type === types.OSC_VOLUM || this.#type === types.REVERBWET
+          || this.#type === types.DELAYWET || this.#type === types.FILTERWET){
         this.#skin = skins.s10;
       }else{
         this.#skin = skins.s17;
@@ -125,6 +132,61 @@ class LimitedKnob extends React.Component {
       var decay = (2 * val ) /100;
       sinte.setEnvolve(this.osc,decay,'decay');
     }
+
+    /**
+     * Método que se encarga de llamar al controlador para que 
+     * modifque la cantidad de feedback del efecto delay
+     * 
+     * @method handleOnChangeDelayFeedback
+     * @param {Float} val Valor del Knob
+     * @private
+     */
+    __handleOnchangeDelayFeedBack(val){
+      this.setState({ value: val });
+      sinte.setDelay('feedback',val);
+    }
+
+    /**
+     * Método que se encarga de llamar al controlador para que 
+     * modifque la cantidad de efecto delay que se aplica
+     * 
+     * @method handleOnChangeDelayWet
+     * @param {Float} val Valor del Knob
+     * @private
+     */
+     __handleOnchangeDelayWet(val){
+      this.setState({ value: val });
+      sinte.setDelay('wet',val);
+    }
+
+    /**
+     * Método que se encarga de llamar al controlador para que 
+     * modifque la cantidad de filtro  que se aplica
+     * 
+     * @method handleOnChangeFilterWet
+     * @param {Float} val Valor del Knob
+     * @private
+     */
+    __handleOnchangeFilterwet(val){
+      this.setState({ value: val });
+      sinte.setFilter('wet',val);
+
+    }
+
+    /**
+     * Método que se encarga de llamar al controlador para que 
+     * modifque la frecuencia desde donde el  filtro se aplica
+     * 
+     * @method handleOnChangeFilterWet
+     * @param {Float} val Valor del Knob
+     * @private
+     */
+     __handleOnChangeFilterControl(val){
+      this.setState({ value: val });
+      sinte.setFilter('freq',val);
+
+    }
+
     /**
      * Método que se encarga de llamar al controlador para que 
      * modifque el volumen Master de la aplicacion
@@ -215,8 +277,7 @@ class LimitedKnob extends React.Component {
      */
     __handleOnChangeReverbWet(val){
       this.setState({ value: val });
-      var wet = ( val ) /100;
-      sinte.setReverb(wet,"wet");
+      sinte.setReverb(val,"wet");
 
     }
 
@@ -235,10 +296,10 @@ class LimitedKnob extends React.Component {
       
       this.#value = val;
       var maxDistance = 10
-      if(this.#type === types.REVERBHPF || this.#type === types.REVERBLPF){
+      if(this.#type === types.REVERBHPF 
+          || this.#type === types.REVERBLPF 
+            || this.#type === types.FILTERCONTROL){
          maxDistance = 2300;
-      }else{
-         maxDistance = 10;
       }
       
       let distance = Math.abs(val - this.state.value);
@@ -246,7 +307,6 @@ class LimitedKnob extends React.Component {
         
         return;
       } else {
-       
         switch(this.#type){
           case types.OSC_VOLUM:
             this.__handleOnChangeOscillator(val);
@@ -277,7 +337,21 @@ class LimitedKnob extends React.Component {
             break;
           case types.REVERBLPF:
             this.__handleOnChangeReverbLP(val);
+            break;
+          case types.DELAYFEEDBACK:
+            this.__handleOnchangeDelayFeedBack(val);
+            break;
+          case types.DELAYWET:
+            this.__handleOnchangeDelayWet(val);
+            break;
+          case types.FILTERWET:
+            this.__handleOnchangeFilterwet(val);
+            break;
+          case types.FILTERCONTROL:
+            this.__handleOnChangeFilterControl(val);
+            break;
           default:
+            console.error("ERROR: tipo incorrecto");
             break;
         }
         

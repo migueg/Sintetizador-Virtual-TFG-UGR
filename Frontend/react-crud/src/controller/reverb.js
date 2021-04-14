@@ -14,8 +14,8 @@ class Reverb extends Effect{
         this.#gainFilter = this.audioctx.createGain();
 
         this.#decay = 5;
-        this.lpF = new Filter(context,this.effect,"lowpass");
-        this.hpF = new Filter(context, this.effect,"highpass");
+        this.lpF = new Filter(context,this.effect,null,"lowpass");
+        this.hpF = new Filter(context, this.effect,null,"highpass");
         
     }
 
