@@ -7,7 +7,7 @@ ul{
     width:100%;
     padding-left: 3%;
     padding-right: -2em;
-    padding-bottom: 24.3em;
+    padding-bottom: 22.3em;
     margin-bottom: 0;
     position:relative;
     border:1px solid #160801;
@@ -39,7 +39,7 @@ li  p{
 
 .white{
     float: left;
-    height: 24em;
+    height: 22em;
     z-index: 2;
     width: 8em;
     border-left:1px solid #bbb;

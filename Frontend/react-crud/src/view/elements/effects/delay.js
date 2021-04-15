@@ -1,7 +1,7 @@
 import  React from 'react';
 import {Container,Row,Col } from 'react-bootstrap';
-import {Knob} from './limitedKnob';
-import {types as knobTypes} from './knobtypes';
+import {Knob} from '../limitedKnob';
+import {types as knobTypes} from '../knobtypes';
 import  Effect from './effect';
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -18,7 +18,7 @@ class Delay extends Effect{
     render(){
         return(
             <div>
-                <Container>
+                <Container className="fx">
                     <Row>
                         <Col>
                             {super.render()}

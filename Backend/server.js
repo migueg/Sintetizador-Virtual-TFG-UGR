@@ -11,13 +11,13 @@ const app = express();
 
 
 var corsOptions = {
-  origin: "http://localhost:3000"
+  origin: ["http://localhost:3000", "192.168.1.62:3000"]
 };
 
 require('./dbhandler')
 
 
-app.use(cors(corsOptions));
+//app.use(cors(corsOptions));
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json());

@@ -20,6 +20,8 @@ export const types = {
     DELAYWET: "delaywet",
     DELAYFEEDBACK: "delayfeedback",
     FILTERWET: "filterwet",
-    FILTERCONTROL: "filtercontrol"
+    FILTERCONTROL: "filtercontrol",
+    DISTORSIONWET: "distorsionwet",
+    DISTORSIONAMOUNT: "distorsionamount"
     
   }

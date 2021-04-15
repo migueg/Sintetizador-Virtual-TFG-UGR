@@ -2,6 +2,7 @@ import {oscillator} from './oscillator';
 import {Reverb} from './reverb';
 import {Delay} from './delay';
 import {Filter} from './filter';
+import {Distorsion} from './distorsion';
 
 /**
  * Clase Fachada del controlador que se comunica con los elementos de la vista.
@@ -75,6 +76,14 @@ import {Filter} from './filter';
  * @private
  */
 
+/**
+ *  Efecto de distorsion
+ * 
+ * @property distorsion
+ * @type Object
+ * @private
+ */
+
 
 
 
@@ -87,10 +96,13 @@ class Synth{
     #reverb;
     #delay;
     #filter;
+    #distorsion;
     
     constructor(){
         //Nodos
-        this.#audioCtx = new window.AudioContext();
+        var AudioContext = window.AudioContext // Default
+        || window.webkitAudioContext;
+        this.#audioCtx = new AudioContext();
         this.#masterVolumeNode = this.#audioCtx.createGain();
         this.#gainCleanNode = this.#audioCtx.createGain();
 
@@ -101,8 +113,8 @@ class Synth{
         //Efectos
         this.#reverb = new Reverb(this.#audioCtx,this.#gainCleanNode,this.#masterVolumeNode);
         this.#delay = new Delay(this.#audioCtx,this.#gainCleanNode,this.#masterVolumeNode);
-        this.#filter = new Filter(this.#audioCtx,this.#gainCleanNode,this.#masterVolumeNode,"highpass")
-
+        this.#filter = new Filter(this.#audioCtx,this.#gainCleanNode,this.#masterVolumeNode,"highpass");
+        this.#distorsion = new Distorsion(this.#audioCtx,this.#gainCleanNode,this.#masterVolumeNode);
 
         this.#masterVolumeNode.connect(this.#audioCtx.destination)
        
@@ -127,6 +139,9 @@ class Synth{
                 break;
             case 'filter':
                 this.#filter.apply();
+                break;
+            case 'distorsion':
+                this.#distorsion.apply();
                 break;
 
             default:
@@ -153,6 +168,8 @@ class Synth{
             case 'filter':
                 this.#filter.disapply();
                 break;
+            case 'distorsion':
+                this.#distorsion.disapply();
                 
             default:
                 break;
@@ -249,12 +266,12 @@ class Synth{
     /**
      * Setter de los parámetros del delay
      * 
-     * @method setEnvolve
-     * @param {Char} type Parámetro a modificar
+     * @method setDelay
+     * @param {Char} param Parámetro a modificar
      * @param {String} val Valor a cambiar
      */
-    setDelay(type,val){
-        switch(type){
+    setDelay(param,val){
+        switch(param){
             case 'time':
                 this.#delay.setTime(val);
                 break;
@@ -270,6 +287,26 @@ class Synth{
         }
     }
     
+    /**
+     * Setter de los parámetros del delay
+     * 
+     * @method setDistorsion
+     * @param {Char} param Parámetro a modificar
+     * @param {String} val Valor a cambiar
+     */
+    setDistorsion(param,val){
+        switch(param){
+            case 'amount':
+                this.#distorsion.setDistorsionCurve(val);
+                break;
+            case 'wet':
+                this.#distorsion.setWet(val);
+                break;
+            default:
+                console.error("ERROR: parametro incompatible");
+                break;
+        }
+    }
     /**
      * Setter de los parámetros de la envolvente de los osciladores
      * 

@@ -1,8 +1,9 @@
 import  React from 'react';
 import {Container,Row,Col } from 'react-bootstrap';
-import Reverb from './elements/reverb';
-import Delay from './elements/delay';
-import Filter from './elements/filter';
+import Reverb from './elements/effects/reverb';
+import Delay from './elements/effects/delay';
+import Filter from './elements/effects/filter';
+import Distorsion from './elements/effects/distorsion';
 
 import {sinte} from './osc-components';
 
@@ -17,21 +18,25 @@ class FX extends React.Component{
     render(){
         return(
         <div>
-            <Container>
-                <Row>
-                    <Col className='reverb' xs>
-                        <Reverb synth={sinte}/>
+            <Container fluid id="fx" >
+                <Row >
+                    <Col className='effect' xs style={{paddingBottom: '1%'}}>
+                        <Reverb  synth={sinte}/>
                     </Col>
 
-                    <Col className='reverb' xs>
+                    <Col className='effect' xs >
                         <Delay synth={sinte}/>
                     </Col>
 
                     
                 </Row>
                 <Row>
-                    <Col className='reverb' xs>
-                        <Filter synth={sinte}/>
+                    <Col className='effect' xs style={{paddingBottom: '1%'}}>
+                        <Filter  synth={sinte}/>
+                    </Col>
+
+                    <Col className='effect' xs>
+                        <Distorsion   synth={sinte}/>
                     </Col>
                     
                 </Row>

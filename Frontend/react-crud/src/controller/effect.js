@@ -9,7 +9,7 @@ class Effect {
         this.input = input
         this.output = output;
         this.wet = this.audioctx.createGain();
-        
+        this.wet.gain.value = 0.8;
         
     }
 

@@ -80,7 +80,8 @@ class Piano extends React.Component{
                     }
             }
     
-            key = key + octave
+            key = key + octave 
+            
             sinte.playNote(this.notes[key])
       
             
@@ -102,7 +103,9 @@ class Piano extends React.Component{
         .then((data) => {
             this.notes = data.notes[0];
         })
-        .catch(console.log)
+        .catch(function(error){
+            throw error;
+        })
         
     }
 
@@ -259,6 +262,7 @@ class Piano extends React.Component{
                 <div className="octaves">
                     <button id='down' onClick={()=>{this.downOctave()}} >Down</button>
                     <button id='up' onClick={()=>{this.upOctave()}}>UP</button>
+                    
                 </div>
                 <li className="white" id="C" name = "first" onClick={()=>{this.notePlayed()}}><p>C1</p></li>
                 <li className="black" id="C#"onClick={()=>{this.notePlayed()}}><p>C#1</p></li>

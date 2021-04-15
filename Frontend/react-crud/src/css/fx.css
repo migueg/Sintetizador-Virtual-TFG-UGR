@@ -1,7 +1,16 @@
-.reverb.col{
+.effect.col{
     float: left;
     width: 45%;
     padding: 10px;
-    
+    margin-top: 0;
     border-style: solid;
+}
+
+
+.fx .col{
+    margin-top: 3%;
+    margin-left: 1%;
+}
+.effect.col.container.row{
+    
 }

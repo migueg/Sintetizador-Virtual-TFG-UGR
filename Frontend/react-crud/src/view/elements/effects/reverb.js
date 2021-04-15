@@ -1,10 +1,10 @@
 import  React from 'react';
 import {Container,Row,Col } from 'react-bootstrap';
-import {Knob} from './limitedKnob';
-import {types as knobTypes} from './knobtypes';
+import {Knob} from '../limitedKnob';
+import {types as knobTypes} from '../knobtypes';
 import  Effect from './effect';
 import 'bootstrap/dist/css/bootstrap.css';
-import '../../css/reverb.css';
+import '../../../css/reverb.css';
 
 class Reverb extends Effect{
     constructor(props){
@@ -16,7 +16,7 @@ class Reverb extends Effect{
     render(){
         return(
             <div className='reverb'>
-                <Container>
+                <Container className="fx">
                     <Row>
                         <Col>
                             {super.render()}

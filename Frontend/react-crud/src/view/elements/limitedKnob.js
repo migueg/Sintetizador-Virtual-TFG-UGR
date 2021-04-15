@@ -4,7 +4,7 @@ import {Knob} from 'react-rotary-knob';
 import {sinte} from '../osc-components';
 import * as skins from 'react-rotary-knob-skin-pack';
 
-import {types as filterTypes} from './filtertypes';
+
 import {types as knobTypes} from './knobtypes';
 
 //Enumerado con los tipos posibles de knob
@@ -76,7 +76,8 @@ class LimitedKnob extends React.Component {
       }
    
       if(this.#type === types.OSC_VOLUM || this.#type === types.REVERBWET
-          || this.#type === types.DELAYWET || this.#type === types.FILTERWET){
+          || this.#type === types.DELAYWET || this.#type === types.FILTERWET
+            || this.#type === types.DISTORSIONWET){
         this.#skin = skins.s10;
       }else{
         this.#skin = skins.s17;
@@ -159,6 +160,33 @@ class LimitedKnob extends React.Component {
       sinte.setDelay('wet',val);
     }
 
+    /**
+     * Método que se encarga de llamar al controlador para que 
+     * modifque la cantidad de efecto distorsion que se aplica
+     * 
+     * @method handleOnChangeDistorsionwet
+     * @param {Float} val Valor del Knob
+     * @private
+     */
+    __handleOnChangeDistorsionwet(val){
+      this.setState({ value: val });
+      sinte.setDistorsion('wet',val);
+    
+    }
+
+    /**
+     * Método que se encarga de llamar al controlador para que 
+     * modifque el nivel de distorsion producido
+     * 
+     * @method handleOnChangeDistorsionAmount
+     * @param {Float} val Valor del Knob
+     * @private
+     */
+     __handleOnChangeDistorsionAmount(val){
+      this.setState({ value: val });
+      sinte.setDistorsion('amount',val);
+    
+    }
     /**
      * Método que se encarga de llamar al controlador para que 
      * modifque la cantidad de filtro  que se aplica
@@ -301,6 +329,9 @@ class LimitedKnob extends React.Component {
             || this.#type === types.FILTERCONTROL){
          maxDistance = 2300;
       }
+      if(this.#type == types.DISTORSIONAMOUNT){
+        maxDistance = 60;
+      }
       
       let distance = Math.abs(val - this.state.value);
       if (distance > maxDistance) {
@@ -350,6 +381,13 @@ class LimitedKnob extends React.Component {
           case types.FILTERCONTROL:
             this.__handleOnChangeFilterControl(val);
             break;
+          case types.DISTORSIONWET:
+            this.__handleOnChangeDistorsionwet(val);
+            break;
+          case types.DISTORSIONAMOUNT:
+            this.__handleOnChangeDistorsionAmount(val);
+            break;
+
           default:
             console.error("ERROR: tipo incorrecto");
             break;

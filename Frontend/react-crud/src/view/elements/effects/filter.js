@@ -1,12 +1,12 @@
 import Effect from './effect'
 import  React from 'react';
 import {Container,Row,Col } from 'react-bootstrap';
-import {Knob} from './limitedKnob';
-import {types as knobTypes} from './knobtypes';
+import {Knob} from '../limitedKnob';
+import {types as knobTypes} from '../knobtypes';
 import  {types as filterTypes} from './filtertypes';
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { sinte } from '../osc-components';
+import { sinte } from '../../osc-components';
 
 class Filter extends Effect{
     #previous;
@@ -34,7 +34,7 @@ class Filter extends Effect{
 
     render(){
         return(
-            <Container>
+            <Container className="fx">
                 <Row>
                     <Col>
                         {super.render()}

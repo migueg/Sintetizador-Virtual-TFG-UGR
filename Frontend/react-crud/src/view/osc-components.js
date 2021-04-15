@@ -190,7 +190,7 @@ export class OscComponents extends Component{
                 
 
 
-                <Container  >
+                <Container fluid >
                     <Row>
                         <Col className="oscilador"xs >
                         <Oscilador osc={'A'} />
