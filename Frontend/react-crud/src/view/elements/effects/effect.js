@@ -1,6 +1,31 @@
 import  React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 
+/**
+ * Clase padre para los componentes relacionados con efectos 
+ *
+ * @class Effect
+ * @constructor
+ * @param {Object} props Objeto que contiene las propiedades del componente
+ * @param {String} type Tipo de efecto
+ * @see Effect
+ */
+
+/**
+ * Instancia de la clase fachada del controlador
+ * 
+ * @property synth 
+ * @type Synth
+ * @protected
+ */
+
+/**
+ * Tipo de efecto
+ * 
+ * @property type
+ * @type String
+ * @private
+ */
 class Effect extends React.Component{
     synth
     #type
@@ -9,6 +34,13 @@ class Effect extends React.Component{
         this.synth = props.synth;
         this.#type = type;
     }
+    /**
+     * Método que se encarga de mandar la orden al controlador
+     * para aplicar o desaplicar el efecto
+     * 
+     * @method checkEffect
+     * 
+     */
     checkEffect(){
         var check = 'interruptor'+this.#type
         if(document.getElementById(check).checked){
@@ -19,6 +51,14 @@ class Effect extends React.Component{
         
     }
 
+    /**
+     * Método que devuelve un interruptor para aplicar o 
+     * desaplicar un efecto
+     * 
+     * @method render
+     * @return Código html del interruptor
+     * 
+     */
     render(){
         return(
             <div className='toggle-switch'>

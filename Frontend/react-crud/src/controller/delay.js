@@ -1,5 +1,23 @@
 import Effect from './effect';
 
+/**
+ * La clase delay encapsula el comportamiento neceseraio para que
+ * se pueda aplicar un efecto de delay sobre el sintetizador
+ *
+ * @class Delay
+ * @constructor
+ * @param {Object} context AudioContext
+ * @param {Object} input Nodo de entrada sobre el que se aplica el efecto
+ * @param {Object} output Node de salida con el efecto aplicado
+ * @see Effect
+ */
+
+/**
+ * Duracion del efecto delay
+ * @property feedback
+ * @type Object
+ * @private
+ */
 class Delay extends Effect{
     #feedback;
   
@@ -14,6 +32,10 @@ class Delay extends Effect{
         this.wet.gain.value = 0.8;
      }
 
+    /**
+     * Metodo que se encarga de aplicar el efecto delay sobre el input
+     * @method apply
+     */
     apply(){
         super.apply()
         this.effect.connect(this.wet);
@@ -21,7 +43,11 @@ class Delay extends Effect{
         this.#feedback.connect(this.effect);
         
     }
-    
+    /**
+     * Setter del tiempo del delay
+     * @method setTime
+     * @param {String} tempo Fracción de tiempo de delay
+     */
     setTime(tempo){
         var val= 0.0;
         switch(tempo){
@@ -51,6 +77,11 @@ class Delay extends Effect{
         this.effect.delayTime.value = val;
     }
 
+    /**
+     * Setter del feedback del efecto delay
+     * @method setFeedback
+     * @param {Float} val Nivel de feedback
+     */
     setFeedback(val){
         var value = val /100
         this.#feedback.gain.value = value;
@@ -59,4 +90,9 @@ class Delay extends Effect{
 
 }
 
+/**
+ * Proporciona el efecto delay
+ * 
+ * @module Delay
+ */
 export{ Delay}

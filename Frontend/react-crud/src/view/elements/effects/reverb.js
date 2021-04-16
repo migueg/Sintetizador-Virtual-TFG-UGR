@@ -6,13 +6,28 @@ import  Effect from './effect';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../../../css/reverb.css';
 
+/**
+ * Clase que genera el componente de la interfaz para el control
+ * del efecto Rerverb
+ *
+ * @class Reverb
+ * @constructor
+ * @param {Object} props Objeto que contiene las propiedades del componente
+ * @see Effect
+ */
 class Reverb extends Effect{
     constructor(props){
         super(props,'reverb')
      
     }
    
-
+    /**
+     * Método que devuelve el componente Reverb para ser renderizado
+     * 
+     * @method render
+     * @return Código html del componente Reverb
+     * 
+     */
     render(){
         return(
             <div className='reverb'>

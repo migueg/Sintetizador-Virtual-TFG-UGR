@@ -10,11 +10,25 @@ import {sinte} from './osc-components';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../css/fx.css';
 
+/**
+ * Clase que genera un vista para aplicar y controlar los efectos 
+ *
+ * @class Distorsion
+ * @constructor
+ */
 class FX extends React.Component{
     constructor(){
         super()
     }
 
+    /**
+     * Método que devuelve el componente FX para ser renderizado que representa
+     * la vista de efecots
+     * 
+     * @method render
+     * @return Código html del componente FX
+     * 
+     */
     render(){
         return(
         <div>
@@ -46,4 +60,9 @@ class FX extends React.Component{
     }
 }
 
+/**
+ * Vista de los efectos
+ * 
+ * @module FX
+ */
 export default FX;

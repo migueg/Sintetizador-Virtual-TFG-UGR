@@ -12,6 +12,26 @@ const types = {
 
 }
 
+/**
+ * La clase Filter encapsula el comportamiento neceseraio para que
+ * se pueda aplicar un efecto de filtro sobre el sintetizador
+ *
+ * @class Filter
+ * @constructor
+ * @param {Object} context AudioContext
+ * @param {Object} input Nodo de entrada sobre el que se aplica el efecto
+ * @param {Object} output Node de salida con el efecto aplicado
+ * @param {String} type Tipo de filtro
+ * @see Effect
+ */
+
+/**
+ * Tipo de filtro
+ * 
+ * @property type
+ * @type String
+ * @private
+ */
 class Filter extends Effect{
     #type
     constructor(context,input,output,type){
@@ -24,13 +44,22 @@ class Filter extends Effect{
         
     }
 
+    /**
+     * Metodo que se encarga de aplicar el efecto de filtro sobre el input
+     * @method apply
+     * 
+     */
     apply(){
         super.apply();
         this.effect.connect(this.wet);
-        console.log('AQUIII')
     }
 
-    
+    /**
+     * Método que se encarga de inicializar el filtro
+     * 
+     * @method init
+     * @param {String} type  de filtro
+     */
     init(type){
         this.#type = type;
         this.effect.type= type;
@@ -38,18 +67,36 @@ class Filter extends Effect{
         console.log(this.effect.type)
         
     }
-    //Para el reverb
+    
+    /**
+     * Metodo que es usado en el reverb para conectar los filtros
+     * a este otro efecto
+     * 
+     * @method connect
+     * @param {Object} input Entrada
+     * @param {Object} output Salida
+     */
     connect(input,output){
         input.connect(this.effect);
         this.effect.connect(output);
-        //this.effect.connect(this.audioctx.destination);
     }
 
+    /**
+     * Setter de la frecuencia del filtro
+     * 
+     * @method setFrecuency
+     * @param {Float} val 
+     */
     setFrecuency(val){
         this.effect.frequency.value = val;
     }
 
-    
+    /**
+     * Método que inicializa las frecuencias en función del 
+     * tipo de filtro
+     * 
+     * @method setinitFrecuencies
+     */
     setinitFrecuencies(){
         switch(this.#type){
             case types.LP:
@@ -80,6 +127,12 @@ class Filter extends Effect{
         }
     }
 
+    /**
+     * Setter del tipo de filtro
+     * 
+     * @method setType
+     * @param {String} type tipo de filtro
+     */
     setType(type){
         this.effect.type= type;
         this.setinitFrecuencies();
@@ -88,4 +141,9 @@ class Filter extends Effect{
     
 }
 
+/**
+ * Proporciona el efecto Filtro
+ * 
+ * @module Filter
+ */
 export { Filter};

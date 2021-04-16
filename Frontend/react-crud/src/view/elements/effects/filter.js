@@ -8,6 +8,15 @@ import  {types as filterTypes} from './filtertypes';
 import 'bootstrap/dist/css/bootstrap.css';
 import { sinte } from '../../osc-components';
 
+/**
+ * Clase que genera el componente de la interfaz para el control
+ * del efecto Filter
+ *
+ * @class Filter
+ * @constructor
+ * @param {Object} props Objeto que contiene las propiedades del componente
+ * @see Effect
+ */
 class Filter extends Effect{
     #previous;
 
@@ -15,6 +24,12 @@ class Filter extends Effect{
         super(props,'filter');
         this.#previous = filterTypes.HP;
     }
+
+    /**
+     * Método para selecionar el tipo de filtro
+     * 
+     * @method selecType
+     */
 
     selectType(){
         var selector = document.getElementById('type').value;
@@ -32,6 +47,13 @@ class Filter extends Effect{
 
     }
 
+     /**
+     * Método que devuelve el componente Filter para ser renderizado
+     * 
+     * @method render
+     * @return Código html del componente Filter
+     * 
+     */
     render(){
         return(
             <Container className="fx">

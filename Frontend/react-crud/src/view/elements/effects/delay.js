@@ -5,16 +5,37 @@ import {types as knobTypes} from '../knobtypes';
 import  Effect from './effect';
 import 'bootstrap/dist/css/bootstrap.css';
 
+/**
+ * Clase que genera el componente de la interfaz para el control
+ * del efecto Delay
+ *
+ * @class Delay
+ * @constructor
+ * @param {Object} props Objeto que contiene las propiedades del componente
+ * @see Effect
+ */
 class Delay extends Effect{
     constructor(props){
         super(props,'delay');
         this.synth.setDelay('time','1/16');
     }
 
-    checkTime(){
+    /**
+     * Método que se encarga de seleccionar el tiempo de delay
+     * 
+     * @method selectTime
+     */
+    selectTime(){
         var selector = document.getElementById('time').value;
         this.synth.setDelay('time',selector);
     }
+    /**
+     * Método que devuelve el componente Delay para ser renderizado
+     * 
+     * @method render
+     * @return Código html del componente Delay
+     * 
+     */
     render(){
         return(
             <div>
@@ -42,7 +63,7 @@ class Delay extends Effect{
                     <Row>
                         <Col>
                         <p>Time</p>
-                        <select className="form-select form-select-sm" id="time" aria-label="time select" onClick={()=>this.checkTime()}>
+                        <select className="form-select form-select-sm" id="time" aria-label="time select" onClick={()=>this.selectTime()}>
                             <option value="1/16">1/16</option>
                             <option value="1/8">1/8</option>
                             <option value="1/4">1/4</option>
