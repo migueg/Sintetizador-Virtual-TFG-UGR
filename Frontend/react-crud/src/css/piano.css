@@ -1,15 +1,19 @@
+
 .piano{
     box-sizing: border-box;
 }
 ul{
     
-    height: 50%;
-    width:100%;
-    padding-left: 3%;
-    padding-right: -2em;
-    padding-bottom: 22.3em;
-    margin-bottom: 0;
-    position:relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    margin: auto;
+    justify-content: center;
+   
+    padding-top: 1%;
+    padding-right: 1%;
+    padding-bottom: 2em;
+
     border:1px solid #160801;
   
     background:linear-gradient(to bottom right,rgba(0,0,0,0.3),rgba(0,0,0,0)),url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/187/vwood.png);
@@ -17,14 +21,12 @@ ul{
 }
 
 li{
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    position: relative;
-    float: left;
-    display: flex;
-    text-align: center;
-    align-content: center;
+   float: left;
+   position: relative;
+   list-style: none;
+   display: flex;
+   align-items: center;
+
 }
 
 li  p{
@@ -37,11 +39,12 @@ li  p{
     z-index: 1;
 }
 
+
+
 .white{
-    float: left;
-    height: 22em;
+    height: 14.4vw;
     z-index: 2;
-    width: 8em;
+    width: 80vw;
     border-left:1px solid #bbb;
     border-bottom:1px solid #bbb;
     border-radius:0 0 5px 5px;
@@ -60,8 +63,8 @@ li  p{
 }
 
 .black{
-    height: 12em;
-    width: 3.5em;
+    height: 7.92vw;
+    width: 44vw;
     z-index: 3;
     border: 2px solid #000;
     border-radius:0 0 3px 3px;
@@ -97,7 +100,7 @@ ul li:first-child {
     border-radius:0 5px 5px 5px
   }
 
-  @media screen and (max-width: 1870px) {
+ /*  @media screen and (max-width: 1870px) {
     .C1{
         display: none;
     }
@@ -175,16 +178,20 @@ ul li:first-child {
     }
   }
 
+  */
   @media screen and (max-width: 1000px) {
       .white{
           width: 4.6em ;
+          height: 8em;
       }
       .black{
           width: 2.2em;
+          height: 5em;
       }
       .o2{
           display: none;
       }
   }
-
+  
+ 
   

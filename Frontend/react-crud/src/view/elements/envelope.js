@@ -43,13 +43,6 @@ class Envelope extends React.Component{
                 <Row> 
                     <Col>
                         <p>Attack</p>
-                    </Col>
-                    <Col>
-                        <p>Release</p>
-                    </Col>
-                </Row>
-                <Row >
-                    <Col >
                         <Knob
                               style={{ display: "inline-block" }}
                               min={0}
@@ -63,10 +56,9 @@ class Envelope extends React.Component{
                               val= {0}
                         />
 
-                        
                     </Col>
-
                     <Col>
+                        <p>Release</p>
                         <Knob
                               style={{ display: "inline-block" }}
                               min={0}
@@ -80,18 +72,9 @@ class Envelope extends React.Component{
                               val = {50}
                         />
                     </Col>
-                </Row>
-                <Row>
+
                     <Col>
                         <p>Decay</p>
-                    </Col>
-                    <Col>
-                        <p>Sustain</p>
-                    </Col>
-                </Row>
-
-                <Row >
-                    <Col >
                         <Knob
                               style={{ display: "inline-block" }}
                               min={0}
@@ -104,11 +87,9 @@ class Envelope extends React.Component{
                               osc = {this.#osc}
                               val= {30}
                         />
-
-                        
                     </Col>
-
                     <Col>
+                        <p>Sustain</p>
                         <Knob
                               style={{ display: "inline-block" }}
                               min={0}

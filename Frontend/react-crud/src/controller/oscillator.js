@@ -48,13 +48,19 @@ import Voice from './voice';
  * @property voice
  * @type Object
  */
+
+/**
+ * Nodo que se encarga del paneo del oscilador
+ * @property #panNode
+ * @type Object
+ */
 class oscillator  {
    #audioCtx 
    #gainNode //Variable privada
    #envelope // envolvente del sonido
    #volume
    #available
-  
+   #panNode
  
 
  constructor(master,context,cleanNode){
@@ -76,8 +82,11 @@ class oscillator  {
   
    this.#gainNode.connect(cleanNode);
    //this.#gainNode.connect(this.#audioCtx.destination);
-   this.#gainNode.connect(master);
    
+   this.#panNode = this.#audioCtx.createStereoPanner();
+   this.#panNode.pan.value = 0;
+   this.#gainNode.connect(this.#panNode);
+   this.#panNode.connect(master);
 
    this.voice = new Voice('sine',this.#audioCtx, this.#envelope,this.#gainNode);
 
@@ -126,6 +135,16 @@ class oscillator  {
       this.voice.start(key,this.#gainNode.gain.value)
     
    }
+ }
+
+ /**
+  * Setter del nivel de paneo del oscilador, -1 izquierda, +1 derecha.
+  * 
+  * @method setPan
+  * @param {Float} value valor de paneo
+  */
+ setPan(value){
+    this.#panNode.pan.value = value;
  }
 
  /**

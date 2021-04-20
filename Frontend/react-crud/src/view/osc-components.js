@@ -42,13 +42,15 @@ class Oscilador extends React.Component{
         super();
         this.#osc = props.osc;
         this._KnobVol = React.createRef(); 
-        
+        this.firstTime = true;
+
         //Asignamos la variable this de la clase a las siguientes funciones
         this.checkChecked = this.checkChecked.bind(this);
       
     
         
     }
+
 
     /**
      * Método que se encarga de comprobar si esta encendido o apagado 
@@ -104,9 +106,23 @@ class Oscilador extends React.Component{
         }
         
         
+        
     }
 
-  
+    /**
+     * Método que se encarga de enviar al controlador el nivel de paneo
+     * que el usuario quiere para un oscilador
+     * 
+     * @method setPan
+     * @param {Char} osc Id del oscilador
+     */
+    setPan(osc){
+        var id = 'range'+ osc;
+        var ranger = document.getElementById(id);
+        sinte.setPan(osc,ranger.value)
+ 
+    }
+
    /**
     * Método que construlle el componente de la interfaz relativo a el oscilador, que contiene los Knobs de la envolvente,
     * el selector de onda, el knob de volumen y el botón de encendido y apagado.
@@ -126,8 +142,10 @@ class Oscilador extends React.Component{
     
         return(
             <div style={{marginLeft: 10}} >
+            <Row>
+
             
-            < div className="toggle-switch">
+            < div className="toggle-switch" style={{marginLeft: 10}}>
                 <input
                 type="checkbox"
                 className="toggle-switch-checkbox"
@@ -139,9 +157,24 @@ class Oscilador extends React.Component{
             
             </div>
 
-            <h3 style={{float: 'left'}}>Oscilador {this.#osc}</h3> 
-            <div className="volumOsc" style={{float: 'right'}}>
-        
+            <h3 style={{float: 'left'}}>Oscilador {this.#osc}</h3>
+            </Row>
+            <Row>
+            <Col>
+            <div className='panner'>
+                <p>Pan L-R</p>
+                <input type="range" id={'range'+this.#osc} onChange={()=>this.setPan(this.#osc)} 
+                     defaultValue='0'  step='0.1' min="-1"  max="1" 
+                    style={{width: '80%'}}
+                    />
+          
+            </div>
+
+          
+            </Col>
+            <Col>
+            <div className="volumOsc" style={{float: 'right', marginRight: '2%'}}>
+            <p>Volumen</p>
             <Knob
                 ref={this._KnobVol}
                 style={{ display: "inline-block" }}
@@ -157,8 +190,10 @@ class Oscilador extends React.Component{
               
             
             />
-           
+          
             </div>
+            </Col>
+            </Row> 
             <div className="WaveSelector">
               <select name="selector" className="selector" onClick={()=>this.checkWave(this.#osc)} id={id}>
                   <option value="sine"  >Sine</option>
@@ -172,6 +207,8 @@ class Oscilador extends React.Component{
             <Envelope osc={this.#osc} />
           
           </div>
+            
+          
         )
     }
 }

@@ -118,6 +118,7 @@ class Synth{
 
         this.#masterVolumeNode.connect(this.#audioCtx.destination)
        
+        
        
     }
 
@@ -391,6 +392,21 @@ class Synth{
      */
     setMaster(val){
         this.#masterVolumeNode.gain.value = val;
+    }
+
+    /**
+     * Setter del nivle de paneo de los osciladores
+     * 
+     * @method setPan
+     * @param {Char} osc id del oscilador
+     * @param {Float} value valor de paneo
+     */
+    setPan(osc,value){
+        if(osc === 'A'){
+            this.#oscillatorA.setPan(value);
+        }else if(osc === 'B'){
+            this.#oscillatorA.setPan(value);
+        }
     }
 
     /**
