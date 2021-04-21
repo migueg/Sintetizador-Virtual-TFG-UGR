@@ -3,6 +3,7 @@ import {Reverb} from './reverb';
 import {Delay} from './delay';
 import {Filter} from './filter';
 import {Distorsion} from './distorsion';
+import Saver from './saver';
 
 /**
  * Clase Fachada del controlador que se comunica con los elementos de la vista.
@@ -15,7 +16,7 @@ import {Distorsion} from './distorsion';
  * Instancia del osciladorA
  * 
  * @property #osciladorA 
- * @type Object
+ * @type oscillator
  * @private
  */
 
@@ -23,7 +24,7 @@ import {Distorsion} from './distorsion';
  * Instancia del osciladorB
  * 
  * @property #osciladorB
- * @type Object
+ * @type oscillator
  * @private
  */
 
@@ -56,7 +57,7 @@ import {Distorsion} from './distorsion';
  *  Efecto de reverb
  * 
  * @property reverb
- * @type Object
+ * @type Reverb
  * @private
  */
 
@@ -64,7 +65,7 @@ import {Distorsion} from './distorsion';
  *  Efecto de Delay
  * 
  * @property delay
- * @type Object
+ * @type Delay
  * @private
  */
 
@@ -72,7 +73,7 @@ import {Distorsion} from './distorsion';
  *  Efecto de Filtro
  * 
  * @property filter
- * @type Object
+ * @type Filter
  * @private
  */
 
@@ -80,10 +81,17 @@ import {Distorsion} from './distorsion';
  *  Efecto de distorsion
  * 
  * @property distorsion
- * @type Object
+ * @type Distorsion
  * @private
  */
 
+/**
+ *  Objeto que se va a enca
+ * 
+ * @property saver
+ * @type Saver
+ * @private
+ */
 
 
 
@@ -97,6 +105,8 @@ class Synth{
     #delay;
     #filter;
     #distorsion;
+    #saver;
+    #loader;
     
     constructor(){
         //Nodos
@@ -110,6 +120,9 @@ class Synth{
         this.#oscillatorA = new oscillator(this.#masterVolumeNode,this.#audioCtx,this.#gainCleanNode);
         this.#oscillatorB = new oscillator(this.#masterVolumeNode,this.#audioCtx,this.#gainCleanNode);
         
+        //Cargador y salvador
+        this.#saver = new Saver(this.#oscillatorA,this.#oscillatorB,this);
+
         //Efectos
         this.#reverb = new Reverb(this.#audioCtx,this.#gainCleanNode,this.#masterVolumeNode);
         this.#delay = new Delay(this.#audioCtx,this.#gainCleanNode,this.#masterVolumeNode);
@@ -247,6 +260,34 @@ class Synth{
     }
 
     /**
+     * Método que se encarga de llamar al saver para que mande el estado actual
+     * del sintetizador a la base de datos para su almacenamiento
+     *  
+     * @method save
+     */
+    save(){
+        this.#saver.save();
+    }
+
+    /******* GETTERS *********/
+
+    /**
+     * Método que devuelve el estado de todos los efectos
+     * 
+     * @method getEffects
+     * @returns JSON
+     */
+    getEffects(){
+        var effects={};
+
+        effects['delay'] = this.#delay.getState();
+        effects ['distorsion'] = this.#distorsion.getState();
+        effects ['filter'] = this.#filter.getState();
+        effects ['reverb'] = this.#reverb.getState();
+        
+        return effects;
+    }
+    /**
      * Getter del volumen de los osciladores
      * 
      * @method getVolum
@@ -263,6 +304,8 @@ class Synth{
         }
 
     }
+
+    /******* SETTERS *********/
 
     /**
      * Setter de los parámetros del delay

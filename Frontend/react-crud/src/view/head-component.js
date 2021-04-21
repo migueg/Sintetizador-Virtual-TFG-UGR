@@ -6,6 +6,7 @@ import {Container,Row,Col } from 'react-bootstrap';
 import disquete from '../img/disquete.png'
 import 'bootstrap/dist/css/bootstrap.css';
 import '../css/header.css';
+import { sinte } from './osc-components';
 
 
 class Header extends React.Component{
@@ -32,7 +33,7 @@ class Header extends React.Component{
                     </Col>
                    
                     <Col>
-                        <img   src={disquete} style={{width: 50, float: 'right' , marginTop: '2%'}}></img>
+                        <img  onClick={()=>sinte.save()} src={disquete} style={{width: 50, float: 'right' , marginTop: '2%'}}></img>
                     </Col>
                     <Col>
                         <div className="LoadedSound" >

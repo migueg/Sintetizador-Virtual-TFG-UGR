@@ -43,6 +43,25 @@ class Delay extends Effect{
         this.#feedback.connect(this.effect);
         
     }
+
+
+    /************ GETTERS **************/
+    
+    /**
+     * Getter del estado del efecto
+     * 
+     * @method getState
+     * @returns JSON
+     */
+    getState(){
+        super.getState();
+        this.state['time'] =  this.effect.delayTime.value;
+        this.state['feedback'] = this.#feedback.gain.value;
+
+        return this.state;
+    }
+
+    /************ SETTERS **************/
     /**
      * Setter del tiempo del delay
      * @method setTime

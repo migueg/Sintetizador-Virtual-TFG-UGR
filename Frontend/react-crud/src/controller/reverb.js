@@ -71,6 +71,19 @@ class Reverb extends Effect{
     }
 
     /**
+     * Actualiza el impulso
+     * 
+     * @method updateImpulse
+     * @param {Float} val Tiempo de caida
+     * @private
+     */
+    __updateImpulse(val){
+        var duration = 10 - val; // Ya que la duracion es inversa al decay
+
+        this.effect.buffer = this.impulseResponse(duration,this.#decay,0);
+    }
+
+    /**
      * Método que se encarga de generar un impulso necesario para
      * generar un efecto de reverb
      * 
@@ -112,6 +125,27 @@ class Reverb extends Effect{
         this.#hpf.connect(this.#gainFilter,this.wet);
         
     }
+
+    /************ GETTERS **************/
+
+    /**
+     * Getter del estado del efecto
+     * 
+     * @method getState
+     * @returns JSON
+     */
+    getState(){
+        super.getState();
+        this.state['hp'] = this.#hpf.getFrecuency();
+        this.state['lp'] = this.#lpf.getFrecuency();
+        this.state['decay'] = this.#decay
+
+        return this.state;
+
+    }
+
+    /************ SETTERS **************/
+
     /**
      * Setter de la frecuencia del filtro pasa altos
      * 
@@ -131,7 +165,8 @@ class Reverb extends Effect{
         this.#lpf.setFrecuency(val);
        
     }
- /**
+    
+    /**
      * Setter del tiempo de caida
      * 
      * @method setDecay
@@ -143,18 +178,8 @@ class Reverb extends Effect{
     }
     
 
-    /**
-     * Actualiza el impulso
-     * 
-     * @method updateImpulse
-     * @param {Float} val Tiempo de caida
-     * @private
-     */
-    __updateImpulse(val){
-        var duration = 10 - val; // Ya que la duracion es inversa al decay
-
-        this.effect.buffer = this.impulseResponse(duration,this.#decay,0);
-    }
+    
+    
 }
 
 /**

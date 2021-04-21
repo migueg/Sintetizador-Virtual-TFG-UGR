@@ -95,6 +95,7 @@ class oscillator  {
     
  }
 
+ 
 
  /**
   * Método que enciende el oscilador
@@ -137,6 +138,25 @@ class oscillator  {
    }
  }
 
+ //GETTERS
+
+  getEnvelope(){
+     return this.voice.getEnvelope();
+  }
+
+  getState(){
+     var state = {};
+
+     state['pan'] = this.#panNode.pan.value;
+     state['on'] = this.#available;
+     state['gain'] = this.#gainNode.gain.value;
+     state['wave'] = this.voice.getType();
+
+     return state;
+
+  }
+  
+ //SETTERS
  /**
   * Setter del nivel de paneo del oscilador, -1 izquierda, +1 derecha.
   * 

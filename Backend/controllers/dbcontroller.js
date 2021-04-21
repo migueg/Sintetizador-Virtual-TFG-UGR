@@ -1,5 +1,6 @@
 const Notes = require ('../models/notes');
 const notesMap  = require('../data/notes');
+const statesModels = require('../models/states');
 
 
  async function createNotes(req,res){
@@ -44,7 +45,41 @@ async function getNotes(req,res){
     res.send(response);
     
 }
+
+async function saveState(req,res){
+    
+    if(req.header('Authorization') === 'Migue'){
+        var state = req.body.state;
+        var oscA = state.A;
+        var enA = oscA.envelope;
+        var oscB = state.B;
+
+        const envelopeA = new statesModels.envelopeModel({
+            attack: enA.attack,
+            release: enA.release,
+            sustain: enA.sustain,
+            decay: enA.decay
+        });
+
+        const oscillatorA = new statesModels.oscillatorModel({ 
+            id: 'A',
+            oscOn:  oscA.on,
+            pan: oscA.pan,
+            gain: oscA.gain,
+            wave: oscA.wave,
+            envelope: envelopeA
+         })
+
+         var state = new statesModels.stateModel({
+             oscA: oscA
+         })
+         console.log(state.oscA.envelope)
+    }else{
+        console.log('error');
+    }
+}
 module.exports = {
     createNotes,
-    getNotes
+    getNotes,
+    saveState
 }

@@ -41,8 +41,24 @@
  * @type Object
  * @protected 
  */
+
+/**
+ * Booleano para controlar si esta encendido o apagado el efecto
+ * 
+ * @property on
+ * @type Boolean
+ * @private
+ */
+
+/**
+ * Almacena el estado del efecto
+ * 
+ * @property state
+ * @type JSON
+ * @protected
+ */
 class Effect {
- 
+    #on
     constructor(context,input,output){
         this.audioctx = context
         this.effect = null;
@@ -50,6 +66,8 @@ class Effect {
         this.output = output;
         this.wet = this.audioctx.createGain();
         this.wet.gain.value = 0.8;
+        this.#on = false;
+        this.state = {};
         
     }
 
@@ -59,6 +77,7 @@ class Effect {
      * @method disapply
      */
     disapply(){
+        this.#on = false;
         this.wet.disconnect(this.output)
     }
     
@@ -69,13 +88,22 @@ class Effect {
      * @method apply
      */
     apply(){
+        this.#on = true;
         this.input.connect(this.effect)
         this.wet.connect(this.output);
         
-
-        
-        
     }
+
+    /**
+     * Devuelve el estado en la variable state
+     * 
+     * @method getState
+     */
+    getState(){
+        this.state['on'] = this.#on;
+        this.state['wet'] = this.wet.gain.value;
+    }
+
     /**
      * Setter de la cantidad de efecto aplicada
      * 
@@ -86,6 +114,8 @@ class Effect {
         
         this.wet.gain.value = val/100;
     }
+
+    
 
 }
 

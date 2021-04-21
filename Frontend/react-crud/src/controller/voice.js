@@ -143,6 +143,27 @@ class Voice {
         this.envelopeGeneratorOn(key,gain)
     }
 
+    //GETTERS
+
+    /** 
+     * Getter de los parámetros de la envolvente
+     * 
+     * @method getEnvolve
+     * @return JSON
+     * 
+     */
+    getEnvelope(){
+        return this.#envelope;
+    }
+
+    /**
+     * Getter del tipo de onda de los oscilladores de las voces
+     * 
+     * @returns String
+     */
+    getType(){
+        return this.#type;
+    }
     /**
      * Setter del volumen
      * 

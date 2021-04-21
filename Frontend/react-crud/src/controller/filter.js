@@ -81,16 +81,7 @@ class Filter extends Effect{
         this.effect.connect(output);
     }
 
-    /**
-     * Setter de la frecuencia del filtro
-     * 
-     * @method setFrecuency
-     * @param {Float} val 
-     */
-    setFrecuency(val){
-        this.effect.frequency.value = val;
-    }
-
+    
     /**
      * Método que inicializa las frecuencias en función del 
      * tipo de filtro
@@ -126,6 +117,45 @@ class Filter extends Effect{
                 break;
         }
     }
+
+    /************ GETTERS **************/
+
+    /**
+     * Devuelve la frecuencia de inicia de actuación del filtr
+     * 
+     * @method getFrecuency
+     * @returns Float
+     */
+    getFrecuency(){
+        return  this.effect.frequency.value;
+    }
+    
+    /**
+     * Getter del estado del efecto
+     * 
+     * @method getState
+     * @returns JSON
+     */
+    getState(){
+        super.getState();
+        this.state['type'] = this.effect.type;
+        this.state ['frequency'] = this.effect.frequency.value;
+
+        return this.state;
+    }
+    
+    /************ SETTERS **************/
+
+    /**
+     * Setter de la frecuencia del filtro
+     * 
+     * @method setFrecuency
+     * @param {Float} val 
+     */
+     setFrecuency(val){
+        this.effect.frequency.value = val;
+    }
+
 
     /**
      * Setter del tipo de filtro

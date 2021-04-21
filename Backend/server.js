@@ -42,6 +42,14 @@ app.get("/notes", (req, res) => {
 
 }) 
 
+app.post("/save/:id" , (req, res) => {
+    if(req.header('Content-Type') === 'application/json'){
+        //console.log('AQUI: ' + req.params.id);
+        dbController.saveState(req,res);
+    }
+    
+})
+
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

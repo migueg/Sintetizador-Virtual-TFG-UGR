@@ -12,12 +12,21 @@ import Effect from './effect';
  * @see Effect
  */
 
+/**
+ * Cantidad de distorsion
+ * 
+ * @property amount
+ * @type Float
+ * @private
+ */
 class Distorsion extends Effect{
+    #amount
     constructor(context,input,output){
         super(context,input,output);
         this.effect = this.audioctx.createWaveShaper();
         this.effect.oversample = '4x';
-        this.effect.curve = this.makeDistortionCurve(400);
+        this.#amount = 400;
+        this.effect.curve = this.makeDistortionCurve(this.#amount);
     }
 
     /**
@@ -50,6 +59,7 @@ class Distorsion extends Effect{
      * @param {Float} amount Cantidad de distorsion 
      */
      setDistorsionCurve(amount){
+        
          this.effect.curve = this.makeDistortionCurve(amount);
      }
 
@@ -61,6 +71,19 @@ class Distorsion extends Effect{
          super.apply();
          this.effect.connect(this.wet)
      }
+
+    /**
+     * Getter del estado del efecto
+     * 
+     * @method getState
+     * @returns JSON
+     */
+    getState(){
+      super.getState();
+      this.state['amount'] =  this.#amount;
+
+      return this.state;
+    }
 }
 
 /**
