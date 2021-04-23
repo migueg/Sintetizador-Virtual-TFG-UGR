@@ -2,6 +2,9 @@ import  React from 'react';
 import {Knob} from './elements/limitedKnob';
 import {types as knobTypes} from './elements/knobtypes';
 import {Container,Row,Col } from 'react-bootstrap';
+import Modal from './elements/modal';
+import * as $ from 'jquery';
+
 
 import disquete from '../img/disquete.png'
 import 'bootstrap/dist/css/bootstrap.css';
@@ -16,6 +19,12 @@ class Header extends React.Component{
    
         this.showOsc = this.showOsc.bind(this)
         this.showFX = this.showFX.bind(this)
+    }
+   
+    showModal(){
+        document.getElementById("backdrop").style.display = "block"
+        document.getElementById("save").style.display = "block"
+        document.getElementById("save").className += "show"
     }
     showOsc(){
        this.props.showOsc()
@@ -33,7 +42,9 @@ class Header extends React.Component{
                     </Col>
                    
                     <Col>
-                        <img  onClick={()=>sinte.save()} src={disquete} style={{width: 50, float: 'right' , marginTop: '2%'}}></img>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+                        <img  onClick={()=>this.showModal()} src={disquete} style={{width: 50, float: 'right' , marginTop: '2%'}}></img>
+                        <Modal type='save' />
                     </Col>
                     <Col>
                         <div className="LoadedSound" >
