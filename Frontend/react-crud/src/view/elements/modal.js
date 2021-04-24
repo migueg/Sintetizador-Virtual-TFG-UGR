@@ -5,11 +5,22 @@ import { sinte } from '../osc-components';
 
 class Modal extends React.Component{
     #type
+    #categories
+
     constructor(props){
         super();
         this.#type = props.type;
+        if(this.#type === 'save'){
+            this.#categories= this.__fetchCategories();
+           
+        }
     }
 
+    __fetchCategories(){
+        
+        return sinte.fetchThings('categories');
+        
+    }
     hideModal(){
         document.getElementById('recipient-name').value = ""
         document.getElementById("backdrop").style.display = "none"

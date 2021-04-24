@@ -1,11 +1,18 @@
 const mongoose = require('mongoose');
 
+const category = new mongoose.Schema({
+    category: {type: String, enum: ['PAD','BELL','LEAD','PLUCK','KEYS','BASS','PERCUSION']}
+});
+
+const categoryModel = mongoose.model('category',category);
+
 const envelope = new mongoose.Schema({
     attack: {type: Number},
     decay: {type: Number},
     sustain: {type: Number},
     release: {type: Number}
 });
+
 const envelopeModel =  mongoose.model('envelope',envelope);
 
 const oscillator = new mongoose.Schema({
@@ -51,6 +58,10 @@ const reverb = new mongoose.Schema({
 const reverbModel =  mongoose.model('reverb',reverb);
 
 const stateSchema = new mongoose.Schema({
+    name: {type: String},
+    userID: {type: String},
+    description: {type: String},
+    category: category,
     oscA: oscillator,
     oscB: oscillator,
     delay: delay,
@@ -68,5 +79,6 @@ module.exports = {
     reverbModel,
     delayModel,
     distorsionModel,
-    filterModel
+    filterModel,
+    categoryModel
 }

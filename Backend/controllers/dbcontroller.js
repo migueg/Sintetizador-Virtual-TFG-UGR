@@ -1,6 +1,8 @@
 const Notes = require ('../models/notes');
+const categories = require('../data/categories');
 const notesMap  = require('../data/notes');
 const statesModels = require('../models/states');
+
 
 
  async function createNotes(req,res){
@@ -18,12 +20,14 @@ const statesModels = require('../models/states');
                         console.error(err)
                         return({error: err} );
                     }else{
-                        res.status(201);
+                        res.status('201');
+                        res.setHeader('Content-type','application/json');
                         res.send({message: "Notas insertadas"});
                     }
                 })
             }else{
-                res.status(304); //Not modified
+                res.status('200'); //Not modified
+                res.setHeader('Content-type','application/json');
                 res.send({message: "ya existen notas en la base de datos"})
                
             }
@@ -32,7 +36,61 @@ const statesModels = require('../models/states');
     })
 }   
 
+async function createCategories(req,res){
+    statesModels.categoryModel.find({category: 'PAD'},function(err,docs){
+        if(err){
+            console.error(err);
+            res.status('500');
+            res.send({msg: err});
+        }else{
+            if(docs.length === 0){
+                statesModels.categoryModel.collection.insertOne(categories,function(err,docs){
+                    if(err){
+                        console.error(err);
+                        res.status('500');
+                        res.setHeader('Content-type','application/json');
+                        res.send({msg: err});
+                    }else{
+                        res.status('201');
+                        res.setHeader('Content-type','application/json');
+                        res.send({msg: 'Categorías creadas con éxito'});
+                    }
+                })
+            }else{
+                res.status('200');
+                res.setHeader('Content-type','application/json');
+                res.send({msg: 'Las categorías estaban ya creadas'});
+            }
+        }
+    });
+}
 
+async function getCategories(req,res){
+    var cts ;
+    await statesModels.categoryModel.find({},function(err,docs){
+        if(err){
+            res.status('500');
+            res.setHeader('Content-type','application/json');
+            res.send({msg: 'Error en BD'});
+            
+        }else{
+            cts = docs;
+        }
+    });
+    
+    if(cts){
+        var cArray = [];
+
+        (await cts).forEach(function(category){
+            cArray.push(category.category);
+        });
+        
+        res.status('200');
+        res.setHeader('Content-type','application/json');
+        res.send({categories: cArray});
+    }
+    
+}
 async function getNotes(req,res){
     var notes = Notes.find();
     var noteMap = {};
@@ -43,6 +101,7 @@ async function getNotes(req,res){
     })
     var response = {notes: [ noteMap ]}
     res.status(200);
+    res.setHeader('Content-type','application/json');
     res.send(response);
     
 }
@@ -139,19 +198,26 @@ function saveState(req,res){
          var success = saveStateInBD(state);
 
          if(success){
-             res.status(201) // created;
+             res.status('201') // created;
+             res.setHeader('Content-type','application/json');
              res.send({msg: 'Sonido almacenado con exito'});
          }else{
-             res.status(500) // server errors
+             res.status('500') // server errors
+             res.setHeader('Content-type','application/json');
              res.send({msg: 'Error al guardar el sonido en BD'});
          }
          
     }else{
-        console.log('error');
+        console.log('ERROR INTERNO DEL SERVIDOR');
+        res.status('500');
+        res.setHeader('Content-type','application/json');
+        res.send({'msg':'ERROR INTERNO DEL SERVIDOR'});
     }
 }
 module.exports = {
     createNotes,
+    getCategories,
     getNotes,
-    saveState
+    saveState,
+    createCategories
 }

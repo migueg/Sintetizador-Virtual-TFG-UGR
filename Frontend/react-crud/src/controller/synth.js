@@ -4,6 +4,7 @@ import {Delay} from './delay';
 import {Filter} from './filter';
 import {Distorsion} from './distorsion';
 import Saver from './saver';
+import Loader from './loader';
 
 /**
  * Clase Fachada del controlador que se comunica con los elementos de la vista.
@@ -86,13 +87,22 @@ import Saver from './saver';
  */
 
 /**
- *  Objeto que se va a enca
+ *  Objeto que se va a encargar de enviar peticiones 
+ *  a BD para almacenar objetos
  * 
  * @property saver
  * @type Saver
  * @private
  */
 
+/**
+ *  Objeto que se va a encargar de enviar peticiones 
+ *  GET a BD para obtener objetos
+ * 
+ * @property loader
+ * @type Loader
+ * @private
+ */
 
 
 class Synth{
@@ -122,6 +132,7 @@ class Synth{
         
         //Cargador y salvador
         this.#saver = new Saver(this.#oscillatorA,this.#oscillatorB,this);
+        this.#loader = new Loader();
 
         //Efectos
         this.#reverb = new Reverb(this.#audioCtx,this.#gainCleanNode,this.#masterVolumeNode);
@@ -186,6 +197,27 @@ class Synth{
                 this.#distorsion.disapply();
                 
             default:
+                break;
+        }
+    }
+
+    /**
+     * Método que se encarga de comunicar al cargargador que se 
+     * requiere obtener información de la BD
+     * 
+     * @method fetchThings
+     * @param {String} thing Información que se quiere obtener
+     * @return JSON 
+     */
+    fetchThings(thing){
+        var data;
+
+        switch(thing){
+            case 'categories':
+                data = this.#loader.fetchCategories();
+                return data;
+            default:
+                console.error('Tipo incompatible');
                 break;
         }
     }
@@ -258,6 +290,7 @@ class Synth{
                 break;
         }
     }
+
 
     /**
      * Método que se encarga de llamar al saver para que mande el estado actual

@@ -30,12 +30,21 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to Server." });
 });
 
+app.get("/createCategories", (req,res) =>{
+  dbController.createCategories(req,res);
+  
+})
 
 app.get("/createNotes", (req,res) =>{
   dbController.createNotes(req,res);
   
+})
+
+app.get("/categories", (req,res) =>{
+  dbController.getCategories(req,res);
   
 })
+
 app.get("/notes", (req, res) => {
    
   dbController.getNotes(req,res)
