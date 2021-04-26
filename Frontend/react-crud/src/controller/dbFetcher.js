@@ -1,9 +1,9 @@
 class DbFetcher {
     constructor(){
         this.codes = {
-            created: '201',
-            ok: '200',
-            error: '500'
+            created: 201,
+            ok: 200,
+            error: 500
         }
     }
 

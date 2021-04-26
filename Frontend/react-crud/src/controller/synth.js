@@ -206,15 +206,17 @@ class Synth{
      * requiere obtener información de la BD
      * 
      * @method fetchThings
+     * @async
      * @param {String} thing Información que se quiere obtener
      * @return JSON 
      */
-    fetchThings(thing){
+    async fetchThings(thing){
         var data;
 
         switch(thing){
             case 'categories':
-                data = this.#loader.fetchCategories();
+                data =  await this.#loader.fetchCategories();
+                console.log('SYTH: ' +data)
                 return data;
             default:
                 console.error('Tipo incompatible');

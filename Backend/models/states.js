@@ -61,6 +61,7 @@ const stateSchema = new mongoose.Schema({
     name: {type: String},
     userID: {type: String},
     description: {type: String},
+    value: {type: Number},
     category: category,
     oscA: oscillator,
     oscB: oscillator,
