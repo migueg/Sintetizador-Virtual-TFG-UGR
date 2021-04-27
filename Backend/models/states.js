@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const category = new mongoose.Schema({
-    category: {type: String, enum: ['PAD','BELL','LEAD','PLUCK','KEYS','BASS','PERCUSION']}
+    category: {type: String, enum: ["PAD","BELL","LEAD","PLUCK","KEYS","BASS","PERCUSION"]}
 });
 
 const categoryModel = mongoose.model('category',category);

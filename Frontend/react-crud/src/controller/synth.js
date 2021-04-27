@@ -216,7 +216,6 @@ class Synth{
         switch(thing){
             case 'categories':
                 data =  await this.#loader.fetchCategories();
-                console.log('SYTH: ' +data)
                 return data;
             default:
                 console.error('Tipo incompatible');
@@ -299,9 +298,12 @@ class Synth{
      * del sintetizador a la base de datos para su almacenamiento
      *  
      * @method save
+     * @async
+     * @param {JSON} data Metadatos del sonido
      */
-    save(){
-        this.#saver.save();
+    async save(data){
+        const resp = await this.#saver.save(data)
+        return resp;
     }
 
     /******* GETTERS *********/
@@ -338,6 +340,22 @@ class Synth{
             return this.#oscillatorB.getVolum();
         }
 
+    }
+    /**
+     * Getter de la disponibilidad de los osciladores
+     * 
+     * @method getAvailable
+     * @param {Char} osc Id del oscilador
+     * @returns Boolean
+     */
+    getAvailable(osc){
+        if(osc === 'A'){
+            return this.#oscillatorA.getAvailable();
+        }
+
+        if(osc === 'B'){
+            return this.#oscillatorB.getAvailable();
+        }
     }
 
     /******* SETTERS *********/

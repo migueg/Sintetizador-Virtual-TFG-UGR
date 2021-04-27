@@ -5,6 +5,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
+
 const dbController = require("./controllers/dbcontroller");
 
 const app = express();
@@ -59,6 +60,9 @@ app.post("/save/:id" , (req, res) => {
     
 })
 
+app.get("/getStates/id", (req,res) => {
+  
+})
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

@@ -1,5 +1,6 @@
 class DbFetcher {
     constructor(){
+        this.data = null;
         this.codes = {
             created: 201,
             ok: 200,

@@ -1,24 +1,24 @@
 
 module.exports = [
     {
-        category: 'PAD'
+        category: "PAD"
     },
     {
-        category: 'BELL'
+        category: "BELL"
     },
     {
-        category: 'LEAD'
+        category: "LEAD"
     },
     {
-        category: 'PLUCK'
+        category: "PLUCK"
     },
     {
-        category: 'KEYS'
+        category: "KEYS"
     },
     {
-        category: 'BASS'
+        category: "BASS"
     },
     {
-        category: 'PERCUSION'
+        category: "PERCUSION"
     }
 ]

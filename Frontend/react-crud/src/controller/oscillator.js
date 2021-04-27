@@ -139,11 +139,31 @@ class oscillator  {
  }
 
  //GETTERS
-
+ /**
+  * Getter de la disponibilidad del oscilador
+  * 
+  * @method getAvailable
+  * @returns Boolean
+  */
+  getAvailable(){
+     return this.#available;
+  }
+  /**
+   * Getter de la envolvente
+   * 
+   * @method getEnvelope
+   * @returns JSON
+   */
   getEnvelope(){
      return this.voice.getEnvelope();
   }
 
+  /**
+   * Getter del estado
+   * 
+   * @method getState
+   * @returns JSON
+   */
   getState(){
      var state = {};
 

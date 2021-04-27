@@ -1,9 +1,12 @@
 import  React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import { sinte } from '../osc-components';
+import success from '../../img/success.png';
+import failure from '../../img/failure.png';
+
 import Rating from './rating';
 import $ from 'jquery';
-
+import '../../css/loader.css'
 class Modal extends React.Component{
     
       constructor(props){
@@ -19,28 +22,71 @@ class Modal extends React.Component{
     async componentDidMount(){
            const resp = await sinte.fetchThings('categories');
            this.setState({data: resp})
-       
-       
     }  
      
     getRating = (data)=> {
         this.state.valoration = data;
     }
 
+    __checkOscillators(){
+        var state = this.props.parentCallback();
+        if(state.A){
+            sinte.onOscillator('A');
+        }
+        if(state.B){
+            sinte.onOscillator('B');
+        }
+
+    }
     hideModal(){
-        document.getElementById('recipient-name').value = ""
+        this.__checkOscillators();
+        $('#save-buttom').removeAttr("disabled");
+        document.getElementById('md-body').style.display = 'block';
+        document.getElementById('success').style.display = 'none';
+        document.getElementById('failure').style.display = 'none';
+        document.getElementById('recipient-name').value = "";
+        document.getElementById('recipient-description').value = ""
         document.getElementById("backdrop").style.display = "none"
         document.getElementById("save").style.display = "none"
         document.getElementById('span-name').style.display= 'none';
         //document.getElementById("save").classNameName += document.getElementById("save").classNameName.replace("show", "")
     }
+    __showLoader(){
+        document.getElementById('md-body').style.display = 'none';
+        document.getElementById('loader').style.display = 'block';
+        $('#save-buttom').attr('disabled',true);
+    }
     
-    save(){
+    __handleResponse(resp){
+        document.getElementById('loader').style.display = 'none';
+        if(resp.state){
+            document.getElementById('success').style.display = 'block';
+            document.getElementById('text-success').innerText = '¡ '+ resp.msg + '!';
+        }else{
+            document.getElementById('failure').style.display = 'block';
+            document.getElementById('text-failure').innerText = 'Vaya...., tenemos problemas. No es posible guadar el sonido. Intentalo más tarde';
+        }
+    }
+    async __saveInBD(data){
+        const resp = await sinte.save(data);
+        return resp;
+    }
+    async save(){
         var name = document.getElementById('recipient-name').value
         if(name){
             var desc = document.getElementById('recipient-description').value
             var category = $('#select option:selected').text();
-            console.log(category)
+            var toSave = {
+                name: name,
+                description: desc,
+                category: category,
+                valoration: this.state.valoration 
+            }
+
+            this.__showLoader();
+            var resp = await this.__saveInBD(toSave);
+            this.__handleResponse(resp)
+            
         }else{
             document.getElementById('span-name').style.display= 'block';
         }
@@ -57,7 +103,7 @@ class Modal extends React.Component{
                             <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div className="modal-body">
+                        <div className="modal-body" id='md-body'>
                             <form>
                             <div className="form-group">
                                
@@ -66,10 +112,25 @@ class Modal extends React.Component{
                                 <input type="text" className="form-control" id="recipient-name"/>
                                 <label htmlFor="recipient-name" className="col-form-label">Selecciona una categoría:</label><br></br>
                                 <select className="form-select" id="select" aria-label="Category select">
-                                    {this.state.data.map(function(category,index){
-                                            return <option value={index}>{category}</option>
-                                        })
-                                        
+                                    { 
+                                        this.state.data ? (
+                                            this.state.data.map(function(category,index){
+                                            return <option key={index} value={index}>{category}</option>
+                                        })) :
+                                        (
+                                            
+                                            this.__showLoader()
+                                            
+                                            
+                                        )
+                                           
+                                    }
+                                    {
+                                        this.state.data ? (
+                                            console.log('')
+                                        ): (
+                                            this.__handleResponse(false)
+                                        )
                                     }
                                 </select>
                                 <br/>
@@ -78,11 +139,24 @@ class Modal extends React.Component{
                                 <label htmlFor="recipient-name" className="col-form-label">Valoración:</label>
                                 <Rating parentCallback={this.getRating}></Rating>
                             </div>
+
                             </form>
+                        </div>
+                        <div id='success' style={{display: 'none' , margin: 'auto', flex: 'auto', alignItems: 'center' , alignContent: 'center' }}>
+                            <img src={success} style={{width: 60 , marginLeft: '30%', marginTop: '5%', marginBottom: '5%'}}/>
+                            <p id='text-success'></p>
+                        </div>
+                        <div id='failure' style={{display: 'none' , margin: 'auto', flex: 'auto', alignItems: 'center' , alignContent: 'center' }}>
+                        <img src={failure} style={{width: 100 , marginLeft: '30%', marginTop: '5%', marginBottom: '5%'}}/>
+                            <p id='text-failure' style={{marginLeft: '5%'}}></p>
+                        </div>
+                        <div id='loader' style={{display: 'none'}}>
+                            <label style={{marginLeft: '3%'}}htmlFor="recipient-name" className="col-form-label">Guardando...</label>
+                            <div className="loader" id='loader' > </div>
                         </div>
                         <div className="modal-footer">
                             <button type="button" onClick={()=>this.hideModal()} className="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <button type="button" onClick={()=> this.save()} className="btn btn-success">Guardar</button>
+                            <button type="button" id='save-buttom' onClick={()=> this.save()} className="btn btn-success">Guardar</button>
                         </div>
                         </div>
                     </div>

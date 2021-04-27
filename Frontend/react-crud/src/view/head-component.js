@@ -3,7 +3,7 @@ import {Knob} from './elements/limitedKnob';
 import {types as knobTypes} from './elements/knobtypes';
 import {Container,Row,Col } from 'react-bootstrap';
 import Modal from './elements/modal';
-import * as $ from 'jquery';
+
 
 
 import disquete from '../img/disquete.png'
@@ -16,15 +16,39 @@ class Header extends React.Component{
     constructor(props){
         super();
         this.props = props;
-   
+        
+        this.state = {
+            A: false,
+            B: false
+        }
         this.showOsc = this.showOsc.bind(this)
         this.showFX = this.showFX.bind(this)
     }
-   
+    
+    checkOscillators(){
+        this.state.A = this.getAvailable('A');
+        this.state.B = this.getAvailable('B');
+        if(this.state.A){
+            sinte.offOscillator('A');
+        }
+
+        if(this.state.B){
+            sinte.offOscillator('B');
+        }
+    }
     showModal(){
+        this.checkOscillators();
         document.getElementById("backdrop").style.display = "block"
         document.getElementById("save").style.display = "block"
         document.getElementById("save").className += "show"
+    }
+
+    getState = ()=>{
+        return this.state
+    }
+
+    getAvailable = (osc)=>{
+        return sinte.getAvailable(osc)
     }
     showOsc(){
        this.props.showOsc()
@@ -44,7 +68,7 @@ class Header extends React.Component{
                     <Col>
                         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
                         <img  onClick={()=>this.showModal()} src={disquete} style={{width: 50, float: 'right' , marginTop: '2%'}}></img>
-                        <Modal type='save' />
+                        <Modal parentCallback={this.getState} type='save' />
                     </Col>
                     <Col>
                         <div className="LoadedSound" >

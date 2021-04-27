@@ -2,7 +2,8 @@ const Notes = require ('../models/notes');
 const categories = require('../data/categories');
 const notesMap  = require('../data/notes');
 const statesModels = require('../models/states');
-
+const { response } = require('express');
+const bson = new (require('bson'))();
 
 
  async function createNotes(req,res){
@@ -44,7 +45,7 @@ async function createCategories(req,res){
             res.send({msg: err});
         }else{
             if(docs.length === 0){
-                statesModels.categoryModel.collection.insertOne(categories,function(err,docs){
+                statesModels.categoryModel.collection.insertMany(categories,function(err,docs){
                     if(err){
                         console.error(err);
                         res.status('500');
@@ -125,20 +126,40 @@ function createOscillator(osc,en,id){
      return oscillator;
 }
 
-async function saveStateInBD(state){
-    var saved = false;
-    await state.save(function(err){
+ async function checkSpace(id){
+    var response;
+    await statesModels.stateModel.find({userID: id}, function(err,docs){
         if(err){
-            console.error("Error al insertar en BD");
+            console.error(err)
         }else{
-            saved = true;
+            response = bson.calculateObjectSize(docs)  //Devuelve el tamaño en bytes
         }
-    });
+    })
 
-    return saved;
+    
+    console.log(response)
+}
+async function saveStateInBD(state,res){
+    var saved = false;
+    
+    
+        const resp = await state.save( function(err){
+            if(err){
+                res.status('500') // server errors
+                res.setHeader('Content-type','application/json');
+                res.send({msg: 'Error al guardar el sonido en BD'});
+            }else{
+                checkSpace(state.userID)
+                res.status('201') // created;
+                res.setHeader('Content-type','application/json');
+                res.send({msg: 'Sonido almacenado con exito'});
+                console.log('Nuevo sonido almacenado para: ' + state.userID)
+            }
+        })
+    
 }
 
-function saveState(req,res){
+async function saveState(req,res){
     
     if(req.header('Authorization') === 'Migue'){
         var bodyState = req.body.state;
@@ -146,7 +167,8 @@ function saveState(req,res){
         var enA = oscA.envelope;
         var oscB = bodyState.B;
         var enB= oscB.envelope;
-        
+        var data = req.body.data;
+
         var del = bodyState.effects.delay;
         var dis = bodyState.effects.distorsion;
         var fil = bodyState.effects.filter;
@@ -185,8 +207,16 @@ function saveState(req,res){
             lp: rev.lp,
             decay: rev.decay
         });
-
+        var category = {
+            category: data.category
+        }
+    
         const state = new statesModels.stateModel({
+             name: data.name,
+             userID: req.header('Authorization'),
+             description: data.description,
+             category: category,
+             value: data.valoration,
              oscA: oscillatorA,
              oscB: oscillatorB,
              delay: delay,
@@ -195,17 +225,7 @@ function saveState(req,res){
              reverb: reverb   
          });
 
-         var success = saveStateInBD(state);
-
-         if(success){
-             res.status('201') // created;
-             res.setHeader('Content-type','application/json');
-             res.send({msg: 'Sonido almacenado con exito'});
-         }else{
-             res.status('500') // server errors
-             res.setHeader('Content-type','application/json');
-             res.send({msg: 'Error al guardar el sonido en BD'});
-         }
+         await saveStateInBD(state,res);
          
     }else{
         console.log('ERROR INTERNO DEL SERVIDOR');

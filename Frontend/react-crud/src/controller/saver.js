@@ -1,5 +1,5 @@
-
-class Saver {
+import DbFetcher from './dbFetcher';
+class Saver extends DbFetcher {
     #envelopes
     #oscilators
     #synth;
@@ -8,6 +8,7 @@ class Saver {
     #oscillatorB
 
     constructor(oscA,oscB,synth){
+        super();
         this.#envelopes = {};
         this.#oscilators = {};
         this.#effects = {};
@@ -39,7 +40,7 @@ class Saver {
         this.#oscilators['effects'] = this.#synth.getEffects();
     }
 
-    __sendRequest(toSave){
+    async __sendRequest(toSave){
         const requestOptions = {
             method: 'POST',
             headers: {
@@ -50,18 +51,51 @@ class Saver {
             body: JSON.stringify(toSave)
         };
 
-        fetch('http://localhost:8080/save/Migue',requestOptions)
-            .then(response => response.json())
-            .then(data => console.log(data));
+        var that = this;
+        try{
+            const resp =  await fetch('http://localhost:8080/save/Migue',requestOptions)
+            .then(function(response){
+                var status = that.handleStatus(response.status);
+                if(status){
+                    return response.json();
+                }else{
+                    return false
+                }
+            })
+            .then((data) =>{
+                if(data){
+                    that.data = {
+                        state: true,
+                        msg: data.msg
+                    }
+                }else{
+                    that.data = {
+                        state: false,
+                        msg: data.msg
+                    }
+                }
+            });
+        }catch(err){
+            that.data = {
+                state: false,
+                msg: err
+            };
+            console.error(err);
+        }
+    
+        
     }
-    save(){
+    async save(data){
         this.__getOscillators();
         this.__getEffects();
-
+    
         var toSave = {};
+        toSave['data'] = data
         toSave['state'] = this.#oscilators;
-        console.log(toSave)
-        this.__sendRequest(toSave);
+        
+        await this.__sendRequest(toSave);
+        
+        return this.data
     }
 }
 

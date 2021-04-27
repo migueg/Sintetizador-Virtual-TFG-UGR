@@ -2,7 +2,6 @@
 import DbFetcher from './dbFetcher'
 class Loader extends DbFetcher {
     #method
-    #data
     constructor(){
         super()
         this.#method = 'GET'
@@ -33,19 +32,19 @@ class Loader extends DbFetcher {
             })
             .then((data)=>{
                 if(data){
-                    that.#data = data.categories;
+                    that.data = data.categories;
                 }else{
-                    that.#data = data;
+                    that.data = data;
                 }
                 
             });
             
         }catch(err){
-            that.#data = false;
+            that.data = false;
             console.error(err)
         }
         
-       return this.#data
+       return this.data
     }
 
   
