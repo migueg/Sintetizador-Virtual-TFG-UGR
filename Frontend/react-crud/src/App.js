@@ -7,6 +7,7 @@ import OscComponents from './view/osc-components'
 import Header from './view/head-component';
 import Piano from './view/piano-component'
 import FX from './view/fx-components';
+import Libary from './view/library-components';
 
 /**
  * Es la clase principal que contiene todos los componentes organizados
@@ -21,9 +22,11 @@ class App extends React.Component{
     super()
     this.showFX = this.showFX.bind(this)
     this.showOsc = this.showOsc.bind(this)
+    this.showLb = this.showLb.bind(this)
   }
   
   __isOff(element){
+    console.log('AQUI')
     var off = false;
     var values= document.getElementById(element).classList.values();
     for (var v of values){
@@ -34,21 +37,58 @@ class App extends React.Component{
   }
   showFX(){
     
-    var off = this.__isOff('fx');
-    if(off){
+    var offlb = this.__isOff('lb');
+    var offosc = this.__isOff('osc');
+    var offfx = this.__isOff('fx');
+
+    if(offfx){
       document.getElementById('fx').classList.remove('off');
-      document.getElementById('osc').classList.toggle('off');
+      if(!offosc){
+        document.getElementById('osc').classList.toggle('off');
+      }
+
+      if(!offlb){
+        document.getElementById('lb').classList.toggle('off');
+
+      }
     }
     
   }
   showOsc(){
-    var off = this.__isOff('osc');
-    if(off){
+    var offlb = this.__isOff('lb');
+    var offosc = this.__isOff('osc');
+    var offfx = this.__isOff('fx');
+
+    if(offosc){
       document.getElementById('osc').classList.remove('off');
-      document.getElementById('fx').classList.toggle('off');
-    } 
+      if(!offlb){
+        document.getElementById('lb').classList.toggle('off');
+      }
+
+      if(!offfx){
+        document.getElementById('fx').classList.toggle('off');
+
+      }
+    }
   }
   
+  showLb(){
+    var offlb = this.__isOff('lb');
+    var offosc = this.__isOff('osc');
+    var offfx = this.__isOff('fx');
+
+    if(offlb){
+      document.getElementById('lb').classList.remove('off');
+      if(!offosc){
+        document.getElementById('osc').classList.toggle('off');
+      }
+
+      if(!offfx){
+        document.getElementById('fx').classList.toggle('off');
+
+      }
+    }
+  }
   render(){
 
   
@@ -61,7 +101,7 @@ class App extends React.Component{
         <div>
             <Nav />
             <div className="header">
-              <Header showFX={this.showFX} showOsc={this.showOsc} />
+              <Header showFX={this.showFX} showOsc={this.showOsc} showLb={this.showLb} />
             </div>
            
             <div className="oscillators" id="osc">
@@ -69,6 +109,9 @@ class App extends React.Component{
             </div>
             <div className="FX off" id="fx">
               <FX/>
+            </div>
+            <div className="LB off" id='lb'>
+              <Libary/>
             </div>
             <div className="piano">
               <Piano /> 

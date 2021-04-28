@@ -1,4 +1,4 @@
-.oscillators,.FX{
+.oscillators,.FX, .LB{
     background: rgb(82,66,80);
     background: radial-gradient(circle, rgb(224, 185, 219) 0%, rgb(211, 145, 145) 50%, rgb(155, 113, 113) 100%);
 }

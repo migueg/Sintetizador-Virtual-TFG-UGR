@@ -217,6 +217,9 @@ class Synth{
             case 'categories':
                 data =  await this.#loader.fetchCategories();
                 return data;
+            case 'metadata':
+                data = await this.#loader.fetchStatesMetadata();
+                return data;
             default:
                 console.error('Tipo incompatible');
                 break;

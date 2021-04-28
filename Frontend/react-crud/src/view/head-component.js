@@ -23,6 +23,7 @@ class Header extends React.Component{
         }
         this.showOsc = this.showOsc.bind(this)
         this.showFX = this.showFX.bind(this)
+    
     }
     
     checkOscillators(){
@@ -56,6 +57,9 @@ class Header extends React.Component{
     showFX(){
         this.props.showFX()
     }
+    showLb(){
+        this.props.showLb()
+    }
     render(){
         return(
             <Container>
@@ -63,6 +67,7 @@ class Header extends React.Component{
                     <Col>
                     <button  onClick={()=>this.showOsc()}>Oscs</button>
                     <button  onClick={()=>this.showFX()}>FX</button>
+                    <button  onClick={()=>this.showLb()}>Biblioteca</button>
                     </Col>
                    
                     <Col>

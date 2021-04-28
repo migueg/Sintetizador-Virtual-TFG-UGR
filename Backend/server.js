@@ -52,6 +52,14 @@ app.get("/notes", (req, res) => {
 
 }) 
 
+app.get("/states", (req,res) => {
+    dbController.getStates(req,res);
+})
+
+app.get("/states/metadata", (req,res) => {
+  dbController.getStatesMetaData(req,res);
+})
+
 app.post("/save/:id" , (req, res) => {
     if(req.header('Content-Type') === 'application/json'){
         //console.log('AQUI: ' + req.params.id);
@@ -60,9 +68,7 @@ app.post("/save/:id" , (req, res) => {
     
 })
 
-app.get("/getStates/id", (req,res) => {
-  
-})
+
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
