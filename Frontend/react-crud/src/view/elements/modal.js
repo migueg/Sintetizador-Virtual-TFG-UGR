@@ -86,6 +86,7 @@ class Modal extends React.Component{
             this.__showLoader();
             var resp = await this.__saveInBD(toSave);
             this.__handleResponse(resp)
+            this.props.parentCallback2();
             
         }else{
             document.getElementById('span-name').style.display= 'block';
@@ -135,7 +136,7 @@ class Modal extends React.Component{
                                 </select>
                                 <br/>
                                 <label htmlFor="recipient-name" className="col-form-label">Añade una descripción corta(opcional):</label>
-                                <input type="text" className="form-control" id="recipient-description"/>
+                                <input type="text" className="form-control" maxLength='25' id="recipient-description"/>
                                 <label htmlFor="recipient-name" className="col-form-label">Valoración:</label>
                                 <Rating parentCallback={this.getRating}></Rating>
                             </div>

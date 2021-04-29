@@ -12,8 +12,13 @@ class Libary extends React.Component{
             charged: ''
             
         }
+        this.child = React.createRef();
+        this.updateTable = this.updateTable.bind(this);
     }
 
+    updateTable(){
+       this.child.current.updateTable();
+    }
     componentDidMount(){
     }
 
@@ -27,8 +32,8 @@ class Libary extends React.Component{
 
                 </Col>
             </Row>
-            <Row>
-                <Table/>
+            <Row style={{alignItems: 'center' ,alignContent:'center'}}>
+                <Table ref={this.child} />
             </Row>
         </Container>
         </div>

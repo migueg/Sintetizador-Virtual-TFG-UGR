@@ -25,25 +25,51 @@ const labels = {
   });
   
   export default function HoverRating(props) {
-    const [value, setValue] = React.useState(3);
+    var val 
+    var disabled = false
+    if(props.value){
+      val = props.value
+      disabled = true
+    }else{
+      val = 3
+    }
+    
+    const [value, setValue] = React.useState(val);
     const [hover, setHover] = React.useState(-1);
+    
     const classes = useStyles();
-  
-    return (
-      <div className={classes.root}>
-        <Rating
-          name="hover-feedback"
-          value={value}
-          precision={0.5}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-            props.parentCallback(newValue)
-          }}
-          onChangeActive={(event, newHover) => {
-            setHover(newHover);
-          }}
-        />
-        {value !== null && <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>}
-      </div>
-    );
+    
+    if(disabled){
+      return(
+        <div>
+      
+          <Box component="fieldset" mb={3} borderColor="transparent">
+            
+            <Rating name="read-only" value={value} readOnly />
+          </Box>
+      
+       </div>
+      )
+    }else{
+
+   
+     return (
+      
+        <div className={classes.root}>
+          <Rating
+            name={"hover-feedback"}
+            value={value}
+            precision={0.5}
+            onChange={(event, newValue) => {
+              setValue(newValue);
+              props.parentCallback(newValue)
+            }}
+            onChangeActive={(event, newHover) => {
+              setHover(newHover);
+            }}
+          />
+          {value !== null && <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>}
+        </div>
+      );
+  }
   }

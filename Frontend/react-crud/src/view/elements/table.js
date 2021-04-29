@@ -7,7 +7,14 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import Rating from './rating';
+import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@material-ui/core/IconButton';
 
+import {Row} from 'react-bootstrap'
+
+import filtrar from '../../img/filtrar.png'
+import search from '../../img/search.png'
 import {sinte} from '../osc-components';
 
 
@@ -20,17 +27,35 @@ class TableUI extends React.Component{
         }
        
     }
- 
-    
-    async componentDidMount(){
+   
+    async updateTable(){
         const metadata = await sinte.fetchThings('metadata')
         this.setState({metadata: metadata , data: true});
+       
+    }
+    async componentDidMount(){
         
+        await this.updateTable();
     }
 
     render(){
         return(
             <Paper className='soundTable' style={{width: '100%' , marginTop:'1%', marginBottom: '1%'}}>
+                <Row style={{width: '100%'}}>
+                    <div id='searchBar' style={{width: '100%'}}>
+                        <img src={search} style={{width: '5vh', marginLeft: '3%',  marginTop: '1%',float: 'left'}}></img>
+                        <input type="text" placeholder='Introduce tu búsqueda aqui' style={{float: 'left', marginLeft: '2%', marginTop: '2%', width: '75%'}}></input>
+                        
+                            <img src={filtrar} style={{width: '3vh'}}></img>
+                            <select className="form-select" aria-label="Default select example">
+                                
+                                <option value="1"></option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        
+                    </div>
+                </Row>
                 <TableContainer className='container' style={{height: '50vh'}}>
                 <Table stickyHeader aria-label="sticky table">
                 <TableHead>
@@ -68,51 +93,42 @@ class TableUI extends React.Component{
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    
-                    {
-                   
-                    console.log( this.state.metadata)}
                     {
                          this.state.data ? (
-                            
-                            this.state.metadata.forEach(row => {
-                                console.log(row.name);
+                        
+                            this.state.metadata.map((row) => {
+                              
                                 return (
-                                    <TableRow>
-                                            <TableCell
-                                            
-                                           
-                                            >
-                                            <p>HOLA</p>
+                                    <TableRow key={row.name}>
+                                        <TableCell>
+                                            <p>{row.name}</p>
                                         </TableCell>
                                         <TableCell
                                             key='description'
-                                            align= 'center'
-                                        
+                                            align='center'
+                                            style={{maxWidth: '5%'}}
                                         >
                                             <p>{row.description}</p>
                                         </TableCell>
                                         <TableCell
                                             key='category'
-                                            align= 'center'
-                                        
+                                            align='center'
                                         >
-                                            <p>{row.category}</p>
+                                            <p>{row.category.category}</p>
                                         </TableCell>
                                         <TableCell
                                             key='valoration'
-                                            align= 'center'
-                                        
+                                            align='right'
                                         >
-                                            <p>{row.vaLue}</p>
+                                            <Rating value={row.value}/>
                                         </TableCell>
-                       
                                     </TableRow>
                                 )
+                                
                             }
                         )
                         ): (
-                            console.log('ER')
+                            this.state.data
                         )
                     }
                    

@@ -23,10 +23,14 @@ class App extends React.Component{
     this.showFX = this.showFX.bind(this)
     this.showOsc = this.showOsc.bind(this)
     this.showLb = this.showLb.bind(this)
+    this.lb =  React.createRef();
+    this.updateTable = this.updateTable.bind(this)
   }
   
+  
+  
   __isOff(element){
-    console.log('AQUI')
+    
     var off = false;
     var values= document.getElementById(element).classList.values();
     for (var v of values){
@@ -89,6 +93,10 @@ class App extends React.Component{
       }
     }
   }
+
+  updateTable (){
+     this.lb.current.updateTable()
+  }
   render(){
 
   
@@ -101,7 +109,7 @@ class App extends React.Component{
         <div>
             <Nav />
             <div className="header">
-              <Header showFX={this.showFX} showOsc={this.showOsc} showLb={this.showLb} />
+              <Header showFX={this.showFX} parentCallback={this.updateTable} showOsc={this.showOsc} showLb={this.showLb} />
             </div>
            
             <div className="oscillators" id="osc">
@@ -111,7 +119,7 @@ class App extends React.Component{
               <FX/>
             </div>
             <div className="LB off" id='lb'>
-              <Libary/>
+              <Libary ref={this.lb}/>
             </div>
             <div className="piano">
               <Piano /> 
