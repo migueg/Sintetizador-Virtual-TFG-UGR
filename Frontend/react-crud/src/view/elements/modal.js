@@ -24,7 +24,8 @@ class Modal extends React.Component{
            this.setState({data: resp})
     }  
      
-    getRating = (data)=> {
+    setRating = (data)=> {
+        console.log('AQUI')
         this.state.valoration = data;
     }
 
@@ -138,7 +139,7 @@ class Modal extends React.Component{
                                 <label htmlFor="recipient-name" className="col-form-label">Añade una descripción corta(opcional):</label>
                                 <input type="text" className="form-control" maxLength='25' id="recipient-description"/>
                                 <label htmlFor="recipient-name" className="col-form-label">Valoración:</label>
-                                <Rating parentCallback={this.getRating}></Rating>
+                                <Rating parentCallback={this.setRating}></Rating>
                             </div>
 
                             </form>
