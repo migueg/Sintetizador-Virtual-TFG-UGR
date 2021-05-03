@@ -16,3 +16,10 @@
 .off{
     display: none;
 }
+
+p,label, h1,h2,h3,h4{
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size: large;
+    font-weight: 600;
+    font-size-adjust: inherit;
+}

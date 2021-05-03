@@ -25,14 +25,14 @@ class Libary extends React.Component{
     render(){
         return(
         <div  className="LB">
-        <Container >
+        <Container fluid>
             <Row>
                 <Col style={{textAlign: 'center'}}>
                     <h3>Biblioteca de sonidos</h3>
 
                 </Col>
             </Row>
-            <Row style={{alignItems: 'center' ,alignContent:'center'}}>
+            <Row style={{width: '90%', marginLeft: '5%', alignItems: 'center' ,alignContent:'center'}}>
                 <Table ref={this.child} />
             </Row>
         </Container>

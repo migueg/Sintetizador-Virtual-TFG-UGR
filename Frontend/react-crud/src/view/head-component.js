@@ -2,7 +2,7 @@ import  React from 'react';
 import {Knob} from './elements/limitedKnob';
 import {types as knobTypes} from './elements/knobtypes';
 import {Container,Row,Col } from 'react-bootstrap';
-import Modal from './elements/modal';
+import ModalSave from './elements/modals/modal-save';
 
 
 
@@ -40,8 +40,8 @@ class Header extends React.Component{
     showModal(){
         this.checkOscillators();
         document.getElementById("backdrop").style.display = "block"
-        document.getElementById("save").style.display = "block"
-        document.getElementById("save").className += "show"
+        document.getElementById("modal").style.display = "block"
+        document.getElementById("modal").className += "show"
     }
 
     getState = ()=>{
@@ -76,7 +76,7 @@ class Header extends React.Component{
                     <Col>
                         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
                         <img  onClick={()=>this.showModal()} src={disquete} style={{width: 50, float: 'right' , marginTop: '2%'}}></img>
-                        <Modal parentCallback={this.getState} parentCallback2={this.updateTable} type='save' />
+                        <ModalSave parentCallback={this.getState} parentCallback2={this.updateTable} type='save' />
                     </Col>
                     <Col>
                         <div className="LoadedSound" >

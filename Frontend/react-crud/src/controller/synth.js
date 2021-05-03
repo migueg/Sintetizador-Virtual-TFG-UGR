@@ -225,6 +225,20 @@ class Synth{
                 break;
         }
     }
+
+    /**
+     * Método que se encarga de llamar al módulo de carga para que
+     * cargue un sonido
+     *  
+     * @method load
+     * @async
+     * @param {string} id Identificador del sonido
+     */
+    async load(id){
+        
+    }
+
+
     /**
      * Método que se encarga de encender un oscilador
      * 

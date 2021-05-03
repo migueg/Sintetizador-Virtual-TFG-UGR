@@ -8,6 +8,7 @@ import Header from './view/head-component';
 import Piano from './view/piano-component'
 import FX from './view/fx-components';
 import Libary from './view/library-components';
+import { sinte } from '../src/view/osc-components';
 
 /**
  * Es la clase principal que contiene todos los componentes organizados
@@ -25,6 +26,8 @@ class App extends React.Component{
     this.showLb = this.showLb.bind(this)
     this.lb =  React.createRef();
     this.updateTable = this.updateTable.bind(this)
+    this.a = false;
+    this.b = false;
   }
   
   
@@ -52,6 +55,7 @@ class App extends React.Component{
       }
 
       if(!offlb){
+        this.__onOscillators();
         document.getElementById('lb').classList.toggle('off');
 
       }
@@ -66,6 +70,7 @@ class App extends React.Component{
     if(offosc){
       document.getElementById('osc').classList.remove('off');
       if(!offlb){
+        this.__onOscillators();
         document.getElementById('lb').classList.toggle('off');
       }
 
@@ -75,23 +80,47 @@ class App extends React.Component{
       }
     }
   }
+  __offOscillators(){
+    this.a = sinte.getAvailable('A');
+    this.b = sinte.getAvailable('B');
+    if(this.a){
+      sinte.offOscillator('A');
+    }
+    if(this.b){
+      sinte.offOscillator('B');
+    }
+  }
+  __onOscillators(){
+    if(this.a){
+      sinte.onOscillator('A');
+    }
+
+    if(this.b){
+      sinte.onOscillator('B');
+    }
+  }
   
   showLb(){
-    var offlb = this.__isOff('lb');
-    var offosc = this.__isOff('osc');
-    var offfx = this.__isOff('fx');
+    if(window.confirm('Si cambias a la biblioteca, la reproducción de los osciladores estará desctivada')){
+      var offlb = this.__isOff('lb');
+      var offosc = this.__isOff('osc');
+      var offfx = this.__isOff('fx');
+    
 
-    if(offlb){
-      document.getElementById('lb').classList.remove('off');
-      if(!offosc){
-        document.getElementById('osc').classList.toggle('off');
-      }
-
-      if(!offfx){
-        document.getElementById('fx').classList.toggle('off');
-
+      if(offlb){
+        this.__offOscillators();
+        document.getElementById('lb').classList.remove('off');
+        if(!offosc){
+          document.getElementById('osc').classList.toggle('off');
+        }
+  
+        if(!offfx){
+          document.getElementById('fx').classList.toggle('off');
+  
+        }
       }
     }
+   
   }
 
   updateTable (){
