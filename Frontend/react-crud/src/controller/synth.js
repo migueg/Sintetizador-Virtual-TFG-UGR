@@ -235,7 +235,12 @@ class Synth{
      * @param {string} id Identificador del sonido
      */
     async load(id){
-        
+        const resp = await this.#loader.fetchState(id);
+        return resp;
+    }
+
+    decodeState(data,field){
+
     }
 
 
@@ -326,6 +331,17 @@ class Synth{
     /******* GETTERS *********/
 
     /**
+     * Getter del flag de selección del oscilador
+     * 
+     * @method getChecked
+     * @param {Char} osc Id del oscilador
+     * @returns Booleano
+     */
+    getChecked(osc){
+        if(osc === 'A'){return this.#oscillatorA.getChecked()}
+        if(osc === 'B'){return this.#oscillatorB.getChecked()}
+    }
+    /**
      * Método que devuelve el estado de todos los efectos
      * 
      * @method getEffects
@@ -376,7 +392,18 @@ class Synth{
     }
 
     /******* SETTERS *********/
-
+    /**
+     * Setter del flag checked que indica si el oscilador
+     * esta seleccionado 
+     * 
+     * @method setChecked
+     * @param {Char} osc Id del oscilador
+     * @param {Boolean} val 
+     */
+    setChecked(osc,val){
+        if(osc === 'A'){this.#oscillatorA.setChecked(val)}
+        if(osc === 'B'){this.#oscillatorB.setChecked(val)}
+    }
     /**
      * Setter de los parámetros del delay
      * 
@@ -518,7 +545,7 @@ class Synth{
         if(osc === 'A'){
             this.#oscillatorA.setPan(value);
         }else if(osc === 'B'){
-            this.#oscillatorA.setPan(value);
+            this.#oscillatorB.setPan(value);
         }
     }
 

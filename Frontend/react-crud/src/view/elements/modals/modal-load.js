@@ -12,7 +12,7 @@ class ModalLoad extends Modal{
 
     async load(){
         
-        this.props.parentCallback(this.id)
+        await this.props.parentCallback()
         $('#load-buttom').attr('disabled',true);
 
     }

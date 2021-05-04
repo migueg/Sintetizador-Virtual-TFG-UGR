@@ -28,6 +28,39 @@ class Envelope extends React.Component{
         super();
         this.#osc = props.osc
         
+        this.attack = React.createRef();
+        this.sustain = React.createRef();
+        this.release = React.createRef();
+        this.decay = React.createRef();
+        
+        this.setEnvelope = this.setEnvelope.bind(this);
+
+    }
+
+    /**
+     * Método que establece nuevos valores para los parámetros de 
+     * la envolvente
+     * 
+     * @method setEnvelope
+     * @param {JSON} envelope 
+     */
+    setEnvelope(envelope){
+        //Hacemos la inversa para tener los valores correctos de los knobs
+        var attack = (envelope.attack * 100) / 2;
+        var decay = (envelope.decay * 100) / 2;
+        var sustain = envelope.sustain *100;
+        var release = envelope.release * 100 / 5;
+        
+        console.log('Attack: ' +attack)
+        console.log('Decay: ' + decay)
+        console.log('Sustain: ' + sustain)
+        console.log('Release: ' + release)
+
+
+        this.attack.current.handleOnChange(attack)
+        this.release.current.handleOnChange(release)
+        this.decay.current.handleOnChange(decay)
+        this.sustain.current.handleOnChange(sustain)
     }
 
     /**
@@ -54,6 +87,7 @@ class Envelope extends React.Component{
                               type={knobTypes.ATTACK}
                               osc = {this.#osc}
                               val= {0}
+                              ref={this.attack}
                         />
 
                     </Col>
@@ -70,6 +104,7 @@ class Envelope extends React.Component{
                               type={knobTypes.RELEASE}
                               osc = {this.#osc}
                               val = {50}
+                              ref={this.release}
                         />
                     </Col>
 
@@ -86,6 +121,7 @@ class Envelope extends React.Component{
                               type={knobTypes.DECAY}
                               osc = {this.#osc}
                               val= {30}
+                              ref={this.decay}
                         />
                     </Col>
                     <Col>
@@ -101,6 +137,7 @@ class Envelope extends React.Component{
                               type={knobTypes.SUSTAIN}
                               osc = {this.#osc}
                               val = {50}
+                              ref = {this.sustain}
                         />
                     </Col>
                 </Row>

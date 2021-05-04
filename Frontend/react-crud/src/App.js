@@ -21,11 +21,17 @@ import { sinte } from '../src/view/osc-components';
 class App extends React.Component{
   constructor(){
     super()
-    this.showFX = this.showFX.bind(this)
-    this.showOsc = this.showOsc.bind(this)
-    this.showLb = this.showLb.bind(this)
+    this.showFX = this.showFX.bind(this);
+    this.showOsc = this.showOsc.bind(this);
+    this.showLb = this.showLb.bind(this);
+    this.updateTable = this.updateTable.bind(this);
+    this.loadSound = this.loadSound.bind(this);
+
     this.lb =  React.createRef();
-    this.updateTable = this.updateTable.bind(this)
+    this.header = React.createRef();
+    this.oscillators = React.createRef();
+    this.fx = React.createRef();
+
     this.a = false;
     this.b = false;
   }
@@ -81,8 +87,8 @@ class App extends React.Component{
     }
   }
   __offOscillators(){
-    this.a = sinte.getAvailable('A');
-    this.b = sinte.getAvailable('B');
+    this.a = sinte.getChecked('A');
+    this.b = sinte.getChecked('B');
     if(this.a){
       sinte.offOscillator('A');
     }
@@ -91,6 +97,8 @@ class App extends React.Component{
     }
   }
   __onOscillators(){
+    this.a = sinte.getChecked('A');
+    this.b = sinte.getChecked('B');
     if(this.a){
       sinte.onOscillator('A');
     }
@@ -122,7 +130,22 @@ class App extends React.Component{
     }
    
   }
+  loadSound(){
+     var newState = this.lb.current.newState
+     
+     if(newState.name){
+      this.header.current.setName(newState.name);
+     }
+     if(newState.oscA && newState.oscB){
+       console.log(newState)
+       this.oscillators.current.setOscA(newState.oscA);
+       this.oscillators.current.setOscB(newState.oscB);
 
+     }
+
+     
+     
+  }
   updateTable (){
      this.lb.current.updateTable()
   }
@@ -138,17 +161,17 @@ class App extends React.Component{
         <div>
             <Nav />
             <div className="header">
-              <Header showFX={this.showFX} parentCallback={this.updateTable} showOsc={this.showOsc} showLb={this.showLb} />
+              <Header ref={this.header} showFX={this.showFX} parentCallback={this.updateTable} showOsc={this.showOsc} showLb={this.showLb} />
             </div>
            
             <div className="oscillators" id="osc">
-              <Route exact path="/" component={()=> <OscComponents ref={this.reference}/>} /> 
+              <Route exact path="/" component={()=> <OscComponents ref={this.oscillators}/>} /> 
             </div>
             <div className="FX off" id="fx">
-              <FX/>
+              <FX ref={this.fx}/>
             </div>
             <div className="LB off" id='lb'>
-              <Libary ref={this.lb}/>
+              <Libary parentCallback={()=>this.loadSound()} ref={this.lb}/>
             </div>
             <div className="piano">
               <Piano /> 

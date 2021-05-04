@@ -4,7 +4,8 @@ class DbFetcher {
         this.codes = {
             created: 201,
             ok: 200,
-            error: 500
+            error: 500,
+            notFound: 404
         }
     }
 
@@ -16,6 +17,10 @@ class DbFetcher {
                 return true;
             case this.codes.error:
                 return false;
+            case this.codes.notFound:
+                return false;
+            default:
+                break;
         }
     }
 }

@@ -105,6 +105,12 @@ class LimitedKnob extends React.Component {
         
     }
 
+    setGainOsc(val){
+      console.log(this.osc)
+      console.log(val)
+      
+      this.setState({ value: val });
+    }
     /**
      * Método que se encarga de llamar al controlador para que 
      * modifque el Attack del oscilador
@@ -334,12 +340,13 @@ class LimitedKnob extends React.Component {
       }
       
       let distance = Math.abs(val - this.state.value);
-      if (distance > maxDistance) {
+      if (distance > maxDistance ) {
         
         return;
       } else {
         switch(this.#type){
           case types.OSC_VOLUM:
+
             this.__handleOnChangeOscillator(val);
             break;
           case types.ATTACK:

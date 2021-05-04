@@ -52,8 +52,8 @@ app.get("/notes", (req, res) => {
 
 }) 
 
-app.get("/states", (req,res) => {
-    dbController.getStates(req,res);
+app.get("/state/:id", (req,res) => {
+    dbController.getState(req,res);
 })
 
 app.get("/states/metadata", (req,res) => {

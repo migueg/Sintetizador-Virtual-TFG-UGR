@@ -14,12 +14,18 @@ class Libary extends React.Component{
         }
         this.child = React.createRef();
         this.updateTable = this.updateTable.bind(this);
+        this.newState = {}
     }
 
     updateTable(){
        this.child.current.updateTable();
     }
     componentDidMount(){
+    }
+
+    loadSound(){
+        this.newState = this.child.current.newState;
+        this.props.parentCallback();
     }
 
     render(){
@@ -33,7 +39,7 @@ class Libary extends React.Component{
                 </Col>
             </Row>
             <Row style={{width: '90%', marginLeft: '5%', alignItems: 'center' ,alignContent:'center'}}>
-                <Table ref={this.child} />
+                <Table parentCallback={()=>this.loadSound()} ref={this.child} />
             </Row>
         </Container>
         </div>

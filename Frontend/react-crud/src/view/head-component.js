@@ -51,6 +51,10 @@ class Header extends React.Component{
     getAvailable = (osc)=>{
         return sinte.getAvailable(osc)
     }
+
+    setName(name){
+        document.getElementById('sound-charged').innerText = name;
+    }
     showOsc(){
        this.props.showOsc()
     }
@@ -80,7 +84,7 @@ class Header extends React.Component{
                     </Col>
                     <Col>
                         <div className="LoadedSound" >
-                            Sonido
+                            <p id='sound-charged' style={{marginBottom: 0}}>Sonido</p>
                         </div>
                     </Col>
                     <Col>

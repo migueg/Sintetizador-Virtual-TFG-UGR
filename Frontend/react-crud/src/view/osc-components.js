@@ -35,19 +35,30 @@ export var sinte = new synth();
  * 
  */
 
+/**
+ * Referencia a la clase Envelope
+ * 
+ * @property envelope 
+ * @type Ref
+ * 
+ */
+
+
 
 class Oscilador extends React.Component{
     #osc;
     constructor(props){
         super();
-        this.#osc = props.osc;
-        this._KnobVol = React.createRef(); 
+        this.#osc = props.osc; 
         this.firstTime = true;
 
         //Asignamos la variable this de la clase a las siguientes funciones
         this.checkChecked = this.checkChecked.bind(this);
-      
-    
+        this.setOsc = this.setOsc.bind(this);
+
+        //Referencias
+        this.envelope = React.createRef();
+        this._KnobVol = React.createRef(); 
         
     }
 
@@ -61,17 +72,20 @@ class Oscilador extends React.Component{
     checkChecked() {
         if(document.getElementById('interruptorA').checked){
             this.checkWave();
-             sinte.onOscillator('A');
+            sinte.setChecked('A',true);
+            sinte.onOscillator('A');
         }else{
+            sinte.setChecked('A',false)
             sinte.offOscillator('A');
         }
     
         if(document.getElementById('interruptorB').checked){
             this.checkWave();
-           
+            sinte.setChecked('B',true)
             sinte.onOscillator('B');
        }else{
-           sinte.offOscillator('B');
+            sinte.setChecked('B',false)
+            sinte.offOscillator('B');
        }
     }
 
@@ -92,6 +106,7 @@ class Oscilador extends React.Component{
                 sinte.selectWave(this.#osc,"sine");
                 break;
             case "square":
+                
                 sinte.selectWave(this.#osc,"square");
                 break;
             case "sawtooth":
@@ -119,10 +134,38 @@ class Oscilador extends React.Component{
     setPan(osc){
         var id = 'range'+ osc;
         var ranger = document.getElementById(id);
-        sinte.setPan(osc,ranger.value)
+        sinte.setPan(this.#osc,ranger.value)
  
     }
 
+    setOsc(osc){
+        var on = osc.oscOn;
+        var pan = osc.pan;
+        var wave = osc.wave;
+        var gain = osc.gain * 100;
+
+        document.getElementById('interruptor'+osc.id).checked = on;
+
+        if(on){
+            sinte.setChecked(osc.id,true)
+        }else{
+            sinte.setChecked(osc.id,false)
+        }
+
+        document.getElementById('range'+osc.id).value = pan;
+        sinte.setPan(osc.id,pan);
+
+        document.getElementById('selector'+osc.id).value = wave;
+        sinte.selectWave(osc.id,wave);
+
+        this.envelope.current.setEnvelope(osc.envelope);
+
+        this._KnobVol.current.setGainOsc(gain);
+
+        sinte.setVolum(osc.id, gain);
+
+
+    }
    /**
     * Método que construlle el componente de la interfaz relativo a el oscilador, que contiene los Knobs de la envolvente,
     * el selector de onda, el knob de volumen y el botón de encendido y apagado.
@@ -187,7 +230,7 @@ class Oscilador extends React.Component{
                 type={knobTypes.OSC_VOLUM}
                 osc = {this.#osc}
                 val={0}
-              
+                
             
             />
           
@@ -204,7 +247,7 @@ class Oscilador extends React.Component{
               <div className="select_arrow"></div>
           </div>
             
-            <Envelope osc={this.#osc} />
+            <Envelope osc={this.#osc} ref={this.envelope}/>
           
           </div>
             
@@ -221,6 +264,19 @@ class Oscilador extends React.Component{
  */
 
 export class OscComponents extends Component{
+    constructor(){
+        super();
+        this.oscA = React.createRef();
+        this.oscB = React.createRef();
+    }
+    setOscA(osc){
+        this.oscA.current.setOsc(osc)
+    }
+
+    setOscB(osc){
+        this.oscB.current.setOsc(osc)
+
+    }
     render(){
         return(
             <div>
@@ -230,10 +286,10 @@ export class OscComponents extends Component{
                 <Container fluid >
                     <Row>
                         <Col className="oscilador"xs >
-                        <Oscilador osc={'A'} />
+                        <Oscilador osc={'A'} ref={this.oscA}/>
                         </Col>
                         <Col className="oscilador" xs >
-                        <Oscilador osc={'B'}/>
+                        <Oscilador osc={'B'} ref={this.oscB}/>
                         </Col>
                     </Row>
                 </Container>

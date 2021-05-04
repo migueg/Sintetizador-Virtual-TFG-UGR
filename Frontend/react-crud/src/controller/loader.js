@@ -1,4 +1,5 @@
 
+import { codePointAt } from 'react-rotary-knob';
 import DbFetcher from './dbFetcher'
 class Loader extends DbFetcher {
     #method
@@ -8,6 +9,13 @@ class Loader extends DbFetcher {
         //this.fetchCategories = this.fetchCategories.bind(this)
     }
 
+    getMetadata(){
+
+    }
+    getEffect(){
+
+    }
+    
     async __fetchUrl(url,requestOptions){
         var status;
         var that = this ;
@@ -54,15 +62,21 @@ class Loader extends DbFetcher {
        
     }
 
-    async fetchStates(){
+    async fetchState(id){
         const requestOptions = {
             method: this.#method,
             headers: {
                 'Authorization': 'Migue'
             }
         }
-      
-        console.log( await this.__fetchUrl('http://localhost:8080/states',requestOptions));
+        
+        const rsp =  await this.__fetchUrl('http://localhost:8080/state/'+id,requestOptions);
+
+        if(!rsp){
+            return rsp
+        }else{
+            return rsp[0]
+        }
     }
 
     async fetchStatesMetadata(){

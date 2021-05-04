@@ -54,6 +54,11 @@ import Voice from './voice';
  * @property #panNode
  * @type Object
  */
+/**
+ * Glag para controlar que el oscilador esa marcado
+ * @property checked
+ * @type Boolean
+ */
 class oscillator  {
    #audioCtx 
    #gainNode //Variable privada
@@ -61,6 +66,7 @@ class oscillator  {
    #volume
    #available
    #panNode
+   #checked
  
 
  constructor(master,context,cleanNode){
@@ -77,6 +83,7 @@ class oscillator  {
    
    this.#volume = 0;
    this.#available = false;
+   this.#checked = false;
    this.#gainNode.gain.value = 0;
 
   
@@ -113,6 +120,7 @@ class oscillator  {
   */
 
  offOscillator(){
+   
     this.#available = false;
     this.#gainNode.gain.value = 0;
  }
@@ -148,6 +156,17 @@ class oscillator  {
   getAvailable(){
      return this.#available;
   }
+
+  /**
+  * Getter del flag checked
+  * 
+  * @method getChecked
+  * @returns Boolean
+  */
+  getChecked(){
+     return this.#checked;
+  }
+
   /**
    * Getter de la envolvente
    * 
@@ -166,17 +185,27 @@ class oscillator  {
    */
   getState(){
      var state = {};
-
      state['pan'] = this.#panNode.pan.value;
-     state['on'] = this.#available;
-     state['gain'] = this.#gainNode.gain.value;
+     state['on'] = this.#checked;
+     state['gain'] = this.#volume;
      state['wave'] = this.voice.getType();
-
+   
+     console.log(state)
      return state;
 
   }
   
  //SETTERS
+
+/**
+ * Setter del flag checked
+ * 
+ * @method setChecked
+ * @param {Boolean} c valor
+ */
+ setChecked(c){
+   this.#checked = c;
+ }
  /**
   * Setter del nivel de paneo del oscilador, -1 izquierda, +1 derecha.
   * 
@@ -194,7 +223,7 @@ class oscillator  {
   * @param {String} wave Onda
   */
  setWave(wave){
-  
+    
     this.voice.setType(wave);
  }
  

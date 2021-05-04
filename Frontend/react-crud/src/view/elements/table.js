@@ -30,6 +30,7 @@ class TableUI extends React.Component{
             rating: 3
         }
         this.modalRef = React.createRef();
+        this.newState = {};
        
     }
 
@@ -162,9 +163,12 @@ class TableUI extends React.Component{
         this.setState({categories: categories})
     }
 
-    async loadSound(id){
-      
-        await sinte.load(id)
+    async loadSound(){
+        const state = await sinte.load(this.modalRef.current.id);
+        this.newState = state;
+        this.props.parentCallback() //envio el nuevo estado al padre
+
+
     }
     showModal(id){
        

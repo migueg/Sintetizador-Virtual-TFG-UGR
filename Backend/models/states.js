@@ -18,6 +18,7 @@ const envelopeModel =  mongoose.model('envelope',envelope);
 const oscillator = new mongoose.Schema({
     id: {type: String },
     pan: {type: Number},
+    gain: {type: Number},
     oscOn: {type: Boolean},
     wave: {type: String},
     envelope: envelope

@@ -20,7 +20,6 @@ function createOscillator(osc,en,id){
         sustain: en.sustain,
         decay: en.decay
     });
-
     const oscillator = new statesModels.oscillatorModel({ 
         id: id,
         oscOn:  osc.on,
@@ -122,25 +121,36 @@ async function getNotes(req,res){
 }
 
 
-async function getStates(req,res){
+async function getState(req,res){
     var id = req.header('Authorization')
-
-    await statesModels.stateModel.find({userID: id}, function(err,docs){
-        if(err){
-            sendResponse(res,'500','Error al obtener los sonidos');
-        }else{
-            sendResponse(res,'200',docs);
-        }
-    })
+    var select = 'name delay distorision filter oscA oscB reverb'
+    if(req.params.id){
+        await statesModels.stateModel.find({userID: id, name: req.params.id}, select, function(err,docs){
+            if(err){
+                sendResponse(res,'500','Error al obtener los sonidos');
+            }else{
+                if(docs.length !== 0){
+                    sendResponse(res,'200',docs);
+                }else{
+                    sendResponse(res,'404','El sonido no se ha encontrado en BD')
+                }
+            }
+        })
+    }else{
+        sendResponse(res,'400','Petición incorrecta');
+    }
+    
 }
 
 async function getStatesMetaData(req,res){
     var id = req.header('Authorization')
+    
     await statesModels.stateModel.find({userID: id}, 'name  description category value ' , function(err,docs){
         if(err){
             sendResponse(res,'500','Error al obtener los sonidos');
         }else{
             sendResponse(res,'200',docs);
+            
         }
     })
 }
@@ -255,6 +265,6 @@ module.exports = {
     getNotes,
     saveState,
     createCategories,
-    getStates,
+    getState,
     getStatesMetaData
 }

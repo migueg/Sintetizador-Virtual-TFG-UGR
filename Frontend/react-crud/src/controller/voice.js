@@ -162,6 +162,7 @@ class Voice {
      * @returns String
      */
     getType(){
+       
         return this.#type;
     }
     /**
@@ -226,6 +227,7 @@ class Voice {
         for(var i in this.#voices){
             this.#voices[i].type = type
         }
+        this.#type = type
     }
 
     /**
