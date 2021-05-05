@@ -53,7 +53,7 @@ class Saver extends DbFetcher {
 
         var that = this;
         try{
-            const resp =  await fetch('http://localhost:8080/save/Migue',requestOptions)
+            await fetch('http://localhost:8080/save/Migue',requestOptions)
             .then(function(response){
                 var status = that.handleStatus(response.status);
                 if(status){

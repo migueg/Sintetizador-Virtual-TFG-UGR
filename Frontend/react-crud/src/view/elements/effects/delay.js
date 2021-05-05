@@ -18,8 +18,13 @@ class Delay extends Effect{
     constructor(props){
         super(props,'delay');
         this.synth.setDelay('time','1/16');
+
+        this.setDelay = this.setDelay.bind(this);
+        this.refWet = React.createRef();
+        this.refFb = React.createRef();
     }
 
+    
     /**
      * Método que se encarga de seleccionar el tiempo de delay
      * 
@@ -28,6 +33,77 @@ class Delay extends Effect{
     selectTime(){
         var selector = document.getElementById('time').value;
         this.synth.setDelay('time',selector);
+    }
+
+    /**
+     * Convierte el valor númerico del tiempo a su correspondiente
+     * fracción 
+     * 
+     * @method checkTime
+     * @param {Float} time Valor de tiempo de delay
+     */
+    checkTime(time){
+        var val = ''
+        switch(time.toString()){
+            case '0.15000000596046448':
+                val = '1/16';
+                break;
+            case '0.30000001192092896':
+                val = '1/8';
+                break;
+            case '0.5':
+                val= '1/4';
+                break;
+            case '0.6499999761581421':
+                val= '1/2';
+                break;
+            case '0.800000011920929':
+                val = '1';
+                break;
+            case '1':
+                val = '2';
+                break;
+            default:
+                console.error("ERROR: Valor incorrecto de tiempo");
+                break;
+                
+
+        }
+        return val
+    }
+    
+    /**
+     * Setter del tiempo de delay
+     * 
+     * @method setTime
+     * @param {String} time Fracción de tiempo
+     */
+    setTime(time){
+        document.getElementById('time').value = time;
+        this.synth.setDelay('time',time);
+
+    }
+    /**
+     * Setter de todos los parámetros del delay
+     * 
+     * @method setDelay
+     * @param {JSON} delay Valores de los parámetros del efecto delay
+     */
+    setDelay(delay){
+        var effectOn = delay.effectOn;
+        var wet = delay.wet * 100;
+        var feedback = delay.feedback * 100;
+        var time = delay.time;
+        time = this.checkTime(time);
+        this.setTime(time);
+
+        this.refWet.current.setWet('delay',wet);
+        this.refFb.current.setFeedback(feedback);
+
+        super.apply(effectOn);
+
+
+        
     }
     /**
      * Método que devuelve el componente Delay para ser renderizado
@@ -56,6 +132,7 @@ class Delay extends Effect{
                             height={200}
                             val={80}
                             type={knobTypes.DELAYWET}
+                            ref={this.refWet}
                             />
                         </Col>
                     </Row>
@@ -83,6 +160,7 @@ class Delay extends Effect{
                             height={200}
                             val={25}
                             type={knobTypes.DELAYFEEDBACK}
+                            ref={this.refFb}
                             />
                         </Col>
                     </Row>

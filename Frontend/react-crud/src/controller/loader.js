@@ -1,5 +1,4 @@
 
-import { codePointAt } from 'react-rotary-knob';
 import DbFetcher from './dbFetcher'
 class Loader extends DbFetcher {
     #method
@@ -21,7 +20,7 @@ class Loader extends DbFetcher {
         var that = this ;
 
         try{
-            const resp =  await fetch(url,requestOptions)
+            await fetch(url,requestOptions)
             .then(function(response){
                 status = that.handleStatus(response.status);
                 if(status){

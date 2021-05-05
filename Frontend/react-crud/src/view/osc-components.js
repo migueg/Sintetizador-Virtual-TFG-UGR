@@ -159,7 +159,7 @@ class Oscilador extends React.Component{
         sinte.selectWave(osc.id,wave);
 
         this.envelope.current.setEnvelope(osc.envelope);
-
+        
         this._KnobVol.current.setGainOsc(gain);
 
         sinte.setVolum(osc.id, gain);

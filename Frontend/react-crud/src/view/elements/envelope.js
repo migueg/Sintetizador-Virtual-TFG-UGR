@@ -51,16 +51,18 @@ class Envelope extends React.Component{
         var sustain = envelope.sustain *100;
         var release = envelope.release * 100 / 5;
         
+    /*  //DEBUG
+        console.log( envelope)
         console.log('Attack: ' +attack)
         console.log('Decay: ' + decay)
         console.log('Sustain: ' + sustain)
         console.log('Release: ' + release)
+    */
 
-
-        this.attack.current.handleOnChange(attack)
-        this.release.current.handleOnChange(release)
-        this.decay.current.handleOnChange(decay)
-        this.sustain.current.handleOnChange(sustain)
+        this.attack.current.setEnvelope('attack',attack)
+        this.release.current.setEnvelope('release',release)
+        this.decay.current.setEnvelope('decay', decay)
+        this.sustain.current.setEnvelope('sustain',sustain)
     }
 
     /**

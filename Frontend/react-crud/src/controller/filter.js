@@ -64,8 +64,6 @@ class Filter extends Effect{
         this.#type = type;
         this.effect.type= type;
         this.setinitFrecuencies();
-        console.log(this.effect.type)
-        
     }
     
     /**
@@ -139,13 +137,14 @@ class Filter extends Effect{
     getState(){
         super.getState();
         this.state['type'] = this.effect.type;
-        this.state ['frequency'] = this.effect.frequency.value;
+        this.state['frequency'] = this.effect.frequency.value;
 
         return this.state;
     }
     
     /************ SETTERS **************/
 
+    
     /**
      * Setter de la frecuencia del filtro
      * 

@@ -59,7 +59,7 @@ class Distorsion extends Effect{
      * @param {Float} amount Cantidad de distorsion 
      */
      setDistorsionCurve(amount){
-        
+        this.#amount = amount
          this.effect.curve = this.makeDistortionCurve(amount);
      }
 

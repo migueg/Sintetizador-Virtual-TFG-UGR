@@ -166,9 +166,9 @@ class TableUI extends React.Component{
     async loadSound(){
         const state = await sinte.load(this.modalRef.current.id);
         this.newState = state;
-        this.props.parentCallback() //envio el nuevo estado al padre
+        var resp = this.props.parentCallback() //envio el nuevo estado al padre
 
-
+        return resp;
     }
     showModal(id){
        
@@ -181,11 +181,11 @@ class TableUI extends React.Component{
                 <ModalLoad ref={this.modalRef} parentCallback={()=>this.loadSound()}/>
                 <Row style={{width: '100%'}}>
                     <div id='searchBar' style={{width: '100%'}}>
-                        <img src={search} style={{width: '5vh', marginLeft: '3%',  marginTop: '1%',float: 'left'}}></img>
+                        <img alt='search-icon' src={search} style={{width: '5vh', marginLeft: '3%',  marginTop: '1%',float: 'left'}}></img>
                         <input type="text" id='toSearch' onKeyUp={()=>this.searchInTable() }  placeholder='Introduce tu búsqueda aqui' style={{float: 'left', marginLeft: '2%',marginBottom: '1%', marginTop: '2%', width: '75%'}}></input>
                         <Tooltip title='Filtros'>
                            
-                                <img src={filtrar} onClick={()=>this.collapse()}  data-bs-toggle='collapse' href="#collapseExample"
+                                <img alt='filter-icon' src={filtrar} onClick={()=>this.collapse()}  data-bs-toggle='collapse' href="#collapseExample"
                                     role="button" aria-expanded="false" aria-controls="collapseExample" 
                                         style={{width: '3vh' , float:'left', marginLeft: '2%', marginTop: '2%'}}/>
                            

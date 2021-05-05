@@ -61,11 +61,12 @@ class Piano extends React.Component{
      * @private
      */
       __playNote(oct , key){
+        var octave;
         if(oct === 'down' || oct=== 'up'){
             
             if(oct === 'down'){
                 
-                var octave = this.#octave + 1;
+                 octave = this.#octave + 1;
                 
                 if(octave === 7 ){
                     octave = 6;
@@ -73,7 +74,7 @@ class Piano extends React.Component{
             }
     
             if(oct === 'up'){
-                var octave = this.#octave + 2
+                 octave = this.#octave + 2
                
                     if(octave === 8){
                         octave = 7;
@@ -197,10 +198,11 @@ class Piano extends React.Component{
     
        if(e.nodeName === 'LI'){
             //(e.textContent)
-            if(e.className != "white" && e.className != "black" ){
+            var key;
+            if(e.className !== "white" && e.className !== "black" ){
                 
                 
-                var key =  e.id.split("1") 
+                 key =  e.id.split("1") 
                 
                 
                 this.__playNote('up', key[0]);
@@ -208,7 +210,7 @@ class Piano extends React.Component{
             }else{
                
      
-                var key =  e.id 
+                 key =  e.id 
             
                 this.__playNote('down', key);
             }
@@ -397,7 +399,8 @@ class Piano extends React.Component{
                             if(!this.pressedKeys['u'])
                                 this.handleKeydownEvent('white','B',keyName,'up');
                             break;
-                     
+                        default:
+                            break;
                          
                      }
                     
@@ -489,6 +492,8 @@ class Piano extends React.Component{
                             break;
                         case 'u':
                             $('#B1').removeClass('white-active');
+                            break;
+                        default:
                             break;
                     }
                 })

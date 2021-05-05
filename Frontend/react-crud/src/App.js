@@ -132,20 +132,29 @@ class App extends React.Component{
   }
   loadSound(){
      var newState = this.lb.current.newState
-     
+     var response = true;
      if(newState.name){
       this.header.current.setName(newState.name);
-     }
-     if(newState.oscA && newState.oscB){
-       console.log(newState)
-       this.oscillators.current.setOscA(newState.oscA);
-       this.oscillators.current.setOscB(newState.oscB);
+      if(newState.oscA && newState.oscB ){
+        //console.log(newState)//A cargar
+        this.oscillators.current.setOscA(newState.oscA);
+        this.oscillators.current.setOscB(newState.oscB);
 
+        if(newState.filter && newState.delay && newState.distorsion 
+          && newState.reverb){
+            this.fx.current.setFx('delay',newState.delay);
+            this.fx.current.setFx('distorsion',newState.distorsion);
+            this.fx.current.setFx('filter', newState.filter);
+            this.fx.current.setFx('reverb',newState.reverb);
+        }
+      }
+     }else{
+       response = false
      }
-
      
-     
+     return response
   }
+
   updateTable (){
      this.lb.current.updateTable()
   }

@@ -63,11 +63,11 @@ class ModalSave extends Modal{
                             </form>
                         </div>
                         <div id='success' style={{display: 'none' , margin: 'auto', flex: 'auto', alignItems: 'center' , alignContent: 'center' }}>
-                            <img src={success} style={{width: 60 , marginLeft: '30%', marginTop: '5%', marginBottom: '5%'}}/>
+                            <img alt='success-icon' src={success} style={{width: 60 , marginLeft: '30%', marginTop: '5%', marginBottom: '5%'}}/>
                             <p id='text-success'></p>
                         </div>
                         <div id='failure' style={{display: 'none' , margin: 'auto', flex: 'auto', alignItems: 'center' , alignContent: 'center' }}>
-                        <img src={failure} style={{width: 100 , marginLeft: '30%', marginTop: '5%', marginBottom: '5%'}}/>
+                        <img alt='failure-icon' src={failure} style={{width: 100 , marginLeft: '30%', marginTop: '5%', marginBottom: '5%'}}/>
                             <p id='text-failure' style={{marginLeft: '5%'}}></p>
                         </div>
                         <div id='loader' style={{display: 'none'}}>

@@ -105,12 +105,7 @@ class LimitedKnob extends React.Component {
         
     }
 
-    setGainOsc(val){
-      console.log(this.osc)
-      console.log(val)
-      
-      this.setState({ value: val });
-    }
+   
     /**
      * Método que se encarga de llamar al controlador para que 
      * modifque el Attack del oscilador
@@ -123,8 +118,6 @@ class LimitedKnob extends React.Component {
       this.setState({ value: val });
       var attack = (2 * val ) /100;
       sinte.setEnvolve(this.osc,attack,'attack');
-    
-
     }
     /**
      * Método que se encarga de llamar al controlador para que 
@@ -211,7 +204,7 @@ class LimitedKnob extends React.Component {
      * Método que se encarga de llamar al controlador para que 
      * modifque la frecuencia desde donde el  filtro se aplica
      * 
-     * @method handleOnChangeFilterWet
+     * @method __handleOnChangeFilterControl
      * @param {Float} val Valor del Knob
      * @private
      */
@@ -335,7 +328,7 @@ class LimitedKnob extends React.Component {
             || this.#type === types.FILTERCONTROL){
          maxDistance = 2300;
       }
-      if(this.#type == types.DISTORSIONAMOUNT){
+      if(this.#type === types.DISTORSIONAMOUNT){
         maxDistance = 60;
       }
       
@@ -415,7 +408,106 @@ class LimitedKnob extends React.Component {
     getState(){
       return this.state;
     }
+    /**
+     * Setter del estado del knob de ganancia
+     * 
+     * @method setGainOsc
+     * @param {Float} val Nuevo valor de ganancia
+     */
+    setGainOsc(val){
+
+      this.setState({ value: val });
+    }
   
+    /**
+     * Setter de los knobs de la envolvente
+     * 
+     * @method setEnvelope
+     * @param {String} param Parametro a cambiar
+     * @param {Float} val Nuevo valor
+     */
+    setEnvelope(param,val){
+      switch(param){
+        case 'decay':
+          this.__handleOnChangeDecay(val);
+          break;
+        case 'attack':
+          this.__handleOnChangeAttack(val)
+          break;
+        case 'sustain':
+          this.__handleOnChangeSustain(val);
+          break;
+        case 'release':
+          this.__handleOnChangeRelease(val);
+          break;
+        default:
+          break;
+
+      }
+
+    }
+    /**
+     * Setter del valor del knob wet para un efecto
+     * 
+     * @method setWet
+     * @param {String} effect Efecto al que se va a modificar el wet
+     * @param {Float} val Valor nuevo
+     */
+    setWet(effect, val){
+      switch(effect){
+        case 'delay':
+          this.__handleOnchangeDelayWet(val);
+          break;
+        case 'distorsion':
+          this.__handleOnChangeDistorsionwet(val);
+          break;
+        case 'filter':
+          this.__handleOnchangeFilterwet(val);
+          break;
+        case 'reverb':
+          this.__handleOnChangeReverbWet(val);
+          break;
+        default:
+          break;
+      }
+    }
+    
+    /**
+     * Setter del knob amount del efecto distorsion
+     * 
+     * @method setAmountDistorsion
+     * @param {Float} val Valor nuevo
+     */
+    setAmountDistorsion(val){
+      this.__handleOnChangeDistorsionAmount(val);
+    }
+    /**
+     * Setter del knob decay del efecto reverb
+     * 
+     * @method setReverbDecay
+     * @param {Float} val Valor nuevo
+     */
+    setReverbDecay(val){
+      this.__handelOnChangeReverbDecay(val);
+    }
+    /**
+     * Setter del knob feedback del efecto delay
+     * 
+     * @method setFeedback
+     * @param {Float} val Valor nuevo
+     */
+    setFeedback(val){
+      this.__handleOnchangeDelayFeedBack(val);
+    }
+    /**
+     * Setter del knob de frecuencia del efecto filtro
+     * 
+     * @method setFeedback
+     * @param {Float} val Valor nuevo
+     */
+    setFrequencies(val){
+      this.__handleOnChangeFilterControl(val);
+    }
     /**
      * Método que devuelve el componente Knob para ser renderizado
      * 

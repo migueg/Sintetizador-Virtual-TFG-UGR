@@ -79,7 +79,7 @@ class Header extends React.Component{
                    
                     <Col>
                         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-                        <img  onClick={()=>this.showModal()} src={disquete} style={{width: 50, float: 'right' , marginTop: '2%'}}></img>
+                        <img alt='save-icon' onClick={()=>this.showModal()} src={disquete} style={{width: 50, float: 'right' , marginTop: '2%'}}></img>
                         <ModalSave parentCallback={this.getState} parentCallback2={this.updateTable} type='save' />
                     </Col>
                     <Col>

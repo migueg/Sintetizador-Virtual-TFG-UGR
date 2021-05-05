@@ -57,7 +57,6 @@ class Delay extends Effect{
         super.getState();
         this.state['time'] =  this.effect.delayTime.value;
         this.state['feedback'] = this.#feedback.gain.value;
-
         return this.state;
     }
 

@@ -25,7 +25,7 @@ class Libary extends React.Component{
 
     loadSound(){
         this.newState = this.child.current.newState;
-        this.props.parentCallback();
+        return this.props.parentCallback();
     }
 
     render(){

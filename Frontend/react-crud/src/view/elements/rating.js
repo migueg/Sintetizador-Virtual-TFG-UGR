@@ -63,7 +63,6 @@ const labels = {
             onChange={(event, newValue) => {
               setValue(newValue);
               props.parentCallback(newValue)
-              console.log('Aqui')
 
             }}
             onChangeActive={(event, newHover) => {

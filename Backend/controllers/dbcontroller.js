@@ -123,7 +123,7 @@ async function getNotes(req,res){
 
 async function getState(req,res){
     var id = req.header('Authorization')
-    var select = 'name delay distorision filter oscA oscB reverb'
+    var select = 'name delay distorsion filter oscA oscB reverb'
     if(req.params.id){
         await statesModels.stateModel.find({userID: id, name: req.params.id}, select, function(err,docs){
             if(err){

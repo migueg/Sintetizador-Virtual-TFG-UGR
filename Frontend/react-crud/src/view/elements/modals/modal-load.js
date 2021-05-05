@@ -10,10 +10,23 @@ class ModalLoad extends Modal{
         this.id = '';
     }
 
+    
     async load(){
-        
-        await this.props.parentCallback()
         $('#load-buttom').attr('disabled',true);
+        $('#close-load-buttom').attr('disabled',true);
+        this.__showLoader();
+
+        var rsp = await this.props.parentCallback()
+        var response = {
+            state: false
+        }
+        if(rsp){
+            response.state= rsp
+            response.msg = 'Sonido cargado con éxito'
+
+        }
+
+        this.__handleResponse(response)
 
     }
     show(id){
@@ -34,23 +47,23 @@ class ModalLoad extends Modal{
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div className="modal-body" id='md-body'>
+                    <div className="modal-body" id='md-body-loader'>
                         <h5>Se perderán los cambios no guardados hasta ahora</h5>
                     </div>
-                    <div id='success' style={{display: 'none' , margin: 'auto', flex: 'auto', alignItems: 'center' , alignContent: 'center' }}>
-                        <img src={success} style={{width: 60 , marginLeft: '30%', marginTop: '5%', marginBottom: '5%'}}/>
-                        <p id='text-success'></p>
+                    <div id='success-loader' style={{display: 'none' , margin: 'auto', flex: 'auto', alignItems: 'center' , alignContent: 'center' }}>
+                        <img alt='success-icon' src={success} style={{width: 60 , marginLeft: '30%', marginTop: '5%', marginBottom: '5%'}}/>
+                        <p id='text-success-loader'></p>
                     </div>
-                    <div id='failure' style={{display: 'none' , margin: 'auto', flex: 'auto', alignItems: 'center' , alignContent: 'center' }}>
-                    <img src={failure} style={{width: 100 , marginLeft: '30%', marginTop: '5%', marginBottom: '5%'}}/>
-                        <p id='text-failure' style={{marginLeft: '5%'}}></p>
+                    <div id='failure-loader' style={{display: 'none' , margin: 'auto', flex: 'auto', alignItems: 'center' , alignContent: 'center' }}>
+                    <img alt='failure-icon' src={failure} style={{width: 100 , marginLeft: '30%', marginTop: '5%', marginBottom: '5%'}}/>
+                        <p id='text-failure-loader' style={{marginLeft: '5%'}}></p>
                     </div>
-                    <div id='loader' style={{display: 'none'}}>
-                        <label style={{marginLeft: '3%'}}htmlFor="recipient-name" className="col-form-label">Guardando...</label>
+                    <div id='loader-loader' style={{display: 'none'}}>
+                        <label style={{marginLeft: '3%'}}htmlFor="recipient-name" className="col-form-label">Cargando...</label>
                         <div className="loader" id='loader' > </div>
                     </div>
                     <div className="modal-footer">
-                        <button type="button" onClick={()=>this.hideModal()} className="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="button" onClick={()=>this.hideModal()} className="btn btn-secondary" id='close-load-buttom'data-dismiss="modal">Cerrar</button>
                         <button type="button" id='load-buttom' onClick={()=>this.load()} className="btn btn-success">Cargar</button>
                     </div>
                     </div>

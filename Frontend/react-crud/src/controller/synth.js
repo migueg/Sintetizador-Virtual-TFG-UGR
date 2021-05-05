@@ -351,9 +351,9 @@ class Synth{
         var effects={};
 
         effects['delay'] = this.#delay.getState();
-        effects ['distorsion'] = this.#distorsion.getState();
-        effects ['filter'] = this.#filter.getState();
-        effects ['reverb'] = this.#reverb.getState();
+        effects['distorsion'] = this.#distorsion.getState();
+        effects['filter'] = this.#filter.getState();
+        effects['reverb'] = this.#reverb.getState();
         
         return effects;
     }
@@ -521,6 +521,7 @@ class Synth{
                 break;
             default:
                 console.error("Error: valor incorrecto ")
+                break;
         }
     }
 
@@ -584,7 +585,6 @@ class Synth{
      setVolum(osc, vol){
         switch(osc){
             case 'A':
-              
                 this.#oscillatorA.setVolum(vol);
             break;
             

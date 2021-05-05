@@ -189,8 +189,7 @@ class oscillator  {
      state['on'] = this.#checked;
      state['gain'] = this.#volume;
      state['wave'] = this.voice.getType();
-   
-     console.log(state)
+
      return state;
 
   }

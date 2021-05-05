@@ -24,7 +24,6 @@ class Modal extends React.Component{
     }  
      
     setRating = (data)=> {
-        console.log('AQUI')
         this.state.valoration = data;
     }
 
@@ -45,36 +44,62 @@ class Modal extends React.Component{
             document.getElementById("modal").style.display = "none"
             document.getElementById('recipient-name').value = "";
             document.getElementById('recipient-description').value = ""
+            document.getElementById('md-body').style.display = 'block';
+            document.getElementById('success').style.display = 'none';
+            document.getElementById('failure').style.display = 'none';
             document.getElementById('span-name').style.display= 'none';
         }else if(this.state.type === 'load'){
-            console.log('AQUI')
-
             $('#load-buttom').removeAttr("disabled");
+            document.getElementById('md-body-loader').style.display = 'block';
             document.getElementById("modalLoad").style.display = "none"
+            document.getElementById('success-loader').style.display = 'none';
+            document.getElementById('failure-loader').style.display = 'none';
         }
-        document.getElementById('md-body').style.display = 'block';
-        document.getElementById('success').style.display = 'none';
-        document.getElementById('failure').style.display = 'none';
+       
         
         document.getElementById("backdrop").style.display = "none"
         
         //document.getElementById("save").classNameName += document.getElementById("save").classNameName.replace("show", "")
     }
     __showLoader(){
-        document.getElementById('md-body').style.display = 'none';
-        document.getElementById('loader').style.display = 'block';
-        $('#save-buttom').attr('disabled',true);
+        if(this.state.type === 'save'){
+            $('#save-buttom').attr('disabled',true);
+            document.getElementById('md-body').style.display = 'none';
+            document.getElementById('loader').style.display = 'block';
+        }else{
+            document.getElementById('md-body-loader').style.display = 'none';
+            document.getElementById('loader-loader').style.display = 'block';
+        }
     }
     
     __handleResponse(resp){
-        document.getElementById('loader').style.display = 'none';
-        if(resp.state){
-            document.getElementById('success').style.display = 'block';
-            document.getElementById('text-success').innerText = '¡ '+ resp.msg + '!';
-        }else{
-            document.getElementById('failure').style.display = 'block';
-            document.getElementById('text-failure').innerText = 'Vaya...., tenemos problemas. No es posible guadar el sonido. Intentalo más tarde';
+        var idS, idF, tS,tF;
+        if(this.state.type === 'save'){
+            document.getElementById('loader').style.display = 'none';
+            idS = 'success';
+            idF = 'failure';
+            tS = 'text-success';
+            tF = 'text-failure';
         }
+
+        if(this.state.type === 'load'){
+            document.getElementById('loader-loader').style.display = 'none';
+            idS = 'success-loader';
+            idF = 'failure-loader';
+            tS = 'text-success-loader';
+            tF = 'text-failure-loader';
+            $('#close-load-buttom').attr('disabled',false);
+
+        }
+        if(resp.state){
+            document.getElementById(idS).style.display = 'block';
+            document.getElementById(tS).innerText = '¡ '+ resp.msg + '!';
+        }else{
+            document.getElementById(idF).style.display = 'block';
+            document.getElementById(tF).innerText = 'Vaya...., tenemos problemas. Intentalo más tarde';
+        }
+
+
     }
     async __saveInBD(data){
         const resp = await sinte.save(data);

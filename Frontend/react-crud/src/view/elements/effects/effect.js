@@ -50,6 +50,28 @@ class Effect extends React.Component{
         }
         
     }
+    /**
+     * Método que se encarga de mandar la orden de aplicar o 
+     * desaplicar el efecto cuando se carga un sonido desde BD
+     * 
+     * @method apply
+     * @param {Boolean} b 
+     */
+    apply(b){
+        var check = 'interruptor'+this.#type
+        var now =   document.getElementById(check).checked 
+        document.getElementById(check).checked = b;
+
+        if(b){
+            this.synth.applyEffect(this.#type);
+
+        }else{
+            if(now){
+                this.synth.disapplyEffect(this.#type);
+
+            }
+        }
+    }
 
     /**
      * Método que devuelve un interruptor para aplicar o 
