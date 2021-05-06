@@ -152,8 +152,13 @@ class TableUI extends React.Component{
    }
     async updateTable(){
         const metadata = await sinte.fetchThings('metadata');
-        
-        this.setState({metadata: metadata , data: true});
+        if(metadata){
+            this.setState({metadata: metadata , data: true});
+
+        }else{
+            this.setState({ data: false});
+
+        }
        
     }
     async componentDidMount(){
@@ -330,7 +335,13 @@ class TableUI extends React.Component{
                             }
                         )
                         ): (
-                            this.state.data
+                            <TableRow>
+                                <TableCell></TableCell>
+                                <TableCell><h4 style={{color: 'red'}}>Parece que tenemos problemas..</h4></TableCell>
+                                <TableCell></TableCell>
+                                <TableCell></TableCell>
+                                <TableCell></TableCell>
+                            </TableRow>
                         )
                     }
                    

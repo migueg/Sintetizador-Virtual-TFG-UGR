@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './css/index.css';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route,Switch } from "react-router-dom";
 import App from './App';
+import Login from './view/login-component'
+import Nav from './view/navbar'
+
 //import * as serviceWorker from "ser";
 import reportWebVitals from './reportWebVitals';
 
@@ -14,8 +17,15 @@ import reportWebVitals from './reportWebVitals';
  */
 
 ReactDOM.render(
+
   <Router>
-    <Route path="/" component={App}/>
+      <Nav />
+    <Switch>
+      <Route path="/synth" component={App}/>
+      <Route path='/' component={Login}/>
+    </Switch>
+   
+
   </Router>,
   document.getElementById('root')
 );

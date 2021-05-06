@@ -1,8 +1,6 @@
 
 import './css/App.css';
 import React from 'react'
-import { BrowserRouter,Route } from 'react-router-dom'
-import Nav from './view/navbar'
 import OscComponents from './view/osc-components'
 import Header from './view/head-component';
 import Piano from './view/piano-component'
@@ -166,15 +164,15 @@ class App extends React.Component{
      // style={{backgroundColor: '#282828'}}
      >
      
-      <BrowserRouter>
+      
         <div>
-            <Nav />
             <div className="header">
               <Header ref={this.header} showFX={this.showFX} parentCallback={this.updateTable} showOsc={this.showOsc} showLb={this.showLb} />
             </div>
            
+            
             <div className="oscillators" id="osc">
-              <Route exact path="/" component={()=> <OscComponents ref={this.oscillators}/>} /> 
+              <OscComponents ref={this.oscillators}/> 
             </div>
             <div className="FX off" id="fx">
               <FX ref={this.fx}/>
@@ -187,7 +185,10 @@ class App extends React.Component{
             </div>
 
         </div>
-      </BrowserRouter>
+        <div>
+
+        </div>
+   
   
     
     </div>
