@@ -1,49 +1,69 @@
 import React from 'react'
-import  {Container,Row,Col} from 'react-bootstrap';
+import  {Container} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
-import portada from '../img/portada.gif'
+import portada from '../img/portada.jpg'
+import '../css/login.css'
+import { Link } from 'react-router-dom';
 
 class Login extends React.Component{
     constructor(){
         super();
     }
 
+    checkForm(){
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        var send = false
+        if(username !== '' && password !== '' ){
+            send = true;
+        }
+
+        if(!send){
+            document.getElementById('span').style.display = '';
+        }
+    }
     render(){
         return( 
-            <div>
-
-            < Container  fluid style={{backgroundImage: `url(${portada})`,
-            backgroundRepeat: 'no-repeat', 
-            backgroundSize: '100%',
-             width:'100%', minHeight: '100%',
-             height: '100%' , 
-              display: 'flex' , 
-                alignContent: 'center' ,
-                alignItems: 'center',
-                justifyContent: 'space-around',
-             paddingBottom: '0%'}}>
-
-                <div style={{width: '40%' , backgroundColor: 'RGB(214, 223, 227,0.7)'}}>
-                <form style={{width: '100%'}}>
+            <div style= {{height: '94%'}}>
+            
+            < Container id='background'fluid style={{backgroundImage: `url(${portada})`}}>
+                <div className='item1'>
+                    <h1>¡Bienvenido!</h1>
+                    <h6>¿Estás preparado para empezar a crear?</h6>
+                </div>
+                <div id='card'  className='item2'>
+                    <form style={{width: '90%',
+                    marginTop: '4%',
+                    marginBottom: '4%',
+                    marginLeft: '5%'}}>
                     <div className="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        <h3 id='login'>Log In</h3>
+                        <span aria-details='login' style={{color: 'red', display:'none'}}  id='span'>*Todos los campos son obligatorios</span>
+                        <br/>
+                        <label htmlFor="username">Nombre de usuario</label>
+                        <input type="email" class="form-control" id="username" aria-describedby="nameHelp" placeholder="Nombre de usuario"/>
+                        
                     </div>
                     <div className="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"/>
+                        <label htmlFor="password">Contraseña</label>
+                        <input type="password" class="form-control" id="password" placeholder="Contraseña"/>
+                        
                     </div>
-                    <div className="form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1"/>
-                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <label htmlFor='register'>¿Aún no tienes una cuenta?</label>
+                    <Link style={{marginLeft: '2%'}} to='/singup' id='register'>Regístrate</Link> <br/>
+                    <button type="submit"style={{width: '40%' , marginTop: '5%', marginLeft: '30%' }} onClick={()=>this.checkForm()} class="btn btn-primary">Entrar</button>
                     </form>
                 </div>
             </Container>
-            <Container fluid>
-                <h1>Footer</h1>
+            <Container style={{height: '10.5%' , padding: 0}} fluid>
+             <footer  style={{height: '100%', width: '100%'}} class="bg-light text-center text-lg-start">
+               
+                <div class="text-center p-3" id='footer' >
+                    © 2021 Copyright:
+                    <a class="text-dark" href="https://www.linkedin.com/in/miguel-garc%C3%ADa-tenorio-114352201/">Miguel García Tenorio</a>
+                </div>
+               
+                </footer>
             </Container>
             </div>
 

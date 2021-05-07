@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import './css/index.css';
 import { BrowserRouter as Router, Route,Switch } from "react-router-dom";
 import App from './App';
-import Login from './view/login-component'
+import Login from './view/login-component';
+import SingUp from './view/singup-component';
+
 import Nav from './view/navbar'
 
 //import * as serviceWorker from "ser";
@@ -22,7 +24,9 @@ ReactDOM.render(
       <Nav />
     <Switch>
       <Route path="/synth" component={App}/>
+      <Route path='/singup' component={SingUp}/>
       <Route path='/' component={Login}/>
+      
     </Switch>
    
 
