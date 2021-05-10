@@ -1,10 +1,13 @@
 const Notes = require ('../models/notes');
+const userModel = require('../models/users');
+const jwt = require("jsonwebtoken");
+
 const categories = require('../data/categories');
 const notesMap  = require('../data/notes');
 const statesModels = require('../models/states');
-const { response } = require('express');
 const bson = new (require('bson'))();
 
+const SIGN = "f8b9afc6-f34f-490f-9353-22dfbc5edc9b"
 
 /********* MÉTODOS AUXILIARES *************/
 function sendResponse(res,code,msg){
@@ -32,8 +35,21 @@ function createOscillator(osc,en,id){
      return oscillator;
 }
 
+async function checkPassword(user,password){
+    console.log(user)
+    const resp = await user.checkPassword(password,function(error, isMatch){
+        if(error){
+            return false;
+        }else if(!isMatch){
+            return false
+        }else{
+            return true;
+        }
+    })
 
-/********* MÉTODOS ASINCRONOS *************/
+    return resp;
+}
+/********* MÉTODOS PRINCIPALES *************/
  async function createNotes(req,res){
     Notes.find({key: 'C1'},function (err,docs){
         if(err){
@@ -83,6 +99,36 @@ async function createCategories(req,res){
     });
 }
 
+async function login(req,res){
+    if(req.body.user && req.body.user.username && req.body.user.password){
+        var user = req.body.user;
+        const resp = await userModel.findOne({username: user.username}).exec(function(error,u){
+            if(error){
+                sendResponse(res,'500','Error interno del servidor');
+            }else if(!u){
+                sendResponse(res,'400','Usuario no registrado');
+            }else{
+                u.checkPassword(user.password,function(isMatch){
+                    if(isMatch){
+                        const token = jwt.sign({username: u.username, role: u.role},SIGN); //generamos el token
+                        sendResponse(res, '200', {token: token})
+                    
+                    }else{
+                        sendResponse(res,'400', 'Contraseña incorrecta')
+
+                    }
+                })
+
+              
+    
+            }
+        })
+    }else{
+        sendResponse(res,'400','Petición incorrecta')
+    }
+    
+    
+}
 async function getCategories(req,res){
     var cts ;
     await statesModels.categoryModel.find({},function(err,docs){
@@ -170,6 +216,9 @@ async function getStatesMetaData(req,res){
     
     console.log(response)
 }
+
+
+
 async function saveStateInBD(state,res){
     
         const resp = await state.save( function(err){
@@ -259,6 +308,40 @@ async function saveState(req,res){
 }
 
 
+async function registerUser(req,res){
+    var user = req.body.user;
+    var d = new Date();
+    var date =  d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate()
+    if(user.username){
+        const userNew = new userModel({
+            username: user.username,
+            password: user.password,
+            role: "user",
+            email: user.email,
+            date: user.date,
+            created: date
+        })
+
+        userNew.save(function(err){
+            if(err){
+                if(err.keyValue.username){
+                    sendResponse(res,'500','El nombre de usuario ya existe, prueba con otro');
+
+                }else if(err.keyValue.email){
+                    sendResponse(res,'500','Ya hay una cuenta registrada con ese correo. Introduce otro correo.');
+
+                }else{
+                    sendResponse(res,'500', 'Error interno del servidor');
+                }
+                
+            }else{
+                sendResponse(res,'201','Usuario registrado con éxito');
+
+            }
+        })
+    }
+}
+
 module.exports = {
     createNotes,
     getCategories,
@@ -266,5 +349,7 @@ module.exports = {
     saveState,
     createCategories,
     getState,
-    getStatesMetaData
+    getStatesMetaData,
+    registerUser,
+    login
 }

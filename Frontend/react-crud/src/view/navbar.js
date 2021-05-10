@@ -46,7 +46,7 @@ class Navigator extends React.Component {
 
                 
                 <Nav className="mr-auto">
-                    <Nav.Link className={this.getNavLinkClass("/")} href="/aaa">Osc</Nav.Link>
+                    <Nav.Link className={this.getNavLinkClass("/login")} href="/aaa">Login</Nav.Link>
                 </Nav>
             
                 </Navbar.Collapse>

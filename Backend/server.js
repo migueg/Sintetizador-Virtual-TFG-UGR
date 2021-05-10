@@ -66,6 +66,19 @@ app.post("/save/:id" , (req, res) => {
         dbController.saveState(req,res);
     }
     
+});
+
+app.post("/singup", (req,res) => {
+  if(req.header('Content-Type') === 'application/json'){
+    dbController.registerUser(req,res);
+}
+
+})
+
+app.post('/singin', (req,res) =>{
+  if(req.header('Content-Type') === 'application/json'){
+    dbController.login(req,res);
+  }
 })
 
 

@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-const { func } = require('prop-types');
 
 const userSchema = new mongoose.Schema({
     username: {type: String, unique: true},
-    password: {type: String, unique: true},
+    password: {type: String, unique: true, length: 80},
     role: {type: String, enum: ["user","admin"]},
     email: {type:String, unique: true},
     date: {type: Date},

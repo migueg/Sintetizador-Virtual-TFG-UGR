@@ -2,17 +2,88 @@ import React from 'react'
 import  {Container} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import portada from '../img/portada.jpg';
+import success from '../img/success.png';
+import failure from '../img/failure.png';
+
+
 import $ from 'jquery';
-import '../css/login.css'
+import '../css/login.css';
+import '../css/loader.css';
 
 
 class SingUp extends React.Component{
     constructor(){
         super();
+        this.data= {}
     }
 
+    __showLoader(){
+        document.getElementById('form').style.display = 'none';
+        document.getElementById('loader').style.display = '';
+    }
+    async register(reg){
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Migue'
+                
+            },
+            body: JSON.stringify(reg)
+        };
+        var that = this;
+        try{
+            await fetch('http://localhost:8080/singup',requestOptions)
+            .then(function(response){
+                if(response.status !== 500){
+                    that.data.state = true;
+                }else{
+                    that.data.state = false;
+                  
+                }
+                return response.json()
+            })
+            .then((data) =>{
+                console.log(that.data.state)
+                if(that.data.state){
+                    that.data = {
+                        state: true,
+                        msg: data.msg
+                    }
+                }else{
+                        that.data = {
+                            state: false,
+                            msg: data.msg
+                        }
+                    }
+                })
+            
+        }catch(err){
+            that.data = {
+                state: false,
+                msg: err
+            };
+            console.error(err);
+        }
+
+        console.log(this.data)
+    }
+
+     handleResponse(){
+        console.log(this.data)
+        if( this.data.state){
+            document.getElementById('success').style.display = '';
+            document.getElementById('text-success').innerText = this.data.msg;
+
+        }else{
+            document.getElementById('failure').style.display = '';
+            document.getElementById('text-failure').innerText = this.data.msg;
+
+        }
+        document.getElementById('loader').style.display = 'none';
+    }   
     
-    checkForm(){
+    async checkForm(){
         document.getElementById('spanpass').style.display = 'none';
         document.getElementById('spanlength').style.display = 'none';
         document.getElementById('span').style.display = 'none';
@@ -40,9 +111,11 @@ class SingUp extends React.Component{
 
         if(!pw){
             document.getElementById('spanpass').style.display = '';
+            send = false;
         }else{
             if(!length){
                 document.getElementById('spanlength').style.display = '';
+                send = false;
                 
             }
             
@@ -50,10 +123,26 @@ class SingUp extends React.Component{
 
         
         if(!send){
-            document.getElementById('span').style.display = '';
+            if(pw && length){
+                document.getElementById('span').style.display = '';
+            }
+        }else{
+            this.__showLoader();
+            const user = {
+                user:{
+                    username: username,
+                    email: email,
+                    password: password,
+                    date: date
+                }
+                
+            }
+            
+            await this.register(user);
+            this.handleResponse()
         }
 
-        return false;
+        
 
     }
     render(){
@@ -100,9 +189,30 @@ class SingUp extends React.Component{
                         <input type="password" class="form-control" id="password2" placeholder="Contraseña"/>
                         
                     </div>
-                   
+
+                  
                     <button type="submit" onClick={()=>this.checkForm()} style={{width: '40%' , marginTop: '5%', marginLeft: '30%' }}  class="btn btn-primary">Registrarse</button>
                     </form>
+
+                    <div id='success' style={{display: 'none' , margin: 'auto', flex: 'auto', alignItems: 'center' , alignContent: 'center' , textAlign: 'center'}}>
+                            <img alt='success-icon' src={success} style={{width: 60 , marginTop: '5%', marginBottom: '5%'}}/>
+                            <p id='text-success'></p>
+                            <button type='button' onClick={()=>{window.location.replace('http://localhost:3000/login')}} style={{margin: 'auto', marginBottom: '3%'}}className="btn btn-primary">Log in</button>
+
+                    </div>
+
+                    <div id='failure' style={{display: 'none' , margin: 'auto', flex: 'auto', alignItems: 'center' , alignContent: 'center', textAlign:'center' }}>
+                        <img alt='failure-icon' src={failure} style={{width: 100 , marginTop: '5%', marginBottom: '5%'}}/>
+                            <p id='text-failure' ></p>
+                            <button type='button' onClick={()=>{window.location.reload()}} style={{margin: 'auto', marginBottom: '3%'}} className="btn btn-primary">Intentar de nuevo</button>
+
+                    </div>
+
+                    <div id='loader' style={{display: 'none'}}>
+                            <label style={{marginLeft: '3%'}}htmlFor="recipient-name" className="col-form-label">Guardando...</label>
+                            <div className="loader" id='loader' > </div>
+
+                    </div>
                 </div>
             </Container>
             <Container style={{height: '10.5%' , padding: 0}} fluid>
