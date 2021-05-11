@@ -10,6 +10,31 @@ const bson = new (require('bson'))();
 const SIGN = "f8b9afc6-f34f-490f-9353-22dfbc5edc9b"
 
 /********* MÉTODOS AUXILIARES *************/
+
+function checkJwtToken(auth){
+    const token = auth;
+
+    return jwt.verify(token, SIGN,function(err,user){
+            if(err){
+                return false;
+            }
+            return true;
+        })
+
+}
+async function checkSpace(id){
+    var response;
+    await statesModels.stateModel.find({userID: id}, function(err,docs){
+        if(err){
+            console.error(err)
+        }else{
+            response = bson.calculateObjectSize(docs)  //Devuelve el tamaño en bytes
+        }
+    })
+
+    
+    //console.log(response)
+}
 function sendResponse(res,code,msg){
     res.status(code) // server errors
     res.setHeader('Content-type','application/json');
@@ -35,20 +60,7 @@ function createOscillator(osc,en,id){
      return oscillator;
 }
 
-async function checkPassword(user,password){
-    console.log(user)
-    const resp = await user.checkPassword(password,function(error, isMatch){
-        if(error){
-            return false;
-        }else if(!isMatch){
-            return false
-        }else{
-            return true;
-        }
-    })
 
-    return resp;
-}
 /********* MÉTODOS PRINCIPALES *************/
  async function createNotes(req,res){
     Notes.find({key: 'C1'},function (err,docs){
@@ -103,6 +115,7 @@ async function login(req,res){
     if(req.body.user && req.body.user.username && req.body.user.password){
         var user = req.body.user;
         const resp = await userModel.findOne({username: user.username}).exec(function(error,u){
+            
             if(error){
                 sendResponse(res,'500','Error interno del servidor');
             }else if(!u){
@@ -111,7 +124,17 @@ async function login(req,res){
                 u.checkPassword(user.password,function(isMatch){
                     if(isMatch){
                         const token = jwt.sign({username: u.username, role: u.role},SIGN); //generamos el token
-                        sendResponse(res, '200', {token: token})
+                        /* res.status(200) 
+                        res.setHeader('Content-type','application/json');
+                        var date = new Date(Number(Date.now() + 48 * 3600000))//Acaba en 2 dias
+                        var options = { 
+                            expires: date,
+                            
+                        }
+                        res.cookie('token',token,options)
+                        res.send({msg: 'Token generado'});
+ */
+                        sendResponse(res, '200', {token: token, user: u.username}, )
                     
                     }else{
                         sendResponse(res,'400', 'Contraseña incorrecta')
@@ -168,54 +191,54 @@ async function getNotes(req,res){
 
 
 async function getState(req,res){
-    var id = req.header('Authorization')
-    var select = 'name delay distorsion filter oscA oscB reverb'
-    if(req.params.id){
-        await statesModels.stateModel.find({userID: id, name: req.params.id}, select, function(err,docs){
-            if(err){
-                sendResponse(res,'500','Error al obtener los sonidos');
-            }else{
-                if(docs.length !== 0){
-                    sendResponse(res,'200',docs);
+    if(checkJwtToken(req.header('Authorization'))){
+        var id = req.header('User');
+        var select = 'name delay distorsion filter oscA oscB reverb'
+        if(req.params.id){
+            await statesModels.stateModel.find({userID: id, name: req.params.id}, select, function(err,docs){
+                if(err){
+                    sendResponse(res,'500','Error al obtener los sonidos');
                 }else{
-                    sendResponse(res,'404','El sonido no se ha encontrado en BD')
+                    if(docs.length !== 0){
+                        sendResponse(res,'200',docs);
+                    }else{
+                        sendResponse(res,'404','El sonido no se ha encontrado en BD')
+                    }
                 }
-            }
-        })
+            })
+        }else{
+            sendResponse(res,'400','Petición incorrecta');
+        }
     }else{
-        sendResponse(res,'400','Petición incorrecta');
+        console.error('UNAUTHORIZED');
+        sendResponse(res,'401','No estas autorizado')
     }
+   
     
 }
 
 async function getStatesMetaData(req,res){
-    var id = req.header('Authorization')
-    
-    await statesModels.stateModel.find({userID: id}, 'name  description category value ' , function(err,docs){
-        if(err){
-            sendResponse(res,'500','Error al obtener los sonidos');
-        }else{
-            sendResponse(res,'200',docs);
-            
-        }
-    })
+    var token = req.header('Authorization');
+    if(checkJwtToken(token)){
+        
+        var id = req.header('User');
+        await statesModels.stateModel.find({userID: id}, 'name  description category value ' , function(err,docs){
+            if(err){
+                sendResponse(res,'500','Error al obtener los sonidos');
+            }else{
+                sendResponse(res,'200',docs);
+                
+            }
+        })
+    }else{
+        console.error('UNAUTHORIZED A');
+        sendResponse(res,'401','No estas autorizado')
+    }
 }
 
 
 
- async function checkSpace(id){
-    var response;
-    await statesModels.stateModel.find({userID: id}, function(err,docs){
-        if(err){
-            console.error(err)
-        }else{
-            response = bson.calculateObjectSize(docs)  //Devuelve el tamaño en bytes
-        }
-    })
 
-    
-    console.log(response)
-}
 
 
 
@@ -235,13 +258,14 @@ async function saveStateInBD(state,res){
 
 async function saveState(req,res){
     
-    if(req.header('Authorization') === 'Migue'){
+    if(checkJwtToken(req.header('Authorization'))){
         var bodyState = req.body.state;
         var oscA = bodyState.A;
         var enA = oscA.envelope;
         var oscB = bodyState.B;
         var enB= oscB.envelope;
         var data = req.body.data;
+        var user = req.body.user;
 
         var del = bodyState.effects.delay;
         var dis = bodyState.effects.distorsion;
@@ -287,7 +311,7 @@ async function saveState(req,res){
     
         const state = new statesModels.stateModel({
              name: data.name,
-             userID: req.header('Authorization'),
+             userID: user,
              description: data.description,
              category: category,
              value: data.valoration,
@@ -302,8 +326,8 @@ async function saveState(req,res){
          await saveStateInBD(state,res);
          
     }else{
-        console.error('ERROR INTERNO DEL SERVIDOR');
-        sendResponse(res,'500','ERROR INTERNO DEL SERVIDOR')
+        console.error('UNAUTHORIZED');
+        sendResponse(res,'401','No estas autorizado')
     }
 }
 

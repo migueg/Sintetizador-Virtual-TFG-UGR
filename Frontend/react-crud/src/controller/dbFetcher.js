@@ -1,4 +1,6 @@
 class DbFetcher {
+    #token
+    #user
     constructor(){
         this.data = null;
         this.codes = {
@@ -7,8 +9,26 @@ class DbFetcher {
             error: 500,
             notFound: 404
         }
+
+        this.#token = '';
+        this.#user = '';
     }
 
+    
+    setToken(token){
+        this.#token = token;
+
+    }
+    setUser(user){
+        this.#user = user
+    }
+
+    getUser(){
+        return this.#user
+    }
+    getToken(){
+        return this.#token;
+    }
     handleStatus(status){
         switch(status){
             case this.codes.created:

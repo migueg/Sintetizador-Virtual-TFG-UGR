@@ -45,7 +45,7 @@ class Saver extends DbFetcher {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Migue',
+                'Authorization': this.getToken(),
                 'Type': 'deafault-save'
             },
             body: JSON.stringify(toSave)
@@ -92,6 +92,7 @@ class Saver extends DbFetcher {
         var toSave = {};
         toSave['data'] = data
         toSave['state'] = this.#oscilators;
+        toSave['user'] = this.getUser();
         
         await this.__sendRequest(toSave);
         

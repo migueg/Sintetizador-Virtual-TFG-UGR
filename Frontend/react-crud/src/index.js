@@ -1,16 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './css/index.css';
-import { BrowserRouter as Router, Route,Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route,Switch , Redirect} from "react-router-dom";
 import App from './App';
 import Login from './view/login-component';
-import SingUp from './view/singup-component';
+import SignUp from './view/signup-component';
 
 import Nav from './view/navbar'
 
 //import * as serviceWorker from "ser";
 import reportWebVitals from './reportWebVitals';
+import Cookies from 'js-cookie';
 
+const PrivateRoute = ({isAuthenticated, ...props}) => {
+  return (isAuthenticated) ? <Route {...props} /> : <Redirect to="/"/>;
+};
+
+const PublicRoute = ({isAuthenticated, ...props}) => {
+  return (isAuthenticated) ?  <Redirect to="/synth"/> : <Route {...props} /> ;
+};
+
+function    isAuthenticated(){
+  if(Cookies.get('token')){
+      return true;
+  }else{
+      return false;
+  }
+}
 /**
  * Renderiza toda la aplicación
  *
@@ -23,9 +39,9 @@ ReactDOM.render(
   <Router>
       <Nav />
     <Switch>
-      <Route path="/synth" component={App}/>
-      <Route path='/singup' component={SingUp}/>
-      <Route path='/' component={Login}/>
+      <PrivateRoute path="/synth" isAuthenticated={isAuthenticated()} component={App}/>
+      <PublicRoute path='/signup' component={SignUp}/>
+      <PublicRoute path='/' isAuthenticated={isAuthenticated()} component={Login}/>
       
     </Switch>
    

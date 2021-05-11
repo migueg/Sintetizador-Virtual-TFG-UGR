@@ -4,6 +4,8 @@ import {Container,Row,Col } from 'react-bootstrap';
 import {Knob} from './elements/limitedKnob';
 import {types as knobTypes} from './elements/knobtypes';
 import {Envelope} from './elements/envelope';
+import Cookies from 'js-cookie';
+
 
 import 'bootstrap/dist/css/bootstrap.css';
 import '../css/Oscilador.css';
@@ -60,6 +62,12 @@ class Oscilador extends React.Component{
         this.envelope = React.createRef();
         this._KnobVol = React.createRef(); 
         
+        var token = Cookies.get('token');
+        var user = Cookies.get('user');
+
+        if(token && user){
+            sinte.setCookies(token,user)
+        }
     }
 
 

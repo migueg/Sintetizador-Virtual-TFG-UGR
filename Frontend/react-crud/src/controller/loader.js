@@ -52,7 +52,7 @@ class Loader extends DbFetcher {
         const requestOptions = {
             method: this.#method,
             headers: {
-                'Authorization': 'Migue'
+                'Authorization':  this.getToken()
             }
         }
       
@@ -65,7 +65,8 @@ class Loader extends DbFetcher {
         const requestOptions = {
             method: this.#method,
             headers: {
-                'Authorization': 'Migue'
+                'Authorization':  this.getToken(),
+                'User': this.getUser()
             }
         }
         
@@ -82,7 +83,8 @@ class Loader extends DbFetcher {
         const requestOptions = {
             method: this.#method,
             headers: {
-                'Authorization': 'Migue'
+                'Authorization':  this.getToken(),
+                'User': this.getUser()
             }
         }
       

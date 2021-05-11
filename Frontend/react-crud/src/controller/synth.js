@@ -577,6 +577,20 @@ class Synth{
     }
 
     /**
+     * Setter del jwt de autenticacion y del id del usario
+     * 
+     * @method setCookies
+     * @param {String} token Token
+     * @param {String} user Id del usuario
+     */
+    setCookies(token,user){
+        this.#saver.setToken(token);
+        this.#saver.setUser(user);
+        this.#loader.setToken(token);
+        this.#loader.setUser(user);
+
+    }
+    /**
      * Setter del volumen de los osciladores
      * 
      * @method setVolum

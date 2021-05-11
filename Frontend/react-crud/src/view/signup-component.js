@@ -11,7 +11,7 @@ import '../css/login.css';
 import '../css/loader.css';
 
 
-class SingUp extends React.Component{
+class SignUp extends React.Component{
     constructor(){
         super();
         this.data= {}
@@ -26,8 +26,6 @@ class SingUp extends React.Component{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Migue'
-                
             },
             body: JSON.stringify(reg)
         };
@@ -66,11 +64,9 @@ class SingUp extends React.Component{
             console.error(err);
         }
 
-        console.log(this.data)
     }
 
      handleResponse(){
-        console.log(this.data)
         if( this.data.state){
             document.getElementById('success').style.display = '';
             document.getElementById('text-success').innerText = this.data.msg;
@@ -163,35 +159,35 @@ class SingUp extends React.Component{
                         <span aria-details='singup' style={{color: 'red', display:'none'}}  id='spanpass'>*Ambas contraseñas deben ser iguales</span>
                         <br/>
                         <label htmlFor="username">Nombre de usuario</label>
-                        <input type="text" class="form-control" id="username" aria-describedby="nameHelp" placeholder="Nombre de usuario"/>
+                        <input type="text" className="form-control" id="username" aria-describedby="nameHelp" placeholder="Nombre de usuario"/>
                         
                     </div>
                     
                     <div className="form-group">
                         <label htmlFor="email">Correo electrónico</label>
-                        <input type="email" class="form-control" id="email" placeholder="Email"/>
+                        <input type="email" className="form-control" id="email" placeholder="Email"/>
                         
                     </div>
                     <div className="form-group">
                         <label htmlFor="date">Fecha de nacimiento</label>
-                        <input type="date" class="form-control" id="date" placeholder="Email"/>
+                        <input type="date" className="form-control" id="date" placeholder="Email"/>
                         
                     </div>
 
                     <div className="form-group">
                         <label htmlFor="password">Contraseña</label>
-                        <input type="password" class="form-control" id="password" placeholder="Contraseña"/>
+                        <input type="password" className="form-control" id="password" placeholder="Contraseña"/>
                         <span aria-details='password' style={{color: 'red', display:'none'}}  id='spanlength'>*La contraseña tiene que tener mínimo 8 caracteres</span>
 
                     </div>
                     <div className="form-group">
                         <label htmlFor="password2">Repita la contraseña</label>
-                        <input type="password" class="form-control" id="password2" placeholder="Contraseña"/>
+                        <input type="password" className="form-control" id="password2" placeholder="Contraseña"/>
                         
                     </div>
 
                   
-                    <button type="submit" onClick={()=>this.checkForm()} style={{width: '40%' , marginTop: '5%', marginLeft: '30%' }}  class="btn btn-primary">Registrarse</button>
+                    <button type="submit" onClick={()=>this.checkForm()} style={{width: '40%' , marginTop: '5%', marginLeft: '30%' }}  className="btn btn-primary">Registrarse</button>
                     </form>
 
                     <div id='success' style={{display: 'none' , margin: 'auto', flex: 'auto', alignItems: 'center' , alignContent: 'center' , textAlign: 'center'}}>
@@ -216,11 +212,11 @@ class SingUp extends React.Component{
                 </div>
             </Container>
             <Container style={{height: '10.5%' , padding: 0}} fluid>
-             <footer  style={{height: '100%', width: '100%'}} class="bg-light text-center text-lg-start">
+             <footer  style={{height: '100%', width: '100%'}} className="bg-light text-center text-lg-start">
                
-                <div class="text-center p-3" id='footer' >
+                <div className="text-center p-3" id='footer' >
                     © 2021 Copyright:
-                    <a class="text-dark" href="https://www.linkedin.com/in/miguel-garc%C3%ADa-tenorio-114352201/">Miguel García Tenorio</a>
+                    <a className="text-dark" href="https://www.linkedin.com/in/miguel-garc%C3%ADa-tenorio-114352201/">Miguel García Tenorio</a>
                 </div>
                
                 </footer>
@@ -237,4 +233,4 @@ class SingUp extends React.Component{
 }
 
 
-export default SingUp;
+export default SignUp;

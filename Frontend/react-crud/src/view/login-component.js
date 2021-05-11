@@ -4,13 +4,63 @@ import 'bootstrap/dist/css/bootstrap.css';
 import portada from '../img/portada.jpg'
 import '../css/login.css'
 import { Link } from 'react-router-dom';
-
+import Cookies from 'js-cookie';
 class Login extends React.Component{
     constructor(){
         super();
+        this.data = {}
     }
 
-    checkForm(){
+    async __login(user){
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            credentials: 'same-origin',
+            body: JSON.stringify(user)
+            
+        };
+
+        var that = this
+        try{
+            await fetch('http://localhost:8080/singin',requestOptions)
+            .then(function(response){
+                if(response.status !== 500 || response.status !== 400){
+                    that.data.state = true;
+                }else{
+                    that.data.state = false;
+                  
+                }
+                return response.json()
+            })
+            .then((data) =>{
+                console.log(that.data.state)
+                if(that.data.state){
+                    that.data = {
+                        state: true,
+                        msg: data.msg.token,
+                        user: data.msg.user
+
+                    }
+                }else{
+                        that.data = {
+                            state: false,
+                            msg: data.msg
+                        }
+                    }
+                })
+            
+        }catch(err){
+            that.data = {
+                state: false,
+                msg: err
+            };
+            console.error(err);
+        }
+
+    }
+    async checkForm(){
         var username = document.getElementById('username').value;
         var password = document.getElementById('password').value;
         var send = false
@@ -20,7 +70,23 @@ class Login extends React.Component{
 
         if(!send){
             document.getElementById('span').style.display = '';
+        }else{
+            var user = {
+                user: {
+                    username: username,
+                    password: password
+                }
+            }
+    
+            await this.__login(user)
+            if(this.data.state){
+                Cookies.set('token',this.data.msg,{expires:2, path:'' })
+                Cookies.set('user',this.data.user,{expires:2, path:'' })
+            }
+            window.location.replace('http://localhost:3000/synth')
         }
+
+ 
     }
     render(){
         return( 
@@ -35,32 +101,33 @@ class Login extends React.Component{
                     <form style={{width: '90%',
                     marginTop: '4%',
                     marginBottom: '4%',
-                    marginLeft: '5%'}}>
+                    marginLeft: '5%'}}
+                    onSubmit={(e)=>e.preventDefault()}>
                     <div className="form-group">
                         <h3 id='login'>Log In</h3>
                         <span aria-details='login' style={{color: 'red', display:'none'}}  id='span'>*Todos los campos son obligatorios</span>
                         <br/>
                         <label htmlFor="username">Nombre de usuario</label>
-                        <input type="email" class="form-control" id="username" aria-describedby="nameHelp" placeholder="Nombre de usuario"/>
+                        <input type="text" className="form-control" id="username" aria-describedby="nameHelp" placeholder="Nombre de usuario"/>
                         
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Contraseña</label>
-                        <input type="password" class="form-control" id="password" placeholder="Contraseña"/>
+                        <input type="password" className="form-control" id="password" placeholder="Contraseña"/>
                         
                     </div>
                     <label htmlFor='register'>¿Aún no tienes una cuenta?</label>
-                    <Link style={{marginLeft: '2%'}} to='/singup' id='register'>Regístrate</Link> <br/>
-                    <button type="submit"style={{width: '40%' , marginTop: '5%', marginLeft: '30%' }} onClick={()=>this.checkForm()} class="btn btn-primary">Entrar</button>
+                    <Link style={{marginLeft: '2%'}} to='/signup' id='register'>Regístrate</Link> <br/>
+                    <button type="submit"style={{width: '40%' , marginTop: '5%', marginLeft: '30%' }} onClick={()=>this.checkForm()} className="btn btn-primary">Entrar</button>
                     </form>
                 </div>
             </Container>
             <Container style={{height: '10.5%' , padding: 0}} fluid>
-             <footer  style={{height: '100%', width: '100%'}} class="bg-light text-center text-lg-start">
+             <footer  style={{height: '100%', width: '100%'}} className="bg-light text-center text-lg-start">
                
-                <div class="text-center p-3" id='footer' >
+                <div className="text-center p-3" id='footer' >
                     © 2021 Copyright:
-                    <a class="text-dark" href="https://www.linkedin.com/in/miguel-garc%C3%ADa-tenorio-114352201/">Miguel García Tenorio</a>
+                    <a className="text-dark" href="https://www.linkedin.com/in/miguel-garc%C3%ADa-tenorio-114352201/">Miguel García Tenorio</a>
                 </div>
                
                 </footer>
