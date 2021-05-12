@@ -88,6 +88,11 @@ class Header extends React.Component{
                         </div>
                     </Col>
                     <Col>
+                        <div className='device-div'>
+                            <p id='device'></p>
+                        </div>
+                    </Col>
+                    <Col>
                     <Knob 
                      min={0}
                      max={100}

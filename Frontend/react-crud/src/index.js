@@ -21,7 +21,8 @@ const PublicRoute = ({isAuthenticated, ...props}) => {
 };
 
 function    isAuthenticated(){
-  if(Cookies.get('token')){
+  var token = Cookies.get('token') 
+  if( token && token !== 'undefined'){
       return true;
   }else{
       return false;

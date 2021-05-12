@@ -11,6 +11,22 @@ class Login extends React.Component{
         this.data = {}
     }
 
+    checkStatus(status){
+        switch(status){
+            case 400:
+                return false;
+            case 500:
+                return false;
+            case 401:
+                return false;
+            case 200:
+                return true;
+            case 201:
+                return true;
+            default:
+                break;
+        }
+    }
     async __login(user){
         const requestOptions = {
             method: 'POST',
@@ -26,7 +42,8 @@ class Login extends React.Component{
         try{
             await fetch('http://localhost:8080/singin',requestOptions)
             .then(function(response){
-                if(response.status !== 500 || response.status !== 400){
+            
+                if(that.checkStatus(response.status)){
                     that.data.state = true;
                 }else{
                     that.data.state = false;
@@ -35,7 +52,6 @@ class Login extends React.Component{
                 return response.json()
             })
             .then((data) =>{
-                console.log(that.data.state)
                 if(that.data.state){
                     that.data = {
                         state: true,
@@ -52,6 +68,7 @@ class Login extends React.Component{
                 })
             
         }catch(err){
+
             that.data = {
                 state: false,
                 msg: err
@@ -82,8 +99,10 @@ class Login extends React.Component{
             if(this.data.state){
                 Cookies.set('token',this.data.msg,{expires:2, path:'' })
                 Cookies.set('user',this.data.user,{expires:2, path:'' })
+                window.location.replace('http://localhost:3000/synth')
+
             }
-            window.location.replace('http://localhost:3000/synth')
+
         }
 
  

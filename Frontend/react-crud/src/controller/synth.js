@@ -5,7 +5,7 @@ import {Filter} from './filter';
 import {Distorsion} from './distorsion';
 import Saver from './saver';
 import Loader from './loader';
-
+import Midi from './midi';
 /**
  * Clase Fachada del controlador que se comunica con los elementos de la vista.
  *
@@ -117,6 +117,7 @@ class Synth{
     #distorsion;
     #saver;
     #loader;
+    #midi
     
     constructor(){
         //Nodos
@@ -134,6 +135,8 @@ class Synth{
         this.#saver = new Saver(this.#oscillatorA,this.#oscillatorB,this);
         this.#loader = new Loader();
 
+        //Interprete MIDI.
+        this.#midi = new Midi(this);
         //Efectos
         this.#reverb = new Reverb(this.#audioCtx,this.#gainCleanNode,this.#masterVolumeNode);
         this.#delay = new Delay(this.#audioCtx,this.#gainCleanNode,this.#masterVolumeNode);
