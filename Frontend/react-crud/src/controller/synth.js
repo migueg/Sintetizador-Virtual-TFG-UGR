@@ -6,6 +6,7 @@ import {Distorsion} from './distorsion';
 import Saver from './saver';
 import Loader from './loader';
 import Midi from './midi';
+import Recorder from './recorder';
 /**
  * Clase Fachada del controlador que se comunica con los elementos de la vista.
  *
@@ -104,6 +105,23 @@ import Midi from './midi';
  * @private
  */
 
+/**
+ *  Objeto que se va a encargar de gestionar los eventos MIDI
+ * 
+ * @property midi
+ * @type Midi
+ * @private
+ */
+
+/**
+ *  Objeto que se va a encargar de gestionar la grabación de sonidos
+ * 
+ * @property recorer
+ * @type Recorder
+ * @private
+ */
+
+
 
 class Synth{
     #oscillatorA;
@@ -117,7 +135,10 @@ class Synth{
     #distorsion;
     #saver;
     #loader;
-    #midi
+    #midi;
+    #recorder;
+  
+
     
     constructor(){
         //Nodos
@@ -145,10 +166,14 @@ class Synth{
 
         this.#masterVolumeNode.connect(this.#audioCtx.destination)
        
+
+        //Recorder
+        this.#recorder = new Recorder(this.#masterVolumeNode,this.#audioCtx)
         
        
     }
 
+   
     /**
      * Método que se encarga de activar un efecto
      * 
@@ -242,9 +267,7 @@ class Synth{
         return resp;
     }
 
-    decodeState(data,field){
-
-    }
+    
 
 
     /**
@@ -295,7 +318,9 @@ class Synth{
     
     }
 
-   
+    rec(state){
+        this.#recorder.rec(state)
+    }
     /**
      * Método que se encarga de seleccionar el tipo de onda de los osciladores
      * 
@@ -551,6 +576,15 @@ class Synth{
         }else if(osc === 'B'){
             this.#oscillatorB.setPan(value);
         }
+    }
+    /**
+     * Setter de la octava del midi
+     * 
+     * @method setOctave
+     * @param {Integer} oct Octava
+     */
+    setOctave(oct){
+        this.#midi.setOctave(oct)
     }
 
     /**

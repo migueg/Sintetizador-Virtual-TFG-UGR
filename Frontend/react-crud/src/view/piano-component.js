@@ -47,7 +47,7 @@ class Piano extends React.Component{
         this.#octave = 0;
         this.pressedKeys = {}
         this.notes = this.fetchNotes();
-
+        
     }
     //METODOS PRIVADOS 
 
@@ -163,7 +163,8 @@ class Piano extends React.Component{
         }else{
             this.#octave += 2;
         }
-        
+   
+        sinte.setOctave(this.#octave)
         this.changeHtmlNotes();
      
     }
@@ -179,6 +180,7 @@ class Piano extends React.Component{
         }else{
             this.#octave -= 2;
         }
+        sinte.setOctave(this.#octave)
 
         this.changeHtmlNotes();
     }

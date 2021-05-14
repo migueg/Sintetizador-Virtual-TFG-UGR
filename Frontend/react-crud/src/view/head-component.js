@@ -67,6 +67,10 @@ class Header extends React.Component{
     updateTable = ( )=>{
         this.props.parentCallback();
     }
+
+    rec(state){
+        sinte.rec(state)
+    }
     render(){
         return(
             <Container>
@@ -104,6 +108,12 @@ class Header extends React.Component{
                      type={knobTypes.MASTER}/>
 
                  
+                    </Col>
+                    <Col>
+                        <button onClick={()=>this.rec('start')}>start</button>
+                        <button onClick={()=>this.rec('pause')}>pause</button>
+                        <button onClick={()=>this.rec('stop')}>stop</button>
+                        <audio controls id='audio'>aaa</audio>
                     </Col>
                 </Row>
             </Container>
