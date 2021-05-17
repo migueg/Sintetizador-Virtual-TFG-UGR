@@ -291,7 +291,7 @@ export class OscComponents extends Component{
                 
 
 
-                <Container fluid >
+                <Container fluid style={{height: 'fit-content'}}>
                     <Row>
                         <Col className="oscilador"xs >
                         <Oscilador osc={'A'} ref={this.oscA}/>

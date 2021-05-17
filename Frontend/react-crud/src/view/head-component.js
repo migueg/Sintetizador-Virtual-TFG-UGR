@@ -5,7 +5,9 @@ import {Container,Row,Col } from 'react-bootstrap';
 import ModalSave from './elements/modals/modal-save';
 
 
-
+import rec from '../img/grabar.png'
+import pausa from '../img/pausa.png'
+import reload from '../img/reload.png'
 import disquete from '../img/disquete.png'
 import 'bootstrap/dist/css/bootstrap.css';
 import '../css/header.css';
@@ -19,7 +21,8 @@ class Header extends React.Component{
         
         this.state = {
             A: false,
-            B: false
+            B: false,
+            date: new Date()
         }
         this.showOsc = this.showOsc.bind(this)
         this.showFX = this.showFX.bind(this)
@@ -69,34 +72,63 @@ class Header extends React.Component{
     }
 
     rec(state){
+        if(state === 'pause'){
+            console.log('aaa')
+
+            document.getElementById('restart').style.display = '';
+            document.querySelector('#restart').addEventListener('click',()=>this.rec('restart'))
+
+            document.querySelector('#pause').disabled = true;
+            document.querySelector('#pause').removeEventListener('click',()=>this.rec('pause'))
+            document.getElementById('audio').style.display = '';
+        }
+
+        if(state === 'start'){
+            document.getElementById('audio').title = 'Record'+ this.state.date.getDate()+'-'+ this.state.date.getMonth()+ '-' + this.state.date.getFullYear();
+            document.querySelector('#pause').disabled = false;
+            document.querySelector('#pause').addEventListener('click',()=>this.rec('pause'))
+            document.getElementById('restart').style.display = 'none';
+        }
+
+        if(state === 'restart'){
+            document.getElementById('restart').style.display = 'none';
+            document.getElementById('audio').style.display = 'none';
+
+        }
         sinte.rec(state)
     }
     render(){
         return(
-            <Container>
+            <Container fluid>
                 <Row>
                     <Col>
-                    <button  onClick={()=>this.showOsc()}>Oscs</button>
-                    <button  onClick={()=>this.showFX()}>FX</button>
-                    <button  onClick={()=>this.showLb()}>Biblioteca</button>
+                    <button className='pages' onClick={()=>this.showOsc()}>Oscs</button>
+                    <button  className='pages'onClick={()=>this.showFX()}>FX</button>
+                    <button className='pages' onClick={()=>this.showLb()}>Sonidos</button>
                     </Col>
                    
-                    <Col>
+                    <Col  className='save-col' style={{padding: 0}}>
                         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-                        <img alt='save-icon' onClick={()=>this.showModal()} src={disquete} style={{width: 50, float: 'right' , marginTop: '2%'}}></img>
+                        <img alt='save-icon' onClick={()=>this.showModal()} src={disquete} style={{width: 50}}></img>
                         <ModalSave parentCallback={this.getState} parentCallback2={this.updateTable} type='save' />
                     </Col>
-                    <Col>
+                    <Col className='charge-sound'>
                         <div className="LoadedSound" >
                             <p id='sound-charged' style={{marginBottom: 0}}>Sonido</p>
                         </div>
                     </Col>
-                    <Col>
+                    <Col className='save-col' >
                         <div className='device-div'>
                             <p id='device'></p>
                         </div>
                     </Col>
-                    <Col>
+                    <Col className='rec' >
+                        <button className='button' onClick={()=>this.rec('start')} id='start'><img src={rec}></img> </button>
+                        <button className='button' id='pause' disabled={true} ><img src={pausa}></img></button>
+                        <button className='button' onClick={()=>this.rec('stop')} id='restart' style={{display: 'none'}}><img src={reload}></img></button>
+                        <audio  controls id='audio' style={{display: 'none'}}></audio>
+                    </Col>
+                    <Col className='save-col'>
                     <Knob 
                      min={0}
                      max={100}
@@ -109,12 +141,7 @@ class Header extends React.Component{
 
                  
                     </Col>
-                    <Col>
-                        <button onClick={()=>this.rec('start')}>start</button>
-                        <button onClick={()=>this.rec('pause')}>pause</button>
-                        <button onClick={()=>this.rec('stop')}>stop</button>
-                        <audio controls id='audio'>aaa</audio>
-                    </Col>
+                    
                 </Row>
             </Container>
         );

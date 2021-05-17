@@ -31,7 +31,7 @@ class Libary extends React.Component{
     render(){
         return(
         <div  className="LB">
-        <Container fluid>
+        <Container fluid style={{height: '30%'}}>
             <Row>
                 <Col style={{textAlign: 'center'}}>
                     <h3>Biblioteca de sonidos</h3>

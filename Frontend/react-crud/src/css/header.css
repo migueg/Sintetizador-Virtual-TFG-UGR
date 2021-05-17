@@ -2,5 +2,61 @@
     padding: 8%;
     background-color: rgb(190, 224, 255);
     border-style: double;
+    height: 100%;
+
 }
 
+.pages{
+    height: 100%;
+    width: 33%;
+    font-size: 1vw;
+    background-color: rgba(223, 193, 148, 0.288);
+
+}
+
+.save-col{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    background-color: rgba(131, 124, 114, 0.288);
+
+}
+.save-col img{
+    order: 1;
+    justify-content: center;
+    align-self: center;
+
+}
+
+#device{
+    order: 1;
+    margin-top: 2%;
+    text-align: center;
+    justify-content: center;
+    align-self: center;
+}
+.save-col img:hover{
+    cursor: pointer;
+}
+
+.col{
+    padding: 0;
+}
+
+.button{
+    width: 33%;
+    border-radius: 50%;
+    background-color:rgba(145, 191, 236, 0.678)
+    
+}
+.button img{
+    width: 80%;
+    color: red;
+    
+    
+}
+.rec , .charge-sound{
+    background-color: rgba(131, 124, 114, 0.288);
+  
+}

@@ -47,6 +47,7 @@ class Piano extends React.Component{
         this.#octave = 0;
         this.pressedKeys = {}
         this.notes = this.fetchNotes();
+
         
     }
     //METODOS PRIVADOS 
@@ -90,6 +91,10 @@ class Piano extends React.Component{
         
     }
 
+    componentDidMount(){
+        document.getElementById('up').click()
+
+    }
     //MÉTODOS PUBLICOS
 
     /**
@@ -260,7 +265,7 @@ class Piano extends React.Component{
 
     render(){
         return(
-        <div className="piano">
+        <div className="piano-container">
            
             <ul className="notes">
                 <div className="octaves">

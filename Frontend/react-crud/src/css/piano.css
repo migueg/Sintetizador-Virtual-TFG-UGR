@@ -1,6 +1,7 @@
 
-.piano{
+.piano-container{
     box-sizing: border-box;
+    height: 100%;
 }
 ul{
     
@@ -42,7 +43,7 @@ li  p{
 
 
 .white{
-    height: 14.4vw;
+    height: 12.4vw;
     z-index: 2;
     width: 80vw;
     border-left:1px solid #bbb;
@@ -64,6 +65,7 @@ li  p{
 
 .black{
     height: 7.92vw;
+    color: ivory;
     width: 44vw;
     z-index: 3;
     border: 2px solid #000;

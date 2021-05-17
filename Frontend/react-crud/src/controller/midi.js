@@ -48,7 +48,6 @@ class Midi {
             console.log("Disponible el acceso MIDI")
             midi.addEventListener('statechange',(event)=>this.initDevices(event.target)); //detecta si se conecta o desconecta el Midi
             this.initDevices()
-            document.getElementById('up').click()
         },
         (err)=>{
             this.#support=false

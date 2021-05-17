@@ -162,12 +162,10 @@ class App extends React.Component{
 
   
   return (
-    <div className="App" 
-     // style={{backgroundColor: '#282828'}}
-     >
+    <div className="App" >
      
       
-        <div>
+       
             <div className="header">
               <Header ref={this.header} showFX={this.showFX} parentCallback={this.updateTable} showOsc={this.showOsc} showLb={this.showLb} />
             </div>
@@ -187,13 +185,9 @@ class App extends React.Component{
             </div>
 
         </div>
-        <div>
+        
 
-        </div>
-   
-  
     
-    </div>
   );
   }
 }

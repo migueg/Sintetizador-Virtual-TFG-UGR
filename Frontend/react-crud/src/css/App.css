@@ -10,7 +10,7 @@
 
 .header{
     background: rgb(82,66,80);
-    background: radial-gradient(circle, rgba(82,66,80,1) 0%, rgba(162,107,107,1) 50%, rgba(55,39,39,1) 100%);
+    background: radial-gradient(circle, rgb(146, 118, 142) 0%, rgba(162,107,107,1) 50%, rgb(141, 102, 102) 100%);
 }
 
 .off{
@@ -23,3 +23,23 @@ p,label, h1,h2,h3,h4{
     font-weight: 600;
     font-size-adjust: inherit;
 }
+
+.App{
+    min-height: 90%;
+    max-height: 90%;
+    height: fit-content;
+}
+
+.piano{
+  height: 50%;
+  
+}
+
+html, body {
+    height: 100%;
+  }
+  
+#root{
+    height: 100%;
+}
+
