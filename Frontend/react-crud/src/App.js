@@ -6,6 +6,8 @@ import Header from './view/head-component';
 import Piano from './view/piano-component'
 import FX from './view/fx-components';
 import Libary from './view/library-components';
+import Analyser from './view/analyser-component';
+
 import { sinte } from '../src/view/osc-components';
 
 /**
@@ -22,6 +24,8 @@ class App extends React.Component{
     this.showFX = this.showFX.bind(this);
     this.showOsc = this.showOsc.bind(this);
     this.showLb = this.showLb.bind(this);
+    this.showEQ = this.showEQ.bind(this)
+
     this.updateTable = this.updateTable.bind(this);
     this.loadSound = this.loadSound.bind(this);
 
@@ -48,11 +52,38 @@ class App extends React.Component{
 
     return off;
   }
+
+
+  __onOscillators(){
+    this.a = sinte.getChecked('A');
+    this.b = sinte.getChecked('B');
+    if(this.a){
+      sinte.onOscillator('A');
+    }
+
+    if(this.b){
+      sinte.onOscillator('B');
+    }
+  }
+
+  __offOscillators(){
+    this.a = sinte.getChecked('A');
+    this.b = sinte.getChecked('B');
+    if(this.a){
+      sinte.offOscillator('A');
+    }
+    if(this.b){
+      sinte.offOscillator('B');
+    }
+  }
+  
+
   showFX(){
     
     var offlb = this.__isOff('lb');
     var offosc = this.__isOff('osc');
     var offfx = this.__isOff('fx');
+    var offeq = this.__isOff('analyser')
 
     if(offfx){
       document.getElementById('fx').classList.remove('off');
@@ -65,6 +96,10 @@ class App extends React.Component{
         document.getElementById('lb').classList.toggle('off');
 
       }
+
+      if(!offeq){
+        document.getElementById('analyser').classList.toggle('off');
+      }
     }
     
   }
@@ -72,6 +107,7 @@ class App extends React.Component{
     var offlb = this.__isOff('lb');
     var offosc = this.__isOff('osc');
     var offfx = this.__isOff('fx');
+    var offeq = this.__isOff('analyser')
 
     if(offosc){
       document.getElementById('osc').classList.remove('off');
@@ -84,35 +120,20 @@ class App extends React.Component{
         document.getElementById('fx').classList.toggle('off');
 
       }
-    }
-  }
-  __offOscillators(){
-    this.a = sinte.getChecked('A');
-    this.b = sinte.getChecked('B');
-    if(this.a){
-      sinte.offOscillator('A');
-    }
-    if(this.b){
-      sinte.offOscillator('B');
-    }
-  }
-  __onOscillators(){
-    this.a = sinte.getChecked('A');
-    this.b = sinte.getChecked('B');
-    if(this.a){
-      sinte.onOscillator('A');
-    }
 
-    if(this.b){
-      sinte.onOscillator('B');
+      if(!offeq){
+        document.getElementById('analyser').classList.toggle('off');
+      }
     }
   }
-  
+ 
+ 
   showLb(){
     if(window.confirm('Si cambias a la biblioteca, la reproducción de los osciladores estará desctivada')){
       var offlb = this.__isOff('lb');
       var offosc = this.__isOff('osc');
       var offfx = this.__isOff('fx');
+      var offeq = this.__isOff('analyser')
     
 
       if(offlb){
@@ -126,9 +147,37 @@ class App extends React.Component{
           document.getElementById('fx').classList.toggle('off');
   
         }
+        if(!offeq){
+          document.getElementById('analyser').classList.toggle('off');
+        }
       }
     }
    
+  }
+
+  showEQ(){
+    var offlb = this.__isOff('lb');
+    var offosc = this.__isOff('osc');
+    var offfx = this.__isOff('fx');
+    var offeq = this.__isOff('analyser')
+
+    if(offeq){
+      document.getElementById('analyser').classList.remove('off');
+      if(!offosc){
+        document.getElementById('osc').classList.toggle('off');
+      }
+
+      if(!offlb){
+        this.__onOscillators();
+        document.getElementById('lb').classList.toggle('off');
+
+      }
+
+      if(!offfx){
+        document.getElementById('fx').classList.toggle('off');
+      }
+    }
+    
   }
   loadSound(){
      var newState = this.lb.current.newState
@@ -167,7 +216,7 @@ class App extends React.Component{
       
        
             <div className="header">
-              <Header ref={this.header} showFX={this.showFX} parentCallback={this.updateTable} showOsc={this.showOsc} showLb={this.showLb} />
+              <Header ref={this.header} showEQ={this.showEQ} showFX={this.showFX} parentCallback={this.updateTable} showOsc={this.showOsc} showLb={this.showLb} />
             </div>
            
             
@@ -179,6 +228,9 @@ class App extends React.Component{
             </div>
             <div className="LB off" id='lb'>
               <Libary parentCallback={()=>this.loadSound()} ref={this.lb}/>
+            </div>
+            <div className="analyser off" style={{width: '100%'}} id='analyser'>
+              <Analyser/>
             </div>
             <div className="piano">
               <Piano /> 

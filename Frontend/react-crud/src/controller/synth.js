@@ -7,6 +7,8 @@ import Saver from './saver';
 import Loader from './loader';
 import Midi from './midi';
 import Recorder from './recorder';
+import Analyser from './analyser';
+
 /**
  * Clase Fachada del controlador que se comunica con los elementos de la vista.
  *
@@ -121,7 +123,14 @@ import Recorder from './recorder';
  * @private
  */
 
-
+/**
+ *  Objeto que se va a encargar de analizar el espectro de frecuencias 
+ *  producido
+ * 
+ * @property analyser
+ * @type Analyser
+ * @private
+ */
 
 class Synth{
     #oscillatorA;
@@ -137,6 +146,7 @@ class Synth{
     #loader;
     #midi;
     #recorder;
+    #analyser
   
 
     
@@ -164,13 +174,20 @@ class Synth{
         this.#filter = new Filter(this.#audioCtx,this.#gainCleanNode,this.#masterVolumeNode,"highpass");
         this.#distorsion = new Distorsion(this.#audioCtx,this.#gainCleanNode,this.#masterVolumeNode);
 
+        
+         //Recorder
+         this.#recorder = new Recorder(this.#masterVolumeNode,this.#audioCtx)
+
+         //Analizador
+         this.#analyser = new Analyser(this.#masterVolumeNode,this.#audioCtx)
+        
+        
         this.#masterVolumeNode.connect(this.#audioCtx.destination)
        
 
-        //Recorder
-        this.#recorder = new Recorder(this.#masterVolumeNode,this.#audioCtx)
-        
        
+        
+        
     }
 
    
@@ -359,6 +376,23 @@ class Synth{
     /******* GETTERS *********/
 
     /**
+     * Getter de la disponibilidad de los osciladores
+     * 
+     * @method getAvailable
+     * @param {Char} osc Id del oscilador
+     * @returns Boolean
+     */
+       getAvailable(osc){
+        if(osc === 'A'){
+            return this.#oscillatorA.getAvailable();
+        }
+
+        if(osc === 'B'){
+            return this.#oscillatorB.getAvailable();
+        }
+    }
+
+    /**
      * Getter del flag de selección del oscilador
      * 
      * @method getChecked
@@ -369,6 +403,8 @@ class Synth{
         if(osc === 'A'){return this.#oscillatorA.getChecked()}
         if(osc === 'B'){return this.#oscillatorB.getChecked()}
     }
+
+    
     /**
      * Método que devuelve el estado de todos los efectos
      * 
@@ -402,20 +438,20 @@ class Synth{
         }
 
     }
+  
     /**
-     * Getter de la disponibilidad de los osciladores
+     * Getter de distintos parámetros del Analizador
      * 
-     * @method getAvailable
-     * @param {Char} osc Id del oscilador
-     * @returns Boolean
+     * @method getThingsAnalyser
+     * @param {String} thing Parámetro que se quiere
+     * @returns Parámetro
      */
-    getAvailable(osc){
-        if(osc === 'A'){
-            return this.#oscillatorA.getAvailable();
-        }
-
-        if(osc === 'B'){
-            return this.#oscillatorB.getAvailable();
+     getThingsAnalyser(thing){
+        switch(thing){
+            case 'size':
+                return this.#analyser.getSize();
+            case 'data':
+                return this.#analyser.getData();
         }
     }
 

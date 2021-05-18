@@ -26,6 +26,7 @@ class Header extends React.Component{
         }
         this.showOsc = this.showOsc.bind(this)
         this.showFX = this.showFX.bind(this)
+        this.showEQ = this.showEQ.bind(this)
     
     }
     
@@ -67,14 +68,16 @@ class Header extends React.Component{
     showLb(){
         this.props.showLb()
     }
+
+    showEQ(){
+        this.props.showEQ()
+    }
     updateTable = ( )=>{
         this.props.parentCallback();
     }
 
     rec(state){
         if(state === 'pause'){
-            console.log('aaa')
-
             document.getElementById('restart').style.display = '';
             document.querySelector('#restart').addEventListener('click',()=>this.rec('restart'))
 
@@ -101,10 +104,12 @@ class Header extends React.Component{
         return(
             <Container fluid>
                 <Row>
-                    <Col>
+                    <Col style={{padding: 0}} xs={3}>
                     <button className='pages' onClick={()=>this.showOsc()}>Oscs</button>
                     <button  className='pages'onClick={()=>this.showFX()}>FX</button>
+                    <button className='pages'  onClick={()=>this.showEQ()}>EQ</button>
                     <button className='pages' onClick={()=>this.showLb()}>Sonidos</button>
+                  
                     </Col>
                    
                     <Col  className='save-col' style={{padding: 0}}>
