@@ -31,6 +31,9 @@ class Analyser{
         return this.#size;
     }
 
+    consoledomain(){
+        console.log(this.#domain)
+    }
     getData(){
         this.#analyser.getByteFrequencyData(this.#domain) 
        //console.log(this.#domain)

@@ -332,6 +332,7 @@ class Synth{
     playNote(key){
         this.#oscillatorA.play(key)
         this.#oscillatorB.play(key)
+        //this.#analyser.consoledomain();
     
     }
 
