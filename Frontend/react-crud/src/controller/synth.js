@@ -453,6 +453,8 @@ class Synth{
                 return this.#analyser.getSize();
             case 'data':
                 return this.#analyser.getData();
+            case 'separation':
+                return this.#analyser.getSeparation();
         }
     }
 

@@ -1,0 +1,29 @@
+
+#canva-cont{
+    background-color: rgba(66, 59, 59, 0.445);
+    border-style:ridge;
+    border-width: 0.7vw;
+    border-color: rgb(71, 68, 68);
+}
+
+.freqs{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+.freqs p{
+    margin: 0;
+    font-size: 0.9vh;
+}
+
+#0k{
+    order: 1;
+}
+#1k{
+    order: 2;
+
+}
+#20k{
+    order:3;
+}

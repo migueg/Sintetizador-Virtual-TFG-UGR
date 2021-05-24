@@ -1,5 +1,6 @@
 import  React from 'react';
 import { sinte } from './osc-components';
+import '../css/analyser.css';
 import $ from 'jquery';
 class Analyser extends React.Component{
     constructor(){
@@ -7,13 +8,16 @@ class Analyser extends React.Component{
         this.state = {}
         //Para que se llame la función draw
         this.draw = this.draw.bind(this)
-      
-        
+        this.state.separation= sinte.getThingsAnalyser('separation')
+        console.log( this.state.separation)
     }
     componentDidMount(){
         document.querySelector('canvas').click()
     }
 
+    componentDidUpdate(){
+        this.translateCanva()
+    }
     createCanva(event){
         //event.target.clie
         
@@ -50,6 +54,25 @@ class Analyser extends React.Component{
      
     }
 
+    detectFreq(event){
+        document.getElementById('freq-indicator').style.display = '';
+
+        document.getElementById('canva-cont').style.cursor = 'crosshair'
+        var x = event.pageX - $('#canva-cont').offset().left;
+        var y =  event.pageY - $('#canva-cont').offset().top;
+      
+        var offset =   (this.state.separation/ (( this.state.width/ this.state.bufferSize )  *2.5))//Relacion de frecuencias por cada pixels
+
+        if( x >= 0){
+            var freq =  x *  offset//divido lo que ocupa cada casilla
+            var div = document.getElementById('freq-indicator')
+            div.innerText = freq + 'hz';
+            $('#freq-indicator').css("transform","translate3d("+x+"px,"+y+"px,0px)")
+        }else{
+            this.hideIndicator()
+        }
+        
+    }
     draw(){
         //console.log('AQUI')
         //window.setTimeout(this.draw, 2000 )
@@ -63,7 +86,7 @@ class Analyser extends React.Component{
         var bufferSize = this.state.bufferSize;
 
         //Calculamos el ancho  de la barra que se va a puntar
-        var width = ( this.state.width/ bufferSize )  *2.5;
+        var width = ( this.state.width/ bufferSize )  *2.5 ;
         var heigth;
         var x = 0;
         var data = sinte.getThingsAnalyser('data');
@@ -91,21 +114,43 @@ class Analyser extends React.Component{
         }   
 
 
-        
+    
 
+    }
+
+    hideIndicator(){
+        document.getElementById('freq-indicator').style.display = 'none';
     }
     render(){
         
         return(
-            <div id='canva-cont' style={{rotate: '45deg' }}>
+            <div>
 
-            <canvas id='canva' onClick={(e)=>this.createCanva(e)}  style={{width: '50%', height: '100%' }}>
+            <div onMouseLeave={()=>{this.hideIndicator()}} onMouseMove={(event)=>this.detectFreq(event)} id='canva-cont' style={{width: '50%', height: '100%' }} >
+            <div className='freqs'>
+                <p id='0k'>200hz</p>
+                <p id='1k'>10khz</p>
+                <p id='20k'>24khz</p>
+            </div>
+            <div id='freq-indicator' style={{
+                display: 'none',
+                margin: 0, 
+                padding: 5, 
+                backgroundColor: 'whitesmoke',
+                width: '10vh',
+                textAlign: 'center',
+                borderRadius: '60%'}}>
+
+            </div>
+            
+            <canvas id='canva'  onClick={(e)=>this.createCanva(e)}  style={{width: '100%', height: '100%' }}>
                 Alterantive
                 
             </canvas>
             
             </div>
-            
+            </div>
+
         )
        
     }
