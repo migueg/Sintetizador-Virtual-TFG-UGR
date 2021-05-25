@@ -8,6 +8,7 @@ import Loader from './loader';
 import Midi from './midi';
 import Recorder from './recorder';
 import Analyser from './analyser';
+import Equalizer from './equalizer';
 
 /**
  * Clase Fachada del controlador que se comunica con los elementos de la vista.
@@ -132,6 +133,14 @@ import Analyser from './analyser';
  * @private
  */
 
+/**
+ *  Objeto que se encarga de controlar el ecualizador
+ * 
+ * @property eq
+ * @type Equalizer
+ * @private
+ */
+
 class Synth{
     #oscillatorA;
     #oscillatorB;
@@ -146,7 +155,8 @@ class Synth{
     #loader;
     #midi;
     #recorder;
-    #analyser
+    #analyser;
+    #eq;
   
 
     
@@ -181,8 +191,10 @@ class Synth{
          //Analizador
          this.#analyser = new Analyser(this.#masterVolumeNode,this.#audioCtx)
         
+        //Equalizador
+        this.#eq = new Equalizer(this.#masterVolumeNode,this.#audioCtx)
         
-        this.#masterVolumeNode.connect(this.#audioCtx.destination)
+        //this.#masterVolumeNode.connect(this.#audioCtx.destination)
        
 
        

@@ -61,10 +61,12 @@ class Analyser extends React.Component{
         var x = event.pageX - $('#canva-cont').offset().left;
         var y =  event.pageY - $('#canva-cont').offset().top;
       
-        var offset =   (this.state.separation/ (( this.state.width/ this.state.bufferSize )  *2.5))//Relacion de frecuencias por cada pixels
-
+       // var offset =   (this.state.separation/ (( this.state.width/ this.state.bufferSize )  *2.5))//Relacion de frecuencias por cada pixels
+        var pixelPerValue = document.querySelector('canvas').width / this.state.bufferSize
+        var freqPerPixel = this.state.separation / pixelPerValue
         if( x >= 0){
-            var freq =  x *  offset//divido lo que ocupa cada casilla
+            var freq = (x * freqPerPixel) / 2.5
+           // var freq =  x *  offset//divido lo que ocupa cada casilla
             var div = document.getElementById('freq-indicator')
             div.innerText = freq + 'hz';
             $('#freq-indicator').css("transform","translate3d("+x+"px,"+y+"px,0px)")
@@ -121,34 +123,123 @@ class Analyser extends React.Component{
     hideIndicator(){
         document.getElementById('freq-indicator').style.display = 'none';
     }
+    equalize(freq, event){
+        var value = event.target.value;
+        console.log(value)
+
+    }
     render(){
         
         return(
-            <div>
+            <div className='cont' >
 
-            <div onMouseLeave={()=>{this.hideIndicator()}} onMouseMove={(event)=>this.detectFreq(event)} id='canva-cont' style={{width: '50%', height: '100%' }} >
-            <div className='freqs'>
-                <p id='0k'>200hz</p>
-                <p id='1k'>10khz</p>
-                <p id='20k'>24khz</p>
-            </div>
-            <div id='freq-indicator' style={{
-                display: 'none',
-                margin: 0, 
-                padding: 5, 
-                backgroundColor: 'whitesmoke',
-                width: '10vh',
-                textAlign: 'center',
-                borderRadius: '60%'}}>
+                <div className='colum' onMouseLeave={()=>{this.hideIndicator()}} onMouseMove={(event)=>this.detectFreq(event)} id='canva-cont' style={{width: '50%', height: '100%',order:1 }} >
+                    <div className='freqs'>
+                        <p id='0k'>200hz</p>
+                        <p id='1k'>10khz</p>
+                        <p id='20k'>24khz</p>
+                    </div>
+                    <div id='freq-indicator' style={{
+                        display: 'none',
+                        margin: 0, 
+                        padding: 5, 
+                        backgroundColor: 'whitesmoke',
+                        width: '10vh',
+                        textAlign: 'center',
+                        borderRadius: '60%'}}>
 
-            </div>
+                    </div>
+                    
+                    <canvas id='canva'  onClick={(e)=>this.createCanva(e)}  style={{width: '100%', height: '100%' }}>
+                        Alterantive
+                        
+                    </canvas>
+                    
+                </div>
+                <div className='colum' id='eq' style={{width: '100%', order:2 }}>
+                    
+                    <div id='eq-cont'>
+                        <h3 style={{order: 1}}>Ecualizador</h3>
+                        <div id='sliders' style={{order: 2}}>
+                        <div className='section'>
+                            <div className="title">LWF</div>
+                            <div className='range-slider'>
+
+                                <input className='input-range' aria-orientation='vertical'
+                                type='range' step='0.5' defaultValue='0' min='-50' max='50' 
+                                onChange={(event)=>this.equalize('lw',event)}
+                                />
+                             
+                            </div>
+                            <span className="scope scope-min">0</span>
+                            <span className="param">dB</span> 
+                        </div>
+                         
+                        <div className='section'>
+                            <div className="title">LWMF</div>
+                            <div className='range-slider'>
+
+                                <input className='input-range' aria-orientation='vertical'
+                                type='range' step='0.5' defaultValue='0' min='-50' max='50'
+                                onChange={(event)=>this.equalize('lwm',event)}
+                            />
+
+                            </div>
+                            <span className="scope scope-min">0</span>
+                            <span className="param">dB</span> 
+                        </div>
+                        <div className='section'>
+                            <div className="title">MF</div>
+                            <div className='range-slider'>
+
+                                <input className='input-range' aria-orientation='vertical'
+                                type='range' step='0.5' defaultValue='0' min='-50' max='50'
+                                onChange={(event)=>this.equalize('mid',event)}
+
+                            />
+
+                            </div>
+                            <span className="scope scope-min">0</span>
+                            <span className="param">dB</span> 
+                        </div>
+                        <div className='section'>
+                            <div className="title">MHF</div>
+                            <div className='range-slider'>
+
+                                <input className='input-range' aria-orientation='vertical'
+                                type='range' step='0.5' defaultValue='0' min='-50' max='50'
+                                onChange={(event)=>this.equalize('mhg',event)}
+
+                            />
+
+                            </div>
+                            <span className="scope scope-min">0</span>
+                            <span className="param">dB</span> 
+                        </div>
+                        <div className='section'>
+                            <div className="title">HF</div>
+                            <div className='range-slider'>
+
+                                <input className='input-range' aria-orientation='vertical'
+                                type='range' step='0.5' defaultValue='0' min='-50' max='50'
+                                onChange={(event)=>this.equalize('hg',event)}
+
+                            />
+
+                            </div>
+                            <span className="scope scope-min">0</span>
+                            <span className="param">dB</span> 
+                        </div>
+                        </div>
+                        
+                        </div>
+
+
+
+
+
+                </div>
             
-            <canvas id='canva'  onClick={(e)=>this.createCanva(e)}  style={{width: '100%', height: '100%' }}>
-                Alterantive
-                
-            </canvas>
-            
-            </div>
             </div>
 
         )
