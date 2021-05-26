@@ -125,7 +125,11 @@ class Analyser extends React.Component{
     }
     equalize(freq, event){
         var value = event.target.value;
-        console.log(value)
+        sinte.equalize(freq,value)
+        var parent = event.target.parentElement
+        var grandad = parent.parentElement;
+        var span = grandad.getElementsByTagName('span')[0];
+        span.innerText = value
 
     }
     render(){
@@ -136,7 +140,7 @@ class Analyser extends React.Component{
                 <div className='colum' onMouseLeave={()=>{this.hideIndicator()}} onMouseMove={(event)=>this.detectFreq(event)} id='canva-cont' style={{width: '50%', height: '100%',order:1 }} >
                     <div className='freqs'>
                         <p id='0k'>200hz</p>
-                        <p id='1k'>10khz</p>
+                        <p id='1k'>12khz</p>
                         <p id='20k'>24khz</p>
                     </div>
                     <div id='freq-indicator' style={{
@@ -166,7 +170,7 @@ class Analyser extends React.Component{
                             <div className='range-slider'>
 
                                 <input className='input-range' aria-orientation='vertical'
-                                type='range' step='0.5' defaultValue='0' min='-50' max='50' 
+                                type='range' step='0.5' defaultValue='0' min='-25' max='25' 
                                 onChange={(event)=>this.equalize('lw',event)}
                                 />
                              
@@ -180,7 +184,7 @@ class Analyser extends React.Component{
                             <div className='range-slider'>
 
                                 <input className='input-range' aria-orientation='vertical'
-                                type='range' step='0.5' defaultValue='0' min='-50' max='50'
+                                type='range' step='0.5' defaultValue='0' min='-25' max='25'
                                 onChange={(event)=>this.equalize('lwm',event)}
                             />
 
@@ -193,7 +197,7 @@ class Analyser extends React.Component{
                             <div className='range-slider'>
 
                                 <input className='input-range' aria-orientation='vertical'
-                                type='range' step='0.5' defaultValue='0' min='-50' max='50'
+                                type='range' step='0.5' defaultValue='0' min='-25' max='25'
                                 onChange={(event)=>this.equalize('mid',event)}
 
                             />
@@ -207,7 +211,7 @@ class Analyser extends React.Component{
                             <div className='range-slider'>
 
                                 <input className='input-range' aria-orientation='vertical'
-                                type='range' step='0.5' defaultValue='0' min='-50' max='50'
+                                type='range' step='0.5' defaultValue='0' min='-25' max='25'
                                 onChange={(event)=>this.equalize('mhg',event)}
 
                             />
@@ -221,7 +225,7 @@ class Analyser extends React.Component{
                             <div className='range-slider'>
 
                                 <input className='input-range' aria-orientation='vertical'
-                                type='range' step='0.5' defaultValue='0' min='-50' max='50'
+                                type='range' step='0.5' defaultValue='0' min='-25' max='25'
                                 onChange={(event)=>this.equalize('hg',event)}
 
                             />

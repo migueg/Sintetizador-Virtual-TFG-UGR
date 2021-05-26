@@ -66,7 +66,7 @@ class Navigator extends React.Component {
     
                     
                     <Nav className="mr-auto">
-                        <Nav.Link className={this.getNavLinkClass("#")} >Perfil</Nav.Link>
+                        <Nav.Link className={this.getNavLinkClass("/profile")} href="/profile" >Perfil</Nav.Link>
                         <Nav.Link className={this.getNavLinkClass("#")} onClick={()=>this.logout()}>Logout</Nav.Link>
 
 

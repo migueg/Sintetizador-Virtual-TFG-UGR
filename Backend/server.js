@@ -60,6 +60,10 @@ app.get("/states/metadata", (req,res) => {
   dbController.getStatesMetaData(req,res);
 })
 
+app.get("/profile",(req,res)=>{
+  dbController.getProfile(req,res);
+});
+
 app.post("/save/:id" , (req, res) => {
     if(req.header('Content-Type') === 'application/json'){
         //console.log('AQUI: ' + req.params.id);

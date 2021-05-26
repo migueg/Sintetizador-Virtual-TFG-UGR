@@ -6,7 +6,7 @@ import success from '../img/success.png';
 import failure from '../img/failure.png';
 
 
-import $ from 'jquery';
+
 import '../css/login.css';
 import '../css/loader.css';
 
@@ -42,7 +42,6 @@ class SignUp extends React.Component{
                 return response.json()
             })
             .then((data) =>{
-                console.log(that.data.state)
                 if(that.data.state){
                     that.data = {
                         state: true,

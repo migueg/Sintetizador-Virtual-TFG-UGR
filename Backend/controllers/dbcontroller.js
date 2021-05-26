@@ -189,7 +189,30 @@ async function getNotes(req,res){
     
 }
 
-
+async function getProfile(req,res){
+    if(checkJwtToken(req.header('Authorization'))){
+        var id = req.header('User');
+        var select = "username email date created role"
+        if(id){
+            await userModel.findOne({username: id},select,function(err,docs){
+                if(err){
+                    sendResponse(res,'500','Error al obtener el perfil');
+                }else{
+                    if(docs.length !== 0){
+                        sendResponse(res,'200',docs);
+                    }else{
+                        sendResponse(res,'404','El perfil no se ha encontrado en BD')
+                    }
+                }
+            })
+        }else{
+            sendResponse(res,'400','Petición incorrecta');
+        }
+    }else{
+        console.error('UNAUTHORIZED');
+        sendResponse(res,'401','No estas autorizado')
+    }
+}
 async function getState(req,res){
     if(checkJwtToken(req.header('Authorization'))){
         var id = req.header('User');
@@ -375,5 +398,6 @@ module.exports = {
     getState,
     getStatesMetaData,
     registerUser,
-    login
+    login,
+    getProfile
 }

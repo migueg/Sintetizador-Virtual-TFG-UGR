@@ -157,7 +157,8 @@ class Synth{
     #recorder;
     #analyser;
     #eq;
-  
+    #eqGain;
+
 
     
     constructor(){
@@ -167,6 +168,7 @@ class Synth{
         this.#audioCtx = new AudioContext();
         this.#masterVolumeNode = this.#audioCtx.createGain();
         this.#gainCleanNode = this.#audioCtx.createGain();
+        this.#eqGain = this.#audioCtx.createGain();
 
         //Osciladores
         this.#oscillatorA = new oscillator(this.#masterVolumeNode,this.#audioCtx,this.#gainCleanNode);
@@ -188,11 +190,13 @@ class Synth{
          //Recorder
          this.#recorder = new Recorder(this.#masterVolumeNode,this.#audioCtx)
 
+         //Equalizador
+          this.#eq = new Equalizer(this.#masterVolumeNode,this.#audioCtx,this.#eqGain)
+
          //Analizador
-         this.#analyser = new Analyser(this.#masterVolumeNode,this.#audioCtx)
+         this.#analyser = new Analyser(this.#eqGain,this.#audioCtx)
         
-        //Equalizador
-        this.#eq = new Equalizer(this.#masterVolumeNode,this.#audioCtx)
+        
         
         //this.#masterVolumeNode.connect(this.#audioCtx.destination)
        
@@ -256,6 +260,18 @@ class Synth{
             default:
                 break;
         }
+    }
+
+    /**
+     * Método que se encarga de enviar al ecualizador que banda
+     * hay que atenuar o incrementar
+     * 
+     * @method equalize
+     * @param {String} freq Banda del ecualizador
+     * @param {Float} value Decremento o incremento en db
+     */
+    equalize(freq,value){
+        this.#eq.equalize(freq,value)
     }
 
     /**

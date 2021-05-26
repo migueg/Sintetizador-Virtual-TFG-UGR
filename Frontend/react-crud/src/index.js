@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Route,Switch , Redirect} from "react-router-do
 import App from './App';
 import Login from './view/login-component';
 import SignUp from './view/signup-component';
+import ErrorPage from './view/errorPage-component';
+import Profile from './view/profile-component';
 
 import Nav from './view/navbar'
 
@@ -40,10 +42,12 @@ ReactDOM.render(
   <Router>
       <Nav />
     <Switch>
-      <PrivateRoute path="/synth" isAuthenticated={isAuthenticated()} component={App}/>
-      <PublicRoute path='/signup' component={SignUp}/>
-      <PublicRoute path='/' isAuthenticated={isAuthenticated()} component={Login}/>
-      
+      <PrivateRoute exact path="/synth" isAuthenticated={isAuthenticated()} component={App}/>
+      <PrivateRoute exact path="/profile" isAuthenticated={isAuthenticated()} component={Profile}/>
+      <PublicRoute exact path='/signup' component={SignUp}/>
+      <PublicRoute exact path='/' isAuthenticated={isAuthenticated()} component={Login}/>
+      <Route component={ErrorPage}/>
+
     </Switch>
    
 
