@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie';
+
 class DbFetcher {
     #token
     #user
@@ -7,7 +9,8 @@ class DbFetcher {
             created: 201,
             ok: 200,
             error: 500,
-            notFound: 404
+            notFound: 404,
+            conflict: 409
         }
 
         this.#token = '';
@@ -18,6 +21,14 @@ class DbFetcher {
     setToken(token){
         this.#token = token;
 
+    }
+    changeCookie(cookie,value){
+        Cookies.remove(cookie)
+        Cookies.set(cookie,value)
+    }
+    
+    getCookie(cookie){
+        return Cookies.get(cookie)
     }
     setUser(user){
         this.#user = user
@@ -38,6 +49,8 @@ class DbFetcher {
             case this.codes.error:
                 return false;
             case this.codes.notFound:
+                return false;
+            case this.codes.conflict:
                 return false;
             default:
                 break;

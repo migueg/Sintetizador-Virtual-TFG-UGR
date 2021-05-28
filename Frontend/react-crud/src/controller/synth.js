@@ -300,6 +300,29 @@ class Synth{
     }
 
     /**
+     * Método que se encarga de redirigir  las peticiones del cliente
+     * en el perfil
+     * 
+     * @method fetchProfile
+     * @param {String} action Acción que el usuario desea realizar
+     * @param {JSON} data Datos a mandar al servidor
+     * @returns Respuesta del servidor
+     */
+    async fetchProfile(action,data){
+        switch(action){
+            case 'edit':
+                return await this.#saver.editProfile(data);
+            case 'profile':
+                return await this.#loader.fetchProfile();
+            case 'maxSize':
+                return await this.#loader.fetchMaxSize();
+            default:
+                console.error('ERROR: Acción incorrecta');
+                break;
+        }
+    }
+    
+    /**
      * Método que se encarga de llamar al módulo de carga para que
      * cargue un sonido
      *  

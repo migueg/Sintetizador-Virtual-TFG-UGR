@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import DbFetcher from './dbFetcher';
 class Saver extends DbFetcher {
     #envelopes
@@ -15,6 +16,8 @@ class Saver extends DbFetcher {
         this.#oscillatorA = oscA;
         this.#oscillatorB = oscB;
         this.#synth = synth;
+        
+        this.edit = {}
 
     }
 
@@ -98,6 +101,51 @@ class Saver extends DbFetcher {
         
         return this.data
     }
+
+    async editProfile(data){
+        var that = this
+        var d = data;
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization':  this.getCookie('token'),
+                'User': this.getCookie('user')
+            },
+            body: JSON.stringify(data)
+        }
+        try{
+            await fetch('http://localhost:8080/edit',requestOptions)
+            .then(function(response){
+                that.edit.state = that.handleStatus(response.status)
+                if(that.edit.state){
+                    if(d.username){
+                        that.edit.username = d.username
+                    }
+                }else{
+                    that.edit.code = response.status
+                }
+                return response.json();
+            })
+            .then((data)=>{
+                that.edit.msg = data.msg
+            })
+        }catch(err){
+            that.edit.state = false;
+            that.edit.msg = err;
+
+        }
+
+        if(this.edit.state){
+            if(this.edit.username){
+                this.changeCookie('user',this.edit.username)
+            }
+        }
+
+        return this.edit
+    }
+
+   
 }
 
 export default Saver;

@@ -72,6 +72,10 @@ app.post("/save/:id" , (req, res) => {
     
 });
 
+app.get("/maxSize", (req,res) =>{
+    dbController.getMaxSize(req,res)
+})
+
 app.post("/singup", (req,res) => {
   if(req.header('Content-Type') === 'application/json'){
     dbController.registerUser(req,res);
@@ -82,6 +86,12 @@ app.post("/singup", (req,res) => {
 app.post('/singin', (req,res) =>{
   if(req.header('Content-Type') === 'application/json'){
     dbController.login(req,res);
+  }
+})
+
+app.post('/edit',(req,res) =>{
+  if(req.header('Content-Type') === 'application/json'){
+    dbController.editProfile(req,res)
   }
 })
 

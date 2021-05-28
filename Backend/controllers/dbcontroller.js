@@ -23,17 +23,18 @@ function checkJwtToken(auth){
 
 }
 async function checkSpace(id){
-    var response;
+    var response
     await statesModels.stateModel.find({userID: id}, function(err,docs){
         if(err){
             console.error(err)
         }else{
-            response = bson.calculateObjectSize(docs)  //Devuelve el tamaño en bytes
+            response =   bson.calculateObjectSize(docs)  //Devuelve el tamaño en bytes
         }
-    })
+    });
 
+   
     
-    //console.log(response)
+   return   response
 }
 function sendResponse(res,code,msg){
     res.status(code) // server errors
@@ -124,16 +125,6 @@ async function login(req,res){
                 u.checkPassword(user.password,function(isMatch){
                     if(isMatch){
                         const token = jwt.sign({username: u.username, role: u.role},SIGN); //generamos el token
-                        /* res.status(200) 
-                        res.setHeader('Content-type','application/json');
-                        var date = new Date(Number(Date.now() + 48 * 3600000))//Acaba en 2 dias
-                        var options = { 
-                            expires: date,
-                            
-                        }
-                        res.cookie('token',token,options)
-                        res.send({msg: 'Token generado'});
- */
                         sendResponse(res, '200', {token: token, user: u.username}, )
                     
                     }else{
@@ -189,27 +180,89 @@ async function getNotes(req,res){
     
 }
 
+async function editProfile(req,res){
+    if(checkJwtToken(req.header('Authorization'))){
+        var id = req.header('User')
+        var user = req.body.username
+        var email = req.body.email;
+        var date = req.body.date;
+
+        var toUpdate = {};
+        if(user){toUpdate.username = user}
+        if(email){toUpdate.email = email}
+        if(date){toUpdate.date = date}
+
+        if(id){
+            await userModel.findOne({username: id},function(err,docs){
+                if(err){
+                    sendResponse(res,'500','Error al editar el perfil');
+                }else{
+                    if(docs.length !== 0){
+                        userModel.updateOne({username:id},toUpdate,function(err,docs){
+                            if(err){
+                                if(err.keyValue.username && !err.keyValue.email){
+                                    sendResponse(res,'409','El nombre de usuario ya existe, prueba con otro'); //409 Conflict
+                                }else if(err.keyValue.email && !err.keyValue.username){
+                                    sendResponse(res,'409','Ya existe una cuenta registrada con ese email, prueba con otro'); //409 Conflict
+                                }else if(err.keyValue.username && err.keyValue.email){
+                                    sendResponse(res,'409','El nombre de usuario y el email ya esxiten, prueba con otros'); //409 Conflict
+
+                                }else{
+                                    sendResponse(res,'500','Error al editar el perfil');
+                                }
+                            }else{
+                                if(docs.length !== 0){
+                                    sendResponse(res,'200','Perfil editado con éxito');
+
+                                }
+                            }
+                        })
+                    }else{
+                        sendResponse(res,'404', 'Usuario no encontrado');
+                    }
+                }
+            })
+        }
+    }
+}
+
+const MAXSIZE = 100 //MB
+async function getMaxSize(req,res){
+    if(checkJwtToken(req.header('Authorization'))){
+        sendResponse(res,'200',MAXSIZE)
+    }else{
+        console.log('UNAUTHORIZED');
+        sendResponse(res,'401','No estas autorizado')
+    }
+}
 async function getProfile(req,res){
     if(checkJwtToken(req.header('Authorization'))){
         var id = req.header('User');
         var select = "username email date created role"
         if(id){
+            var size = await checkSpace(id)
             await userModel.findOne({username: id},select,function(err,docs){
                 if(err){
                     sendResponse(res,'500','Error al obtener el perfil');
                 }else{
-                    if(docs.length !== 0){
-                        sendResponse(res,'200',docs);
-                    }else{
-                        sendResponse(res,'404','El perfil no se ha encontrado en BD')
+                    if(docs){
+                        if(docs.length !== 0){
+                            console.log(checkSpace(id))
+                            
+                            console.log( size)
+                            sendResponse(res,'200',{profile: docs, size: size});
+                        }else{
+                            sendResponse(res,'404','El perfil no se ha encontrado en BD')
+                        }
                     }
+                    
                 }
             })
         }else{
             sendResponse(res,'400','Petición incorrecta');
         }
     }else{
-        console.error('UNAUTHORIZED');
+        console.log('UNAUTHORIZED');
         sendResponse(res,'401','No estas autorizado')
     }
 }
@@ -233,7 +286,7 @@ async function getState(req,res){
             sendResponse(res,'400','Petición incorrecta');
         }
     }else{
-        console.error('UNAUTHORIZED');
+        console.log('UNAUTHORIZED');
         sendResponse(res,'401','No estas autorizado')
     }
    
@@ -254,7 +307,7 @@ async function getStatesMetaData(req,res){
             }
         })
     }else{
-        console.error('UNAUTHORIZED A');
+        console.log('UNAUTHORIZED');
         sendResponse(res,'401','No estas autorizado')
     }
 }
@@ -349,7 +402,7 @@ async function saveState(req,res){
          await saveStateInBD(state,res);
          
     }else{
-        console.error('UNAUTHORIZED');
+        console.log('UNAUTHORIZED');
         sendResponse(res,'401','No estas autorizado')
     }
 }
@@ -399,5 +452,7 @@ module.exports = {
     getStatesMetaData,
     registerUser,
     login,
-    getProfile
+    getProfile,
+    editProfile,
+    getMaxSize
 }

@@ -5,16 +5,71 @@ class Loader extends DbFetcher {
     constructor(){
         super()
         this.#method = 'GET'
+        
+        this.profile = {}
+        this.maxSize= {}
         //this.fetchCategories = this.fetchCategories.bind(this)
     }
 
-    getMetadata(){
+    async fetchMaxSize(){
+        var that = this
+        const requestOptions = {
+            method: this.#method,
+            headers: {
+                'Authorization': this.getCookie('token'),
+               
+            }
+        }
+
+        try{
+            await fetch('http://localhost:8080/maxSize',requestOptions)
+            .then(function(response){
+                that.maxSize.data = that.handleStatus(response.status)
+                return response.json();
+            })
+            .then((data)=>{
+                if(that.maxSize.data){
+                    that.maxSize.msg = data.msg
+                }else{
+                    that.maxSize.msg = data.msg
+                }
+            })
+        }catch(err){
+            that.maxSize.data = false;
+
+        }
+        return this.maxSize;
 
     }
-    getEffect(){
+    async fetchProfile(){
+        var that = this
+        const requestOptions = {
+            method: this.#method,
+            headers: {
+                'Authorization': this.getCookie('token'),
+                'User': this.getCookie('user')
+            }
+        }
+        try{
+            await fetch('http://localhost:8080/profile',requestOptions)
+            .then(function(response){
+                that.profile.data = that.handleStatus(response.status)
+                return response.json();
+            })
+            .then((data)=>{
+                if(that.profile.data){
+                    that.profile.profile = data.msg
+                }else{
+                    that.profile.error = data.msg
+                }
+            })
+        }catch(err){
+            that.profile.data = false;
 
+        }
+
+        return this.profile;
     }
-    
     async __fetchUrl(url,requestOptions){
         var status;
         var that = this ;
@@ -52,7 +107,7 @@ class Loader extends DbFetcher {
         const requestOptions = {
             method: this.#method,
             headers: {
-                'Authorization':  this.getToken()
+                'Authorization':   this.getCookie('token')
             }
         }
       
@@ -65,8 +120,8 @@ class Loader extends DbFetcher {
         const requestOptions = {
             method: this.#method,
             headers: {
-                'Authorization':  this.getToken(),
-                'User': this.getUser()
+                'Authorization':   this.getCookie('token'),
+                'User':  this.getCookie('user')
             }
         }
         
@@ -83,8 +138,8 @@ class Loader extends DbFetcher {
         const requestOptions = {
             method: this.#method,
             headers: {
-                'Authorization':  this.getToken(),
-                'User': this.getUser()
+                'Authorization':   this.getCookie('token'),
+                'User':  this.getCookie('user')
             }
         }
       
