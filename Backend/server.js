@@ -95,6 +95,12 @@ app.post('/edit',(req,res) =>{
   }
 })
 
+app.post('/password', (req,res) =>{
+  if(req.header('Content-Type') === 'application/json'){
+    dbController.editPassword(req,res);
+  }
+})
+
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

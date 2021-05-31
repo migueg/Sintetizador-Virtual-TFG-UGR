@@ -44,6 +44,24 @@ userSchema.methods.checkPassword = function(password,callback){
             return callback(success);
         }
     })
+
+}
+
+userSchema.methods.changePassword = function(password,callback){
+    bcrypt.genSalt(10, function(saltError,salt){
+        if(saltError){
+            return saltError;
+        }else{
+            bcrypt.hash(password,salt,function(hashError,hash){
+                if(hashError){
+                    return callback(hashError);
+                }
+
+                this.password = hash;
+                return callback('success');
+            })
+        }
+    } )
 }
 
 

@@ -316,6 +316,8 @@ class Synth{
                 return await this.#loader.fetchProfile();
             case 'maxSize':
                 return await this.#loader.fetchMaxSize();
+            case 'password':
+                return await this.#saver.editPassword(data);
             default:
                 console.error('ERROR: Acción incorrecta');
                 break;

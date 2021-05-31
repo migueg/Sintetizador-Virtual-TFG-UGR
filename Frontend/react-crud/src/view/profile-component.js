@@ -29,10 +29,21 @@ class Profile extends React.Component{
        var profile = await sinte.fetchProfile('profile')
        var maxSize = await sinte.fetchProfile('maxSize');
        
-       
-       this.setState({size: maxSize})
-       this.setState({userSpace: profile.size})
+       console.log(maxSize)
+       this.setState({maxSize: maxSize.msg})
+       this.setState({userSpace: profile.profile.size})
        this.setState(profile.profile)
+       
+       console.log(this.state.maxSize)
+       this.__paintProgressBar()
+
+    }
+
+    __paintProgressBar(){
+        var value =  Math.round(this.state.userSpace * 1000) / 1000;
+        document.getElementById('progress').style.width = value + '%'
+        document.getElementById('space-available').innerText = value + '% de ' + this.state.maxSize + ' MB'
+
     }
 
     __handleResponse(response){
@@ -186,6 +197,12 @@ class Profile extends React.Component{
                         <input type='text'  id='creted' disabled style={{fontSize: '1.8vh', color: 'rgb(38, 38, 38)'}} defaultValue={this.toDate(this.state.profile.created)} ></input>  
                         <input type='date'  id='created-post'  style={{display: 'none', color: 'rgb(38, 38, 38)'}}  ></input> 
 
+                        <label htmlFor='progress'style={{marginTop: '2%'}} >Espacio disponible: </label>
+                        <p id='space-available' style={{fontSize: '1.2vh'}}></p>
+                        <div className="progress">
+                            <div className="progress-bar progress-bar-striped bg-danger" id='progress' role="progressbar" aria-valuemax="100"></div>
+                        </div>
+                                                
                         <button  type="button" id='edit' className="btn btn-success" onClick={()=>this.confirmEdit()} style={{display: 'none' , marginTop: '2%'}}>Editar</button>
                         <button  type="button" id='cancel' className="btn btn-danger" onClick={()=>window.location.reload()} style={{display: 'none', marginTop: '2%'}} >Cancelar</button>
 

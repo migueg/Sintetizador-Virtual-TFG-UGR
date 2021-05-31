@@ -61,6 +61,13 @@ function createOscillator(osc,en,id){
      return oscillator;
 }
 
+function bytesToMB(bytes){
+    var kb = bytes /1024;
+    var mb = kb / 1024;
+    
+    return mb;
+}
+
 
 /********* MÉTODOS PRINCIPALES *************/
  async function createNotes(req,res){
@@ -143,6 +150,39 @@ async function login(req,res){
     
     
 }
+
+async function editPassword(req,res){
+    if(checkJwtToken(req.header('Authorization'))){
+        var id = req.header('User');
+        var password = req.body.password
+        if(id && password){
+            await userModel.findOne({username: id}).exec(function(err,user){
+                if(err){
+                    sendResponse(res,'500' , err)
+                }else{
+                    var u = user;
+                    user.changePassword(password,function(res){
+                        if(res === 'success'){
+                            const token = jwt.sign({username: u.username, role: u.role},SIGN);
+                            sendResponse(res,'200',{token: token, msg:'Contraseña modificada con éxito'})
+                        }else{
+                            sendResponse(res,'500' , 'Erro al modificar la contraseña')
+                        }
+                    })
+                }
+                
+            })
+
+        }else{
+
+            sendResponse(res,'400','Petición incorrecta')
+
+        }
+    }else{
+        console.log('UNAUTHORIZED');
+        sendResponse(res,'401','No estas autorizado')
+    }
+}
 async function getCategories(req,res){
     var cts ;
     await statesModels.categoryModel.find({},function(err,docs){
@@ -222,7 +262,12 @@ async function editProfile(req,res){
                     }
                 }
             })
+        }else{
+            sendResponse(res,'404', 'Petición incorrecta');
         }
+    }else{
+        console.log('UNAUTHORIZED');
+        sendResponse(res,'401','No estas autorizado')
     }
 }
 
@@ -235,22 +280,23 @@ async function getMaxSize(req,res){
         sendResponse(res,'401','No estas autorizado')
     }
 }
+
+
 async function getProfile(req,res){
     if(checkJwtToken(req.header('Authorization'))){
         var id = req.header('User');
         var select = "username email date created role"
         if(id){
             var size = await checkSpace(id)
+            var sizeMB = bytesToMB(size)
             await userModel.findOne({username: id},select,function(err,docs){
                 if(err){
                     sendResponse(res,'500','Error al obtener el perfil');
                 }else{
                     if(docs){
                         if(docs.length !== 0){
-                            console.log(checkSpace(id))
                             
-                            console.log( size)
-                            sendResponse(res,'200',{profile: docs, size: size});
+                            sendResponse(res,'200',{profile: docs, size: sizeMB});
                         }else{
                             sendResponse(res,'404','El perfil no se ha encontrado en BD')
                         }
@@ -454,5 +500,6 @@ module.exports = {
     login,
     getProfile,
     editProfile,
-    getMaxSize
+    getMaxSize,
+    editPassword
 }

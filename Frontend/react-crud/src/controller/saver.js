@@ -145,7 +145,44 @@ class Saver extends DbFetcher {
         return this.edit
     }
 
-   
+   async editPassword(data){
+    var that = this
+    var d = data;
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization':  this.getCookie('token'),
+            'User': this.getCookie('user')
+        },
+        body: JSON.stringify(data)
+    }
+    try{
+        await fetch('http://localhost:8080/password',requestOptions)
+        .then(function(response){
+            that.edit.password = that.handleStatus(response.status)
+            
+            return response.json();
+        })
+        .then((data)=>{
+            that.edit.msg = data.msg.msg
+
+            if(that.edit.password){
+                that.edit.token = data.msg.token;
+            }
+        })
+    }catch(err){
+        that.edit.password = false;
+        that.edit.msg = err;
+
+    }
+
+    if(this.edit.token){
+        this.changeCookie('token',this.edit.token)
+    }
+
+    return {state: this.edit.password, msg: this.edit.msg}
+   }
 }
 
 export default Saver;
