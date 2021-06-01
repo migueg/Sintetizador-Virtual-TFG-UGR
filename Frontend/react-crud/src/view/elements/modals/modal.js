@@ -38,8 +38,8 @@ class Modal extends React.Component{
 
     }
     hideModal(){
-        this.__checkOscillators();
         if(this.state.type === 'save'){
+            this.__checkOscillators();
             $('#save-buttom').removeAttr("disabled");
             document.getElementById("modal").style.display = "none"
             document.getElementById('recipient-name').value = "";
@@ -49,11 +49,19 @@ class Modal extends React.Component{
             document.getElementById('failure').style.display = 'none';
             document.getElementById('span-name').style.display= 'none';
         }else if(this.state.type === 'load'){
+            this.__checkOscillators();
             $('#load-buttom').removeAttr("disabled");
             document.getElementById('md-body-loader').style.display = 'block';
             document.getElementById("modalLoad").style.display = "none"
             document.getElementById('success-loader').style.display = 'none';
             document.getElementById('failure-loader').style.display = 'none';
+        }else if(this.state.type === 'password'){
+            $('#password-buttom').removeAttr("disabled");
+            document.getElementById('md-body-password').style.display = 'block';
+            document.getElementById("modalPassword").style.display = "none"
+            document.getElementById('success-password').style.display = 'none';
+            this.__cleanPasswords();
+            
         }
        
         
@@ -61,11 +69,26 @@ class Modal extends React.Component{
         
         //document.getElementById("save").classNameName += document.getElementById("save").classNameName.replace("show", "")
     }
+
+    __cleanPasswords(){
+        document.getElementById('failure-password').style.display = 'none';
+        document.getElementById('span-password').style.display = 'none';
+        document.getElementById('span-password2').style.display = 'none';
+        document.getElementById('span-password-length').style.display = 'none';
+        document.getElementById('span-password-coincidence').style.display = 'none';
+        document.getElementById('recipient-password').value = '';
+        document.getElementById('recipient-password2').value = '';
+    }
     __showLoader(){
         if(this.state.type === 'save'){
             $('#save-buttom').attr('disabled',true);
             document.getElementById('md-body').style.display = 'none';
             document.getElementById('loader').style.display = 'block';
+        }else if(this.state.type === 'password'){
+            $('#password-buttom').attr('disabled',true);
+
+            document.getElementById('md-body-password').style.display = 'none';
+            document.getElementById('loader-password').style.display = 'block';
         }else{
             document.getElementById('md-body-loader').style.display = 'none';
             document.getElementById('loader-loader').style.display = 'block';
@@ -90,6 +113,14 @@ class Modal extends React.Component{
             tF = 'text-failure-loader';
             $('#close-load-buttom').attr('disabled',false);
 
+        }
+
+        if(this.state.type === 'password'){
+            document.getElementById('loader-password').style.display = 'none';
+            idS = 'success-password';
+            idF = 'failure-password';
+            tS = 'text-success-password';
+            tF = 'text-failure-password';
         }
         if(resp.state){
             document.getElementById(idS).style.display = 'block';

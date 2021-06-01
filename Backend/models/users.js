@@ -48,6 +48,7 @@ userSchema.methods.checkPassword = function(password,callback){
 }
 
 userSchema.methods.changePassword = function(password,callback){
+    const user = this
     bcrypt.genSalt(10, function(saltError,salt){
         if(saltError){
             return saltError;
@@ -56,8 +57,11 @@ userSchema.methods.changePassword = function(password,callback){
                 if(hashError){
                     return callback(hashError);
                 }
+             
+                user.updateOne({password: hash},function(err){
 
-                this.password = hash;
+                })
+
                 return callback('success');
             })
         }
@@ -65,23 +69,4 @@ userSchema.methods.changePassword = function(password,callback){
 }
 
 
-/**
- * USO
- *  loginUser: function(username, password, callback) {
-    UserModel.findOne({username: username}).exec(function(error, user) {
-      if (error) {
-        callback({error: true})
-      } else if (!user) {
-        callback({error: true})
-      } else {
- *  user.comparePassword(password, function(matchError, isMatch) {
-          if (matchError) {
-            callback({error: true})
-          } else if (!isMatch) {
-            callback({error: true})
-          } else {
-            callback({success: true})
-          }
-        })
- */
 module.exports = mongoose.model('users',userSchema);

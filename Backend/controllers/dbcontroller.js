@@ -158,11 +158,13 @@ async function editPassword(req,res){
         if(id && password){
             await userModel.findOne({username: id}).exec(function(err,user){
                 if(err){
+                    console.log(err)
+
                     sendResponse(res,'500' , err)
                 }else{
                     var u = user;
-                    user.changePassword(password,function(res){
-                        if(res === 'success'){
+                    user.changePassword(password,function(response){
+                        if(response === 'success'){
                             const token = jwt.sign({username: u.username, role: u.role},SIGN);
                             sendResponse(res,'200',{token: token, msg:'Contraseña modificada con éxito'})
                         }else{

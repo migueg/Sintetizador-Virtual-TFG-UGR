@@ -1,7 +1,9 @@
 import React from 'react'
 import  {Container} from 'react-bootstrap';
+
+import ModalPassword from './elements/modals/modal-password';
+
 import portada from '../img/portada.jpg';
-import Cookies from 'js-cookie';
 import editar from '../img/editar.png'
 import success from '../img/success.png';
 import failure from '../img/failure.png';
@@ -147,6 +149,12 @@ class Profile extends React.Component{
 
     }
 
+    showModal(){
+        document.getElementById("backdrop").style.display = "block"
+        document.getElementById("modalPassword").style.display = "block"
+        document.getElementById("modalPassword").className += "show"
+    }
+
     toDate(string){
         console.log()
         var split  = string.split('-');
@@ -168,6 +176,7 @@ class Profile extends React.Component{
              {
                  this.state.profile ? (
                     <div >
+                        <ModalPassword></ModalPassword>
                         <div id='profile' style={{
                             display: 'flex',
                             
@@ -176,7 +185,7 @@ class Profile extends React.Component{
                         }}>
                         <div className='buttons'>
                             <button  type="button" className="btn btn-light"  onClick={() => this.editProfile()}><img style={{width: '2vw'}}src={editar}></img></button>
-                            <button  type="button" className="btn btn-primary" >Cambiar contraseña</button>
+                            <button  type="button" onClick={()=> this.showModal()} className="btn btn-primary" >Cambiar contraseña</button>
 
                         </div>
                         <span  style={{display: 'none', color: 'red'}} id='span-no-edit'></span>

@@ -192,7 +192,7 @@ class SignUp extends React.Component{
                     <div id='success' style={{display: 'none' , margin: 'auto', flex: 'auto', alignItems: 'center' , alignContent: 'center' , textAlign: 'center'}}>
                             <img alt='success-icon' src={success} style={{width: 60 , marginTop: '5%', marginBottom: '5%'}}/>
                             <p id='text-success'></p>
-                            <button type='button' onClick={()=>{window.location.replace('http://localhost:3000/login')}} style={{margin: 'auto', marginBottom: '3%'}}className="btn btn-primary">Log in</button>
+                            <button type='button' onClick={()=>{window.location.replace('http://localhost:3000')}} style={{margin: 'auto', marginBottom: '3%'}}className="btn btn-primary">Log in</button>
 
                     </div>
 

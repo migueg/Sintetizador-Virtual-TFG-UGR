@@ -101,6 +101,8 @@ class Login extends React.Component{
                 Cookies.set('user',this.data.user,{expires:2, path:'' })
                 window.location.replace('http://localhost:3000/synth')
 
+            }else{
+                document.getElementById('wrong-credentials').style.display = '';
             }
 
         }
@@ -122,6 +124,7 @@ class Login extends React.Component{
                     marginBottom: '4%',
                     marginLeft: '5%'}}
                     onSubmit={(e)=>e.preventDefault()}>
+                    <span id='wrong-credentials' style={{display: 'none', color: 'red'}}>*Usuario o contraseña incorrecta</span>
                     <div className="form-group">
                         <h3 id='login'>Log In</h3>
                         <span aria-details='login' style={{color: 'red', display:'none'}}  id='span'>*Todos los campos son obligatorios</span>
