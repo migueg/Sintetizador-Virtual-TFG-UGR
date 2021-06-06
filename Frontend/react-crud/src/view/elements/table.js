@@ -18,7 +18,7 @@ import search from '../../img/search.png'
 import {sinte} from '../osc-components';
 import Rating from './rating';
 import ModalLoad from '../elements/modals/modal-load';
-
+import ModalDelete from '../elements/modals/modal-delete';
 class TableUI extends React.Component{
     constructor(){
         super();
@@ -30,6 +30,7 @@ class TableUI extends React.Component{
             rating: 3
         }
         this.modalRef = React.createRef();
+        this.modalDeleteRef = React.createRef();
         this.newState = {};
        
     }
@@ -169,21 +170,32 @@ class TableUI extends React.Component{
     }
 
     async loadSound(){
+
         const state = await sinte.load(this.modalRef.current.id);
         this.newState = state;
         var resp = this.props.parentCallback() //envio el nuevo estado al padre
 
         return resp;
     }
+
+    async deleteSound(){
+        const state = await sinte.delete(this.modalDeleteRef.current.id);
+        return state;
+    }
     showModal(id){
-       
         this.modalRef.current.show(id)
+    }
+
+    showModalDelete(id){
+
+        this.modalDeleteRef.current.show(id)
     }
     render(){
         if(this.state)
         return(
             <Paper className='soundTable' style={{width: '100%' , marginTop:'1%', marginBottom: '1%'}}>
                 <ModalLoad ref={this.modalRef} parentCallback={()=>this.loadSound()}/>
+                <ModalDelete ref={this.modalDeleteRef} parentCallback2={()=>this.deleteSound()}/>
                 <Row style={{width: '100%'}}>
                     <div id='searchBar' style={{width: '100%'}}>
                         <img alt='search-icon' src={search} style={{width: '5vh', marginLeft: '3%',  marginTop: '1%',float: 'left'}}></img>
@@ -303,6 +315,7 @@ class TableUI extends React.Component{
                                     <TableRow key={row.name}>
                                         <TableCell align='center'> 
                                             <button type='button' onClick={()=>this.showModal(row.name)} className='btn btn-success'>Cargar</button>
+                                            <button type='button' onClick={()=>this.showModalDelete(row.name)} style={{marginLeft: '1%'}}  className='btn btn-danger'>Eliminar</button>
                                         </TableCell>
                                         <TableCell
                                             align='center'

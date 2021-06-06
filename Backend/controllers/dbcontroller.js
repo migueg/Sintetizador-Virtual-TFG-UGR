@@ -119,6 +119,28 @@ async function createCategories(req,res){
     });
 }
 
+async function deleteSound(req,res){
+    if(checkJwtToken(req.header('Authorization'))){
+        var soundId = req.params.id;
+        var user = req.header('User');
+        if(soundId && user){
+            await statesModels.stateModel.deleteOne({userID: user, name: soundId},function(err){
+                if(err){
+                    sendResponse(res, '500' , err)
+                }else{
+                    sendResponse(res, '200', 'Sonido eliminado con éxito!')
+                }
+            })
+        }else{
+            sendResponse(res,'400', 'Petición incorrecta')
+        }
+    }else{
+        console.log('UNAUTHORIZED');
+        sendResponse(res,'401','No estas autorizado')
+    }
+    
+}
+
 async function login(req,res){
     if(req.body.user && req.body.user.username && req.body.user.password){
         var user = req.body.user;
@@ -503,5 +525,6 @@ module.exports = {
     getProfile,
     editProfile,
     getMaxSize,
-    editPassword
+    editPassword,
+    deleteSound
 }

@@ -1,4 +1,3 @@
-import Cookies from 'js-cookie';
 import DbFetcher from './dbFetcher';
 class Saver extends DbFetcher {
     #envelopes
@@ -18,6 +17,7 @@ class Saver extends DbFetcher {
         this.#synth = synth;
         
         this.edit = {}
+        this.deleteSound = {}
 
     }
 
@@ -182,6 +182,44 @@ class Saver extends DbFetcher {
     }
 
     return {state: this.edit.password, msg: this.edit.msg}
+   }
+
+   async delete(id){
+       if(id){
+            var that = this
+            var soundId = id
+            const requestOptions = {
+                method: 'DELETE',
+                headers: {
+                    'Authorization':  this.getCookie('token'),
+                    'User': this.getCookie('user')
+                },
+                
+            }
+            try{
+                await fetch('http://localhost:8080/delete/'+soundId,requestOptions)
+                .then(function(response){
+                    that.deleteSound.state = that.handleStatus(response.status)
+                    
+                    return response.json();
+                })
+                .then((data)=>{
+                    that.deleteSound.msg = data.msg
+        
+        
+                })
+            }catch(err){
+                that.deleteSound.state = false;
+                that.deleteSound.msg = err;
+        
+            }
+        
+       }else{
+           this.deleteSound.state = false;
+           this.deleteSound.msg = 'No podemos identificar el sonido'
+       }
+
+       return this.deleteSound;
    }
 }
 

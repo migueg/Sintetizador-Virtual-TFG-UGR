@@ -236,6 +236,16 @@ class Synth{
     }
 
     /**
+     * Método que se encarga de cominacar al saver que tiene que mandar una petición
+     * 
+     * @mehtod delete
+     * @param {String} id Id del sonido a eliminar
+     * @returns Json con el resultado de la petición
+     */
+    async delete(id){
+        return await this.#saver.delete(id)
+    }
+    /**
      * Método que se encarga de desactivar un efecto
      * 
      * @method disapplyEffect

@@ -62,6 +62,11 @@ class Modal extends React.Component{
             document.getElementById('success-password').style.display = 'none';
             this.__cleanPasswords();
             
+        }else if(this.state.type === 'delete'){
+            document.getElementById('md-body-delete').style.display = 'block';
+            document.getElementById("modalDelete").style.display = "none"
+            document.getElementById('success-delete').style.display = 'none';
+            document.getElementById('failure-delete').style.display = 'none';
         }
        
         
@@ -89,6 +94,9 @@ class Modal extends React.Component{
 
             document.getElementById('md-body-password').style.display = 'none';
             document.getElementById('loader-password').style.display = 'block';
+        }else if(this.state.type === 'delete'){
+            document.getElementById('md-body-delete').style.display = 'none';
+            document.getElementById('loader-delete').style.display = 'block';
         }else{
             document.getElementById('md-body-loader').style.display = 'none';
             document.getElementById('loader-loader').style.display = 'block';
@@ -97,6 +105,7 @@ class Modal extends React.Component{
     
     __handleResponse(resp){
         var idS, idF, tS,tF;
+        console.log(this.state.type)
         if(this.state.type === 'save'){
             document.getElementById('loader').style.display = 'none';
             idS = 'success';
@@ -122,6 +131,19 @@ class Modal extends React.Component{
             tS = 'text-success-password';
             tF = 'text-failure-password';
         }
+
+        if(this.state.type === 'delete'){
+            document.getElementById('loader-delete').style.display = 'none';
+            idS = 'success-delete';
+            idF = 'failure-delete';
+            tS = 'text-success-delete';
+            tF = 'text-failure-delete';
+
+            $('#close-delete-buttom').attr('disabled',true);
+            $('#delete-buttom').attr('disabled',true);
+        }
+
+        
         if(resp.state){
             document.getElementById(idS).style.display = 'block';
             document.getElementById(tS).innerText = '¡ '+ resp.msg + '!';
