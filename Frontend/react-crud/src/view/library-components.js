@@ -20,9 +20,7 @@ class Libary extends React.Component{
     updateTable(){
        this.child.current.updateTable();
     }
-    componentDidMount(){
-    }
-
+    
     loadSound(){
         this.newState = this.child.current.newState;
         return this.props.parentCallback();

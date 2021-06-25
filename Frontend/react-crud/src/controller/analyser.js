@@ -22,10 +22,7 @@ class Analyser{
 
     analyse(){
        this.#analyser.getByteFrequencyData(this.#domain) //Guarda en domain decibeles de frecuencias
-       //console.log(this.#domain)
-       for(var i = 0; i < this.#size; i++){
-           //console.log(this.#domain[i])
-       }
+      
     }
 
     getSize(){
@@ -37,11 +34,7 @@ class Analyser{
     }
 
     consoledomain(){
-        console.log(this.#analyser.frequencyBinCount)
-       /*  for(var i=0 ; i < this.#domain.length ; i++){
-            //console.log(this.#domain[i])
-
-        } */
+        console.log(this.#analyser.frequencyBinCount)  
     }
     getData(){
         this.#analyser.getByteFrequencyData(this.#domain) 

@@ -399,6 +399,12 @@ class Synth{
     
     }
 
+    /**
+     * Delega la petición de grabación al objeto encargado de ello
+     * 
+     * @method rec
+     * @param {JSON} state Estado a salvar
+     */
     rec(state){
         this.#recorder.rec(state)
     }
@@ -534,6 +540,22 @@ class Synth{
         if(osc === 'A'){this.#oscillatorA.setChecked(val)}
         if(osc === 'B'){this.#oscillatorB.setChecked(val)}
     }
+
+    /**
+     * Setter del jwt de autenticacion y del id del usario
+     * 
+     * @method setCookies
+     * @param {String} token Token
+     * @param {String} user Id del usuario
+     */
+     setCookies(token,user){
+        this.#saver.setToken(token);
+        this.#saver.setUser(user);
+        this.#loader.setToken(token);
+        this.#loader.setUser(user);
+
+    }
+
     /**
      * Setter de los parámetros del delay
      * 
@@ -665,20 +687,7 @@ class Synth{
         this.#masterVolumeNode.gain.value = val;
     }
 
-    /**
-     * Setter del nivle de paneo de los osciladores
-     * 
-     * @method setPan
-     * @param {Char} osc id del oscilador
-     * @param {Float} value valor de paneo
-     */
-    setPan(osc,value){
-        if(osc === 'A'){
-            this.#oscillatorA.setPan(value);
-        }else if(osc === 'B'){
-            this.#oscillatorB.setPan(value);
-        }
-    }
+   
     /**
      * Setter de la octava del midi
      * 
@@ -689,6 +698,21 @@ class Synth{
         this.#midi.setOctave(oct)
     }
 
+     /**
+     * Setter del nivle de paneo de los osciladores
+     * 
+     * @method setPan
+     * @param {Char} osc id del oscilador
+     * @param {Float} value valor de paneo
+     */
+      setPan(osc,value){
+        if(osc === 'A'){
+            this.#oscillatorA.setPan(value);
+        }else if(osc === 'B'){
+            this.#oscillatorB.setPan(value);
+        }
+    }
+    
     /**
      * Modificador del efecto reverb
      * 
@@ -715,20 +739,7 @@ class Synth{
         
     }
 
-    /**
-     * Setter del jwt de autenticacion y del id del usario
-     * 
-     * @method setCookies
-     * @param {String} token Token
-     * @param {String} user Id del usuario
-     */
-    setCookies(token,user){
-        this.#saver.setToken(token);
-        this.#saver.setUser(user);
-        this.#loader.setToken(token);
-        this.#loader.setUser(user);
-
-    }
+    
     /**
      * Setter del volumen de los osciladores
      * 
