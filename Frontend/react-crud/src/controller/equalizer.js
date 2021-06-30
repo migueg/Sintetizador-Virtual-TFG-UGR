@@ -15,14 +15,6 @@ class Equalizer{
         this.#hgm = context.createBiquadFilter();
         this.#hg = context.createBiquadFilter();
 
-        /* master.connect(this.#lw);
-        this.#lw.connect(this.#lwm);
-        this.#lwm.connect(this.#mid);
-        this.#mid.connect(this.#hgm);
-        this.#hgm.connect(this.#hg);
-
-        this.#hg.connect(context.destination)
- */
         master.connect(this.#hg);
         this.#hg.connect(this.#hgm);
         this.#hgm.connect(this.#mid);
