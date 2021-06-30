@@ -130,7 +130,7 @@ class oscillator  {
   * como argumento
   * 
   * @method play
-  * @param {String} key Nota
+  * @param {String} key Frecuencia
   */
 
  play(key){
