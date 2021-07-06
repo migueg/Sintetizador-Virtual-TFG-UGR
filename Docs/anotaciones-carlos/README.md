@@ -96,6 +96,7 @@ requisito esencial, que debería estar entre los primeros requisitos.
 (19) En HU.26 aparece "loguearme", debería ser "logearme", aunque, en general, en todo el texto, creo
 que sería mejor evitar las palabras en Inglés (o adaptadas del Inglés al Español) cuando existan 
 alternativas comunmente aceptadas en Español.  En este caso, por ejemplo, se puede usar "identificarme" 
-en el lugar de "logearme"
+en el lugar de "logearme". También se debe ser coherente, por ejemplo, aquí se usa "logear", pero en 
+HU.27 se usa "hacer login"
 
 
