@@ -88,3 +88,9 @@ añadir al glosario lo que corresponda.
 (17) Los requisitos RN-1, RN-3 y RN-4 son requisitos funcionales, habría que ponerlos en la sección
 4.3.1, al principio, esto está relacionado con la nota anterior (16), en concreto el RN-4 es un 
 requisito esencial, que debería estar entre los primeros requisitos.
+
+**Secc. 4.4 (product backlog con sprints e historias de usuario**
+
+(18) En HU.13 se usa el término "panear", creo que habría que definirlo en el primer uso.
+
+
