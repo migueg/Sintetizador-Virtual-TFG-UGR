@@ -99,9 +99,7 @@ alternativas comunmente aceptadas en Español.  En este caso, por ejemplo, se pu
 en el lugar de "logearme". También se debe ser coherente, por ejemplo, aquí se usa "logear", pero en 
 HU.27 se usa "hacer login"
 
-(20) En HU.27 se habla de "jwt Token", pero creo que esas palabras designan un detalle técnico de la 
-implementación, transparente para el usuario, que no se debe incluir en una historia de usuario. En esa 
-historia hay otros términos parecidos.
+
 
 
 
