@@ -123,6 +123,10 @@ solucionar esto (es "Synth", se puede añadir una etiqueta en el diagrama).
 (23) En las figuras 5.16 y 5.17 (págs 77 y 78): no se puede leer el texto. Quizás sea mejor, en la medida que sea posible, hacer un diagrama
 con los nodos incluyendo simplemente el nombre la clase, y luego, para cada clase, incluir aparte dsu estructura (soy consciente de que no hay tiempo). Alternativamente, quizás se podrían incluir estos diagramas UML en una hoja de tamaño A3 en lugar de A4 (quizás como un anexo), de forma que ampliandolo se pudiera leer algo del texto.
 
+**Secc 6.1.2 (conclusión del análisis de las tecnologías)**
+
+(24) En esta sección o en la anterior creo que habría que añadir algo sobre la justificación del uso de _NodeJS_, _React_ y _Express_, aunque sea breve, ya que ahora mismo no hay nada al respecto
+
 
 
 
