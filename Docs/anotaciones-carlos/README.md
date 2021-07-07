@@ -94,7 +94,8 @@ requisito esencial, que debería estar entre los primeros requisitos.
 
 **Secc. 4.4 (product backlog con sprints e historias de usuario**
 
-(18) En HU.13 se usa el término "panear", creo que habría que definirlo en el primer uso.
+(18) En HU.13 se usa el término "panear", creo que habría que definirlo en el primer uso. Se introduce
+mucho más adelante (secc. 6.4.1.3.2.1), pero habría que adelantar la definición al primer uso de la palabra.
 
 (19) En HU.26 aparece "loguearme", debería ser "logearme", aunque, en general, en todo el texto, creo
 que sería mejor evitar las palabras en Inglés (o adaptadas del Inglés al Español) cuando existan 
@@ -179,10 +180,19 @@ constructor de la clase `Synth`.
 al _Gain Node_ común que controla el volumen de los altavoces. Pero en el texto se dice que sí están....
 Además, creo que sería mejor incluir en el diagrama dos globos, uno para el _master volume node_ y 
 otro para el _clean node_ que se referencian en el texto, ya que el texto es algo complicado de entender, y 
-se vería más claro si se incorpora al diagrama.
+se vería más claro si se incorpora al diagrama. Tmb los nodos de paneo que se describen en la sección 
+6.4.1.3.2.1 (pág. 105). Tmb los nodos envolventes de la 6.4.1.3.2.2.
 
-(30) En la figura 6.7 hay unas llaves mal indentadas (las que cierran el _for_). En general, se 
-debería revisar la indentación de los trozos de código, esta es solo un ejemplo, pero hay más.
+(30) En la figura 6.7 hay unas llaves mal indentadas (las que cierran el _for_), tmb. en la 6.6 (las últimas). 
+En general, se debería revisar la indentación de los trozos de código, esta es solo un ejemplo, pero creo que 
+hay más.
+
+
+**Secc. 6.4.1.3.3 (repro de audio sin midi)**
+
+(31) Aparece la palabra _seteado_ (pág 106), es otro anglicismo fácilmente evitable, aquí se debe sustituir por _fijado_
+
+
 
 
 
