@@ -186,7 +186,7 @@ se vería más claro si se incorpora al diagrama. Tmb los nodos de paneo que se 
 
 (30) En la figura 6.7 hay unas llaves mal indentadas (las que cierran el _for_), tmb. en la 6.6 (las últimas), y en la 6.13. 
 En general, se debería revisar la indentación de los trozos de código, esta es solo un ejemplo, pero creo que 
-hay más.
+hay más. (solucionado)
 
 
 **Secc. 6.4.1.3.2.2 (envolventes)**
@@ -208,7 +208,7 @@ el grafo usado para generar la señal de audio. (solucionado)
 (34) En la página 116, dice _el cual al multiplicarlo por doce del número de semitonos por ..._, pero aquí _del_ creo 
 que debería ser _da_. En esa página, al final, pone _A parte_ donde debería poner _Aparte_. (solucionado)
 
-(35) Parecido a lo dicho en las notas (29) y (33), sería bueno incluir un gráfico con los nodos de efectos y todos los demás.
+(35) Parecido a lo dicho en las notas (29) y (33), sería bueno incluir un gráfico con los nodos de efectos y todos los demás. (solucionado)
 
 **6.4.1.3.4.2. (Delay)**
 
@@ -218,19 +218,19 @@ es en realidad el tiempo de retraso entre la señal original de entrada y la se�
 
 **Secc. 6.4.1.3.4.4. (Filtros)**
 
-(37) Al igual que antes, sería interesante tener una figura con un grafo que incluya los nodos de los filtros.
+(37) Al igual que antes, sería interesante tener una figura con un grafo que incluya los nodos de los filtros. (solucionado)
 
 
 **Secc. 6.4.1.4.2.1. (Login)**
 
-(38) pág. 135, aparece _existo_ cuando debe ser _éxito_
+(38) pág. 135, aparece _existo_ cuando debe ser _éxito_ (solucionado)
 
 (39) la sección 6.4.1. (Implementación del front-end) tiene 77 páginas, pero no aparece desglosada en el 
-índice, creo que sería bueno regenerar el índice con dicha sección desglosada
+índice, creo que sería bueno regenerar el índice con dicha sección desglosada (solucionado)
 
 **Secc. 6.4.2. (Backend)**
 
-(40) En general en esta sección se usa la palabra _schema_ directamente en Inglés, pero creo que quedaría mejor usa _esquema_ en su lugar.
+(40) En general en esta sección se usa la palabra _schema_ directamente en Inglés, pero creo que quedaría mejor usa _esquema_ en su lugar. (solucionado)
 
 
 
