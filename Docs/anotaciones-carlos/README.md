@@ -215,12 +215,9 @@ que debería ser _da_. En esa página, al final, pone _A parte_ donde debería p
 es en realidad el tiempo de retraso entre la señal original de entrada y la señal retardada de salida (https://developer.mozilla.org/en-US/docs/Web/API/DelayNode/delayTime)
 
 
+**Secc. 6.4.1.3.4.4. (Filtros)**
 
-
-
-
-
-
+(37) Al igual que antes, sería interesante tener una figura con un grafo que incluya los nodos de los filtros.
 
 
 
