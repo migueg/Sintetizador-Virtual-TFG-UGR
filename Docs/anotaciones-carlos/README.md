@@ -202,6 +202,10 @@ sección y da la sensación de que falta un texto una figura.
 Sería una versión ampliada de la figura 6.6 con los añadidos de la nota (30), creo que ayudaría a entender mucho mejor 
 el grafo usado para generar la señal de audio.
 
+**Secc. 6.4.1.3.3. Reproducción de audio con MIDI)**
+
+(34) En la página 116, dice _el cual al multiplicarlo por doce del número de semitonos por ..._, pero aquí _del_ creo que debería ser _da_
+
 
 
 
