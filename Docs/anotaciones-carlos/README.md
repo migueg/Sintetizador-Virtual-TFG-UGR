@@ -105,6 +105,21 @@ HU.27 se usa "hacer login"
 (20) En la figura 5.3 (pág.59) y su explicación, no queda claro la diferencia entre la componente "Web" y la componente "NodeJS (FrontEnd)", no me queda claro pq se usa Node JS en el front end, aclarar esto brevemente en el texto.
 
 
+**Secc 5.2**
+
+(21) en el primer párrafo de esta sección se repite "no relaccional" 
+
+**Secc. 5.3.1, página 63-68**
+
+(21) Se introducen los diagramas de interacción entre el front-end y el back-end, pero, aparte de los diagramas, no se relacionan las distintas peticiones ni se indican para que sirve cada una, en formato de texto, creo que sería bueno añadir una lista de peticiones y de cada una al menos una frase explicativa.
+
+**Secciones 5.3.2 y 5.4.1**
+
+(22) Centrar las figuras 5.8 y 5.9
+
+
+
+
 
 
 
