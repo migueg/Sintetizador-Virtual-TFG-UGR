@@ -1,3 +1,5 @@
+Anotaciones sobre el PDF del día 6 de julio.
+
 **Introducción, resumen**
 
 (1) El resumen en inglés tiene un interlineado distinto al resto del texto, creo 
@@ -102,7 +104,7 @@ HU.27 se usa "hacer login"
 
 **Secc. 5.1.1**
 
-(20) En la figura 5.3 (pág.59) y su explicación, no queda claro la diferencia entre la componente "Web" y la componente "NodeJS (FrontEnd)", no me queda claro pq se usa Node JS en el front end, aclarar esto brevemente en el texto.
+(20) En la figura 5.3 (pág.59) y su explicación, no queda claro la diferencia entre la componente "Web" y la componente "NodeJS (FrontEnd)", no me queda claro pq se usa Node JS en el front end, aclarar esto brevemente en el texto. Ver nota (26).
 
 
 **Secc 5.2**
@@ -129,5 +131,12 @@ con los nodos incluyendo simplemente el nombre la clase, y luego, para cada clas
 
 **Sec. 6.2.2.1 (javascript)**
 
-(25) Se dice que Javascript es compilado y también que es interpretado, es algo confuso. Creo que en general se puede decir que Javascript es interpretado, aunque algunos interpretes del lenguaje usen compilación JIT (durante la ejecución), pero lo segundo es un detalle menos importante. Además, creo que habría que añadir que Javascript es un lenguaje no fuertemente tipado (no se declara el tipo de cada variable). También se dice que está basado en prototipos y que los objetos no  se crean mediante instanciación de clases. Sin embargo, en las últimas versiones de Javascript sí se pueden declarar clases y crear objetos como instancias de esas clases, de hecho este proyecto usa esas capacidades. Arreglarlo.
+(25) Se dice que Javascript es compilado y también que es interpretado, es algo confuso. Creo que en general se puede decir que Javascript es interpretado, aunque algunos interpretes del lenguaje usen compilación JIT (durante la ejecución), pero lo segundo es un detalle menos importante. Además, creo que habría que añadir que Javascript es un lenguaje no fuertemente tipado (no se declara el tipo de cada variable). También se dice que está basado en prototipos y que los objetos no  se crean mediante instanciación de clases. Sin embargo, en las últimas versiones de Javascript (ECMAscript 6) sí se pueden declarar clases y crear objetos como instancias de esas clases, de hecho este proyecto usa esas capacidades. Arreglarlo.
 
+**Secc. 6.2.3 (entorno de ejecución)**
+
+(26) No me queda claro el motivo de usar NodeJS para el front-end o para una parte del front-end, es lo mismo que digo en la nota (20). Aclararlo aquí brevemente.
+
+**Secc. 6.3.2 (instrucciones de ejecución)**
+
+(27) No se dice si las instrucciones son válidas tanto para Linux como para Windows, aclararlo.
