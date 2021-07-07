@@ -204,7 +204,8 @@ el grafo usado para generar la señal de audio.
 
 **Secc. 6.4.1.3.3. Reproducción de audio con MIDI)**
 
-(34) En la página 116, dice _el cual al multiplicarlo por doce del número de semitonos por ..._, pero aquí _del_ creo que debería ser _da_
+(34) En la página 116, dice _el cual al multiplicarlo por doce del número de semitonos por ..._, pero aquí _del_ creo 
+que debería ser _da_. En esa página, al final, pone _A parte_ donde debería poner _Aparte_.
 
 
 
