@@ -209,6 +209,11 @@ que debería ser _da_. En esa página, al final, pone _A parte_ donde debería p
 
 (35) Parecido a lo dicho en las notas (29) y (33), sería bueno incluir un gráfico con los nodos de efectos y todos los demás.
 
+**6.4.1.3.4.2. (Delay)**
+
+(36) la frase _Es la fracción de tiempo del sonido que se reproducirán del sonido_ no queda clara. Además, da la sensación que `delayTime`
+es en realidad el tiempo de retraso entre la señal original de entrada y la señal retardada de salida (https://developer.mozilla.org/en-US/docs/Web/API/DelayNode/delayTime)
+
 
 
 
