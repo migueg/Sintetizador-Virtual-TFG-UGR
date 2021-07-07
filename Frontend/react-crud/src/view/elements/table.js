@@ -19,10 +19,23 @@ import {sinte} from '../osc-components';
 import Rating from './rating';
 import ModalLoad from '../elements/modals/modal-load';
 import ModalDelete from '../elements/modals/modal-delete';
+
+
+/**
+ * Representa el componente para la tabla de sonidos
+ * 
+ * @class TableUI
+ * @constructor
+ */
 class TableUI extends React.Component{
     constructor(){
         super();
-        this.state = {
+        
+        /**
+         * @property state
+         * @type Object
+         */
+            this.state = {
             metadata: {},
             categories: [],
             data: false,
@@ -35,6 +48,11 @@ class TableUI extends React.Component{
        
     }
 
+    /**
+     * Colapsa la zona de filtros
+     * 
+     * @method collapse
+     */
    collapse(){
         if(this.state.collapse){
             $('.collapse').slideUp()
@@ -44,6 +62,17 @@ class TableUI extends React.Component{
             this.state.collapse = true 
         }
    }
+
+   /**
+    * Filtra por rango
+    * 
+    * @method checkRange
+    * @param {string} range Rango
+    * @param {Float} rating Valoración 
+    * @param {Float} ratingfilter Filtro de valoración
+    * @returns Boolean
+    * @private
+    */
     __checkRange(range,rating,ratingfilter){
         var show = false;
         switch(range){
@@ -75,6 +104,18 @@ class TableUI extends React.Component{
 
         return show;
    }
+   /**
+    * Filtra la tabla
+    * 
+    * @method filterTable
+    * @param {string} name 
+    * @param {string} toSearch 
+    * @param {string} category 
+    * @param {string} filter 
+    * @param {string} rating 
+    * @param {Object} tr 
+    * @param {string} range 
+    */
    filterTable(name,toSearch,category,filter,rating, tr,range){
        var ratingfilter = $('#rating').val();
        
@@ -103,6 +144,12 @@ class TableUI extends React.Component{
         }
       
    }
+
+   /**
+    * Busca un elemento en la tabla
+    * 
+    * @method searchInTable
+    */
    searchInTable(){
         var  td,name,category,rating;
         var table = document.getElementById('tableBody')
@@ -151,6 +198,13 @@ class TableUI extends React.Component{
             }
         }
    }
+
+   /**
+    * Actualiza el contenido de la tabla
+    * 
+    * @method updateTable
+    * @async
+    */
     async updateTable(){
         const metadata = await sinte.fetchThings('metadata');
         if(metadata){
@@ -162,6 +216,14 @@ class TableUI extends React.Component{
         }
        
     }
+
+    /**
+     * Método que se ejecuta antes de renderizar el componente. Actauliza la tabla
+     * y obtiene las notas
+     * 
+     * @method componentDidMount
+     * @async
+     */
     async componentDidMount(){
         
         await this.updateTable();
@@ -169,6 +231,13 @@ class TableUI extends React.Component{
         this.setState({categories: categories})
     }
 
+    /**
+     * Manda un mensajae a la fachada para cargar un sonido
+     * 
+     * @method loadSound
+     * @returns {Object} respuesta
+     * @async
+     */
     async loadSound(){
 
         const state = await sinte.load(this.modalRef.current.id);
@@ -178,18 +247,46 @@ class TableUI extends React.Component{
         return resp;
     }
 
+    /**
+     * Manda un mensajae a la fachada para eliminar un sonido
+     * 
+     * @method deleteSound
+     * @returns {Object} respuesta
+     * @async
+     */
     async deleteSound(){
         const state = await sinte.delete(this.modalDeleteRef.current.id);
         return state;
     }
+
+    /**
+     * Manda la orden para enseñar un modal 
+     * 
+     * @method showModal
+     * @param {String} id 
+     */
     showModal(id){
         this.modalRef.current.show(id)
     }
 
+    /**
+     * Manda la orden para enseñar un modal 
+     * 
+     * @method showModalDelete
+     * @param {String} id 
+     */
     showModalDelete(id){
 
         this.modalDeleteRef.current.show(id)
     }
+
+    /**
+     * Método que devuelve el componente TableUI para ser renderizado
+     * 
+     * @method render
+     * @return Código html del componente Distorsion
+     * 
+     */
     render(){
         if(this.state)
         return(

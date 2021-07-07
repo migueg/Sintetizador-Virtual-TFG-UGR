@@ -15,6 +15,12 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 import { sinte } from './osc-components';
 
+/**
+ * Proporciona un componente para el perfil de usuario
+ * 
+ * @class Profile
+ * @constructor
+ */
 class Profile extends React.Component{
     #profile
     
@@ -26,7 +32,12 @@ class Profile extends React.Component{
         
     }
 
-    
+    /**
+     * Se encarga de obtener el perfil del usuario y setearlo antes de que el componente
+     * se renderice
+     * 
+     * @method componentDidMount
+     */
     async componentDidMount(){
        var profile = await sinte.fetchProfile('profile')
        var maxSize = await sinte.fetchProfile('maxSize');
@@ -41,6 +52,12 @@ class Profile extends React.Component{
 
     }
 
+    /**
+     * Pinta la barra de espacio disponible
+     * 
+     * @method paintProgressBar
+     * @private
+     */
     __paintProgressBar(){
         var value =  Math.round(this.state.userSpace * 1000) / 1000;
         document.getElementById('progress').style.width = value + '%'
@@ -48,6 +65,13 @@ class Profile extends React.Component{
 
     }
 
+    /**
+     * Se encarga de interpretar una respuesta de la fachada
+     * 
+     * @method handleResponse
+     * @param {Object} response 
+     * @private
+     */
     __handleResponse(response){
         document.getElementById('span-username').style.display = 'none';
         document.getElementById('span-email').style.display = 'none';
@@ -81,6 +105,13 @@ class Profile extends React.Component{
         }
     }
 
+    /**
+     * Esconde el cargador
+     * 
+     * @method hideLoader
+     * @param {Integer} code 
+     * @private
+     */
     __hideLoader(code){
         document.getElementById('loader').style.display = 'none';
         if(code === '409'){
@@ -93,10 +124,23 @@ class Profile extends React.Component{
             document.getElementById('success').style.display = '';
         }
     }
+    /**
+     * Enseña el cargador
+     * 
+     * @method showLoader
+     * @private
+     */
     __showLoader(){
         document.getElementById('profile').style.display = 'none';
         document.getElementById('loader').style.display = '';
     }
+
+    /**
+     * Manda los mensajes para editar el perfil
+     * 
+     * @method confirmEdit
+     * @async
+     */
     async confirmEdit(){
         var username = document.getElementById('username')
         var email = document.getElementById('email');
@@ -128,6 +172,11 @@ class Profile extends React.Component{
         
 
     }
+    /**
+     * Actualiza los valores de la vista con los del perfil editado
+     * 
+     * @method editProfile
+     */
     editProfile(){
        var username = document.getElementById('username')
        username.removeAttribute('disabled') 
@@ -149,12 +198,24 @@ class Profile extends React.Component{
 
     }
 
+    /**
+     * Enseña un modal
+     * 
+     * @method showModal
+     */
     showModal(){
         document.getElementById("backdrop").style.display = "block"
         document.getElementById("modalPassword").style.display = "block"
         document.getElementById("modalPassword").className += "show"
     }
 
+    /**
+     * Tranforma un string en una fecha para el input del formulario
+     * 
+     * @method toDate
+     * @param {String} string Fecha
+     * @returns {Date}
+     */
     toDate(string){
         console.log()
         var split  = string.split('-');
@@ -165,6 +226,13 @@ class Profile extends React.Component{
         return date
     }
 
+    /**
+     * Método que devuelve el componente Profile para ser renderizado
+     * 
+     * @method render
+     * @return Código html del componente Profile
+     * 
+     */
     render(){
         return(
             <div style= {{height: '94%'}}>

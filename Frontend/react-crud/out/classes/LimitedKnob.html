@@ -38,25 +38,55 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/Analyser.html">Analyser</a></li>
+                                <li><a href="../classes/Anlyser.html">Anlyser</a></li>
                                 <li><a href="../classes/App.html">App</a></li>
+                                <li><a href="../classes/Delay.html">Delay</a></li>
+                                <li><a href="../classes/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../classes/Effect.html">Effect</a></li>
                                 <li><a href="../classes/Envelope.html">Envelope</a></li>
+                                <li><a href="../classes/Equalizer.html">Equalizer</a></li>
+                                <li><a href="../classes/ErrorPage.html">ErrorPage</a></li>
+                                <li><a href="../classes/Filter.html">Filter</a></li>
+                                <li><a href="../classes/Header.html">Header</a></li>
                                 <li><a href="../classes/Index.html">Index</a></li>
+                                <li><a href="../classes/Library.html">Library</a></li>
                                 <li><a href="../classes/LimitedKnob.html">LimitedKnob</a></li>
+                                <li><a href="../classes/Loader.html">Loader</a></li>
+                                <li><a href="../classes/Login.html">Login</a></li>
+                                <li><a href="../classes/Midi.html">Midi</a></li>
+                                <li><a href="../classes/Modal.html">Modal</a></li>
+                                <li><a href="../classes/ModalDelete.html">ModalDelete</a></li>
+                                <li><a href="../classes/ModalLoad.html">ModalLoad</a></li>
+                                <li><a href="../classes/ModalPassword.html">ModalPassword</a></li>
+                                <li><a href="../classes/ModalSave.html">ModalSave</a></li>
                                 <li><a href="../classes/Navigator.html">Navigator</a></li>
                                 <li><a href="../classes/Oscilador.html">Oscilador</a></li>
                                 <li><a href="../classes/oscillator.html">oscillator</a></li>
                                 <li><a href="../classes/Piano.html">Piano</a></li>
+                                <li><a href="../classes/Profile.html">Profile</a></li>
+                                <li><a href="../classes/Recorder.html">Recorder</a></li>
+                                <li><a href="../classes/Reverb.html">Reverb</a></li>
+                                <li><a href="../classes/Saver.html">Saver</a></li>
+                                <li><a href="../classes/SignUp.html">SignUp</a></li>
                                 <li><a href="../classes/Synth.html">Synth</a></li>
+                                <li><a href="../classes/TableUI.html">TableUI</a></li>
                                 <li><a href="../classes/Voice.html">Voice</a></li>
                             </ul>
                 
                 
                             <ul id="api-modules" class="apis modules">
                                 <li><a href="../modules/App.html">App</a></li>
+                                <li><a href="../modules/Delay.html">Delay</a></li>
+                                <li><a href="../modules/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../modules/Filter.html">Filter</a></li>
+                                <li><a href="../modules/filterTypes.html">filterTypes</a></li>
+                                <li><a href="../modules/FX.html">FX</a></li>
                                 <li><a href="../modules/Knob.html">Knob</a></li>
                                 <li><a href="../modules/Navigator.html">Navigator</a></li>
                                 <li><a href="../modules/OscComponents.html">OscComponents</a></li>
                                 <li><a href="../modules/Piano.html">Piano</a></li>
+                                <li><a href="../modules/Reverb.html">Reverb</a></li>
                                 <li><a href="../modules/synth.html">synth</a></li>
                                 <li><a href="../modules/types.html">types</a></li>
                             </ul>
@@ -97,7 +127,7 @@
 
 
         <div class="foundat">
-            Defined in: <a href="../files/src_view_elements_limitedKnob.js.html#l12"><code>src\view\elements\limitedKnob.js:12</code></a>
+            Defined in: <a href="../files/src_view_elements_limitedKnob.js.html#l13"><code>src\view\elements\limitedKnob.js:13</code></a>
         </div>
 
             Module: <a href="../modules/Knob.html">Knob</a>
@@ -134,7 +164,7 @@ que puede ser usado para disitintos fines atendiendo a su tipo</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_view_elements_limitedKnob.js.html#l12"><code>src\view\elements\limitedKnob.js:12</code></a>
+        <a href="../files/src_view_elements_limitedKnob.js.html#l13"><code>src\view\elements\limitedKnob.js:13</code></a>
         </p>
 
 
@@ -184,8 +214,24 @@ que puede ser usado para disitintos fines atendiendo a su tipo</p>
                     <h3>Methods</h3>
 
                     <ul class="index-list methods">
+                            <li class="index-item method private">
+                                <a href="#method___handleOnChangeFilterControl">__handleOnChangeFilterControl</a>
+
+                            </li>
                             <li class="index-item method">
                                 <a href="#method_getState">getState</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method_handelOnChangeReverbDecay">handelOnChangeReverbDecay</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method_handelOnChangeReverbHP">handelOnChangeReverbHP</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method_handelOnChangeReverbLP">handelOnChangeReverbLP</a>
 
                             </li>
                             <li class="index-item method">
@@ -201,6 +247,30 @@ que puede ser usado para disitintos fines atendiendo a su tipo</p>
 
                             </li>
                             <li class="index-item method private">
+                                <a href="#method_handleOnChangeDelayFeedback">handleOnChangeDelayFeedback</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method_handleOnChangeDelayWet">handleOnChangeDelayWet</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method_handleOnChangeDistorsionAmount">handleOnChangeDistorsionAmount</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method_handleOnChangeDistorsionwet">handleOnChangeDistorsionwet</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method_handleOnChangeFilterWet">handleOnChangeFilterWet</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method_handleOnChangeMaster">handleOnChangeMaster</a>
+
+                            </li>
+                            <li class="index-item method private">
                                 <a href="#method_handleOnChangeOscillator">handleOnChangeOscillator</a>
 
                             </li>
@@ -209,11 +279,43 @@ que puede ser usado para disitintos fines atendiendo a su tipo</p>
 
                             </li>
                             <li class="index-item method private">
+                                <a href="#method_handleOnChangeReverbWet">handleOnChangeReverbWet</a>
+
+                            </li>
+                            <li class="index-item method private">
                                 <a href="#method_handleOnChangeSustain">handleOnChangeSustain</a>
 
                             </li>
                             <li class="index-item method">
                                 <a href="#method_render">render</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setAmountDistorsion">setAmountDistorsion</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setEnvelope">setEnvelope</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setFeedback">setFeedback</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setFeedback">setFeedback</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setGainOsc">setGainOsc</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setReverbDecay">setReverbDecay</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setWet">setWet</a>
 
                             </li>
                     </ul>
@@ -252,6 +354,63 @@ que puede ser usado para disitintos fines atendiendo a su tipo</p>
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
+<div id="method___handleOnChangeFilterControl" class="method item private">
+    <h3 class="name"><code>__handleOnChangeFilterControl</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>val</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_view_elements_limitedKnob.js.html#l203"><code>src\view\elements\limitedKnob.js:203</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método que se encarga de llamar al controlador para que
+modifque la frecuencia desde donde el  filtro se aplica</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">val</code>
+                        <span class="type">Float</span>
+
+
+                    <div class="param-description">
+                        <p>Valor del Knob</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
 <div id="method_getState" class="method item">
     <h3 class="name"><code>getState</code></h3>
 
@@ -271,7 +430,7 @@ que puede ser usado para disitintos fines atendiendo a su tipo</p>
                     <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_view_elements_limitedKnob.js.html#l202"><code>src\view\elements\limitedKnob.js:202</code></a>
+        <a href="../files/src_view_elements_limitedKnob.js.html#l400"><code>src\view\elements\limitedKnob.js:400</code></a>
         </p>
 
 
@@ -292,6 +451,177 @@ que puede ser usado para disitintos fines atendiendo a su tipo</p>
 
             </div>
         </div>
+
+
+</div>
+<div id="method_handelOnChangeReverbDecay" class="method item private">
+    <h3 class="name"><code>handelOnChangeReverbDecay</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>val</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_view_elements_limitedKnob.js.html#l258"><code>src\view\elements\limitedKnob.js:258</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método que se encarga de llamar al controlador para que
+modifque el nivel de Decay del Reverb aplicado</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">val</code>
+                        <span class="type">Float</span>
+
+
+                    <div class="param-description">
+                        <p>Valor del Knob</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_handelOnChangeReverbHP" class="method item private">
+    <h3 class="name"><code>handelOnChangeReverbHP</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>val</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_view_elements_limitedKnob.js.html#l271"><code>src\view\elements\limitedKnob.js:271</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método que se encarga de llamar al controlador para que
+modifque el filtro pasa alto del Reverb aplicado</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">val</code>
+                        <span class="type">Float</span>
+
+
+                    <div class="param-description">
+                        <p>Valor del Knob</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_handelOnChangeReverbLP" class="method item private">
+    <h3 class="name"><code>handelOnChangeReverbLP</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>val</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_view_elements_limitedKnob.js.html#l284"><code>src\view\elements\limitedKnob.js:284</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método que se encarga de llamar al controlador para que
+modifque el filtro pasa bajos del Reverb aplicado</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">val</code>
+                        <span class="type">Float</span>
+
+
+                    <div class="param-description">
+                        <p>Valor del Knob</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
 
 
 </div>
@@ -317,7 +647,7 @@ que puede ser usado para disitintos fines atendiendo a su tipo</p>
                     <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_view_elements_limitedKnob.js.html#l158"><code>src\view\elements\limitedKnob.js:158</code></a>
+        <a href="../files/src_view_elements_limitedKnob.js.html#l313"><code>src\view\elements\limitedKnob.js:313</code></a>
         </p>
 
 
@@ -375,7 +705,7 @@ mover el Knob</p>
                     <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_view_elements_limitedKnob.js.html#l100"><code>src\view\elements\limitedKnob.js:100</code></a>
+        <a href="../files/src_view_elements_limitedKnob.js.html#l109"><code>src\view\elements\limitedKnob.js:109</code></a>
         </p>
 
 
@@ -432,7 +762,7 @@ modifque el Attack del oscilador</p>
                     <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_view_elements_limitedKnob.js.html#l115"><code>src\view\elements\limitedKnob.js:115</code></a>
+        <a href="../files/src_view_elements_limitedKnob.js.html#l122"><code>src\view\elements\limitedKnob.js:122</code></a>
         </p>
 
 
@@ -442,6 +772,348 @@ modifque el Attack del oscilador</p>
     <div class="description">
         <p>Método que se encarga de llamar al controlador para que
 modifque el Decay del oscilador</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">val</code>
+                        <span class="type">Float</span>
+
+
+                    <div class="param-description">
+                        <p>Valor del Knob</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_handleOnChangeDelayFeedback" class="method item private">
+    <h3 class="name"><code>handleOnChangeDelayFeedback</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>val</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_view_elements_limitedKnob.js.html#l136"><code>src\view\elements\limitedKnob.js:136</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método que se encarga de llamar al controlador para que
+modifque la cantidad de feedback del efecto delay</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">val</code>
+                        <span class="type">Float</span>
+
+
+                    <div class="param-description">
+                        <p>Valor del Knob</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_handleOnChangeDelayWet" class="method item private">
+    <h3 class="name"><code>handleOnChangeDelayWet</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>val</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_view_elements_limitedKnob.js.html#l149"><code>src\view\elements\limitedKnob.js:149</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método que se encarga de llamar al controlador para que
+modifque la cantidad de efecto delay que se aplica</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">val</code>
+                        <span class="type">Float</span>
+
+
+                    <div class="param-description">
+                        <p>Valor del Knob</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_handleOnChangeDistorsionAmount" class="method item private">
+    <h3 class="name"><code>handleOnChangeDistorsionAmount</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>val</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_view_elements_limitedKnob.js.html#l176"><code>src\view\elements\limitedKnob.js:176</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método que se encarga de llamar al controlador para que
+modifque el nivel de distorsion producido</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">val</code>
+                        <span class="type">Float</span>
+
+
+                    <div class="param-description">
+                        <p>Valor del Knob</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_handleOnChangeDistorsionwet" class="method item private">
+    <h3 class="name"><code>handleOnChangeDistorsionwet</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>val</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_view_elements_limitedKnob.js.html#l162"><code>src\view\elements\limitedKnob.js:162</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método que se encarga de llamar al controlador para que
+modifque la cantidad de efecto distorsion que se aplica</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">val</code>
+                        <span class="type">Float</span>
+
+
+                    <div class="param-description">
+                        <p>Valor del Knob</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_handleOnChangeFilterWet" class="method item private">
+    <h3 class="name"><code>handleOnChangeFilterWet</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>val</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_view_elements_limitedKnob.js.html#l189"><code>src\view\elements\limitedKnob.js:189</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método que se encarga de llamar al controlador para que
+modifque la cantidad de filtro  que se aplica</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">val</code>
+                        <span class="type">Float</span>
+
+
+                    <div class="param-description">
+                        <p>Valor del Knob</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_handleOnChangeMaster" class="method item private">
+    <h3 class="name"><code>handleOnChangeMaster</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>val</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_view_elements_limitedKnob.js.html#l217"><code>src\view\elements\limitedKnob.js:217</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método que se encarga de llamar al controlador para que
+modifque el volumen Master de la aplicacion</p>
 
     </div>
 
@@ -489,7 +1161,7 @@ modifque el Decay del oscilador</p>
                     <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_view_elements_limitedKnob.js.html#l85"><code>src\view\elements\limitedKnob.js:85</code></a>
+        <a href="../files/src_view_elements_limitedKnob.js.html#l93"><code>src\view\elements\limitedKnob.js:93</code></a>
         </p>
 
 
@@ -546,7 +1218,7 @@ modifque el volumen general del oscilador</p>
                     <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_view_elements_limitedKnob.js.html#l142"><code>src\view\elements\limitedKnob.js:142</code></a>
+        <a href="../files/src_view_elements_limitedKnob.js.html#l244"><code>src\view\elements\limitedKnob.js:244</code></a>
         </p>
 
 
@@ -556,6 +1228,63 @@ modifque el volumen general del oscilador</p>
     <div class="description">
         <p>Método que se encarga de llamar al controlador para que
 modifque el Release del oscilador</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">val</code>
+                        <span class="type">Float</span>
+
+
+                    <div class="param-description">
+                        <p>Valor del Knob</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_handleOnChangeReverbWet" class="method item private">
+    <h3 class="name"><code>handleOnChangeReverbWet</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>val</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_view_elements_limitedKnob.js.html#l297"><code>src\view\elements\limitedKnob.js:297</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método que se encarga de llamar al controlador para que
+modifque el nivel de Reverb aplicado</p>
 
     </div>
 
@@ -603,7 +1332,7 @@ modifque el Release del oscilador</p>
                     <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_view_elements_limitedKnob.js.html#l129"><code>src\view\elements\limitedKnob.js:129</code></a>
+        <a href="../files/src_view_elements_limitedKnob.js.html#l231"><code>src\view\elements\limitedKnob.js:231</code></a>
         </p>
 
 
@@ -656,7 +1385,7 @@ modifque el Sustain del oscilador</p>
                     <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_view_elements_limitedKnob.js.html#l214"><code>src\view\elements\limitedKnob.js:214</code></a>
+        <a href="../files/src_view_elements_limitedKnob.js.html#l511"><code>src\view\elements\limitedKnob.js:511</code></a>
         </p>
 
 
@@ -680,6 +1409,419 @@ modifque el Sustain del oscilador</p>
 
 
 </div>
+<div id="method_setAmountDistorsion" class="method item">
+    <h3 class="name"><code>setAmountDistorsion</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>val</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_view_elements_limitedKnob.js.html#l475"><code>src\view\elements\limitedKnob.js:475</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Setter del knob amount del efecto distorsion</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">val</code>
+                        <span class="type">Float</span>
+
+
+                    <div class="param-description">
+                        <p>Valor nuevo</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_setEnvelope" class="method item">
+    <h3 class="name"><code>setEnvelope</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>param</code>
+                </li>
+                <li class="arg">
+                        <code>val</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_view_elements_limitedKnob.js.html#l422"><code>src\view\elements\limitedKnob.js:422</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Setter de los knobs de la envolvente</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">param</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Parametro a cambiar</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">val</code>
+                        <span class="type">Float</span>
+
+
+                    <div class="param-description">
+                        <p>Nuevo valor</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_setFeedback" class="method item">
+    <h3 class="name"><code>setFeedback</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>val</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_view_elements_limitedKnob.js.html#l493"><code>src\view\elements\limitedKnob.js:493</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Setter del knob feedback del efecto delay</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">val</code>
+                        <span class="type">Float</span>
+
+
+                    <div class="param-description">
+                        <p>Valor nuevo</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_setFeedback" class="method item">
+    <h3 class="name"><code>setFeedback</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>val</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_view_elements_limitedKnob.js.html#l502"><code>src\view\elements\limitedKnob.js:502</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Setter del knob de frecuencia del efecto filtro</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">val</code>
+                        <span class="type">Float</span>
+
+
+                    <div class="param-description">
+                        <p>Valor nuevo</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_setGainOsc" class="method item">
+    <h3 class="name"><code>setGainOsc</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>val</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_view_elements_limitedKnob.js.html#l411"><code>src\view\elements\limitedKnob.js:411</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Setter del estado del knob de ganancia</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">val</code>
+                        <span class="type">Float</span>
+
+
+                    <div class="param-description">
+                        <p>Nuevo valor de ganancia</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_setReverbDecay" class="method item">
+    <h3 class="name"><code>setReverbDecay</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>val</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_view_elements_limitedKnob.js.html#l484"><code>src\view\elements\limitedKnob.js:484</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Setter del knob decay del efecto reverb</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">val</code>
+                        <span class="type">Float</span>
+
+
+                    <div class="param-description">
+                        <p>Valor nuevo</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_setWet" class="method item">
+    <h3 class="name"><code>setWet</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>effect</code>
+                </li>
+                <li class="arg">
+                        <code>val</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_view_elements_limitedKnob.js.html#l449"><code>src\view\elements\limitedKnob.js:449</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Setter del valor del knob wet para un efecto</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">effect</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Efecto al que se va a modificar el wet</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">val</code>
+                        <span class="type">Float</span>
+
+
+                    <div class="param-description">
+                        <p>Valor nuevo</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
             </div>
 
             <div id="properties" class="api-class-tabpanel">
@@ -697,7 +1839,7 @@ modifque el Sustain del oscilador</p>
                     <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_view_elements_limitedKnob.js.html#l49"><code>src\view\elements\limitedKnob.js:49</code></a>
+        <a href="../files/src_view_elements_limitedKnob.js.html#l50"><code>src\view\elements\limitedKnob.js:50</code></a>
         </p>
 
 
@@ -724,7 +1866,7 @@ modifque el Sustain del oscilador</p>
                     <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_view_elements_limitedKnob.js.html#l27"><code>src\view\elements\limitedKnob.js:27</code></a>
+        <a href="../files/src_view_elements_limitedKnob.js.html#l28"><code>src\view\elements\limitedKnob.js:28</code></a>
         </p>
 
 
@@ -750,7 +1892,7 @@ modifque el Sustain del oscilador</p>
                     <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_view_elements_limitedKnob.js.html#l41"><code>src\view\elements\limitedKnob.js:41</code></a>
+        <a href="../files/src_view_elements_limitedKnob.js.html#l42"><code>src\view\elements\limitedKnob.js:42</code></a>
         </p>
 
 
@@ -777,7 +1919,7 @@ modifque el Sustain del oscilador</p>
                     <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_view_elements_limitedKnob.js.html#l20"><code>src\view\elements\limitedKnob.js:20</code></a>
+        <a href="../files/src_view_elements_limitedKnob.js.html#l21"><code>src\view\elements\limitedKnob.js:21</code></a>
         </p>
 
 
@@ -804,7 +1946,7 @@ modifque el Sustain del oscilador</p>
                     <p>Provided by the <a href="../modules/types.html">types</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_view_elements_limitedKnob.js.html#l34"><code>src\view\elements\limitedKnob.js:34</code></a>
+        <a href="../files/src_view_elements_limitedKnob.js.html#l35"><code>src\view\elements\limitedKnob.js:35</code></a>
         </p>
 
 

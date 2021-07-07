@@ -1,4 +1,52 @@
 
+/**
+ * La clase Equalizer se encarga de ecualizar la señal de audio 
+ *
+ * @class Equalizer
+ * @constructor
+ * 
+ * @param {BaseContext} context AudioContext
+ * @param {AudioNode} master Nodo master de ganancia
+ * @param {AudioNode} eqGain Nodo de ganancia para el ecualizador
+ * 
+ */
+
+
+/**
+ * Node para el filtro de frecuencias bajas
+ * @property lw
+ * @type AudioNode
+ * @private
+ */
+
+/**
+ * Node para el filtro de frecuencias medias bajas
+ * @property lwm
+ * @type AudioNode
+ * @private
+ */
+
+/**
+ * Node para el filtro de frecuencias medias
+ * @property mid
+ * @type AudioNode
+ * @private
+ */
+
+/**
+ * Node para el filtro de frecuencias medias altas
+ * @property hgm
+ * @type AudioNode
+ * @private
+ */
+
+/**
+ * Node para el filtro de frecuencias altas
+ * @property hg
+ * @type AudioNode
+ * @private
+ */
+
 class Equalizer{
     #lw
     #lwm
@@ -29,6 +77,12 @@ class Equalizer{
 
     }
 
+    /**
+     * Metodo que inicializa las propiedades de los filtros
+     * 
+     * @method setProperties
+     * @private
+     */
     __setProperties(){
         this.#hg.type = 'highshelf';
         this.#hg.frequency.value = 19201; //19201hz-2400hz
@@ -56,6 +110,14 @@ class Equalizer{
 
     }
 
+    /**
+     * Método que se encarga de ecualizar
+     * 
+     * @method equalize
+     * @param {String} freq Frecuencias a las que afectara 
+     * @param {Float} value Valor nuevo
+     * 
+     */
     equalize(freq,value){
         switch(freq){
             case 'lw':

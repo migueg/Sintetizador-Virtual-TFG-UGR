@@ -3,6 +3,14 @@ import Rating from '../rating';
 import success from '../../../img/success.png';
 import failure from '../../../img/failure.png';
 
+
+/**
+ * Clase que genera el modal de la interfaz para guardar un sonido.
+ *
+ * @class ModalSave
+ * @constructor
+ * @see Modal
+ */
 class ModalSave extends Modal{
     constructor(props){
       
@@ -10,7 +18,13 @@ class ModalSave extends Modal{
         
     }   
 
-    
+    /**
+     * Método que devuelve el componente ModalSave para ser renderizado
+     * 
+     * @method render
+     * @return Código html del componente Distorsion
+     * 
+     */
     render(){
         return(
             <div>

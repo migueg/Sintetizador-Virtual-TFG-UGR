@@ -38,25 +38,55 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/Analyser.html">Analyser</a></li>
+                                <li><a href="../classes/Anlyser.html">Anlyser</a></li>
                                 <li><a href="../classes/App.html">App</a></li>
+                                <li><a href="../classes/Delay.html">Delay</a></li>
+                                <li><a href="../classes/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../classes/Effect.html">Effect</a></li>
                                 <li><a href="../classes/Envelope.html">Envelope</a></li>
+                                <li><a href="../classes/Equalizer.html">Equalizer</a></li>
+                                <li><a href="../classes/ErrorPage.html">ErrorPage</a></li>
+                                <li><a href="../classes/Filter.html">Filter</a></li>
+                                <li><a href="../classes/Header.html">Header</a></li>
                                 <li><a href="../classes/Index.html">Index</a></li>
+                                <li><a href="../classes/Library.html">Library</a></li>
                                 <li><a href="../classes/LimitedKnob.html">LimitedKnob</a></li>
+                                <li><a href="../classes/Loader.html">Loader</a></li>
+                                <li><a href="../classes/Login.html">Login</a></li>
+                                <li><a href="../classes/Midi.html">Midi</a></li>
+                                <li><a href="../classes/Modal.html">Modal</a></li>
+                                <li><a href="../classes/ModalDelete.html">ModalDelete</a></li>
+                                <li><a href="../classes/ModalLoad.html">ModalLoad</a></li>
+                                <li><a href="../classes/ModalPassword.html">ModalPassword</a></li>
+                                <li><a href="../classes/ModalSave.html">ModalSave</a></li>
                                 <li><a href="../classes/Navigator.html">Navigator</a></li>
                                 <li><a href="../classes/Oscilador.html">Oscilador</a></li>
                                 <li><a href="../classes/oscillator.html">oscillator</a></li>
                                 <li><a href="../classes/Piano.html">Piano</a></li>
+                                <li><a href="../classes/Profile.html">Profile</a></li>
+                                <li><a href="../classes/Recorder.html">Recorder</a></li>
+                                <li><a href="../classes/Reverb.html">Reverb</a></li>
+                                <li><a href="../classes/Saver.html">Saver</a></li>
+                                <li><a href="../classes/SignUp.html">SignUp</a></li>
                                 <li><a href="../classes/Synth.html">Synth</a></li>
+                                <li><a href="../classes/TableUI.html">TableUI</a></li>
                                 <li><a href="../classes/Voice.html">Voice</a></li>
                             </ul>
                 
                 
                             <ul id="api-modules" class="apis modules">
                                 <li><a href="../modules/App.html">App</a></li>
+                                <li><a href="../modules/Delay.html">Delay</a></li>
+                                <li><a href="../modules/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../modules/Filter.html">Filter</a></li>
+                                <li><a href="../modules/filterTypes.html">filterTypes</a></li>
+                                <li><a href="../modules/FX.html">FX</a></li>
                                 <li><a href="../modules/Knob.html">Knob</a></li>
                                 <li><a href="../modules/Navigator.html">Navigator</a></li>
                                 <li><a href="../modules/OscComponents.html">OscComponents</a></li>
                                 <li><a href="../modules/Piano.html">Piano</a></li>
+                                <li><a href="../modules/Reverb.html">Reverb</a></li>
                                 <li><a href="../modules/synth.html">synth</a></li>
                                 <li><a href="../modules/types.html">types</a></li>
                             </ul>
@@ -97,7 +127,7 @@
 
 
         <div class="foundat">
-            Defined in: <a href="../files/src_App.js.html#l10"><code>src\App.js:10</code></a>
+            Defined in: <a href="../files/src_App.js.html#l13"><code>src\App.js:13</code></a>
         </div>
 
             Module: <a href="../modules/App.html">App</a>
@@ -127,7 +157,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_App.js.html#l10"><code>src\App.js:10</code></a>
+        <a href="../files/src_App.js.html#l13"><code>src\App.js:13</code></a>
         </p>
 
 
@@ -148,17 +178,447 @@
     <ul class="api-class-tabs">
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
     </ul>
 
     <div>
         <div id="index" class="api-class-tabpanel index">
             <h2 class="off-left">Item Index</h2>
 
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                            <li class="index-item method private">
+                                <a href="#method___onOscillators">__onOscillators</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method___onOscillators">__onOscillators</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method_isOff">isOff</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_loadSound">loadSound</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_render">render</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_showEQ">showEQ</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_showFX">showFX</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_showLb">showLb</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_showOsc">showOsc</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_updateTable">updateTable</a>
+
+                            </li>
+                    </ul>
+                </div>
 
 
 
         </div>
 
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+<div id="method___onOscillators" class="method item private">
+    <h3 class="name"><code>__onOscillators</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Piano.html">Piano</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_App.js.html#l64"><code>src\App.js:64</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Indica a la fahcada que hay que encender los osciladores</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method___onOscillators" class="method item private">
+    <h3 class="name"><code>__onOscillators</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Piano.html">Piano</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_App.js.html#l81"><code>src\App.js:81</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Indica a la fahcada que hay que apagar los osciladores</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_isOff" class="method item private">
+    <h3 class="name"><code>isOff</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>element</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Boolean</span>
+        </span>
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Piano.html">Piano</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_App.js.html#l44"><code>src\App.js:44</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Comprueba si un layer esta oculto</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">element</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Id del layer</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Boolean</span>:
+            </div>
+        </div>
+
+
+</div>
+<div id="method_loadSound" class="method item">
+    <h3 class="name"><code>loadSound</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Piano.html">Piano</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_App.js.html#l220"><code>src\App.js:220</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Cuando se carga el sonido inicia el proceso para que se actualicen los valores</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Object</span>:
+                    <p>respuesta</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_render" class="method item">
+    <h3 class="name"><code>render</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Piano.html">Piano</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_App.js.html#l260"><code>src\App.js:260</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método que devuelve el componente App para ser renderizado que se corresponde con el sintetizador</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>Código html del componente App</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_showEQ" class="method item">
+    <h3 class="name"><code>showEQ</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Piano.html">Piano</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_App.js.html#l190"><code>src\App.js:190</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Muestra el layer de EQ</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_showFX" class="method item">
+    <h3 class="name"><code>showFX</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Piano.html">Piano</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_App.js.html#l98"><code>src\App.js:98</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Muestra el layer de efectos</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_showLb" class="method item">
+    <h3 class="name"><code>showLb</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Piano.html">Piano</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_App.js.html#l158"><code>src\App.js:158</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Muestra el layer de tabla de sonidos</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_showOsc" class="method item">
+    <h3 class="name"><code>showOsc</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Piano.html">Piano</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_App.js.html#l129"><code>src\App.js:129</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Muestra el layer de osciladores</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_updateTable" class="method item">
+    <h3 class="name"><code>updateTable</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Piano.html">Piano</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_App.js.html#l251"><code>src\App.js:251</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Le dice al hijo que tiene que actualizar la tabla de sonidos</p>
+
+    </div>
+
+
+
+
+</div>
+            </div>
 
 
 

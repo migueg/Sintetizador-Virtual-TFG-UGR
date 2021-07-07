@@ -38,25 +38,55 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/Analyser.html">Analyser</a></li>
+                                <li><a href="../classes/Anlyser.html">Anlyser</a></li>
                                 <li><a href="../classes/App.html">App</a></li>
+                                <li><a href="../classes/Delay.html">Delay</a></li>
+                                <li><a href="../classes/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../classes/Effect.html">Effect</a></li>
                                 <li><a href="../classes/Envelope.html">Envelope</a></li>
+                                <li><a href="../classes/Equalizer.html">Equalizer</a></li>
+                                <li><a href="../classes/ErrorPage.html">ErrorPage</a></li>
+                                <li><a href="../classes/Filter.html">Filter</a></li>
+                                <li><a href="../classes/Header.html">Header</a></li>
                                 <li><a href="../classes/Index.html">Index</a></li>
+                                <li><a href="../classes/Library.html">Library</a></li>
                                 <li><a href="../classes/LimitedKnob.html">LimitedKnob</a></li>
+                                <li><a href="../classes/Loader.html">Loader</a></li>
+                                <li><a href="../classes/Login.html">Login</a></li>
+                                <li><a href="../classes/Midi.html">Midi</a></li>
+                                <li><a href="../classes/Modal.html">Modal</a></li>
+                                <li><a href="../classes/ModalDelete.html">ModalDelete</a></li>
+                                <li><a href="../classes/ModalLoad.html">ModalLoad</a></li>
+                                <li><a href="../classes/ModalPassword.html">ModalPassword</a></li>
+                                <li><a href="../classes/ModalSave.html">ModalSave</a></li>
                                 <li><a href="../classes/Navigator.html">Navigator</a></li>
                                 <li><a href="../classes/Oscilador.html">Oscilador</a></li>
                                 <li><a href="../classes/oscillator.html">oscillator</a></li>
                                 <li><a href="../classes/Piano.html">Piano</a></li>
+                                <li><a href="../classes/Profile.html">Profile</a></li>
+                                <li><a href="../classes/Recorder.html">Recorder</a></li>
+                                <li><a href="../classes/Reverb.html">Reverb</a></li>
+                                <li><a href="../classes/Saver.html">Saver</a></li>
+                                <li><a href="../classes/SignUp.html">SignUp</a></li>
                                 <li><a href="../classes/Synth.html">Synth</a></li>
+                                <li><a href="../classes/TableUI.html">TableUI</a></li>
                                 <li><a href="../classes/Voice.html">Voice</a></li>
                             </ul>
                 
                 
                             <ul id="api-modules" class="apis modules">
                                 <li><a href="../modules/App.html">App</a></li>
+                                <li><a href="../modules/Delay.html">Delay</a></li>
+                                <li><a href="../modules/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../modules/Filter.html">Filter</a></li>
+                                <li><a href="../modules/filterTypes.html">filterTypes</a></li>
+                                <li><a href="../modules/FX.html">FX</a></li>
                                 <li><a href="../modules/Knob.html">Knob</a></li>
                                 <li><a href="../modules/Navigator.html">Navigator</a></li>
                                 <li><a href="../modules/OscComponents.html">OscComponents</a></li>
                                 <li><a href="../modules/Piano.html">Piano</a></li>
+                                <li><a href="../modules/Reverb.html">Reverb</a></li>
                                 <li><a href="../modules/synth.html">synth</a></li>
                                 <li><a href="../modules/types.html">types</a></li>
                             </ul>
@@ -171,7 +201,7 @@ Cada voz se corresponde con un oscilador real de la Web Audio API</p>
                 </li>
                 <li class="param">
                         <code class="param-name">context</code>
-                        <span class="type">Object</span>
+                        <span class="type">BaseAudioContext</span>
 
 
                     <div class="param-description">
@@ -182,7 +212,7 @@ Cada voz se corresponde con un oscilador real de la Web Audio API</p>
                 </li>
                 <li class="param">
                         <code class="param-name">envelope</code>
-                        <span class="type">JSON</span>
+                        <span class="type">Object</span>
 
 
                     <div class="param-description">
@@ -193,7 +223,7 @@ Cada voz se corresponde con un oscilador real de la Web Audio API</p>
                 </li>
                 <li class="param">
                         <code class="param-name">gain</code>
-                        <span class="type">Object</span>
+                        <span class="type">AudioNode</span>
 
 
                     <div class="param-description">
@@ -232,6 +262,10 @@ Cada voz se corresponde con un oscilador real de la Web Audio API</p>
                             </li>
                             <li class="index-item method">
                                 <a href="#method_envelopeGeneratorOn">envelopeGeneratorOn</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getEnvolve">getEnvolve</a>
 
                             </li>
                             <li class="index-item method">
@@ -274,7 +308,7 @@ Cada voz se corresponde con un oscilador real de la Web Audio API</p>
 
                             </li>
                             <li class="index-item property private">
-                                <a href="#property_context">context</a>
+                                <a href="#property_BaseAudioContext">BaseAudioContext</a>
 
                             </li>
                             <li class="index-item property private">
@@ -367,7 +401,7 @@ lograr la polifonia</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_controller_voice.js.html#l210"><code>src\controller\voice.js:210</code></a>
+        <a href="../files/src_controller_voice.js.html#l233"><code>src\controller\voice.js:233</code></a>
         </p>
 
 
@@ -412,6 +446,48 @@ señal de audio y que es llamado cada vez que se presiona una nota</p>
 
 
 </div>
+<div id="method_getEnvolve" class="method item">
+    <h3 class="name"><code>getEnvolve</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_controller_voice.js.html#l148"><code>src\controller\voice.js:148</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Getter de los parámetros de la envolvente</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>JSON</p>
+
+            </div>
+        </div>
+
+
+</div>
 <div id="method_setAttack" class="method item">
     <h3 class="name"><code>setAttack</code></h3>
 
@@ -433,7 +509,7 @@ señal de audio y que es llamado cada vez que se presiona una nota</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_controller_voice.js.html#l159"><code>src\controller\voice.js:159</code></a>
+        <a href="../files/src_controller_voice.js.html#l181"><code>src\controller\voice.js:181</code></a>
         </p>
 
 
@@ -487,7 +563,7 @@ señal de audio y que es llamado cada vez que se presiona una nota</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_controller_voice.js.html#l189"><code>src\controller\voice.js:189</code></a>
+        <a href="../files/src_controller_voice.js.html#l211"><code>src\controller\voice.js:211</code></a>
         </p>
 
 
@@ -544,7 +620,7 @@ señal de audio y que es llamado cada vez que se presiona una nota</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_controller_voice.js.html#l146"><code>src\controller\voice.js:146</code></a>
+        <a href="../files/src_controller_voice.js.html#l168"><code>src\controller\voice.js:168</code></a>
         </p>
 
 
@@ -609,7 +685,7 @@ señal de audio y que es llamado cada vez que se presiona una nota</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_controller_voice.js.html#l169"><code>src\controller\voice.js:169</code></a>
+        <a href="../files/src_controller_voice.js.html#l191"><code>src\controller\voice.js:191</code></a>
         </p>
 
 
@@ -663,7 +739,7 @@ señal de audio y que es llamado cada vez que se presiona una nota</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_controller_voice.js.html#l179"><code>src\controller\voice.js:179</code></a>
+        <a href="../files/src_controller_voice.js.html#l201"><code>src\controller\voice.js:201</code></a>
         </p>
 
 
@@ -717,7 +793,7 @@ señal de audio y que es llamado cada vez que se presiona una nota</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_controller_voice.js.html#l198"><code>src\controller\voice.js:198</code></a>
+        <a href="../files/src_controller_voice.js.html#l220"><code>src\controller\voice.js:220</code></a>
         </p>
 
 
@@ -826,7 +902,7 @@ y llama al metodo de la envolvente</p>
 
 <div id="property_activeVoices" class="property item private">
     <h3 class="name"><code>activeVoices</code></h3>
-    <span class="type">JSON</span>
+    <span class="type">Object</span>
 
 
         <span class="flag private">private</span>
@@ -850,8 +926,8 @@ y llama al metodo de la envolvente</p>
 
 
 </div>
-<div id="property_context" class="property item private">
-    <h3 class="name"><code>context</code></h3>
+<div id="property_BaseAudioContext" class="property item private">
+    <h3 class="name"><code>BaseAudioContext</code></h3>
     <span class="type">Object</span>
 
 
@@ -878,7 +954,7 @@ y llama al metodo de la envolvente</p>
 </div>
 <div id="property_envelope" class="property item private">
     <h3 class="name"><code>envelope</code></h3>
-    <span class="type">JSON</span>
+    <span class="type">Object</span>
 
 
         <span class="flag private">private</span>
@@ -904,7 +980,7 @@ y llama al metodo de la envolvente</p>
 </div>
 <div id="property_gains" class="property item private">
     <h3 class="name"><code>gains</code></h3>
-    <span class="type">JSON</span>
+    <span class="type">Object</span>
 
 
         <span class="flag private">private</span>
@@ -930,7 +1006,7 @@ y llama al metodo de la envolvente</p>
 </div>
 <div id="property_masterNode" class="property item private">
     <h3 class="name"><code>masterNode</code></h3>
-    <span class="type">Object</span>
+    <span class="type">AudioNode</span>
 
 
         <span class="flag private">private</span>
@@ -956,7 +1032,7 @@ y llama al metodo de la envolvente</p>
 </div>
 <div id="property_notes" class="property item private">
     <h3 class="name"><code>notes</code></h3>
-    <span class="type">JSON</span>
+    <span class="type">Object</span>
 
 
         <span class="flag private">private</span>
@@ -1008,7 +1084,7 @@ y llama al metodo de la envolvente</p>
 </div>
 <div id="property_voices" class="property item private">
     <h3 class="name"><code>voices</code></h3>
-    <span class="type">JSON</span>
+    <span class="type">Object</span>
 
 
         <span class="flag private">private</span>

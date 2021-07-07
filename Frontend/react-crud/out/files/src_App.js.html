@@ -38,25 +38,55 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/Analyser.html">Analyser</a></li>
+                                <li><a href="../classes/Anlyser.html">Anlyser</a></li>
                                 <li><a href="../classes/App.html">App</a></li>
+                                <li><a href="../classes/Delay.html">Delay</a></li>
+                                <li><a href="../classes/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../classes/Effect.html">Effect</a></li>
                                 <li><a href="../classes/Envelope.html">Envelope</a></li>
+                                <li><a href="../classes/Equalizer.html">Equalizer</a></li>
+                                <li><a href="../classes/ErrorPage.html">ErrorPage</a></li>
+                                <li><a href="../classes/Filter.html">Filter</a></li>
+                                <li><a href="../classes/Header.html">Header</a></li>
                                 <li><a href="../classes/Index.html">Index</a></li>
+                                <li><a href="../classes/Library.html">Library</a></li>
                                 <li><a href="../classes/LimitedKnob.html">LimitedKnob</a></li>
+                                <li><a href="../classes/Loader.html">Loader</a></li>
+                                <li><a href="../classes/Login.html">Login</a></li>
+                                <li><a href="../classes/Midi.html">Midi</a></li>
+                                <li><a href="../classes/Modal.html">Modal</a></li>
+                                <li><a href="../classes/ModalDelete.html">ModalDelete</a></li>
+                                <li><a href="../classes/ModalLoad.html">ModalLoad</a></li>
+                                <li><a href="../classes/ModalPassword.html">ModalPassword</a></li>
+                                <li><a href="../classes/ModalSave.html">ModalSave</a></li>
                                 <li><a href="../classes/Navigator.html">Navigator</a></li>
                                 <li><a href="../classes/Oscilador.html">Oscilador</a></li>
                                 <li><a href="../classes/oscillator.html">oscillator</a></li>
                                 <li><a href="../classes/Piano.html">Piano</a></li>
+                                <li><a href="../classes/Profile.html">Profile</a></li>
+                                <li><a href="../classes/Recorder.html">Recorder</a></li>
+                                <li><a href="../classes/Reverb.html">Reverb</a></li>
+                                <li><a href="../classes/Saver.html">Saver</a></li>
+                                <li><a href="../classes/SignUp.html">SignUp</a></li>
                                 <li><a href="../classes/Synth.html">Synth</a></li>
+                                <li><a href="../classes/TableUI.html">TableUI</a></li>
                                 <li><a href="../classes/Voice.html">Voice</a></li>
                             </ul>
                 
                 
                             <ul id="api-modules" class="apis modules">
                                 <li><a href="../modules/App.html">App</a></li>
+                                <li><a href="../modules/Delay.html">Delay</a></li>
+                                <li><a href="../modules/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../modules/Filter.html">Filter</a></li>
+                                <li><a href="../modules/filterTypes.html">filterTypes</a></li>
+                                <li><a href="../modules/FX.html">FX</a></li>
                                 <li><a href="../modules/Knob.html">Knob</a></li>
                                 <li><a href="../modules/Navigator.html">Navigator</a></li>
                                 <li><a href="../modules/OscComponents.html">OscComponents</a></li>
                                 <li><a href="../modules/Piano.html">Piano</a></li>
+                                <li><a href="../modules/Reverb.html">Reverb</a></li>
                                 <li><a href="../modules/synth.html">synth</a></li>
                                 <li><a href="../modules/types.html">types</a></li>
                             </ul>
@@ -99,11 +129,14 @@
 
 import &#x27;./css/App.css&#x27;;
 import React from &#x27;react&#x27;
-import { BrowserRouter,Route } from &#x27;react-router-dom&#x27;
-import Nav from &#x27;./view/navbar&#x27;
 import OscComponents from &#x27;./view/osc-components&#x27;
 import Header from &#x27;./view/head-component&#x27;;
 import Piano from &#x27;./view/piano-component&#x27;
+import FX from &#x27;./view/fx-components&#x27;;
+import Libary from &#x27;./view/library-components&#x27;;
+import Analyser from &#x27;./view/analyser-component&#x27;;
+
+import { sinte } from &#x27;../src/view/osc-components&#x27;;
 
 /**
  * Es la clase principal que contiene todos los componentes organizados
@@ -112,33 +145,288 @@ import Piano from &#x27;./view/piano-component&#x27;
  * @constructor
  */
 
-function App() {
-  return (
-    &lt;div className=&quot;App&quot; 
-     // style={{backgroundColor: &#x27;#282828&#x27;}}
-     &gt;
+
+class App extends React.Component{
+  constructor(){
+    super()
+    this.showFX = this.showFX.bind(this);
+    this.showOsc = this.showOsc.bind(this);
+    this.showLb = this.showLb.bind(this);
+    this.showEQ = this.showEQ.bind(this)
+
+    this.updateTable = this.updateTable.bind(this);
+    this.loadSound = this.loadSound.bind(this);
+
+    this.lb =  React.createRef();
+    this.header = React.createRef();
+    this.oscillators = React.createRef();
+    this.fx = React.createRef();
+
+    this.a = false;
+    this.b = false;
+
+    
+  }
+  
+  
+  /**
+   * Comprueba si un layer esta oculto
+   * 
+   * @method isOff
+   * @param {string} element Id del layer
+   * @returns {Boolean}
+   * @private
+   */
+  __isOff(element){
+    
+    var off = false;
+    var values= document.getElementById(element).classList.values();
+    for (var v of values){
+      if(v === &#x27;off&#x27;){off = true}
+    }
+
+    return off;
+  }
+
+
+  /**
+   * Indica a la fahcada que hay que encender los osciladores
+   * 
+   * @method __onOscillators
+   * @private
+   */
+  __onOscillators(){
+    this.a = sinte.getChecked(&#x27;A&#x27;);
+    this.b = sinte.getChecked(&#x27;B&#x27;);
+    if(this.a){
+      sinte.onOscillator(&#x27;A&#x27;);
+    }
+
+    if(this.b){
+      sinte.onOscillator(&#x27;B&#x27;);
+    }
+  }
+  /**
+   * Indica a la fahcada que hay que apagar los osciladores
+   * 
+   * @method __onOscillators
+   * @private
+   */
+  __offOscillators(){
+    this.a = sinte.getChecked(&#x27;A&#x27;);
+    this.b = sinte.getChecked(&#x27;B&#x27;);
+    if(this.a){
+      sinte.offOscillator(&#x27;A&#x27;);
+    }
+    if(this.b){
+      sinte.offOscillator(&#x27;B&#x27;);
+    }
+  }
+  
+  /**
+   * Muestra el layer de efectos
+   * 
+   * @method showFX
+   */
+  showFX(){
+    
+    var offlb = this.__isOff(&#x27;lb&#x27;);
+    var offosc = this.__isOff(&#x27;osc&#x27;);
+    var offfx = this.__isOff(&#x27;fx&#x27;);
+    var offeq = this.__isOff(&#x27;analyser&#x27;)
+
+    if(offfx){
+      document.getElementById(&#x27;fx&#x27;).classList.remove(&#x27;off&#x27;);
+      if(!offosc){
+        document.getElementById(&#x27;osc&#x27;).classList.toggle(&#x27;off&#x27;);
+      }
+
+      if(!offlb){
+        this.__onOscillators();
+        document.getElementById(&#x27;lb&#x27;).classList.toggle(&#x27;off&#x27;);
+
+      }
+
+      if(!offeq){
+        document.getElementById(&#x27;analyser&#x27;).classList.toggle(&#x27;off&#x27;);
+      }
+    }
+    
+  }
+
+  /**
+   * Muestra el layer de osciladores
+   * 
+   * @method showOsc
+   */
+  showOsc(){
+    var offlb = this.__isOff(&#x27;lb&#x27;);
+    var offosc = this.__isOff(&#x27;osc&#x27;);
+    var offfx = this.__isOff(&#x27;fx&#x27;);
+    var offeq = this.__isOff(&#x27;analyser&#x27;)
+
+    if(offosc){
+      document.getElementById(&#x27;osc&#x27;).classList.remove(&#x27;off&#x27;);
+      if(!offlb){
+        this.__onOscillators();
+        document.getElementById(&#x27;lb&#x27;).classList.toggle(&#x27;off&#x27;);
+      }
+
+      if(!offfx){
+        document.getElementById(&#x27;fx&#x27;).classList.toggle(&#x27;off&#x27;);
+
+      }
+
+      if(!offeq){
+        document.getElementById(&#x27;analyser&#x27;).classList.toggle(&#x27;off&#x27;);
+      }
+    }
+  }
+ 
+  /**
+   * Muestra el layer de tabla de sonidos
+   * 
+   * @method showLb
+   */
+  showLb(){
+    if(window.confirm(&#x27;Si cambias a la biblioteca, la reproducción de los osciladores estará desctivada&#x27;)){
+      var offlb = this.__isOff(&#x27;lb&#x27;);
+      var offosc = this.__isOff(&#x27;osc&#x27;);
+      var offfx = this.__isOff(&#x27;fx&#x27;);
+      var offeq = this.__isOff(&#x27;analyser&#x27;)
+    
+
+      if(offlb){
+        this.__offOscillators();
+        document.getElementById(&#x27;lb&#x27;).classList.remove(&#x27;off&#x27;);
+        if(!offosc){
+          document.getElementById(&#x27;osc&#x27;).classList.toggle(&#x27;off&#x27;);
+        }
+  
+        if(!offfx){
+          document.getElementById(&#x27;fx&#x27;).classList.toggle(&#x27;off&#x27;);
+  
+        }
+        if(!offeq){
+          document.getElementById(&#x27;analyser&#x27;).classList.toggle(&#x27;off&#x27;);
+        }
+      }
+    }
+   
+  }
+  
+  /**
+   * Muestra el layer de EQ
+   * 
+   * @method showEQ
+   */
+  showEQ(){
+    var offlb = this.__isOff(&#x27;lb&#x27;);
+    var offosc = this.__isOff(&#x27;osc&#x27;);
+    var offfx = this.__isOff(&#x27;fx&#x27;);
+    var offeq = this.__isOff(&#x27;analyser&#x27;)
+
+    if(offeq){
+      document.getElementById(&#x27;analyser&#x27;).classList.remove(&#x27;off&#x27;);
+      if(!offosc){
+        document.getElementById(&#x27;osc&#x27;).classList.toggle(&#x27;off&#x27;);
+      }
+
+      if(!offlb){
+        this.__onOscillators();
+        document.getElementById(&#x27;lb&#x27;).classList.toggle(&#x27;off&#x27;);
+
+      }
+
+      if(!offfx){
+        document.getElementById(&#x27;fx&#x27;).classList.toggle(&#x27;off&#x27;);
+      }
+    }
+    
+  }
+
+  /**
+   * Cuando se carga el sonido inicia el proceso para que se actualicen los valores
+   * 
+   * @method loadSound
+   * @returns {Object} respuesta
+   */
+  loadSound(){
+     var newState = this.lb.current.newState
+     var response = true;
+     if(newState.name){
+      this.header.current.setName(newState.name);
+      if(newState.oscA &amp;&amp; newState.oscB ){
+        //console.log(newState)//A cargar
+        this.oscillators.current.setOscA(newState.oscA);
+        this.oscillators.current.setOscB(newState.oscB);
+
+        if(newState.filter &amp;&amp; newState.delay &amp;&amp; newState.distorsion 
+          &amp;&amp; newState.reverb){
+            this.fx.current.setFx(&#x27;delay&#x27;,newState.delay);
+            this.fx.current.setFx(&#x27;distorsion&#x27;,newState.distorsion);
+            this.fx.current.setFx(&#x27;filter&#x27;, newState.filter);
+            this.fx.current.setFx(&#x27;reverb&#x27;,newState.reverb);
+        }
+      }
+     }else{
+       response = false
+     }
      
-      &lt;BrowserRouter&gt;
-        &lt;div&gt;
-            &lt;Nav /&gt;
+     return response
+  }
+
+  /**
+   * Le dice al hijo que tiene que actualizar la tabla de sonidos
+   * 
+   * @method updateTable
+   */
+  updateTable (){
+     this.lb.current.updateTable()
+  }
+
+  /**
+     * Método que devuelve el componente App para ser renderizado que se corresponde con el sintetizador
+     * 
+     * @method render
+     * @return Código html del componente App
+     * 
+     */
+  render(){
+
+  
+  return (
+    &lt;div className=&quot;App&quot; &gt;
+     
+      
+       
             &lt;div className=&quot;header&quot;&gt;
-              &lt;Header /&gt;
+              &lt;Header ref={this.header} showEQ={this.showEQ} showFX={this.showFX} parentCallback={this.updateTable} showOsc={this.showOsc} showLb={this.showLb} /&gt;
             &lt;/div&gt;
            
-            &lt;div className=&quot;oscillators&quot;&gt;
-              &lt;Route exact path=&quot;/&quot; component={OscComponents} /&gt; 
+            
+            &lt;div className=&quot;oscillators&quot; id=&quot;osc&quot;&gt;
+              &lt;OscComponents ref={this.oscillators}/&gt; 
             &lt;/div&gt;
-
+            &lt;div className=&quot;FX off&quot; id=&quot;fx&quot;&gt;
+              &lt;FX ref={this.fx}/&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;LB off&quot; id=&#x27;lb&#x27;&gt;
+              &lt;Libary parentCallback={()=&gt;this.loadSound()} ref={this.lb}/&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;analyser off&quot; style={{width: &#x27;100%&#x27;}} id=&#x27;analyser&#x27;&gt;
+              &lt;Analyser/&gt;
+            &lt;/div&gt;
             &lt;div className=&quot;piano&quot;&gt;
               &lt;Piano /&gt; 
             &lt;/div&gt;
 
         &lt;/div&gt;
-      &lt;/BrowserRouter&gt;
-  
+        
+
     
-    &lt;/div&gt;
   );
+  }
 }
 /**
  * Modulo de la aplicación

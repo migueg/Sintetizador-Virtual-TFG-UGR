@@ -24,7 +24,7 @@ class Distorsion extends Effect{
      * Setter de todos los parámetros del efecto distorsión
      * 
      * @method setDistorsion
-     * @param {JSON} d Valores de los parámetros del efecto distorsión
+     * @param {Object} d Valores de los parámetros del efecto distorsión
      */
     setDistorsion(d){
         var effectOn = d.effectOn;

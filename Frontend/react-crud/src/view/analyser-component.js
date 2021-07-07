@@ -2,6 +2,14 @@ import  React from 'react';
 import { sinte } from './osc-components';
 import '../css/analyser.css';
 import $ from 'jquery';
+
+/**
+ * La clase Analyser contiene el componente de la interfaz que proporciona los gráficos 
+ *
+ * @class Anlyser
+ * @constructor
+ */
+
 class Analyser extends React.Component{
     constructor(){
         super();
@@ -11,13 +19,31 @@ class Analyser extends React.Component{
         this.state.separation= sinte.getThingsAnalyser('separation')
         console.log( this.state.separation)
     }
+
+    /**
+     * Método del ciclo de vida de React que se encarga de simular un click
+     * 
+     * @method componentDidMount
+     */
     componentDidMount(){
         document.querySelector('canvas').click()
     }
 
+    /**
+     * Método del ciclo de vida de React 
+     * 
+     * @method componentDidUpdate
+     */
     componentDidUpdate(){
         this.translateCanva()
     }
+
+    /**
+     * Se encarga de crear el canva
+     * 
+     * @method createCanva
+     * @param {Event} event 
+     */
     createCanva(event){
         //event.target.clie
         
@@ -33,7 +59,11 @@ class Analyser extends React.Component{
         
     }
      
-   
+   /**
+     * Se encarga de transladar el canva
+     * 
+     * @method translateCanva
+     */
     translateCanva(){
         
         
@@ -54,6 +84,12 @@ class Analyser extends React.Component{
      
     }
 
+    /**
+     * Detecta la frecuencia en el gráfico
+     * 
+     * @method  detectFreq
+     * @param {Evento} event 
+     */
     detectFreq(event){
         document.getElementById('freq-indicator').style.display = '';
 
@@ -75,14 +111,16 @@ class Analyser extends React.Component{
         }
         
     }
+
+    /**
+     * Se encarga de dibujar el canva
+     * 
+     * @method draw
+     */
     draw(){
-        //console.log('AQUI')
-        //window.setTimeout(this.draw, 2000 )
-        //thi s.setState({update:true})
+
         var d  = window.requestAnimationFrame(this.draw)
 
-        //
-        //this.translateCanva()
         this.state.ctx.clearRect(0,0, this.state.width, this.state.height)
 
         var bufferSize = this.state.bufferSize;
@@ -92,8 +130,7 @@ class Analyser extends React.Component{
         var heigth;
         var x = 0;
         var data = sinte.getThingsAnalyser('data');
-        //console.log(data)
-     
+
         for(var i = 0; i < bufferSize; i++){
             heigth = data[i]/2
             if(data[i] <= 210){
@@ -106,17 +143,12 @@ class Analyser extends React.Component{
                 this.state.ctx.fillStyle = 'rgb(' + (heigth+100) + ',50,50)';
 
             }
-            //this.state.ctx.fillStyle = 'rgb(200,0,200)'
-             //thi s.state.ctx.fillRect(x,this.state.height,width,heigth);
-           
+
              this.state.ctx.fillRect(x,0,width, heigth);
             x  += width + 1;
             
 
         }   
-
-
-    
 
     }
 
@@ -132,6 +164,14 @@ class Analyser extends React.Component{
         span.innerText = value
 
     }
+
+    /**
+     * Método que devuelve el componente Analyser para ser renderizado
+     * 
+     * @method render
+     * @return Código html del componente Analyser
+     * 
+     */
     render(){
         
         return(

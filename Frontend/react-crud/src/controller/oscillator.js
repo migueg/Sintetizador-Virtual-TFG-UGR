@@ -11,21 +11,21 @@ import Voice from './voice';
 /**
  * Contexto de audio para la aplicación de la Web Audio API
  * @property audioCtx
- * @type Object
+ * @type BaseAudioContext
  * @private
  */
 
 /**
  * Nodo de ganancia del oscilador para controlar el volumen de este
  * @property gainNode
- * @type Object
+ * @type AudioNode
  * @private
  */
 
 /**
  * Guarda los valores de la envolvente
  * @property envelope
- * @type JSON
+ * @type Object
  * @private
  */
 
@@ -46,13 +46,13 @@ import Voice from './voice';
 /**
  * Contiene una instancia de la clase Voice para lograr la polifonia
  * @property voice
- * @type Object
+ * @type AudioNode
  */
 
 /**
  * Nodo que se encarga del paneo del oscilador
  * @property #panNode
- * @type Object
+ * @type AudioNode
  */
 /**
  * Glag para controlar que el oscilador esa marcado

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src\view\head-component.js</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/Analyser.html">Analyser</a></li>
+                                <li><a href="../classes/Anlyser.html">Anlyser</a></li>
+                                <li><a href="../classes/App.html">App</a></li>
+                                <li><a href="../classes/Delay.html">Delay</a></li>
+                                <li><a href="../classes/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../classes/Effect.html">Effect</a></li>
+                                <li><a href="../classes/Envelope.html">Envelope</a></li>
+                                <li><a href="../classes/Equalizer.html">Equalizer</a></li>
+                                <li><a href="../classes/ErrorPage.html">ErrorPage</a></li>
+                                <li><a href="../classes/Filter.html">Filter</a></li>
+                                <li><a href="../classes/Header.html">Header</a></li>
+                                <li><a href="../classes/Index.html">Index</a></li>
+                                <li><a href="../classes/Library.html">Library</a></li>
+                                <li><a href="../classes/LimitedKnob.html">LimitedKnob</a></li>
+                                <li><a href="../classes/Loader.html">Loader</a></li>
+                                <li><a href="../classes/Login.html">Login</a></li>
+                                <li><a href="../classes/Midi.html">Midi</a></li>
+                                <li><a href="../classes/Modal.html">Modal</a></li>
+                                <li><a href="../classes/ModalDelete.html">ModalDelete</a></li>
+                                <li><a href="../classes/ModalLoad.html">ModalLoad</a></li>
+                                <li><a href="../classes/ModalPassword.html">ModalPassword</a></li>
+                                <li><a href="../classes/ModalSave.html">ModalSave</a></li>
+                                <li><a href="../classes/Navigator.html">Navigator</a></li>
+                                <li><a href="../classes/Oscilador.html">Oscilador</a></li>
+                                <li><a href="../classes/oscillator.html">oscillator</a></li>
+                                <li><a href="../classes/Piano.html">Piano</a></li>
+                                <li><a href="../classes/Profile.html">Profile</a></li>
+                                <li><a href="../classes/Recorder.html">Recorder</a></li>
+                                <li><a href="../classes/Reverb.html">Reverb</a></li>
+                                <li><a href="../classes/Saver.html">Saver</a></li>
+                                <li><a href="../classes/SignUp.html">SignUp</a></li>
+                                <li><a href="../classes/Synth.html">Synth</a></li>
+                                <li><a href="../classes/TableUI.html">TableUI</a></li>
+                                <li><a href="../classes/Voice.html">Voice</a></li>
+                            </ul>
+                
+                
+                            <ul id="api-modules" class="apis modules">
+                                <li><a href="../modules/App.html">App</a></li>
+                                <li><a href="../modules/Delay.html">Delay</a></li>
+                                <li><a href="../modules/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../modules/Filter.html">Filter</a></li>
+                                <li><a href="../modules/filterTypes.html">filterTypes</a></li>
+                                <li><a href="../modules/FX.html">FX</a></li>
+                                <li><a href="../modules/Knob.html">Knob</a></li>
+                                <li><a href="../modules/Navigator.html">Navigator</a></li>
+                                <li><a href="../modules/OscComponents.html">OscComponents</a></li>
+                                <li><a href="../modules/Piano.html">Piano</a></li>
+                                <li><a href="../modules/Reverb.html">Reverb</a></li>
+                                <li><a href="../modules/synth.html">synth</a></li>
+                                <li><a href="../modules/types.html">types</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1 class="file-heading">File: src\view\head-component.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+import  React from &#x27;react&#x27;;
+import {Knob} from &#x27;./elements/limitedKnob&#x27;;
+import {types as knobTypes} from &#x27;./elements/knobtypes&#x27;;
+import {Container,Row,Col } from &#x27;react-bootstrap&#x27;;
+import ModalSave from &#x27;./elements/modals/modal-save&#x27;;
+
+
+import rec from &#x27;../img/grabar.png&#x27;
+import pausa from &#x27;../img/pausa.png&#x27;
+import reload from &#x27;../img/reload.png&#x27;
+import disquete from &#x27;../img/disquete.png&#x27;
+import &#x27;bootstrap/dist/css/bootstrap.css&#x27;;
+import &#x27;../css/header.css&#x27;;
+import { sinte } from &#x27;./osc-components&#x27;;
+
+/**
+ * Clase que proporciona el componente para los efectos
+ * 
+ * @class Header
+ * @constructor
+ */
+class Header extends React.Component{
+    constructor(props){
+        super();
+        this.props = props;
+        
+        this.state = {
+            A: false,
+            B: false,
+            date: new Date()
+        }
+        this.showOsc = this.showOsc.bind(this)
+        this.showFX = this.showFX.bind(this)
+        this.showEQ = this.showEQ.bind(this)
+    
+    }
+    
+    /**
+     * Comprueba si los osciladores estan encendidos
+     * 
+     * @method checkOscillators
+     */
+    checkOscillators(){
+        this.state.A = this.getAvailable(&#x27;A&#x27;);
+        this.state.B = this.getAvailable(&#x27;B&#x27;);
+        if(this.state.A){
+            sinte.offOscillator(&#x27;A&#x27;);
+        }
+
+        if(this.state.B){
+            sinte.offOscillator(&#x27;B&#x27;);
+        }
+    }
+
+    /**
+     * Muestra un modal
+     * 
+     * @method showModal
+     */
+    showModal(){
+        this.checkOscillators();
+        document.getElementById(&quot;backdrop&quot;).style.display = &quot;block&quot;
+        document.getElementById(&quot;modal&quot;).style.display = &quot;block&quot;
+        document.getElementById(&quot;modal&quot;).className += &quot;show&quot;
+    }
+
+    /**
+     * Getter del estado del componente 
+     * 
+     * @method getState
+     * @returns {Object} estado
+     */
+    getState = ()=&gt;{
+        return this.state
+    }
+    /**
+     * Devuelve si esta encendido el oscilador pasado como parametro
+     * 
+     * @method getAvailable
+     * @param {Char} Id Identificador
+     * @returns {Boolean} estado
+     */
+    getAvailable = (osc)=&gt;{
+        return sinte.getAvailable(osc)
+    }
+
+    /**
+     * Setter del nombre del sonido cargado
+     * 
+     * @method setName
+     * @param {string} name 
+     */
+    setName(name){
+        document.getElementById(&#x27;sound-charged&#x27;).innerText = name;
+    }
+    /**
+     * Indica al padre que tiene que enseñar el layer de osciladores
+     * 
+     * @method showOsc
+     */
+    showOsc(){
+       this.props.showOsc()
+    }
+    /**
+     * Indica al padre que tiene que enseñar el layer de efectos
+     * 
+     * @method showOsc
+     */
+    showFX(){
+        this.props.showFX()
+    }
+    /**
+     * Indica al padre que tiene que enseñar el layer de tabla de sonidos
+     * 
+     * @method showLb
+     */
+    showLb(){
+        this.props.showLb()
+    }
+    /**
+     * Indica al padre que tiene que enseñar el layer de EQ
+     * 
+     * @method showEQ
+     */
+    showEQ(){
+        this.props.showEQ()
+    }
+    /**
+     * Indica al padre que tiene que actualizar la tabla de sonidos
+     * 
+     * @method updateTable
+     */
+    updateTable = ( )=&gt;{
+        this.props.parentCallback();
+    }
+
+    /**
+     * Gestiona los botones de grabación y manda el mensaje correspondiente a la fachada
+     * 
+     * @method rec
+     * @param {string} state  botón pulsado
+     */
+    rec(state){
+        if(state === &#x27;pause&#x27;){
+            document.getElementById(&#x27;restart&#x27;).style.display = &#x27;&#x27;;
+            document.querySelector(&#x27;#restart&#x27;).addEventListener(&#x27;click&#x27;,()=&gt;this.rec(&#x27;restart&#x27;))
+
+            document.querySelector(&#x27;#pause&#x27;).disabled = true;
+            document.querySelector(&#x27;#pause&#x27;).removeEventListener(&#x27;click&#x27;,()=&gt;this.rec(&#x27;pause&#x27;))
+            document.getElementById(&#x27;audio&#x27;).style.display = &#x27;&#x27;;
+        }
+
+        if(state === &#x27;start&#x27;){
+            document.getElementById(&#x27;audio&#x27;).title = &#x27;Record&#x27;+ this.state.date.getDate()+&#x27;-&#x27;+ this.state.date.getMonth()+ &#x27;-&#x27; + this.state.date.getFullYear();
+            document.querySelector(&#x27;#pause&#x27;).disabled = false;
+            document.querySelector(&#x27;#pause&#x27;).addEventListener(&#x27;click&#x27;,()=&gt;this.rec(&#x27;pause&#x27;))
+            document.getElementById(&#x27;restart&#x27;).style.display = &#x27;none&#x27;;
+        }
+
+        if(state === &#x27;restart&#x27;){
+            document.getElementById(&#x27;restart&#x27;).style.display = &#x27;none&#x27;;
+            document.getElementById(&#x27;audio&#x27;).style.display = &#x27;none&#x27;;
+
+        }
+        sinte.rec(state)
+    }
+
+    /**
+     * Método que devuelve el componente Header para ser renderizado
+     * 
+     * @method render
+     * @return Código html del componente Header
+     * 
+     */
+    render(){
+        return(
+            &lt;Container fluid&gt;
+                &lt;Row&gt;
+                    &lt;Col style={{padding: 0}} xs={3}&gt;
+                    &lt;button className=&#x27;pages&#x27; onClick={()=&gt;this.showOsc()}&gt;Oscs&lt;/button&gt;
+                    &lt;button  className=&#x27;pages&#x27;onClick={()=&gt;this.showFX()}&gt;FX&lt;/button&gt;
+                    &lt;button className=&#x27;pages&#x27;  onClick={()=&gt;this.showEQ()}&gt;EQ&lt;/button&gt;
+                    &lt;button className=&#x27;pages&#x27; onClick={()=&gt;this.showLb()}&gt;Sonidos&lt;/button&gt;
+                  
+                    &lt;/Col&gt;
+                   
+                    &lt;Col  className=&#x27;save-col&#x27; style={{padding: 0}}&gt;
+                        &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js&quot;&gt;&lt;/script&gt;
+                        &lt;img alt=&#x27;save-icon&#x27; onClick={()=&gt;this.showModal()} src={disquete} style={{width: 50}}&gt;&lt;/img&gt;
+                        &lt;ModalSave parentCallback={this.getState} parentCallback2={this.updateTable} type=&#x27;save&#x27; /&gt;
+                    &lt;/Col&gt;
+                    &lt;Col className=&#x27;charge-sound&#x27;&gt;
+                        &lt;div className=&quot;LoadedSound&quot; &gt;
+                            &lt;p id=&#x27;sound-charged&#x27; style={{marginBottom: 0}}&gt;Sonido&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/Col&gt;
+                    &lt;Col className=&#x27;save-col&#x27; &gt;
+                        &lt;div className=&#x27;device-div&#x27;&gt;
+                            &lt;p id=&#x27;device&#x27;&gt;&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/Col&gt;
+                    &lt;Col className=&#x27;rec&#x27; &gt;
+                        &lt;button className=&#x27;button&#x27; onClick={()=&gt;this.rec(&#x27;start&#x27;)} id=&#x27;start&#x27;&gt;&lt;img src={rec}&gt;&lt;/img&gt; &lt;/button&gt;
+                        &lt;button className=&#x27;button&#x27; id=&#x27;pause&#x27; disabled={true} &gt;&lt;img src={pausa}&gt;&lt;/img&gt;&lt;/button&gt;
+                        &lt;button className=&#x27;button&#x27; onClick={()=&gt;this.rec(&#x27;stop&#x27;)} id=&#x27;restart&#x27; style={{display: &#x27;none&#x27;}}&gt;&lt;img src={reload}&gt;&lt;/img&gt;&lt;/button&gt;
+                        &lt;audio  controls id=&#x27;audio&#x27; style={{display: &#x27;none&#x27;}}&gt;&lt;/audio&gt;
+                    &lt;/Col&gt;
+                    &lt;Col className=&#x27;save-col&#x27;&gt;
+                    &lt;Knob 
+                     min={0}
+                     max={100}
+                     unlockDistance={0}
+                     preciseMode={false}
+                     width={200} 
+                     height={200}
+                     val={97}
+                     type={knobTypes.MASTER}/&gt;
+
+                 
+                    &lt;/Col&gt;
+                    
+                &lt;/Row&gt;
+            &lt;/Container&gt;
+        );
+    }
+}
+
+
+export default Header;
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

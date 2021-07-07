@@ -5,12 +5,25 @@ import portada from '../img/portada.jpg'
 import '../css/login.css'
 import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
+/**
+ * Proporciona el componente para el Login
+ * 
+ * @class Login
+ * @constructor
+ */
 class Login extends React.Component{
     constructor(){
         super();
         this.data = {}
     }
 
+    /**
+     * Comprueba el estado de un código de respuesta HTTP
+     * 
+     * @method checkStatus
+     * @param {Integer} status 
+     * @returns {Boolean}
+     */
     checkStatus(status){
         switch(status){
             case 400:
@@ -27,6 +40,15 @@ class Login extends React.Component{
                 break;
         }
     }
+
+    /**
+     * Realiza la petición de login e interpreta la respuesta
+     * 
+     * @method login 
+     * @param {Object} user  Datos de login
+     * @private
+     * @async
+     */
     async __login(user){
         const requestOptions = {
             method: 'POST',
@@ -77,6 +99,12 @@ class Login extends React.Component{
         }
 
     }
+    /**
+     * Valida el formulario de login 
+     * 
+     * @method checkForm
+     * @async
+     */
     async checkForm(){
         var username = document.getElementById('username').value;
         var password = document.getElementById('password').value;
@@ -109,6 +137,14 @@ class Login extends React.Component{
 
  
     }
+
+    /**
+     * Método que devuelve el componente Login para ser renderizado
+     * 
+     * @method render
+     * @return Código html del componente Login
+     * 
+     */
     render(){
         return( 
             <div style= {{height: '94%'}}>

@@ -1,5 +1,39 @@
 
 import DbFetcher from './dbFetcher'
+
+/**
+ * La clase Loader contiene  las peticiones de tipo GET realizadas
+ * al Backend
+ *
+ * @class Loader
+ * @constructor
+ * 
+ * 
+ */
+
+/**
+ * Método HTTP
+ * 
+ * @property method
+ * @type String
+ * @private
+ */
+
+/**
+ * Perfil
+ * 
+ * @property profile
+ * @type Objet
+ * 
+ */
+
+/**
+ * Tamaño máximo
+ * 
+ * @property maxSize
+ * @type Object
+ * 
+ */
 class Loader extends DbFetcher {
     #method
     constructor(){
@@ -11,6 +45,14 @@ class Loader extends DbFetcher {
         //this.fetchCategories = this.fetchCategories.bind(this)
     }
 
+    /**
+     * Realiza una petición para obtener el tamaño máximo de almacenamiento
+     * disponible para un usuario
+     * 
+     * @method fetchMaxSize
+     * @returns {Object} Tamaño máximo
+     * @async
+     */
     async fetchMaxSize(){
         var that = this
         const requestOptions = {
@@ -41,6 +83,13 @@ class Loader extends DbFetcher {
         return this.maxSize;
 
     }
+    /**
+     * Realiza una petición para obtener el perfil de un usuario
+     * 
+     * @method fetchProfile
+     * @returns {Object} Perfil
+     * @async
+     */
     async fetchProfile(){
         var that = this
         const requestOptions = {
@@ -70,6 +119,17 @@ class Loader extends DbFetcher {
 
         return this.profile;
     }
+
+    /**
+     * Realiza una petición a la URL pasada como parámetro
+     * 
+     * @method fetchUrl
+     * @param {String} url URL a la que se realiza la petición
+     * @param {Object} requestOptions Opciones de la petición
+     * @returns {Object} respuesta
+     * @private
+     * @async
+     */
     async __fetchUrl(url,requestOptions){
         var status;
         var that = this ;
@@ -103,6 +163,13 @@ class Loader extends DbFetcher {
         return this.data
     }
 
+    /**
+     * Realiza una petición para obtener las categorías
+     * 
+     * @method fetchCategories
+     * @returns {Object} Categorías
+     * @async
+     */
      async fetchCategories(){
         const requestOptions = {
             method: this.#method,
@@ -116,6 +183,14 @@ class Loader extends DbFetcher {
        
     }
 
+    /**
+     * Realiza una petición para obtener un sonido
+     * 
+     * @method fetchCategories
+     * @param {String} id Identificador del sonido
+     * @returns {Object} Sonido
+     * @async
+     */
     async fetchState(id){
         const requestOptions = {
             method: this.#method,
@@ -134,6 +209,13 @@ class Loader extends DbFetcher {
         }
     }
 
+    /**
+     * Realiza una petición para obtener los metadatos de los sonidos
+     * 
+     * @method fetchStatesMetadata
+     * @returns {Object} Sonidos
+     * @async
+     */
     async fetchStatesMetadata(){
         const requestOptions = {
             method: this.#method,

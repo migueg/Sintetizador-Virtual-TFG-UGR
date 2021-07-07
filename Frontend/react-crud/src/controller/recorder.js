@@ -1,10 +1,21 @@
 
 /**
+ * La clase Recorder se encarga de convertir las señales de audio en archivos  mp3
+ * legibles por el navegador
+ *
+ * @class Recorder
+ * @constructor
+ * @param {BaseAudioContext} context Contexto
+ * @param {AudioNode} master Ganancia master
+ * 
+ */
+
+/**
  * Objeto que se va a encargar de crear un canal stream
  * con el audio saliente
  * 
  * @property source
- * @type Object
+ * @type MediaStreamDestinationNode
  * @private
  */
 
@@ -12,7 +23,19 @@
  * Objeto que se va a encargar de grabar el sonido
  * 
  * @property mediarecorder
- * @type Object
+ * @type MediaRecorder
+ * @private
+ */
+
+/**
+ * @property pause
+ * @type Boolean
+ * @private
+ */
+
+/**
+ * @property start
+ * @type Boolean
  * @private
  */
 
@@ -43,6 +66,12 @@ class Recorder{
 
     }
 
+    /**
+     * Método que gestiona el proceso de grabación
+     * 
+     * @method rec
+     * @param {String} state Acción a realizar
+     */
     rec(state){
 
         if(state === 'start'){

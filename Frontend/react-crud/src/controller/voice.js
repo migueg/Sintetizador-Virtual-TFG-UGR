@@ -6,14 +6,14 @@
  * @class Voice
  * @constructor
  * @param {String} type Tipo de la onda
- * @param {Object} context Contexto de audi
- * @param {JSON} envelope Parametros de la envolvente
- * @param {Object} gain Nodo de la ganancia del oscilador al que pertenece
+ * @param {BaseAudioContext} context Contexto de audi
+ * @param {Object} envelope Parametros de la envolvente
+ * @param {AudioNode} gain Nodo de la ganancia del oscilador al que pertenece
  */
 
 /**
  * Contexto de audio para la aplicación de la Web Audio API
- * @property context
+ * @property BaseAudioContext
  * @type Object
  * @private
  */
@@ -28,42 +28,42 @@
 /**
  * Guarda los valores de la envolvente
  * @property envelope
- * @type JSON
+ * @type object
  * @private
  */
 
 /**
  * Nodo de ganancia del oscilador
  * @property masterNode
- * @type Object
+ * @type AudioNode
  * @private
  */
 
 /**
  * Contiene las ganacias particulares de cada voz
  * @property gains
- * @type JSON
+ * @type object
  * @private
  */
 
 /**
  * Contiene las voces correspondientes a cada nota
  * @property voices
- * @type JSON
+ * @type object
  * @private
  */
 
 /**
  * Contiene las voces que se estan reproduciendo
  * @property activeVoices
- * @type JSON
+ * @type object
  * @private
  */
 
 /**
  * Contiene las notas con sus frecuencias
  * @property notes
- * @type JSON
+ * @type object
  * @private
  */
 

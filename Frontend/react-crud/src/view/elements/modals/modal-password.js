@@ -3,11 +3,26 @@ import success from '../../../img/success.png';
 import failure from '../../../img/failure.png';
 import { sinte } from '../../osc-components';
 
+/**
+ * Clase que genera el modal de la interfaz para editar la contraseña
+ *
+ * @class ModalPassword
+ * @constructor
+ * @see Modal
+ */
+
 class ModalPassword extends Modal{
     constructor(){
         super('password')
     }
 
+    /**
+     * Se encarga de comunicar a la fachada que el usuario quiere modificar su contraseña. 
+     * Cuando reciba una respuesta, la interpretará
+     * 
+     * @method delete
+     * @async
+     */
     async sendPassword(){
         var password = document.getElementById('recipient-password').value;
         var password2 = document.getElementById('recipient-password2').value;
@@ -42,6 +57,14 @@ class ModalPassword extends Modal{
             }
         }
     }
+    
+    /**
+     * Método que devuelve el componente ModalPassword para ser renderizado
+     * 
+     * @method render
+     * @return Código html del componente Distorsion
+     * 
+     */
     render(){
         return(
             <div>

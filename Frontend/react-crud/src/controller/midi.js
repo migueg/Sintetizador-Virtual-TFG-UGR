@@ -1,6 +1,81 @@
 import commonjs from "react-rotary-knob";
 import { synth } from "./synth";
 
+/**
+ * La clase Midi se encarga de comunicarse con el hardware de tipo MIDI
+ *
+ * @class Midi
+ * @constructor
+ * @param {synth} Synth instancia del sintetizador
+ * 
+ */
+
+/**
+ * Objeto midi
+ * 
+ * @property Midi
+ * @type Object
+ * @private
+ */
+
+/**
+ * 
+ * @property input
+ * @type Object
+ * @private
+ */
+
+/**
+ * 
+ * @property output
+ * @type Object
+ * @private
+ */
+
+
+/**
+ * Diccionario de notas
+ * 
+ * @property notes
+ * @type Object
+ * @private
+ */
+
+/**
+ * 
+ * @property lastOn
+ * @type Boolean
+ * @private
+ */
+
+/**
+ * Instancia del sintetizador
+ * 
+ * @property synth
+ * @type synth
+ * @private
+ */
+
+/**
+ * 
+ * @property ceil
+ * @type Integer
+ * @private
+ */
+
+/**
+ * 
+ * @property octave
+ * @type Integer
+ * @private
+ */
+
+/**
+ * 
+ * @property init
+ * @type Boolean
+ */
+
 class Midi {
     #support;
     #midi;
@@ -29,6 +104,12 @@ class Midi {
        //this.__checkNote = this.__checkNote.bind(this)
     }
 
+    /**
+     * Realiza una petición para obtener las notas
+     * 
+     * @method fetchNotes
+     * @async
+     */
     async fetchNotes(){
         await fetch('http://localhost:8080/notes')
         .then(res => res.json())
@@ -39,6 +120,11 @@ class Midi {
         
     }
 
+    /**
+     * Accede a la comunicación MIDI
+     * 
+     * @method requestAccess
+     */
     requestAccess(){
         var that = this
         navigator.requestMIDIAccess()
@@ -56,6 +142,11 @@ class Midi {
       
     }
 
+    /**
+     * Selecciona un dispositvo MIDI para establecer comunicación
+     * 
+     * @method initDevices
+     */
     initDevices(){
         if(this.#midi.inputs.size > 0){
             var inputArray = []; //Contiene los inputs
@@ -87,7 +178,13 @@ class Midi {
     }
 
 
-    
+    /**
+     * Enseña el nombre del dispositvo MIDI por pantalla
+     * 
+     * @method showDevice
+     * @param {string} msg 
+     * @private
+     */
     __showDevice(msg){
         var doc =  document.getElementById('device')
         if(doc){
@@ -96,6 +193,12 @@ class Midi {
         
     }
 
+    /**
+     * Manejador para los mensajes del dispositivo MIDI
+     * 
+     * @method handleMidiMessage
+     * @param {Event} event 
+     */
     handleMidiMessage(event){
         //console.log(event.data) [off/on,note,velocity]
         const NOTE_ON = 144;
@@ -196,6 +299,15 @@ class Midi {
 
 
     }
+
+    /**
+     * Transforma un código MIDI en una frecuencia
+     * 
+     * @method midiNoteToFrequency
+     * @param {Integer} note Código de nota MIDI
+     * @returns {Float} frecuencia
+     * @private
+     */
     __midiNoteToFrequency (note) {
         var value = Math.pow(2, ((note - 69) / 12)) * 440;
         if(value < 98){
@@ -214,6 +326,15 @@ class Midi {
       
     }
 
+    /**
+     * Comprueba si una frecuencia se corresponde con una nota
+     * 
+     * @method checkNote
+     * @param {Float} freq frecuencia
+     * @returns {string} key de la nota
+     * @private
+     */
+
     __checkNote(freq){
        //console.log('Freq:' + freq)
        if(freq >= 32.7032 && freq <= 4186.01){ //Rango de frecuencias
@@ -231,6 +352,12 @@ class Midi {
        }
     }
 
+    /**
+     * Setter de la octava
+     * 
+     * @method setOctave
+     * @param {Integer} oct 
+     */
     setOctave(oct){
         this.#octave = oct +1 
     }

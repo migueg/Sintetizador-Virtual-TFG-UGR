@@ -38,25 +38,55 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/Analyser.html">Analyser</a></li>
+                                <li><a href="../classes/Anlyser.html">Anlyser</a></li>
                                 <li><a href="../classes/App.html">App</a></li>
+                                <li><a href="../classes/Delay.html">Delay</a></li>
+                                <li><a href="../classes/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../classes/Effect.html">Effect</a></li>
                                 <li><a href="../classes/Envelope.html">Envelope</a></li>
+                                <li><a href="../classes/Equalizer.html">Equalizer</a></li>
+                                <li><a href="../classes/ErrorPage.html">ErrorPage</a></li>
+                                <li><a href="../classes/Filter.html">Filter</a></li>
+                                <li><a href="../classes/Header.html">Header</a></li>
                                 <li><a href="../classes/Index.html">Index</a></li>
+                                <li><a href="../classes/Library.html">Library</a></li>
                                 <li><a href="../classes/LimitedKnob.html">LimitedKnob</a></li>
+                                <li><a href="../classes/Loader.html">Loader</a></li>
+                                <li><a href="../classes/Login.html">Login</a></li>
+                                <li><a href="../classes/Midi.html">Midi</a></li>
+                                <li><a href="../classes/Modal.html">Modal</a></li>
+                                <li><a href="../classes/ModalDelete.html">ModalDelete</a></li>
+                                <li><a href="../classes/ModalLoad.html">ModalLoad</a></li>
+                                <li><a href="../classes/ModalPassword.html">ModalPassword</a></li>
+                                <li><a href="../classes/ModalSave.html">ModalSave</a></li>
                                 <li><a href="../classes/Navigator.html">Navigator</a></li>
                                 <li><a href="../classes/Oscilador.html">Oscilador</a></li>
                                 <li><a href="../classes/oscillator.html">oscillator</a></li>
                                 <li><a href="../classes/Piano.html">Piano</a></li>
+                                <li><a href="../classes/Profile.html">Profile</a></li>
+                                <li><a href="../classes/Recorder.html">Recorder</a></li>
+                                <li><a href="../classes/Reverb.html">Reverb</a></li>
+                                <li><a href="../classes/Saver.html">Saver</a></li>
+                                <li><a href="../classes/SignUp.html">SignUp</a></li>
                                 <li><a href="../classes/Synth.html">Synth</a></li>
+                                <li><a href="../classes/TableUI.html">TableUI</a></li>
                                 <li><a href="../classes/Voice.html">Voice</a></li>
                             </ul>
                 
                 
                             <ul id="api-modules" class="apis modules">
                                 <li><a href="../modules/App.html">App</a></li>
+                                <li><a href="../modules/Delay.html">Delay</a></li>
+                                <li><a href="../modules/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../modules/Filter.html">Filter</a></li>
+                                <li><a href="../modules/filterTypes.html">filterTypes</a></li>
+                                <li><a href="../modules/FX.html">FX</a></li>
                                 <li><a href="../modules/Knob.html">Knob</a></li>
                                 <li><a href="../modules/Navigator.html">Navigator</a></li>
                                 <li><a href="../modules/OscComponents.html">OscComponents</a></li>
                                 <li><a href="../modules/Piano.html">Piano</a></li>
+                                <li><a href="../modules/Reverb.html">Reverb</a></li>
                                 <li><a href="../modules/synth.html">synth</a></li>
                                 <li><a href="../modules/types.html">types</a></li>
                             </ul>
@@ -104,14 +134,14 @@
  * @class Voice
  * @constructor
  * @param {String} type Tipo de la onda
- * @param {Object} context Contexto de audi
- * @param {JSON} envelope Parametros de la envolvente
- * @param {Object} gain Nodo de la ganancia del oscilador al que pertenece
+ * @param {BaseAudioContext} context Contexto de audi
+ * @param {Object} envelope Parametros de la envolvente
+ * @param {AudioNode} gain Nodo de la ganancia del oscilador al que pertenece
  */
 
 /**
  * Contexto de audio para la aplicación de la Web Audio API
- * @property context
+ * @property BaseAudioContext
  * @type Object
  * @private
  */
@@ -126,42 +156,42 @@
 /**
  * Guarda los valores de la envolvente
  * @property envelope
- * @type JSON
+ * @type object
  * @private
  */
 
 /**
  * Nodo de ganancia del oscilador
  * @property masterNode
- * @type Object
+ * @type AudioNode
  * @private
  */
 
 /**
  * Contiene las ganacias particulares de cada voz
  * @property gains
- * @type JSON
+ * @type object
  * @private
  */
 
 /**
  * Contiene las voces correspondientes a cada nota
  * @property voices
- * @type JSON
+ * @type object
  * @private
  */
 
 /**
  * Contiene las voces que se estan reproduciendo
  * @property activeVoices
- * @type JSON
+ * @type object
  * @private
  */
 
 /**
  * Contiene las notas con sus frecuencias
  * @property notes
- * @type JSON
+ * @type object
  * @private
  */
 
@@ -241,6 +271,28 @@ class Voice {
         this.envelopeGeneratorOn(key,gain)
     }
 
+    //GETTERS
+
+    /** 
+     * Getter de los parámetros de la envolvente
+     * 
+     * @method getEnvolve
+     * @return JSON
+     * 
+     */
+    getEnvelope(){
+        return this.#envelope;
+    }
+
+    /**
+     * Getter del tipo de onda de los oscilladores de las voces
+     * 
+     * @returns String
+     */
+    getType(){
+       
+        return this.#type;
+    }
     /**
      * Setter del volumen
      * 
@@ -303,6 +355,7 @@ class Voice {
         for(var i in this.#voices){
             this.#voices[i].type = type
         }
+        this.#type = type
     }
 
     /**
@@ -315,9 +368,10 @@ class Voice {
      */
     envelopeGeneratorOn(key,gain){
         var gainN = this.#gains[key].gain
-        var current = gainN.value  = gain
+        var current = gainN.value  = gain //Representa el volumen en cada una de las fases
         var now = this.#context.currentTime
        
+        //Se cancelan todos los valores de ganancia del nodo y se establecen a 0
         gainN.cancelScheduledValues(now)
         gainN.setValueAtTime(0 ,now)
     

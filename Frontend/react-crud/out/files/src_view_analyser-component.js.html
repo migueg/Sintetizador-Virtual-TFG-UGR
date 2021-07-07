@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src\view\analyser-component.js</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/Analyser.html">Analyser</a></li>
+                                <li><a href="../classes/Anlyser.html">Anlyser</a></li>
+                                <li><a href="../classes/App.html">App</a></li>
+                                <li><a href="../classes/Delay.html">Delay</a></li>
+                                <li><a href="../classes/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../classes/Effect.html">Effect</a></li>
+                                <li><a href="../classes/Envelope.html">Envelope</a></li>
+                                <li><a href="../classes/Equalizer.html">Equalizer</a></li>
+                                <li><a href="../classes/ErrorPage.html">ErrorPage</a></li>
+                                <li><a href="../classes/Filter.html">Filter</a></li>
+                                <li><a href="../classes/Header.html">Header</a></li>
+                                <li><a href="../classes/Index.html">Index</a></li>
+                                <li><a href="../classes/Library.html">Library</a></li>
+                                <li><a href="../classes/LimitedKnob.html">LimitedKnob</a></li>
+                                <li><a href="../classes/Loader.html">Loader</a></li>
+                                <li><a href="../classes/Login.html">Login</a></li>
+                                <li><a href="../classes/Midi.html">Midi</a></li>
+                                <li><a href="../classes/Modal.html">Modal</a></li>
+                                <li><a href="../classes/ModalDelete.html">ModalDelete</a></li>
+                                <li><a href="../classes/ModalLoad.html">ModalLoad</a></li>
+                                <li><a href="../classes/ModalPassword.html">ModalPassword</a></li>
+                                <li><a href="../classes/ModalSave.html">ModalSave</a></li>
+                                <li><a href="../classes/Navigator.html">Navigator</a></li>
+                                <li><a href="../classes/Oscilador.html">Oscilador</a></li>
+                                <li><a href="../classes/oscillator.html">oscillator</a></li>
+                                <li><a href="../classes/Piano.html">Piano</a></li>
+                                <li><a href="../classes/Profile.html">Profile</a></li>
+                                <li><a href="../classes/Recorder.html">Recorder</a></li>
+                                <li><a href="../classes/Reverb.html">Reverb</a></li>
+                                <li><a href="../classes/Saver.html">Saver</a></li>
+                                <li><a href="../classes/SignUp.html">SignUp</a></li>
+                                <li><a href="../classes/Synth.html">Synth</a></li>
+                                <li><a href="../classes/TableUI.html">TableUI</a></li>
+                                <li><a href="../classes/Voice.html">Voice</a></li>
+                            </ul>
+                
+                
+                            <ul id="api-modules" class="apis modules">
+                                <li><a href="../modules/App.html">App</a></li>
+                                <li><a href="../modules/Delay.html">Delay</a></li>
+                                <li><a href="../modules/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../modules/Filter.html">Filter</a></li>
+                                <li><a href="../modules/filterTypes.html">filterTypes</a></li>
+                                <li><a href="../modules/FX.html">FX</a></li>
+                                <li><a href="../modules/Knob.html">Knob</a></li>
+                                <li><a href="../modules/Navigator.html">Navigator</a></li>
+                                <li><a href="../modules/OscComponents.html">OscComponents</a></li>
+                                <li><a href="../modules/Piano.html">Piano</a></li>
+                                <li><a href="../modules/Reverb.html">Reverb</a></li>
+                                <li><a href="../modules/synth.html">synth</a></li>
+                                <li><a href="../modules/types.html">types</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1 class="file-heading">File: src\view\analyser-component.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+import  React from &#x27;react&#x27;;
+import { sinte } from &#x27;./osc-components&#x27;;
+import &#x27;../css/analyser.css&#x27;;
+import $ from &#x27;jquery&#x27;;
+
+/**
+ * La clase Analyser contiene el componente de la interfaz que proporciona los gráficos 
+ *
+ * @class Anlyser
+ * @constructor
+ */
+
+class Analyser extends React.Component{
+    constructor(){
+        super();
+        this.state = {}
+        //Para que se llame la función draw
+        this.draw = this.draw.bind(this)
+        this.state.separation= sinte.getThingsAnalyser(&#x27;separation&#x27;)
+        console.log( this.state.separation)
+    }
+
+    /**
+     * Método del ciclo de vida de React que se encarga de simular un click
+     * 
+     * @method componentDidMount
+     */
+    componentDidMount(){
+        document.querySelector(&#x27;canvas&#x27;).click()
+    }
+
+    /**
+     * Método del ciclo de vida de React 
+     * 
+     * @method componentDidUpdate
+     */
+    componentDidUpdate(){
+        this.translateCanva()
+    }
+
+    /**
+     * Se encarga de crear el canva
+     * 
+     * @method createCanva
+     * @param {Event} event 
+     */
+    createCanva(event){
+        //event.target.clie
+        
+        this.state.canva=  document.querySelector(&#x27;canvas&#x27;);
+        console.log()
+
+        
+        this.state.ctx = this.state.canva.getContext(&#x27;2d&#x27;);
+        this.state.bufferSize = sinte.getThingsAnalyser(&#x27;size&#x27;);
+      
+        this.translateCanva()
+        this.draw()
+        
+    }
+     
+   /**
+     * Se encarga de transladar el canva
+     * 
+     * @method translateCanva
+     */
+    translateCanva(){
+        
+        
+        this.state.width = this.state.canva.width;
+        this.state.height = this.state.canva.height;
+
+        var centery =  this.state.height/2;
+        var centerx =  this.state.width/ 2;
+        
+        this.state.ctx.translate(centerx, centery);
+        this.state.ctx.rotate(180  * Math.PI / 180)
+
+        this.state.ctx.scale(-1,1)
+        this.state.ctx.translate(-centerx,-centery)
+        
+        this.state.ctx.fillStyle = &#x27;rgb(0,0,0)&#x27;;
+        this.state.ctx.clearRect(0,0, this.state.width , this.state.height)
+     
+    }
+
+    /**
+     * Detecta la frecuencia en el gráfico
+     * 
+     * @method  detectFreq
+     * @param {Evento} event 
+     */
+    detectFreq(event){
+        document.getElementById(&#x27;freq-indicator&#x27;).style.display = &#x27;&#x27;;
+
+        document.getElementById(&#x27;canva-cont&#x27;).style.cursor = &#x27;crosshair&#x27;
+        var x = event.pageX - $(&#x27;#canva-cont&#x27;).offset().left;
+        var y =  event.pageY - $(&#x27;#canva-cont&#x27;).offset().top;
+      
+       // var offset =   (this.state.separation/ (( this.state.width/ this.state.bufferSize )  *2.5))//Relacion de frecuencias por cada pixels
+        var pixelPerValue = document.querySelector(&#x27;canvas&#x27;).width / this.state.bufferSize
+        var freqPerPixel = this.state.separation / pixelPerValue
+        if( x &gt;= 0){
+            var freq = (x * freqPerPixel) / 2.5
+           // var freq =  x *  offset//divido lo que ocupa cada casilla
+            var div = document.getElementById(&#x27;freq-indicator&#x27;)
+            div.innerText = freq + &#x27;hz&#x27;;
+            $(&#x27;#freq-indicator&#x27;).css(&quot;transform&quot;,&quot;translate3d(&quot;+x+&quot;px,&quot;+y+&quot;px,0px)&quot;)
+        }else{
+            this.hideIndicator()
+        }
+        
+    }
+
+    /**
+     * Se encarga de dibujar el canva
+     * 
+     * @method draw
+     */
+    draw(){
+
+        var d  = window.requestAnimationFrame(this.draw)
+
+        this.state.ctx.clearRect(0,0, this.state.width, this.state.height)
+
+        var bufferSize = this.state.bufferSize;
+
+        //Calculamos el ancho  de la barra que se va a puntar
+        var width = ( this.state.width/ bufferSize )  *2.5 ;
+        var heigth;
+        var x = 0;
+        var data = sinte.getThingsAnalyser(&#x27;data&#x27;);
+
+        for(var i = 0; i &lt; bufferSize; i++){
+            heigth = data[i]/2
+            if(data[i] &lt;= 210){
+                this.state.ctx.fillStyle = &#x27;rgb(&#x27; + (heigth+20) + &#x27;,172,46)&#x27;;
+
+            }else if (data[i] &gt; 85 &amp;&amp; data[i] &lt;= 240){
+                this.state.ctx.fillStyle = &#x27;rgb(&#x27; + (heigth+192) + &#x27;,174,114)&#x27;;
+
+            }else{
+                this.state.ctx.fillStyle = &#x27;rgb(&#x27; + (heigth+100) + &#x27;,50,50)&#x27;;
+
+            }
+
+             this.state.ctx.fillRect(x,0,width, heigth);
+            x  += width + 1;
+            
+
+        }   
+
+    }
+
+    hideIndicator(){
+        document.getElementById(&#x27;freq-indicator&#x27;).style.display = &#x27;none&#x27;;
+    }
+    equalize(freq, event){
+        var value = event.target.value;
+        sinte.equalize(freq,value)
+        var parent = event.target.parentElement
+        var grandad = parent.parentElement;
+        var span = grandad.getElementsByTagName(&#x27;span&#x27;)[0];
+        span.innerText = value
+
+    }
+
+    /**
+     * Método que devuelve el componente Analyser para ser renderizado
+     * 
+     * @method render
+     * @return Código html del componente Analyser
+     * 
+     */
+    render(){
+        
+        return(
+            &lt;div className=&#x27;cont&#x27; &gt;
+
+                &lt;div className=&#x27;colum&#x27; onMouseLeave={()=&gt;{this.hideIndicator()}} onMouseMove={(event)=&gt;this.detectFreq(event)} id=&#x27;canva-cont&#x27; style={{width: &#x27;50%&#x27;, height: &#x27;100%&#x27;,order:1 }} &gt;
+                    &lt;div className=&#x27;freqs&#x27;&gt;
+                        &lt;p id=&#x27;0k&#x27;&gt;200hz&lt;/p&gt;
+                        &lt;p id=&#x27;1k&#x27;&gt;12khz&lt;/p&gt;
+                        &lt;p id=&#x27;20k&#x27;&gt;24khz&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div id=&#x27;freq-indicator&#x27; style={{
+                        display: &#x27;none&#x27;,
+                        margin: 0, 
+                        padding: 5, 
+                        backgroundColor: &#x27;whitesmoke&#x27;,
+                        width: &#x27;10vh&#x27;,
+                        textAlign: &#x27;center&#x27;,
+                        borderRadius: &#x27;60%&#x27;}}&gt;
+
+                    &lt;/div&gt;
+                    
+                    &lt;canvas id=&#x27;canva&#x27;  onClick={(e)=&gt;this.createCanva(e)}  style={{width: &#x27;100%&#x27;, height: &#x27;100%&#x27; }}&gt;
+                        Alterantive
+                        
+                    &lt;/canvas&gt;
+                    
+                &lt;/div&gt;
+                &lt;div className=&#x27;colum&#x27; id=&#x27;eq&#x27; style={{width: &#x27;100%&#x27;, order:2 }}&gt;
+                    
+                    &lt;div id=&#x27;eq-cont&#x27;&gt;
+                        &lt;h3 style={{order: 1}}&gt;Ecualizador&lt;/h3&gt;
+                        &lt;div id=&#x27;sliders&#x27; style={{order: 2}}&gt;
+                        &lt;div className=&#x27;section&#x27;&gt;
+                            &lt;div className=&quot;title&quot;&gt;LWF&lt;/div&gt;
+                            &lt;div className=&#x27;range-slider&#x27;&gt;
+
+                                &lt;input className=&#x27;input-range&#x27; aria-orientation=&#x27;vertical&#x27;
+                                type=&#x27;range&#x27; step=&#x27;0.5&#x27; defaultValue=&#x27;0&#x27; min=&#x27;-25&#x27; max=&#x27;25&#x27; 
+                                onChange={(event)=&gt;this.equalize(&#x27;lw&#x27;,event)}
+                                /&gt;
+                             
+                            &lt;/div&gt;
+                            &lt;span className=&quot;scope scope-min&quot;&gt;0&lt;/span&gt;
+                            &lt;span className=&quot;param&quot;&gt;dB&lt;/span&gt; 
+                        &lt;/div&gt;
+                         
+                        &lt;div className=&#x27;section&#x27;&gt;
+                            &lt;div className=&quot;title&quot;&gt;LWMF&lt;/div&gt;
+                            &lt;div className=&#x27;range-slider&#x27;&gt;
+
+                                &lt;input className=&#x27;input-range&#x27; aria-orientation=&#x27;vertical&#x27;
+                                type=&#x27;range&#x27; step=&#x27;0.5&#x27; defaultValue=&#x27;0&#x27; min=&#x27;-25&#x27; max=&#x27;25&#x27;
+                                onChange={(event)=&gt;this.equalize(&#x27;lwm&#x27;,event)}
+                            /&gt;
+
+                            &lt;/div&gt;
+                            &lt;span className=&quot;scope scope-min&quot;&gt;0&lt;/span&gt;
+                            &lt;span className=&quot;param&quot;&gt;dB&lt;/span&gt; 
+                        &lt;/div&gt;
+                        &lt;div className=&#x27;section&#x27;&gt;
+                            &lt;div className=&quot;title&quot;&gt;MF&lt;/div&gt;
+                            &lt;div className=&#x27;range-slider&#x27;&gt;
+
+                                &lt;input className=&#x27;input-range&#x27; aria-orientation=&#x27;vertical&#x27;
+                                type=&#x27;range&#x27; step=&#x27;0.5&#x27; defaultValue=&#x27;0&#x27; min=&#x27;-25&#x27; max=&#x27;25&#x27;
+                                onChange={(event)=&gt;this.equalize(&#x27;mid&#x27;,event)}
+
+                            /&gt;
+
+                            &lt;/div&gt;
+                            &lt;span className=&quot;scope scope-min&quot;&gt;0&lt;/span&gt;
+                            &lt;span className=&quot;param&quot;&gt;dB&lt;/span&gt; 
+                        &lt;/div&gt;
+                        &lt;div className=&#x27;section&#x27;&gt;
+                            &lt;div className=&quot;title&quot;&gt;MHF&lt;/div&gt;
+                            &lt;div className=&#x27;range-slider&#x27;&gt;
+
+                                &lt;input className=&#x27;input-range&#x27; aria-orientation=&#x27;vertical&#x27;
+                                type=&#x27;range&#x27; step=&#x27;0.5&#x27; defaultValue=&#x27;0&#x27; min=&#x27;-25&#x27; max=&#x27;25&#x27;
+                                onChange={(event)=&gt;this.equalize(&#x27;mhg&#x27;,event)}
+
+                            /&gt;
+
+                            &lt;/div&gt;
+                            &lt;span className=&quot;scope scope-min&quot;&gt;0&lt;/span&gt;
+                            &lt;span className=&quot;param&quot;&gt;dB&lt;/span&gt; 
+                        &lt;/div&gt;
+                        &lt;div className=&#x27;section&#x27;&gt;
+                            &lt;div className=&quot;title&quot;&gt;HF&lt;/div&gt;
+                            &lt;div className=&#x27;range-slider&#x27;&gt;
+
+                                &lt;input className=&#x27;input-range&#x27; aria-orientation=&#x27;vertical&#x27;
+                                type=&#x27;range&#x27; step=&#x27;0.5&#x27; defaultValue=&#x27;0&#x27; min=&#x27;-25&#x27; max=&#x27;25&#x27;
+                                onChange={(event)=&gt;this.equalize(&#x27;hg&#x27;,event)}
+
+                            /&gt;
+
+                            &lt;/div&gt;
+                            &lt;span className=&quot;scope scope-min&quot;&gt;0&lt;/span&gt;
+                            &lt;span className=&quot;param&quot;&gt;dB&lt;/span&gt; 
+                        &lt;/div&gt;
+                        &lt;/div&gt;
+                        
+                        &lt;/div&gt;
+
+
+
+
+
+                &lt;/div&gt;
+            
+            &lt;/div&gt;
+
+        )
+       
+    }
+}
+
+export default Analyser;
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

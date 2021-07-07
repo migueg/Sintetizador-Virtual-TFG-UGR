@@ -6,6 +6,14 @@ import { sinte } from '../../osc-components';
 
 import $ from 'jquery';
 import '../../../css/loader.css'
+
+/**
+ * Clase que encapsula el comportamiento común de los modales.
+ *
+ * @class Modal
+ * @constructor
+ * @param {string} type Tipo de modal
+ */
 class Modal extends React.Component{
     
       constructor(type){
@@ -18,15 +26,34 @@ class Modal extends React.Component{
         }
     }
 
+    /**
+     * Método que se ejecuta antes de que el componente se renderice. Se encarga
+     * de pedir las categorías y setearlas.
+     * 
+     * @method componentDidMount
+     */
     async componentDidMount(){
            const resp = await sinte.fetchThings('categories');
            this.setState({data: resp})
     }  
+
+    /**
+     * Setter de la valoración
+     * 
+     * @method setRating
+     * @param {Float} data Valoración
+     */
      
     setRating = (data)=> {
         this.state.valoration = data;
     }
 
+    /**
+     * Compureba que osciladores están encendidos
+     * 
+     * @methos checkOscillators
+     * @private
+     */
     __checkOscillators(){
         var state = this.props.parentCallback();
         if(state.A){
@@ -37,6 +64,12 @@ class Modal extends React.Component{
         }
 
     }
+
+    /**
+     * Se encarga de ocultar los modales
+     * 
+     * @method hideModal
+     */
     hideModal(){
         if(this.state.type === 'save'){
             this.__checkOscillators();
@@ -75,6 +108,12 @@ class Modal extends React.Component{
         //document.getElementById("save").classNameName += document.getElementById("save").classNameName.replace("show", "")
     }
 
+    /**
+     * Se encarga de limpiar las contraseñas
+     * 
+     * @method cleanPasswords
+     * @private
+     */
     __cleanPasswords(){
         document.getElementById('failure-password').style.display = 'none';
         document.getElementById('span-password').style.display = 'none';
@@ -84,6 +123,13 @@ class Modal extends React.Component{
         document.getElementById('recipient-password').value = '';
         document.getElementById('recipient-password2').value = '';
     }
+
+    /**
+     * Se encarga de enseñar el loader
+     * 
+     * @method showLoader
+     * @private
+     */
     __showLoader(){
         if(this.state.type === 'save'){
             $('#save-buttom').attr('disabled',true);
@@ -103,6 +149,13 @@ class Modal extends React.Component{
         }
     }
     
+    /**
+     * Interpreta la respuestas de fachada y las maneja
+     * 
+     * @method handleResponse
+     * @param {Object} resp 
+     * @private
+     */
     __handleResponse(resp){
         var idS, idF, tS,tF;
         console.log(this.state.type)
@@ -154,10 +207,24 @@ class Modal extends React.Component{
 
 
     }
+
+    /**
+     * Envía a la fachada un mensaje para guargar un sonido
+     * 
+     * @method saveInBD
+     * @param {Object} data 
+     * @returns {string} Respuesta del servidor
+     * @private
+     */
     async __saveInBD(data){
         const resp = await sinte.save(data);
         return resp;
     }
+    /**
+     * Inicia el proceso de guardado de un sonido y maneja la respuesta.
+     * 
+     * @method save
+     */
     async save(){
         var name = document.getElementById('recipient-name').value
         if(name){

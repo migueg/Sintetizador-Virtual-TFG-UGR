@@ -1,4 +1,42 @@
 import DbFetcher from './dbFetcher';
+import { oscillator } from './oscillator';
+
+/**
+ * La clase Saver contiene  las peticiones de tipo POST y DELETE realizadas
+ * al Backend
+ *
+ * @class Saver
+ * @constructor
+ * @param {oscillator} oscA
+ * @param {oscillator} oscB
+ * @param {synth} synth
+ * 
+ * 
+ */
+/**
+ * 
+ * @property envelopes
+ * @type Object
+ */
+
+/**
+ * 
+ * @property oscilators
+ * @type Object
+ */
+
+/**
+ * 
+ * @property oscilatorA
+ * @type oscillator
+ */
+
+/**
+ * 
+ * @property oscilatorB
+ * @type oscillator
+ */
+
 class Saver extends DbFetcher {
     #envelopes
     #oscilators
@@ -21,11 +59,23 @@ class Saver extends DbFetcher {
 
     }
 
+    /**
+     * Obtiene la información de las envolventes
+     * 
+     * @method getEnvelopes
+     * @private
+     */
     __getEnvelopes(){
         this.#envelopes['A'] = this.#oscillatorA.getEnvelope();
         this.#envelopes['B'] = this.#oscillatorB.getEnvelope(); 
     }
 
+    /**
+     * Obtiene la información de los osciladores
+     * 
+     * @method getOscillators
+     * @private
+     */
     __getOscillators(){
         
         this.#oscilators['A'] = this.#oscillatorA.getState();
@@ -39,10 +89,23 @@ class Saver extends DbFetcher {
 
     }
 
+    /**
+     * Obtiene la información de los efectos
+     * 
+     * @method getEffects
+     * @private
+     */
     __getEffects(){
         this.#oscilators['effects'] = this.#synth.getEffects();
     }
 
+    /**
+     * Manda una petición para guardar un sonido
+     * 
+     * @method sendRequest
+     * @param {Object} toSave 
+     * @private
+     */
     async __sendRequest(toSave){
         const requestOptions = {
             method: 'POST',
@@ -88,6 +151,16 @@ class Saver extends DbFetcher {
     
         
     }
+
+    /**
+     * Se encarga de recopilar la información de los sonidos y 
+     * dar orden para mandar la petición de guardado
+     * 
+     * @method save
+     * @param {Object} data 
+     * @returns {Object} Respuesta del servidor
+     * @async
+     */
     async save(data){
         this.__getOscillators();
         this.__getEffects();
@@ -102,6 +175,14 @@ class Saver extends DbFetcher {
         return this.data
     }
 
+    /**
+     * Manda una petición para editar el perfil de usuario
+     * 
+     * @method editProfile
+     * @param {Object} data 
+     * @returns {Object} Respuesta del servidor
+     * @async
+     */
     async editProfile(data){
         var that = this
         var d = data;
@@ -145,6 +226,14 @@ class Saver extends DbFetcher {
         return this.edit
     }
 
+    /**
+     * Manda una petición para editar la contraseña de usuario
+     * 
+     * @method editPassword
+     * @param {Object} data 
+     * @returns {Object} Respuesta del servidor
+     * @async
+     */
    async editPassword(data){
     var that = this
     var d = data;
@@ -184,6 +273,14 @@ class Saver extends DbFetcher {
     return {state: this.edit.password, msg: this.edit.msg}
    }
 
+    /**
+     * Manda una petición para borrar un sonido
+     * 
+     * @method delete
+     * @param {String} id Identificador del sondio 
+     * @returns {Object} Respuesta del servidor
+     * @async
+     */
    async delete(id){
        if(id){
             var that = this

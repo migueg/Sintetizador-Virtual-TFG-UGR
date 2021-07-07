@@ -41,7 +41,14 @@ class App extends React.Component{
   }
   
   
-  
+  /**
+   * Comprueba si un layer esta oculto
+   * 
+   * @method isOff
+   * @param {string} element Id del layer
+   * @returns {Boolean}
+   * @private
+   */
   __isOff(element){
     
     var off = false;
@@ -54,6 +61,12 @@ class App extends React.Component{
   }
 
 
+  /**
+   * Indica a la fahcada que hay que encender los osciladores
+   * 
+   * @method __onOscillators
+   * @private
+   */
   __onOscillators(){
     this.a = sinte.getChecked('A');
     this.b = sinte.getChecked('B');
@@ -65,7 +78,12 @@ class App extends React.Component{
       sinte.onOscillator('B');
     }
   }
-
+  /**
+   * Indica a la fahcada que hay que apagar los osciladores
+   * 
+   * @method __onOscillators
+   * @private
+   */
   __offOscillators(){
     this.a = sinte.getChecked('A');
     this.b = sinte.getChecked('B');
@@ -77,7 +95,11 @@ class App extends React.Component{
     }
   }
   
-
+  /**
+   * Muestra el layer de efectos
+   * 
+   * @method showFX
+   */
   showFX(){
     
     var offlb = this.__isOff('lb');
@@ -103,6 +125,12 @@ class App extends React.Component{
     }
     
   }
+
+  /**
+   * Muestra el layer de osciladores
+   * 
+   * @method showOsc
+   */
   showOsc(){
     var offlb = this.__isOff('lb');
     var offosc = this.__isOff('osc');
@@ -127,7 +155,11 @@ class App extends React.Component{
     }
   }
  
- 
+  /**
+   * Muestra el layer de tabla de sonidos
+   * 
+   * @method showLb
+   */
   showLb(){
     if(window.confirm('Si cambias a la biblioteca, la reproducción de los osciladores estará desctivada')){
       var offlb = this.__isOff('lb');
@@ -154,7 +186,12 @@ class App extends React.Component{
     }
    
   }
-
+  
+  /**
+   * Muestra el layer de EQ
+   * 
+   * @method showEQ
+   */
   showEQ(){
     var offlb = this.__isOff('lb');
     var offosc = this.__isOff('osc');
@@ -179,6 +216,13 @@ class App extends React.Component{
     }
     
   }
+
+  /**
+   * Cuando se carga el sonido inicia el proceso para que se actualicen los valores
+   * 
+   * @method loadSound
+   * @returns {Object} respuesta
+   */
   loadSound(){
      var newState = this.lb.current.newState
      var response = true;
@@ -204,9 +248,22 @@ class App extends React.Component{
      return response
   }
 
+  /**
+   * Le dice al hijo que tiene que actualizar la tabla de sonidos
+   * 
+   * @method updateTable
+   */
   updateTable (){
      this.lb.current.updateTable()
   }
+
+  /**
+     * Método que devuelve el componente App para ser renderizado que se corresponde con el sintetizador
+     * 
+     * @method render
+     * @return Código html del componente App
+     * 
+     */
   render(){
 
   

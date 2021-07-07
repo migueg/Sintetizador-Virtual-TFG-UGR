@@ -38,25 +38,55 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/Analyser.html">Analyser</a></li>
+                                <li><a href="../classes/Anlyser.html">Anlyser</a></li>
                                 <li><a href="../classes/App.html">App</a></li>
+                                <li><a href="../classes/Delay.html">Delay</a></li>
+                                <li><a href="../classes/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../classes/Effect.html">Effect</a></li>
                                 <li><a href="../classes/Envelope.html">Envelope</a></li>
+                                <li><a href="../classes/Equalizer.html">Equalizer</a></li>
+                                <li><a href="../classes/ErrorPage.html">ErrorPage</a></li>
+                                <li><a href="../classes/Filter.html">Filter</a></li>
+                                <li><a href="../classes/Header.html">Header</a></li>
                                 <li><a href="../classes/Index.html">Index</a></li>
+                                <li><a href="../classes/Library.html">Library</a></li>
                                 <li><a href="../classes/LimitedKnob.html">LimitedKnob</a></li>
+                                <li><a href="../classes/Loader.html">Loader</a></li>
+                                <li><a href="../classes/Login.html">Login</a></li>
+                                <li><a href="../classes/Midi.html">Midi</a></li>
+                                <li><a href="../classes/Modal.html">Modal</a></li>
+                                <li><a href="../classes/ModalDelete.html">ModalDelete</a></li>
+                                <li><a href="../classes/ModalLoad.html">ModalLoad</a></li>
+                                <li><a href="../classes/ModalPassword.html">ModalPassword</a></li>
+                                <li><a href="../classes/ModalSave.html">ModalSave</a></li>
                                 <li><a href="../classes/Navigator.html">Navigator</a></li>
                                 <li><a href="../classes/Oscilador.html">Oscilador</a></li>
                                 <li><a href="../classes/oscillator.html">oscillator</a></li>
                                 <li><a href="../classes/Piano.html">Piano</a></li>
+                                <li><a href="../classes/Profile.html">Profile</a></li>
+                                <li><a href="../classes/Recorder.html">Recorder</a></li>
+                                <li><a href="../classes/Reverb.html">Reverb</a></li>
+                                <li><a href="../classes/Saver.html">Saver</a></li>
+                                <li><a href="../classes/SignUp.html">SignUp</a></li>
                                 <li><a href="../classes/Synth.html">Synth</a></li>
+                                <li><a href="../classes/TableUI.html">TableUI</a></li>
                                 <li><a href="../classes/Voice.html">Voice</a></li>
                             </ul>
                 
                 
                             <ul id="api-modules" class="apis modules">
                                 <li><a href="../modules/App.html">App</a></li>
+                                <li><a href="../modules/Delay.html">Delay</a></li>
+                                <li><a href="../modules/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../modules/Filter.html">Filter</a></li>
+                                <li><a href="../modules/filterTypes.html">filterTypes</a></li>
+                                <li><a href="../modules/FX.html">FX</a></li>
                                 <li><a href="../modules/Knob.html">Knob</a></li>
                                 <li><a href="../modules/Navigator.html">Navigator</a></li>
                                 <li><a href="../modules/OscComponents.html">OscComponents</a></li>
                                 <li><a href="../modules/Piano.html">Piano</a></li>
+                                <li><a href="../modules/Reverb.html">Reverb</a></li>
                                 <li><a href="../modules/synth.html">synth</a></li>
                                 <li><a href="../modules/types.html">types</a></li>
                             </ul>
@@ -99,11 +129,35 @@
 import React from &#x27;react&#x27;;
 import ReactDOM from &#x27;react-dom&#x27;;
 import &#x27;./css/index.css&#x27;;
-import { BrowserRouter as Router, Route } from &quot;react-router-dom&quot;;
+import { BrowserRouter as Router, Route,Switch , Redirect} from &quot;react-router-dom&quot;;
 import App from &#x27;./App&#x27;;
+import Login from &#x27;./view/login-component&#x27;;
+import SignUp from &#x27;./view/signup-component&#x27;;
+import ErrorPage from &#x27;./view/errorPage-component&#x27;;
+import Profile from &#x27;./view/profile-component&#x27;;
+
+import Nav from &#x27;./view/navbar&#x27;
+
 //import * as serviceWorker from &quot;ser&quot;;
 import reportWebVitals from &#x27;./reportWebVitals&#x27;;
+import Cookies from &#x27;js-cookie&#x27;;
 
+const PrivateRoute = ({isAuthenticated, ...props}) =&gt; {
+  return (isAuthenticated) ? &lt;Route {...props} /&gt; : &lt;Redirect to=&quot;/&quot;/&gt;;
+};
+
+const PublicRoute = ({isAuthenticated, ...props}) =&gt; {
+  return (isAuthenticated) ?  &lt;Redirect to=&quot;/synth&quot;/&gt; : &lt;Route {...props} /&gt; ;
+};
+
+function    isAuthenticated(){
+  var token = Cookies.get(&#x27;token&#x27;) 
+  if( token &amp;&amp; token !== &#x27;undefined&#x27;){
+      return true;
+  }else{
+      return false;
+  }
+}
 /**
  * Renderiza toda la aplicación
  *
@@ -112,8 +166,19 @@ import reportWebVitals from &#x27;./reportWebVitals&#x27;;
  */
 
 ReactDOM.render(
+
   &lt;Router&gt;
-    &lt;Route path=&quot;/&quot; component={App}/&gt;
+      &lt;Nav /&gt;
+    &lt;Switch&gt;
+      &lt;PrivateRoute exact path=&quot;/synth&quot; isAuthenticated={isAuthenticated()} component={App}/&gt;
+      &lt;PrivateRoute exact path=&quot;/profile&quot; isAuthenticated={isAuthenticated()} component={Profile}/&gt;
+      &lt;PublicRoute exact path=&#x27;/signup&#x27; component={SignUp}/&gt;
+      &lt;PublicRoute exact path=&#x27;/&#x27; isAuthenticated={isAuthenticated()} component={Login}/&gt;
+      &lt;Route component={ErrorPage}/&gt;
+
+    &lt;/Switch&gt;
+   
+
   &lt;/Router&gt;,
   document.getElementById(&#x27;root&#x27;)
 );

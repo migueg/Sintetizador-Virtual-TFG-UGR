@@ -4,13 +4,31 @@ import failure from '../../../img/failure.png';
 
 import $ from 'jquery';
 
+/**
+ * Clase que genera el modal de la interfaz para borrar sonidos
+ *
+ * @class ModalDelete
+ * @constructor
+ * @see Modal
+ */
+
+/**
+ * @property id
+ * @type string
+ */
 class ModalDelete extends Modal{
     constructor(){
         super('delete');
         this.id = '';
     }
 
-    
+    /**
+     * Se encarga de comunicar a la fachada que el usuario quiere eliminar un sonido. 
+     * Cuando reciba una respuesta, la interpretará
+     * 
+     * @method delete
+     * @async
+     */
     async delete(){
         
         this.__showLoader();
@@ -34,6 +52,12 @@ class ModalDelete extends Modal{
 
     }
 
+    /**
+     * Se encarga de mostrar el modal
+     * 
+     * @method show 
+     * @param {string} id Identidicador del modal
+     */
     show(id){
         $('#close-delete-buttom').attr('disabled',false);
         $('#delete-buttom').attr('disabled',false);
@@ -42,6 +66,13 @@ class ModalDelete extends Modal{
         document.getElementById("modalDelete").style.display = "block"
         document.getElementById("modalDelete").className += "show" 
     }
+    /**
+     * Método que devuelve el componente ModalDelte para ser renderizado
+     * 
+     * @method render
+     * @return Código html del componente Distorsion
+     * 
+     */
     render(){
         return(
             <div>

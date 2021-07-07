@@ -5,11 +5,24 @@ import portada from '../img/portada.jpg';
 
 import '../css/login.css';
 
+/**
+ * Proporciona el componente para la vista de error
+ * 
+ * @class ErrorPage
+ * @constructor
+ */
 class ErrorPage extends React.Component{
     constructor(){
         super();
     }
 
+    /**
+     * Método que devuelve el componente Errorpage para ser renderizado
+     * 
+     * @method render
+     * @return Código html del componente Errorpage
+     * 
+     */
     render(){
         return(
             <div style= {{height: '94%'}}>

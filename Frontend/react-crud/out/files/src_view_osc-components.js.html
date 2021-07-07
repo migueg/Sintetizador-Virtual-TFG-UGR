@@ -38,25 +38,55 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/Analyser.html">Analyser</a></li>
+                                <li><a href="../classes/Anlyser.html">Anlyser</a></li>
                                 <li><a href="../classes/App.html">App</a></li>
+                                <li><a href="../classes/Delay.html">Delay</a></li>
+                                <li><a href="../classes/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../classes/Effect.html">Effect</a></li>
                                 <li><a href="../classes/Envelope.html">Envelope</a></li>
+                                <li><a href="../classes/Equalizer.html">Equalizer</a></li>
+                                <li><a href="../classes/ErrorPage.html">ErrorPage</a></li>
+                                <li><a href="../classes/Filter.html">Filter</a></li>
+                                <li><a href="../classes/Header.html">Header</a></li>
                                 <li><a href="../classes/Index.html">Index</a></li>
+                                <li><a href="../classes/Library.html">Library</a></li>
                                 <li><a href="../classes/LimitedKnob.html">LimitedKnob</a></li>
+                                <li><a href="../classes/Loader.html">Loader</a></li>
+                                <li><a href="../classes/Login.html">Login</a></li>
+                                <li><a href="../classes/Midi.html">Midi</a></li>
+                                <li><a href="../classes/Modal.html">Modal</a></li>
+                                <li><a href="../classes/ModalDelete.html">ModalDelete</a></li>
+                                <li><a href="../classes/ModalLoad.html">ModalLoad</a></li>
+                                <li><a href="../classes/ModalPassword.html">ModalPassword</a></li>
+                                <li><a href="../classes/ModalSave.html">ModalSave</a></li>
                                 <li><a href="../classes/Navigator.html">Navigator</a></li>
                                 <li><a href="../classes/Oscilador.html">Oscilador</a></li>
                                 <li><a href="../classes/oscillator.html">oscillator</a></li>
                                 <li><a href="../classes/Piano.html">Piano</a></li>
+                                <li><a href="../classes/Profile.html">Profile</a></li>
+                                <li><a href="../classes/Recorder.html">Recorder</a></li>
+                                <li><a href="../classes/Reverb.html">Reverb</a></li>
+                                <li><a href="../classes/Saver.html">Saver</a></li>
+                                <li><a href="../classes/SignUp.html">SignUp</a></li>
                                 <li><a href="../classes/Synth.html">Synth</a></li>
+                                <li><a href="../classes/TableUI.html">TableUI</a></li>
                                 <li><a href="../classes/Voice.html">Voice</a></li>
                             </ul>
                 
                 
                             <ul id="api-modules" class="apis modules">
                                 <li><a href="../modules/App.html">App</a></li>
+                                <li><a href="../modules/Delay.html">Delay</a></li>
+                                <li><a href="../modules/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../modules/Filter.html">Filter</a></li>
+                                <li><a href="../modules/filterTypes.html">filterTypes</a></li>
+                                <li><a href="../modules/FX.html">FX</a></li>
                                 <li><a href="../modules/Knob.html">Knob</a></li>
                                 <li><a href="../modules/Navigator.html">Navigator</a></li>
                                 <li><a href="../modules/OscComponents.html">OscComponents</a></li>
                                 <li><a href="../modules/Piano.html">Piano</a></li>
+                                <li><a href="../modules/Reverb.html">Reverb</a></li>
                                 <li><a href="../modules/synth.html">synth</a></li>
                                 <li><a href="../modules/types.html">types</a></li>
                             </ul>
@@ -102,6 +132,8 @@ import {Container,Row,Col } from &#x27;react-bootstrap&#x27;;
 import {Knob} from &#x27;./elements/limitedKnob&#x27;;
 import {types as knobTypes} from &#x27;./elements/knobtypes&#x27;;
 import {Envelope} from &#x27;./elements/envelope&#x27;;
+import Cookies from &#x27;js-cookie&#x27;;
+
 
 import &#x27;bootstrap/dist/css/bootstrap.css&#x27;;
 import &#x27;../css/Oscilador.css&#x27;;
@@ -133,20 +165,39 @@ export var sinte = new synth();
  * 
  */
 
+/**
+ * Referencia a la clase Envelope
+ * 
+ * @property envelope 
+ * @type Ref
+ * 
+ */
+
+
 
 class Oscilador extends React.Component{
     #osc;
     constructor(props){
         super();
-        this.#osc = props.osc;
-        this._KnobVol = React.createRef(); 
-        
+        this.#osc = props.osc; 
+        this.firstTime = true;
+
         //Asignamos la variable this de la clase a las siguientes funciones
         this.checkChecked = this.checkChecked.bind(this);
-      
-    
+        this.setOsc = this.setOsc.bind(this);
+
+        //Referencias
+        this.envelope = React.createRef();
+        this._KnobVol = React.createRef(); 
         
+        var token = Cookies.get(&#x27;token&#x27;);
+        var user = Cookies.get(&#x27;user&#x27;);
+
+        if(token &amp;&amp; user){
+            sinte.setCookies(token,user)
+        }
     }
+
 
     /**
      * Método que se encarga de comprobar si esta encendido o apagado 
@@ -157,17 +208,20 @@ class Oscilador extends React.Component{
     checkChecked() {
         if(document.getElementById(&#x27;interruptorA&#x27;).checked){
             this.checkWave();
-             sinte.onOscillator(&#x27;A&#x27;);
+            sinte.setChecked(&#x27;A&#x27;,true);
+            sinte.onOscillator(&#x27;A&#x27;);
         }else{
+            sinte.setChecked(&#x27;A&#x27;,false)
             sinte.offOscillator(&#x27;A&#x27;);
         }
     
         if(document.getElementById(&#x27;interruptorB&#x27;).checked){
             this.checkWave();
-           
+            sinte.setChecked(&#x27;B&#x27;,true)
             sinte.onOscillator(&#x27;B&#x27;);
        }else{
-           sinte.offOscillator(&#x27;B&#x27;);
+            sinte.setChecked(&#x27;B&#x27;,false)
+            sinte.offOscillator(&#x27;B&#x27;);
        }
     }
 
@@ -188,6 +242,7 @@ class Oscilador extends React.Component{
                 sinte.selectWave(this.#osc,&quot;sine&quot;);
                 break;
             case &quot;square&quot;:
+                
                 sinte.selectWave(this.#osc,&quot;square&quot;);
                 break;
             case &quot;sawtooth&quot;:
@@ -202,9 +257,57 @@ class Oscilador extends React.Component{
         }
         
         
+        
     }
 
-  
+    /**
+     * Método que se encarga de enviar al controlador el nivel de paneo
+     * que el usuario quiere para un oscilador
+     * 
+     * @method setPan
+     * @param {Char} osc Id del oscilador
+     */
+    setPan(osc){
+        var id = &#x27;range&#x27;+ osc;
+        var ranger = document.getElementById(id);
+        sinte.setPan(this.#osc,ranger.value)
+ 
+    }
+
+    /**
+     * Setter del estado del oscilador
+     * 
+     * @method setOsc
+     * @param {Objetc} osc 
+     */
+    setOsc(osc){
+        var on = osc.oscOn;
+        var pan = osc.pan;
+        var wave = osc.wave;
+        var gain = osc.gain * 100;
+
+        document.getElementById(&#x27;interruptor&#x27;+osc.id).checked = on;
+
+        if(on){
+            sinte.setChecked(osc.id,true)
+        }else{
+            sinte.setChecked(osc.id,false)
+        }
+
+        document.getElementById(&#x27;range&#x27;+osc.id).value = pan;
+        sinte.setPan(osc.id,pan);
+
+        document.getElementById(&#x27;selector&#x27;+osc.id).value = wave;
+        sinte.selectWave(osc.id,wave);
+
+        this.envelope.current.setEnvelope(osc.envelope);
+        
+        this._KnobVol.current.setGainOsc(gain);
+
+        sinte.setVolum(osc.id, gain);
+
+
+    }
    /**
     * Método que construlle el componente de la interfaz relativo a el oscilador, que contiene los Knobs de la envolvente,
     * el selector de onda, el knob de volumen y el botón de encendido y apagado.
@@ -224,8 +327,10 @@ class Oscilador extends React.Component{
     
         return(
             &lt;div style={{marginLeft: 10}} &gt;
+            &lt;Row&gt;
+
             
-            &lt; div className=&quot;toggle-switch&quot;&gt;
+            &lt; div className=&quot;toggle-switch&quot; style={{marginLeft: 10}}&gt;
                 &lt;input
                 type=&quot;checkbox&quot;
                 className=&quot;toggle-switch-checkbox&quot;
@@ -237,9 +342,24 @@ class Oscilador extends React.Component{
             
             &lt;/div&gt;
 
-            &lt;h3 style={{float: &#x27;left&#x27;}}&gt;Oscilador {this.#osc}&lt;/h3&gt; 
-            &lt;div className=&quot;volumOsc&quot; style={{float: &#x27;right&#x27;}}&gt;
-        
+            &lt;h3 style={{float: &#x27;left&#x27;}}&gt;Oscilador {this.#osc}&lt;/h3&gt;
+            &lt;/Row&gt;
+            &lt;Row&gt;
+            &lt;Col&gt;
+            &lt;div className=&#x27;panner&#x27;&gt;
+                &lt;p&gt;Pan L-R&lt;/p&gt;
+                &lt;input type=&quot;range&quot; id={&#x27;range&#x27;+this.#osc} onChange={()=&gt;this.setPan(this.#osc)} 
+                     defaultValue=&#x27;0&#x27;  step=&#x27;0.1&#x27; min=&quot;-1&quot;  max=&quot;1&quot; 
+                    style={{width: &#x27;80%&#x27;}}
+                    /&gt;
+          
+            &lt;/div&gt;
+
+          
+            &lt;/Col&gt;
+            &lt;Col&gt;
+            &lt;div className=&quot;volumOsc&quot; style={{float: &#x27;right&#x27;, marginRight: &#x27;2%&#x27;}}&gt;
+            &lt;p&gt;Volumen&lt;/p&gt;
             &lt;Knob
                 ref={this._KnobVol}
                 style={{ display: &quot;inline-block&quot; }}
@@ -252,11 +372,13 @@ class Oscilador extends React.Component{
                 type={knobTypes.OSC_VOLUM}
                 osc = {this.#osc}
                 val={0}
-              
+                
             
             /&gt;
-           
+          
             &lt;/div&gt;
+            &lt;/Col&gt;
+            &lt;/Row&gt; 
             &lt;div className=&quot;WaveSelector&quot;&gt;
               &lt;select name=&quot;selector&quot; className=&quot;selector&quot; onClick={()=&gt;this.checkWave(this.#osc)} id={id}&gt;
                   &lt;option value=&quot;sine&quot;  &gt;Sine&lt;/option&gt;
@@ -267,9 +389,11 @@ class Oscilador extends React.Component{
               &lt;div className=&quot;select_arrow&quot;&gt;&lt;/div&gt;
           &lt;/div&gt;
             
-            &lt;Envelope osc={this.#osc} /&gt;
+            &lt;Envelope osc={this.#osc} ref={this.envelope}/&gt;
           
           &lt;/div&gt;
+            
+          
         )
     }
 }
@@ -282,19 +406,32 @@ class Oscilador extends React.Component{
  */
 
 export class OscComponents extends Component{
+    constructor(){
+        super();
+        this.oscA = React.createRef();
+        this.oscB = React.createRef();
+    }
+    setOscA(osc){
+        this.oscA.current.setOsc(osc)
+    }
+
+    setOscB(osc){
+        this.oscB.current.setOsc(osc)
+
+    }
     render(){
         return(
             &lt;div&gt;
                 
 
 
-                &lt;Container  &gt;
+                &lt;Container fluid style={{height: &#x27;fit-content&#x27;}}&gt;
                     &lt;Row&gt;
                         &lt;Col className=&quot;oscilador&quot;xs &gt;
-                        &lt;Oscilador osc={&#x27;A&#x27;} /&gt;
+                        &lt;Oscilador osc={&#x27;A&#x27;} ref={this.oscA}/&gt;
                         &lt;/Col&gt;
                         &lt;Col className=&quot;oscilador&quot; xs &gt;
-                        &lt;Oscilador osc={&#x27;B&#x27;}/&gt;
+                        &lt;Oscilador osc={&#x27;B&#x27;} ref={this.oscB}/&gt;
                         &lt;/Col&gt;
                     &lt;/Row&gt;
                 &lt;/Container&gt;

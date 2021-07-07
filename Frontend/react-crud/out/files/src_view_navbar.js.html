@@ -38,25 +38,55 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/Analyser.html">Analyser</a></li>
+                                <li><a href="../classes/Anlyser.html">Anlyser</a></li>
                                 <li><a href="../classes/App.html">App</a></li>
+                                <li><a href="../classes/Delay.html">Delay</a></li>
+                                <li><a href="../classes/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../classes/Effect.html">Effect</a></li>
                                 <li><a href="../classes/Envelope.html">Envelope</a></li>
+                                <li><a href="../classes/Equalizer.html">Equalizer</a></li>
+                                <li><a href="../classes/ErrorPage.html">ErrorPage</a></li>
+                                <li><a href="../classes/Filter.html">Filter</a></li>
+                                <li><a href="../classes/Header.html">Header</a></li>
                                 <li><a href="../classes/Index.html">Index</a></li>
+                                <li><a href="../classes/Library.html">Library</a></li>
                                 <li><a href="../classes/LimitedKnob.html">LimitedKnob</a></li>
+                                <li><a href="../classes/Loader.html">Loader</a></li>
+                                <li><a href="../classes/Login.html">Login</a></li>
+                                <li><a href="../classes/Midi.html">Midi</a></li>
+                                <li><a href="../classes/Modal.html">Modal</a></li>
+                                <li><a href="../classes/ModalDelete.html">ModalDelete</a></li>
+                                <li><a href="../classes/ModalLoad.html">ModalLoad</a></li>
+                                <li><a href="../classes/ModalPassword.html">ModalPassword</a></li>
+                                <li><a href="../classes/ModalSave.html">ModalSave</a></li>
                                 <li><a href="../classes/Navigator.html">Navigator</a></li>
                                 <li><a href="../classes/Oscilador.html">Oscilador</a></li>
                                 <li><a href="../classes/oscillator.html">oscillator</a></li>
                                 <li><a href="../classes/Piano.html">Piano</a></li>
+                                <li><a href="../classes/Profile.html">Profile</a></li>
+                                <li><a href="../classes/Recorder.html">Recorder</a></li>
+                                <li><a href="../classes/Reverb.html">Reverb</a></li>
+                                <li><a href="../classes/Saver.html">Saver</a></li>
+                                <li><a href="../classes/SignUp.html">SignUp</a></li>
                                 <li><a href="../classes/Synth.html">Synth</a></li>
+                                <li><a href="../classes/TableUI.html">TableUI</a></li>
                                 <li><a href="../classes/Voice.html">Voice</a></li>
                             </ul>
                 
                 
                             <ul id="api-modules" class="apis modules">
                                 <li><a href="../modules/App.html">App</a></li>
+                                <li><a href="../modules/Delay.html">Delay</a></li>
+                                <li><a href="../modules/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../modules/Filter.html">Filter</a></li>
+                                <li><a href="../modules/filterTypes.html">filterTypes</a></li>
+                                <li><a href="../modules/FX.html">FX</a></li>
                                 <li><a href="../modules/Knob.html">Knob</a></li>
                                 <li><a href="../modules/Navigator.html">Navigator</a></li>
                                 <li><a href="../modules/OscComponents.html">OscComponents</a></li>
                                 <li><a href="../modules/Piano.html">Piano</a></li>
+                                <li><a href="../modules/Reverb.html">Reverb</a></li>
                                 <li><a href="../modules/synth.html">synth</a></li>
                                 <li><a href="../modules/types.html">types</a></li>
                             </ul>
@@ -101,6 +131,7 @@ import {NavLink, withRouter}  from &#x27;react-router-dom&#x27;
 import {Navbar,Nav} from &#x27;react-bootstrap&#x27;
 import &#x27;bootstrap/dist/css/bootstrap.css&#x27;;
 import &#x27;../css/App.css&#x27;
+import Cookies from &#x27;js-cookie&#x27;;
 
 /**
  * Proporciona la barra de navegación del Frontend
@@ -125,6 +156,23 @@ class Navigator extends React.Component {
     getNavLinkClass = (path) =&gt; {
         return this.props.location.pathname === path ? &#x27;active&#x27; : &#x27;&#x27;;
     }
+
+    isAuthenticated(){
+        if(Cookies.get(&#x27;token&#x27;)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+ 
+    logout(){
+        if(window.confirm(&#x27;¿Estas seguro que quieres salir?, se perderán todos los cambios guardados&#x27;)){
+            Cookies.remove(&#x27;user&#x27;,{path: &#x27;&#x27;})
+            Cookies.remove(&#x27;token&#x27;,{path: &#x27;&#x27;})
+
+            window.location.reload();
+        }
+    }
     /**
     * Método que construlle el componente de la interfaz relativo a el navegador.
     * 
@@ -132,24 +180,52 @@ class Navigator extends React.Component {
     * @returns Código html del componente navegador
     */
     render() {
-        return (
-            
-            &lt;Navbar collapseOnSelect expand=&quot;sm&quot; className=&quot;custom&quot;variant=&quot;dark&quot;&gt; 
-            {
-                //la propiedad expand establece cuando el nav bar se va a colapsar en el boton
-            }
-                &lt;Navbar.Brand href=&quot;#&quot;&gt;Sintetizador&lt;/Navbar.Brand&gt;
-                &lt;Navbar.Toggle aria-controls=&quot;responsive-navbar-nav&quot;&gt;&lt;/Navbar.Toggle&gt;
-                &lt;Navbar.Collapse id=&quot;responsive-navbar-nav&quot;&gt;
 
-                
-                &lt;Nav className=&quot;mr-auto&quot;&gt;
-                    &lt;Nav.Link className={this.getNavLinkClass(&quot;/&quot;)} href=&quot;/&quot;&gt;Osc&lt;/Nav.Link&gt;
-                &lt;/Nav&gt;
+        if(this.isAuthenticated()){
+            return (
             
-                &lt;/Navbar.Collapse&gt;
-            &lt;/Navbar&gt;
-        )
+                &lt;Navbar collapseOnSelect expand=&quot;sm&quot; className=&quot;custom&quot;variant=&quot;dark&quot;&gt; 
+                {
+                    //la propiedad expand establece cuando el nav bar se va a colapsar en el boton
+                }
+                    &lt;Navbar.Brand href=&quot;/&quot;&gt;Sintetizador&lt;/Navbar.Brand&gt;
+                    &lt;Navbar.Toggle aria-controls=&quot;responsive-navbar-nav&quot;&gt;&lt;/Navbar.Toggle&gt;
+                    &lt;Navbar.Collapse id=&quot;responsive-navbar-nav&quot;&gt;
+    
+                    
+                    &lt;Nav className=&quot;mr-auto&quot;&gt;
+                        &lt;Nav.Link className={this.getNavLinkClass(&quot;/profile&quot;)} href=&quot;/profile&quot; &gt;Perfil&lt;/Nav.Link&gt;
+                        &lt;Nav.Link className={this.getNavLinkClass(&quot;#&quot;)} onClick={()=&gt;this.logout()}&gt;Logout&lt;/Nav.Link&gt;
+
+
+                    &lt;/Nav&gt;
+                
+                    &lt;/Navbar.Collapse&gt;
+                &lt;/Navbar&gt;
+            )
+        }else{
+            return (
+            
+                &lt;Navbar collapseOnSelect expand=&quot;sm&quot; className=&quot;custom&quot;variant=&quot;dark&quot;&gt; 
+                {
+                    //la propiedad expand establece cuando el nav bar se va a colapsar en el boton
+                }
+                    &lt;Navbar.Brand href=&quot;/&quot;&gt;Sintetizador&lt;/Navbar.Brand&gt;
+                    &lt;Navbar.Toggle aria-controls=&quot;responsive-navbar-nav&quot;&gt;&lt;/Navbar.Toggle&gt;
+                    &lt;Navbar.Collapse id=&quot;responsive-navbar-nav&quot;&gt;
+    
+                    
+                    &lt;Nav className=&quot;mr-auto&quot;&gt;
+                        &lt;Nav.Link className={this.getNavLinkClass(&quot;/login&quot;)} href=&#x27;/&#x27; &gt;Login&lt;/Nav.Link&gt;
+                        &lt;Nav.Link className={this.getNavLinkClass(&quot;/singup&quot;)} href=&quot;/signup&quot;&gt;Registro&lt;/Nav.Link&gt;
+
+                    &lt;/Nav&gt;
+                
+                    &lt;/Navbar.Collapse&gt;
+                &lt;/Navbar&gt;
+            )
+        }
+        
     }
 };
 Navigator = withRouter(Navigator);

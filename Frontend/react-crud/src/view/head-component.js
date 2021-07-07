@@ -13,7 +13,12 @@ import 'bootstrap/dist/css/bootstrap.css';
 import '../css/header.css';
 import { sinte } from './osc-components';
 
-
+/**
+ * Clase que proporciona el componente para los efectos
+ * 
+ * @class Header
+ * @constructor
+ */
 class Header extends React.Component{
     constructor(props){
         super();
@@ -30,6 +35,11 @@ class Header extends React.Component{
     
     }
     
+    /**
+     * Comprueba si los osciladores estan encendidos
+     * 
+     * @method checkOscillators
+     */
     checkOscillators(){
         this.state.A = this.getAvailable('A');
         this.state.B = this.getAvailable('B');
@@ -41,6 +51,12 @@ class Header extends React.Component{
             sinte.offOscillator('B');
         }
     }
+
+    /**
+     * Muestra un modal
+     * 
+     * @method showModal
+     */
     showModal(){
         this.checkOscillators();
         document.getElementById("backdrop").style.display = "block"
@@ -48,34 +64,82 @@ class Header extends React.Component{
         document.getElementById("modal").className += "show"
     }
 
+    /**
+     * Getter del estado del componente 
+     * 
+     * @method getState
+     * @returns {Object} estado
+     */
     getState = ()=>{
         return this.state
     }
-
+    /**
+     * Devuelve si esta encendido el oscilador pasado como parametro
+     * 
+     * @method getAvailable
+     * @param {Char} Id Identificador
+     * @returns {Boolean} estado
+     */
     getAvailable = (osc)=>{
         return sinte.getAvailable(osc)
     }
 
+    /**
+     * Setter del nombre del sonido cargado
+     * 
+     * @method setName
+     * @param {string} name 
+     */
     setName(name){
         document.getElementById('sound-charged').innerText = name;
     }
+    /**
+     * Indica al padre que tiene que enseñar el layer de osciladores
+     * 
+     * @method showOsc
+     */
     showOsc(){
        this.props.showOsc()
     }
+    /**
+     * Indica al padre que tiene que enseñar el layer de efectos
+     * 
+     * @method showOsc
+     */
     showFX(){
         this.props.showFX()
     }
+    /**
+     * Indica al padre que tiene que enseñar el layer de tabla de sonidos
+     * 
+     * @method showLb
+     */
     showLb(){
         this.props.showLb()
     }
-
+    /**
+     * Indica al padre que tiene que enseñar el layer de EQ
+     * 
+     * @method showEQ
+     */
     showEQ(){
         this.props.showEQ()
     }
+    /**
+     * Indica al padre que tiene que actualizar la tabla de sonidos
+     * 
+     * @method updateTable
+     */
     updateTable = ( )=>{
         this.props.parentCallback();
     }
 
+    /**
+     * Gestiona los botones de grabación y manda el mensaje correspondiente a la fachada
+     * 
+     * @method rec
+     * @param {string} state  botón pulsado
+     */
     rec(state){
         if(state === 'pause'){
             document.getElementById('restart').style.display = '';
@@ -100,6 +164,14 @@ class Header extends React.Component{
         }
         sinte.rec(state)
     }
+
+    /**
+     * Método que devuelve el componente Header para ser renderizado
+     * 
+     * @method render
+     * @return Código html del componente Header
+     * 
+     */
     render(){
         return(
             <Container fluid>

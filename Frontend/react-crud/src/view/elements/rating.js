@@ -24,6 +24,13 @@ const labels = {
     },
   });
   
+  /**
+   * Representa el componente para el rating
+   * 
+   * @function HoverRating
+   * @param {Object} props 
+   * @returns {JSX} JSX para el renderizado
+   */
   export default function HoverRating(props) {
     var val 
     var disabled = false

@@ -38,25 +38,55 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/Analyser.html">Analyser</a></li>
+                                <li><a href="../classes/Anlyser.html">Anlyser</a></li>
                                 <li><a href="../classes/App.html">App</a></li>
+                                <li><a href="../classes/Delay.html">Delay</a></li>
+                                <li><a href="../classes/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../classes/Effect.html">Effect</a></li>
                                 <li><a href="../classes/Envelope.html">Envelope</a></li>
+                                <li><a href="../classes/Equalizer.html">Equalizer</a></li>
+                                <li><a href="../classes/ErrorPage.html">ErrorPage</a></li>
+                                <li><a href="../classes/Filter.html">Filter</a></li>
+                                <li><a href="../classes/Header.html">Header</a></li>
                                 <li><a href="../classes/Index.html">Index</a></li>
+                                <li><a href="../classes/Library.html">Library</a></li>
                                 <li><a href="../classes/LimitedKnob.html">LimitedKnob</a></li>
+                                <li><a href="../classes/Loader.html">Loader</a></li>
+                                <li><a href="../classes/Login.html">Login</a></li>
+                                <li><a href="../classes/Midi.html">Midi</a></li>
+                                <li><a href="../classes/Modal.html">Modal</a></li>
+                                <li><a href="../classes/ModalDelete.html">ModalDelete</a></li>
+                                <li><a href="../classes/ModalLoad.html">ModalLoad</a></li>
+                                <li><a href="../classes/ModalPassword.html">ModalPassword</a></li>
+                                <li><a href="../classes/ModalSave.html">ModalSave</a></li>
                                 <li><a href="../classes/Navigator.html">Navigator</a></li>
                                 <li><a href="../classes/Oscilador.html">Oscilador</a></li>
                                 <li><a href="../classes/oscillator.html">oscillator</a></li>
                                 <li><a href="../classes/Piano.html">Piano</a></li>
+                                <li><a href="../classes/Profile.html">Profile</a></li>
+                                <li><a href="../classes/Recorder.html">Recorder</a></li>
+                                <li><a href="../classes/Reverb.html">Reverb</a></li>
+                                <li><a href="../classes/Saver.html">Saver</a></li>
+                                <li><a href="../classes/SignUp.html">SignUp</a></li>
                                 <li><a href="../classes/Synth.html">Synth</a></li>
+                                <li><a href="../classes/TableUI.html">TableUI</a></li>
                                 <li><a href="../classes/Voice.html">Voice</a></li>
                             </ul>
                 
                 
                             <ul id="api-modules" class="apis modules">
                                 <li><a href="../modules/App.html">App</a></li>
+                                <li><a href="../modules/Delay.html">Delay</a></li>
+                                <li><a href="../modules/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../modules/Filter.html">Filter</a></li>
+                                <li><a href="../modules/filterTypes.html">filterTypes</a></li>
+                                <li><a href="../modules/FX.html">FX</a></li>
                                 <li><a href="../modules/Knob.html">Knob</a></li>
                                 <li><a href="../modules/Navigator.html">Navigator</a></li>
                                 <li><a href="../modules/OscComponents.html">OscComponents</a></li>
                                 <li><a href="../modules/Piano.html">Piano</a></li>
+                                <li><a href="../modules/Reverb.html">Reverb</a></li>
                                 <li><a href="../modules/synth.html">synth</a></li>
                                 <li><a href="../modules/types.html">types</a></li>
                             </ul>
@@ -126,6 +156,41 @@ class Envelope extends React.Component{
         super();
         this.#osc = props.osc
         
+        this.attack = React.createRef();
+        this.sustain = React.createRef();
+        this.release = React.createRef();
+        this.decay = React.createRef();
+        
+        this.setEnvelope = this.setEnvelope.bind(this);
+
+    }
+
+    /**
+     * Método que establece nuevos valores para los parámetros de 
+     * la envolvente
+     * 
+     * @method setEnvelope
+     * @param {JSON} envelope 
+     */
+    setEnvelope(envelope){
+        //Hacemos la inversa para tener los valores correctos de los knobs
+        var attack = (envelope.attack * 100) / 2;
+        var decay = (envelope.decay * 100) / 2;
+        var sustain = envelope.sustain *100;
+        var release = envelope.release * 100 / 5;
+        
+    /*  //DEBUG
+        console.log( envelope)
+        console.log(&#x27;Attack: &#x27; +attack)
+        console.log(&#x27;Decay: &#x27; + decay)
+        console.log(&#x27;Sustain: &#x27; + sustain)
+        console.log(&#x27;Release: &#x27; + release)
+    */
+
+        this.attack.current.setEnvelope(&#x27;attack&#x27;,attack)
+        this.release.current.setEnvelope(&#x27;release&#x27;,release)
+        this.decay.current.setEnvelope(&#x27;decay&#x27;, decay)
+        this.sustain.current.setEnvelope(&#x27;sustain&#x27;,sustain)
     }
 
     /**
@@ -141,13 +206,6 @@ class Envelope extends React.Component{
                 &lt;Row&gt; 
                     &lt;Col&gt;
                         &lt;p&gt;Attack&lt;/p&gt;
-                    &lt;/Col&gt;
-                    &lt;Col&gt;
-                        &lt;p&gt;Release&lt;/p&gt;
-                    &lt;/Col&gt;
-                &lt;/Row&gt;
-                &lt;Row &gt;
-                    &lt;Col &gt;
                         &lt;Knob
                               style={{ display: &quot;inline-block&quot; }}
                               min={0}
@@ -159,12 +217,12 @@ class Envelope extends React.Component{
                               type={knobTypes.ATTACK}
                               osc = {this.#osc}
                               val= {0}
+                              ref={this.attack}
                         /&gt;
 
-                        
                     &lt;/Col&gt;
-
                     &lt;Col&gt;
+                        &lt;p&gt;Release&lt;/p&gt;
                         &lt;Knob
                               style={{ display: &quot;inline-block&quot; }}
                               min={0}
@@ -176,20 +234,12 @@ class Envelope extends React.Component{
                               type={knobTypes.RELEASE}
                               osc = {this.#osc}
                               val = {50}
+                              ref={this.release}
                         /&gt;
                     &lt;/Col&gt;
-                &lt;/Row&gt;
-                &lt;Row&gt;
+
                     &lt;Col&gt;
                         &lt;p&gt;Decay&lt;/p&gt;
-                    &lt;/Col&gt;
-                    &lt;Col&gt;
-                        &lt;p&gt;Sustain&lt;/p&gt;
-                    &lt;/Col&gt;
-                &lt;/Row&gt;
-
-                &lt;Row &gt;
-                    &lt;Col &gt;
                         &lt;Knob
                               style={{ display: &quot;inline-block&quot; }}
                               min={0}
@@ -201,12 +251,11 @@ class Envelope extends React.Component{
                               type={knobTypes.DECAY}
                               osc = {this.#osc}
                               val= {30}
+                              ref={this.decay}
                         /&gt;
-
-                        
                     &lt;/Col&gt;
-
                     &lt;Col&gt;
+                        &lt;p&gt;Sustain&lt;/p&gt;
                         &lt;Knob
                               style={{ display: &quot;inline-block&quot; }}
                               min={0}
@@ -218,6 +267,7 @@ class Envelope extends React.Component{
                               type={knobTypes.SUSTAIN}
                               osc = {this.#osc}
                               val = {50}
+                              ref = {this.sustain}
                         /&gt;
                     &lt;/Col&gt;
                 &lt;/Row&gt;

@@ -146,6 +146,12 @@ class Oscilador extends React.Component{
  
     }
 
+    /**
+     * Setter del estado del oscilador
+     * 
+     * @method setOsc
+     * @param {Objetc} osc 
+     */
     setOsc(osc){
         var on = osc.oscOn;
         var pan = osc.pan;

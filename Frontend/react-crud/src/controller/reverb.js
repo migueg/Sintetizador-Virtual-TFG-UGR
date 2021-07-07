@@ -7,9 +7,9 @@ import {Filter} from './filter';
  *
  * @class Distorsion
  * @constructor
- * @param {Object} context AudioContext
- * @param {Object} input Nodo de entrada sobre el que se aplica el efecto
- * @param {Object} output Node de salida con el efecto aplicado
+ * @param {BaseAudioContext} context AudioContext
+ * @param {AudioNode} input Nodo de entrada sobre el que se aplica el efecto
+ * @param {AudioNode} output Node de salida con el efecto aplicado
  * @see Effect
  */
 
@@ -25,7 +25,7 @@ import {Filter} from './filter';
  * Nodo de ganancia auxiliar
  * 
  * @property gainAux
- * @type Object
+ * @type AudioNode
  * @private
  */
 
@@ -33,7 +33,7 @@ import {Filter} from './filter';
  * Nodo de ganancia para el filtro
  * 
  * @property gainFilter
- * @type Object
+ * @type AudioNode
  * @private
  */
 

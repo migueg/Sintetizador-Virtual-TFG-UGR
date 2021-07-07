@@ -18,9 +18,9 @@ const types = {
  *
  * @class Filter
  * @constructor
- * @param {Object} context AudioContext
- * @param {Object} input Nodo de entrada sobre el que se aplica el efecto
- * @param {Object} output Node de salida con el efecto aplicado
+ * @param {BaseAudioContext} context AudioContext
+ * @param {AudioNode} input Nodo de entrada sobre el que se aplica el efecto
+ * @param {AudioNode} output Node de salida con el efecto aplicado
  * @param {String} type Tipo de filtro
  * @see Effect
  */

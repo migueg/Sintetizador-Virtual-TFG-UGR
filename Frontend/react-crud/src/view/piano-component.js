@@ -28,7 +28,7 @@ import '../css/piano.css';
  * Lista de las teclas presionadas por el usuario
  * 
  * @property pressedKeys 
- * @type JSON
+ * @type Object
  * 
  */
 
@@ -36,7 +36,7 @@ import '../css/piano.css';
  * Lista con las notas y sus frecuencias
  * 
  * @property notes 
- * @type JSON
+ * @type Object
  * 
  */
 

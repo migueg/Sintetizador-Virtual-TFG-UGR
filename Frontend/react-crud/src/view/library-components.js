@@ -5,6 +5,12 @@ import Table from './elements/table';
 
 import 'bootstrap/dist/css/bootstrap.css';
 
+/**
+ * Clase que proporciona el layer de la tabla de sonidos
+ * 
+ * @class Library
+ * @constructor
+ */
 class Libary extends React.Component{
     constructor(){
         super();
@@ -17,15 +23,31 @@ class Libary extends React.Component{
         this.newState = {}
     }
 
+    /**
+     * Indica al hijo que debe actualizar la tabla
+     * 
+     * @method updateTable
+     */
     updateTable(){
        this.child.current.updateTable();
     }
     
+    /**
+     * Obtiene el nuevo estado y se lo pasa al padre
+     * 
+     * @returns {Object} datos del sonido
+     */
     loadSound(){
         this.newState = this.child.current.newState;
         return this.props.parentCallback();
     }
-
+    /**
+     * Método que devuelve el componente Library para ser renderizado
+     * 
+     * @method render
+     * @return Código html del componente Library
+     * 
+     */
     render(){
         return(
         <div  className="LB">

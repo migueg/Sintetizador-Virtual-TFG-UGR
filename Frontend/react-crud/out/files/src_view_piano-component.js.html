@@ -38,25 +38,55 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/Analyser.html">Analyser</a></li>
+                                <li><a href="../classes/Anlyser.html">Anlyser</a></li>
                                 <li><a href="../classes/App.html">App</a></li>
+                                <li><a href="../classes/Delay.html">Delay</a></li>
+                                <li><a href="../classes/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../classes/Effect.html">Effect</a></li>
                                 <li><a href="../classes/Envelope.html">Envelope</a></li>
+                                <li><a href="../classes/Equalizer.html">Equalizer</a></li>
+                                <li><a href="../classes/ErrorPage.html">ErrorPage</a></li>
+                                <li><a href="../classes/Filter.html">Filter</a></li>
+                                <li><a href="../classes/Header.html">Header</a></li>
                                 <li><a href="../classes/Index.html">Index</a></li>
+                                <li><a href="../classes/Library.html">Library</a></li>
                                 <li><a href="../classes/LimitedKnob.html">LimitedKnob</a></li>
+                                <li><a href="../classes/Loader.html">Loader</a></li>
+                                <li><a href="../classes/Login.html">Login</a></li>
+                                <li><a href="../classes/Midi.html">Midi</a></li>
+                                <li><a href="../classes/Modal.html">Modal</a></li>
+                                <li><a href="../classes/ModalDelete.html">ModalDelete</a></li>
+                                <li><a href="../classes/ModalLoad.html">ModalLoad</a></li>
+                                <li><a href="../classes/ModalPassword.html">ModalPassword</a></li>
+                                <li><a href="../classes/ModalSave.html">ModalSave</a></li>
                                 <li><a href="../classes/Navigator.html">Navigator</a></li>
                                 <li><a href="../classes/Oscilador.html">Oscilador</a></li>
                                 <li><a href="../classes/oscillator.html">oscillator</a></li>
                                 <li><a href="../classes/Piano.html">Piano</a></li>
+                                <li><a href="../classes/Profile.html">Profile</a></li>
+                                <li><a href="../classes/Recorder.html">Recorder</a></li>
+                                <li><a href="../classes/Reverb.html">Reverb</a></li>
+                                <li><a href="../classes/Saver.html">Saver</a></li>
+                                <li><a href="../classes/SignUp.html">SignUp</a></li>
                                 <li><a href="../classes/Synth.html">Synth</a></li>
+                                <li><a href="../classes/TableUI.html">TableUI</a></li>
                                 <li><a href="../classes/Voice.html">Voice</a></li>
                             </ul>
                 
                 
                             <ul id="api-modules" class="apis modules">
                                 <li><a href="../modules/App.html">App</a></li>
+                                <li><a href="../modules/Delay.html">Delay</a></li>
+                                <li><a href="../modules/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../modules/Filter.html">Filter</a></li>
+                                <li><a href="../modules/filterTypes.html">filterTypes</a></li>
+                                <li><a href="../modules/FX.html">FX</a></li>
                                 <li><a href="../modules/Knob.html">Knob</a></li>
                                 <li><a href="../modules/Navigator.html">Navigator</a></li>
                                 <li><a href="../modules/OscComponents.html">OscComponents</a></li>
                                 <li><a href="../modules/Piano.html">Piano</a></li>
+                                <li><a href="../modules/Reverb.html">Reverb</a></li>
                                 <li><a href="../modules/synth.html">synth</a></li>
                                 <li><a href="../modules/types.html">types</a></li>
                             </ul>
@@ -99,6 +129,8 @@
 import  React from &#x27;react&#x27;;
 import {sinte} from &#x27;./osc-components&#x27;;
 import $ from &#x27;jquery&#x27;;
+
+
 import &#x27;bootstrap/dist/css/bootstrap.css&#x27;;
 import &#x27;../css/piano.css&#x27;;
 
@@ -124,7 +156,7 @@ import &#x27;../css/piano.css&#x27;;
  * Lista de las teclas presionadas por el usuario
  * 
  * @property pressedKeys 
- * @type JSON
+ * @type Object
  * 
  */
 
@@ -132,7 +164,7 @@ import &#x27;../css/piano.css&#x27;;
  * Lista con las notas y sus frecuencias
  * 
  * @property notes 
- * @type JSON
+ * @type Object
  * 
  */
 
@@ -144,6 +176,7 @@ class Piano extends React.Component{
         this.pressedKeys = {}
         this.notes = this.fetchNotes();
 
+        
     }
     //METODOS PRIVADOS 
 
@@ -157,11 +190,12 @@ class Piano extends React.Component{
      * @private
      */
       __playNote(oct , key){
+        var octave;
         if(oct === &#x27;down&#x27; || oct=== &#x27;up&#x27;){
             
             if(oct === &#x27;down&#x27;){
                 
-                var octave = this.#octave + 1;
+                 octave = this.#octave + 1;
                 
                 if(octave === 7 ){
                     octave = 6;
@@ -169,14 +203,15 @@ class Piano extends React.Component{
             }
     
             if(oct === &#x27;up&#x27;){
-                var octave = this.#octave + 2
+                 octave = this.#octave + 2
                
                     if(octave === 8){
                         octave = 7;
                     }
             }
     
-            key = key + octave
+            key = key + octave 
+            
             sinte.playNote(this.notes[key])
       
             
@@ -184,6 +219,10 @@ class Piano extends React.Component{
         
     }
 
+    componentDidMount(){
+        document.getElementById(&#x27;up&#x27;).click()
+
+    }
     //MÉTODOS PUBLICOS
 
     /**
@@ -198,7 +237,9 @@ class Piano extends React.Component{
         .then((data) =&gt; {
             this.notes = data.notes[0];
         })
-        .catch(console.log)
+        .catch(function(error){
+            throw error;
+        })
         
     }
 
@@ -255,7 +296,8 @@ class Piano extends React.Component{
         }else{
             this.#octave += 2;
         }
-        
+   
+        sinte.setOctave(this.#octave)
         this.changeHtmlNotes();
      
     }
@@ -271,6 +313,7 @@ class Piano extends React.Component{
         }else{
             this.#octave -= 2;
         }
+        sinte.setOctave(this.#octave)
 
         this.changeHtmlNotes();
     }
@@ -290,10 +333,11 @@ class Piano extends React.Component{
     
        if(e.nodeName === &#x27;LI&#x27;){
             //(e.textContent)
-            if(e.className != &quot;white&quot; &amp;&amp; e.className != &quot;black&quot; ){
+            var key;
+            if(e.className !== &quot;white&quot; &amp;&amp; e.className !== &quot;black&quot; ){
                 
                 
-                var key =  e.id.split(&quot;1&quot;) 
+                 key =  e.id.split(&quot;1&quot;) 
                 
                 
                 this.__playNote(&#x27;up&#x27;, key[0]);
@@ -301,7 +345,7 @@ class Piano extends React.Component{
             }else{
                
      
-                var key =  e.id 
+                 key =  e.id 
             
                 this.__playNote(&#x27;down&#x27;, key);
             }
@@ -326,6 +370,7 @@ class Piano extends React.Component{
         if(octave === &#x27;up&#x27;){
             aux = note + &#x27;1&#x27;;
         }
+            //Se activa el elemento HTML de la nota para emular que se ha pulsado una nota
             if(type === &#x27;white&#x27;){  
                 document.getElementById(aux).classList.toggle(&#x27;white-active&#x27;);
  
@@ -348,12 +393,13 @@ class Piano extends React.Component{
 
     render(){
         return(
-        &lt;div className=&quot;piano&quot;&gt;
+        &lt;div className=&quot;piano-container&quot;&gt;
            
             &lt;ul className=&quot;notes&quot;&gt;
                 &lt;div className=&quot;octaves&quot;&gt;
                     &lt;button id=&#x27;down&#x27; onClick={()=&gt;{this.downOctave()}} &gt;Down&lt;/button&gt;
                     &lt;button id=&#x27;up&#x27; onClick={()=&gt;{this.upOctave()}}&gt;UP&lt;/button&gt;
+                    
                 &lt;/div&gt;
                 &lt;li className=&quot;white&quot; id=&quot;C&quot; name = &quot;first&quot; onClick={()=&gt;{this.notePlayed()}}&gt;&lt;p&gt;C1&lt;/p&gt;&lt;/li&gt;
                 &lt;li className=&quot;black&quot; id=&quot;C#&quot;onClick={()=&gt;{this.notePlayed()}}&gt;&lt;p&gt;C#1&lt;/p&gt;&lt;/li&gt;
@@ -485,10 +531,11 @@ class Piano extends React.Component{
                                 this.handleKeydownEvent(&#x27;black&#x27;,&#x27;A#&#x27;,keyName,&#x27;up&#x27;);
                             break;
                         case &#x27;u&#x27;:
-                            if(!this.pressedKeys[&#x27;d&#x27;])
+                            if(!this.pressedKeys[&#x27;u&#x27;])
                                 this.handleKeydownEvent(&#x27;white&#x27;,&#x27;B&#x27;,keyName,&#x27;up&#x27;);
                             break;
-                     
+                        default:
+                            break;
                          
                      }
                     
@@ -580,6 +627,8 @@ class Piano extends React.Component{
                             break;
                         case &#x27;u&#x27;:
                             $(&#x27;#B1&#x27;).removeClass(&#x27;white-active&#x27;);
+                            break;
+                        default:
                             break;
                     }
                 })

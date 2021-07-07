@@ -38,25 +38,55 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/Analyser.html">Analyser</a></li>
+                                <li><a href="../classes/Anlyser.html">Anlyser</a></li>
                                 <li><a href="../classes/App.html">App</a></li>
+                                <li><a href="../classes/Delay.html">Delay</a></li>
+                                <li><a href="../classes/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../classes/Effect.html">Effect</a></li>
                                 <li><a href="../classes/Envelope.html">Envelope</a></li>
+                                <li><a href="../classes/Equalizer.html">Equalizer</a></li>
+                                <li><a href="../classes/ErrorPage.html">ErrorPage</a></li>
+                                <li><a href="../classes/Filter.html">Filter</a></li>
+                                <li><a href="../classes/Header.html">Header</a></li>
                                 <li><a href="../classes/Index.html">Index</a></li>
+                                <li><a href="../classes/Library.html">Library</a></li>
                                 <li><a href="../classes/LimitedKnob.html">LimitedKnob</a></li>
+                                <li><a href="../classes/Loader.html">Loader</a></li>
+                                <li><a href="../classes/Login.html">Login</a></li>
+                                <li><a href="../classes/Midi.html">Midi</a></li>
+                                <li><a href="../classes/Modal.html">Modal</a></li>
+                                <li><a href="../classes/ModalDelete.html">ModalDelete</a></li>
+                                <li><a href="../classes/ModalLoad.html">ModalLoad</a></li>
+                                <li><a href="../classes/ModalPassword.html">ModalPassword</a></li>
+                                <li><a href="../classes/ModalSave.html">ModalSave</a></li>
                                 <li><a href="../classes/Navigator.html">Navigator</a></li>
                                 <li><a href="../classes/Oscilador.html">Oscilador</a></li>
                                 <li><a href="../classes/oscillator.html">oscillator</a></li>
                                 <li><a href="../classes/Piano.html">Piano</a></li>
+                                <li><a href="../classes/Profile.html">Profile</a></li>
+                                <li><a href="../classes/Recorder.html">Recorder</a></li>
+                                <li><a href="../classes/Reverb.html">Reverb</a></li>
+                                <li><a href="../classes/Saver.html">Saver</a></li>
+                                <li><a href="../classes/SignUp.html">SignUp</a></li>
                                 <li><a href="../classes/Synth.html">Synth</a></li>
+                                <li><a href="../classes/TableUI.html">TableUI</a></li>
                                 <li><a href="../classes/Voice.html">Voice</a></li>
                             </ul>
                 
                 
                             <ul id="api-modules" class="apis modules">
                                 <li><a href="../modules/App.html">App</a></li>
+                                <li><a href="../modules/Delay.html">Delay</a></li>
+                                <li><a href="../modules/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../modules/Filter.html">Filter</a></li>
+                                <li><a href="../modules/filterTypes.html">filterTypes</a></li>
+                                <li><a href="../modules/FX.html">FX</a></li>
                                 <li><a href="../modules/Knob.html">Knob</a></li>
                                 <li><a href="../modules/Navigator.html">Navigator</a></li>
                                 <li><a href="../modules/OscComponents.html">OscComponents</a></li>
                                 <li><a href="../modules/Piano.html">Piano</a></li>
+                                <li><a href="../modules/Reverb.html">Reverb</a></li>
                                 <li><a href="../modules/synth.html">synth</a></li>
                                 <li><a href="../modules/types.html">types</a></li>
                             </ul>
@@ -109,21 +139,21 @@ import Voice from &#x27;./voice&#x27;;
 /**
  * Contexto de audio para la aplicación de la Web Audio API
  * @property audioCtx
- * @type Object
+ * @type BaseAudioContext
  * @private
  */
 
 /**
  * Nodo de ganancia del oscilador para controlar el volumen de este
  * @property gainNode
- * @type Object
+ * @type AudioNode
  * @private
  */
 
 /**
  * Guarda los valores de la envolvente
  * @property envelope
- * @type JSON
+ * @type Object
  * @private
  */
 
@@ -144,7 +174,18 @@ import Voice from &#x27;./voice&#x27;;
 /**
  * Contiene una instancia de la clase Voice para lograr la polifonia
  * @property voice
- * @type Object
+ * @type AudioNode
+ */
+
+/**
+ * Nodo que se encarga del paneo del oscilador
+ * @property #panNode
+ * @type AudioNode
+ */
+/**
+ * Glag para controlar que el oscilador esa marcado
+ * @property checked
+ * @type Boolean
  */
 class oscillator  {
    #audioCtx 
@@ -152,25 +193,36 @@ class oscillator  {
    #envelope // envolvente del sonido
    #volume
    #available
-  
+   #panNode
+   #checked
  
 
- constructor(){
-   this.#audioCtx = new window.AudioContext ()
+ constructor(master,context,cleanNode){
+   //this.#audioCtx = new window.AudioContext ()
+   this.#audioCtx = context
    this.#envelope = {
       attack : 0,
       decay: 0.6,
       sustain: 0.5,
       release: 2.5
    }
-      
+
    this.#gainNode = this.#audioCtx.createGain();
-  
+   
    this.#volume = 0;
    this.#available = false;
+   this.#checked = false;
    this.#gainNode.gain.value = 0;
 
-   this.#gainNode.connect(this.#audioCtx.destination);
+  
+   this.#gainNode.connect(cleanNode);
+   //this.#gainNode.connect(this.#audioCtx.destination);
+   
+   this.#panNode = this.#audioCtx.createStereoPanner();
+   this.#panNode.pan.value = 0;
+   this.#gainNode.connect(this.#panNode);
+   this.#panNode.connect(master);
+
    this.voice = new Voice(&#x27;sine&#x27;,this.#audioCtx, this.#envelope,this.#gainNode);
 
  
@@ -178,6 +230,7 @@ class oscillator  {
     
  }
 
+ 
 
  /**
   * Método que enciende el oscilador
@@ -195,6 +248,7 @@ class oscillator  {
   */
 
  offOscillator(){
+   
     this.#available = false;
     this.#gainNode.gain.value = 0;
  }
@@ -204,7 +258,7 @@ class oscillator  {
   * como argumento
   * 
   * @method play
-  * @param {String} key Nota
+  * @param {String} key Frecuencia
   */
 
  play(key){
@@ -214,11 +268,79 @@ class oscillator  {
    if(this.#available ){
       this.#gainNode.gain.value = this.#volume
       
-      this.voice.start(key,this.#gainNode.gain.value)
-
-    
       
+      this.voice.start(key,this.#gainNode.gain.value)
+    
    }
+ }
+
+ //GETTERS
+ /**
+  * Getter de la disponibilidad del oscilador
+  * 
+  * @method getAvailable
+  * @returns Boolean
+  */
+  getAvailable(){
+     return this.#available;
+  }
+
+  /**
+  * Getter del flag checked
+  * 
+  * @method getChecked
+  * @returns Boolean
+  */
+  getChecked(){
+     return this.#checked;
+  }
+
+  /**
+   * Getter de la envolvente
+   * 
+   * @method getEnvelope
+   * @returns JSON
+   */
+  getEnvelope(){
+     return this.voice.getEnvelope();
+  }
+
+  /**
+   * Getter del estado
+   * 
+   * @method getState
+   * @returns JSON
+   */
+  getState(){
+     var state = {};
+     state[&#x27;pan&#x27;] = this.#panNode.pan.value;
+     state[&#x27;on&#x27;] = this.#checked;
+     state[&#x27;gain&#x27;] = this.#volume;
+     state[&#x27;wave&#x27;] = this.voice.getType();
+
+     return state;
+
+  }
+  
+ //SETTERS
+
+/**
+ * Setter del flag checked
+ * 
+ * @method setChecked
+ * @param {Boolean} c valor
+ */
+ setChecked(c){
+   this.#checked = c;
+ }
+ /**
+  * Setter del nivel de paneo del oscilador, -1 izquierda, +1 derecha.
+  * 
+  * @method setPan
+  * @param {Float} value valor de paneo
+  */
+ setPan(value){
+    this.#panNode.pan.value = value;
  }
 
  /**
@@ -228,7 +350,7 @@ class oscillator  {
   * @param {String} wave Onda
   */
  setWave(wave){
-  
+    
     this.voice.setType(wave);
  }
  

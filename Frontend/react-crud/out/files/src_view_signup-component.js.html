@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src\view\signup-component.js</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/Analyser.html">Analyser</a></li>
+                                <li><a href="../classes/Anlyser.html">Anlyser</a></li>
+                                <li><a href="../classes/App.html">App</a></li>
+                                <li><a href="../classes/Delay.html">Delay</a></li>
+                                <li><a href="../classes/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../classes/Effect.html">Effect</a></li>
+                                <li><a href="../classes/Envelope.html">Envelope</a></li>
+                                <li><a href="../classes/Equalizer.html">Equalizer</a></li>
+                                <li><a href="../classes/ErrorPage.html">ErrorPage</a></li>
+                                <li><a href="../classes/Filter.html">Filter</a></li>
+                                <li><a href="../classes/Header.html">Header</a></li>
+                                <li><a href="../classes/Index.html">Index</a></li>
+                                <li><a href="../classes/Library.html">Library</a></li>
+                                <li><a href="../classes/LimitedKnob.html">LimitedKnob</a></li>
+                                <li><a href="../classes/Loader.html">Loader</a></li>
+                                <li><a href="../classes/Login.html">Login</a></li>
+                                <li><a href="../classes/Midi.html">Midi</a></li>
+                                <li><a href="../classes/Modal.html">Modal</a></li>
+                                <li><a href="../classes/ModalDelete.html">ModalDelete</a></li>
+                                <li><a href="../classes/ModalLoad.html">ModalLoad</a></li>
+                                <li><a href="../classes/ModalPassword.html">ModalPassword</a></li>
+                                <li><a href="../classes/ModalSave.html">ModalSave</a></li>
+                                <li><a href="../classes/Navigator.html">Navigator</a></li>
+                                <li><a href="../classes/Oscilador.html">Oscilador</a></li>
+                                <li><a href="../classes/oscillator.html">oscillator</a></li>
+                                <li><a href="../classes/Piano.html">Piano</a></li>
+                                <li><a href="../classes/Profile.html">Profile</a></li>
+                                <li><a href="../classes/Recorder.html">Recorder</a></li>
+                                <li><a href="../classes/Reverb.html">Reverb</a></li>
+                                <li><a href="../classes/Saver.html">Saver</a></li>
+                                <li><a href="../classes/SignUp.html">SignUp</a></li>
+                                <li><a href="../classes/Synth.html">Synth</a></li>
+                                <li><a href="../classes/TableUI.html">TableUI</a></li>
+                                <li><a href="../classes/Voice.html">Voice</a></li>
+                            </ul>
+                
+                
+                            <ul id="api-modules" class="apis modules">
+                                <li><a href="../modules/App.html">App</a></li>
+                                <li><a href="../modules/Delay.html">Delay</a></li>
+                                <li><a href="../modules/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../modules/Filter.html">Filter</a></li>
+                                <li><a href="../modules/filterTypes.html">filterTypes</a></li>
+                                <li><a href="../modules/FX.html">FX</a></li>
+                                <li><a href="../modules/Knob.html">Knob</a></li>
+                                <li><a href="../modules/Navigator.html">Navigator</a></li>
+                                <li><a href="../modules/OscComponents.html">OscComponents</a></li>
+                                <li><a href="../modules/Piano.html">Piano</a></li>
+                                <li><a href="../modules/Reverb.html">Reverb</a></li>
+                                <li><a href="../modules/synth.html">synth</a></li>
+                                <li><a href="../modules/types.html">types</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1 class="file-heading">File: src\view\signup-component.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+import React from &#x27;react&#x27;
+import  {Container} from &#x27;react-bootstrap&#x27;;
+import &#x27;bootstrap/dist/css/bootstrap.css&#x27;;
+import portada from &#x27;../img/portada.jpg&#x27;;
+import success from &#x27;../img/success.png&#x27;;
+import failure from &#x27;../img/failure.png&#x27;;
+
+
+
+import &#x27;../css/login.css&#x27;;
+import &#x27;../css/loader.css&#x27;;
+
+/**
+ * Proporciona el componente para el registro
+ * @class SignUp
+ * @constructor 
+ */
+
+class SignUp extends React.Component{
+    constructor(){
+        super();
+        this.data= {}
+    }
+
+    /**
+     * Enseña el cargador
+     * 
+     * @method showLoader
+     * @private
+     */
+    __showLoader(){
+        document.getElementById(&#x27;form&#x27;).style.display = &#x27;none&#x27;;
+        document.getElementById(&#x27;loader&#x27;).style.display = &#x27;&#x27;;
+    }
+
+    /**
+     * Manda una petición para el registro e interpreta la respuesta
+     * 
+     * @method register
+     * @param {Object} reg Datos de registro
+     * @async
+     */
+    async register(reg){
+        const requestOptions = {
+            method: &#x27;POST&#x27;,
+            headers: {
+                &#x27;Content-Type&#x27;: &#x27;application/json&#x27;,
+            },
+            body: JSON.stringify(reg)
+        };
+        var that = this;
+        try{
+            await fetch(&#x27;http://localhost:8080/singup&#x27;,requestOptions)
+            .then(function(response){
+                if(response.status !== 500){
+                    that.data.state = true;
+                }else{
+                    that.data.state = false;
+                  
+                }
+                return response.json()
+            })
+            .then((data) =&gt;{
+                if(that.data.state){
+                    that.data = {
+                        state: true,
+                        msg: data.msg
+                    }
+                }else{
+                        that.data = {
+                            state: false,
+                            msg: data.msg
+                        }
+                    }
+                })
+            
+        }catch(err){
+            that.data = {
+                state: false,
+                msg: err
+            };
+            console.error(err);
+        }
+
+    }
+
+    /**
+     * Interpreta la respuesta del servidor
+     * 
+     * @method handleResponse
+     */
+     handleResponse(){
+        if( this.data.state){
+            document.getElementById(&#x27;success&#x27;).style.display = &#x27;&#x27;;
+            document.getElementById(&#x27;text-success&#x27;).innerText = this.data.msg;
+
+        }else{
+            document.getElementById(&#x27;failure&#x27;).style.display = &#x27;&#x27;;
+            document.getElementById(&#x27;text-failure&#x27;).innerText = this.data.msg;
+
+        }
+        document.getElementById(&#x27;loader&#x27;).style.display = &#x27;none&#x27;;
+    }   
+    
+    /**
+     * Valida el formulario de registro
+     * 
+     * @method checkForm
+     */
+    async checkForm(){
+        document.getElementById(&#x27;spanpass&#x27;).style.display = &#x27;none&#x27;;
+        document.getElementById(&#x27;spanlength&#x27;).style.display = &#x27;none&#x27;;
+        document.getElementById(&#x27;span&#x27;).style.display = &#x27;none&#x27;;
+
+        var username = document.getElementById(&#x27;username&#x27;).value;
+        var password = document.getElementById(&#x27;password&#x27;).value;
+        var password2 = document.getElementById(&#x27;password2&#x27;).value;
+        var date = document.getElementById(&#x27;date&#x27;).value;
+        var email = document.getElementById(&#x27;email&#x27;).value;
+
+        var send = false;
+        var pw = false;
+        var length = false
+
+        if(password === password2){
+            pw = true;
+            if(password.length &gt;= 8){
+                length = true;
+            }
+        }
+        if(username !== &#x27;&#x27; &amp;&amp; password !== &#x27;&#x27; &amp;&amp; password2  &amp;&amp; 
+            date !== &#x27;&#x27; &amp;&amp; email !== &#x27;&#x27;){
+                send = true;
+        }
+
+        if(!pw){
+            document.getElementById(&#x27;spanpass&#x27;).style.display = &#x27;&#x27;;
+            send = false;
+        }else{
+            if(!length){
+                document.getElementById(&#x27;spanlength&#x27;).style.display = &#x27;&#x27;;
+                send = false;
+                
+            }
+            
+        }
+
+        
+        if(!send){
+            if(pw &amp;&amp; length){
+                document.getElementById(&#x27;span&#x27;).style.display = &#x27;&#x27;;
+            }
+        }else{
+            this.__showLoader();
+            const user = {
+                user:{
+                    username: username,
+                    email: email,
+                    password: password,
+                    date: date
+                }
+                
+            }
+            
+            await this.register(user);
+            this.handleResponse()
+        }
+
+        
+
+    }
+
+    /**
+     * Método que devuelve el componente SignUp para ser renderizado
+     * 
+     * @method render
+     * @return Código html del componente SignUp
+     * 
+     */
+    render(){
+        return( 
+            &lt;div style= {{height: &#x27;94%&#x27;}}&gt;
+            
+            &lt; Container id=&#x27;background&#x27;fluid style={{backgroundImage: &#x60;url(${portada})&#x60;}}&gt;
+               
+                &lt;div id=&#x27;card&#x27;  className=&#x27;item2&#x27;&gt;
+                    &lt;form id=&#x27;form&#x27; style={{width: &#x27;90%&#x27;,
+                    marginTop: &#x27;4%&#x27;,
+                    marginBottom: &#x27;4%&#x27;,
+                    marginLeft: &#x27;5%&#x27;}}
+                    onSubmit={(e)=&gt;e.preventDefault()} &gt;
+                    &lt;div className=&quot;form-group&quot;&gt;
+                        &lt;h3 id=&#x27;singup&#x27;&gt;Registro&lt;/h3&gt;
+                        &lt;span aria-details=&#x27;singup&#x27; style={{color: &#x27;red&#x27;, display:&#x27;none&#x27;}}  id=&#x27;span&#x27;&gt;*Todos los campos son obligatorios&lt;/span&gt;
+                        &lt;span aria-details=&#x27;singup&#x27; style={{color: &#x27;red&#x27;, display:&#x27;none&#x27;}}  id=&#x27;spanpass&#x27;&gt;*Ambas contraseñas deben ser iguales&lt;/span&gt;
+                        &lt;br/&gt;
+                        &lt;label htmlFor=&quot;username&quot;&gt;Nombre de usuario&lt;/label&gt;
+                        &lt;input type=&quot;text&quot; className=&quot;form-control&quot; id=&quot;username&quot; aria-describedby=&quot;nameHelp&quot; placeholder=&quot;Nombre de usuario&quot;/&gt;
+                        
+                    &lt;/div&gt;
+                    
+                    &lt;div className=&quot;form-group&quot;&gt;
+                        &lt;label htmlFor=&quot;email&quot;&gt;Correo electrónico&lt;/label&gt;
+                        &lt;input type=&quot;email&quot; className=&quot;form-control&quot; id=&quot;email&quot; placeholder=&quot;Email&quot;/&gt;
+                        
+                    &lt;/div&gt;
+                    &lt;div className=&quot;form-group&quot;&gt;
+                        &lt;label htmlFor=&quot;date&quot;&gt;Fecha de nacimiento&lt;/label&gt;
+                        &lt;input type=&quot;date&quot; className=&quot;form-control&quot; id=&quot;date&quot; placeholder=&quot;Email&quot;/&gt;
+                        
+                    &lt;/div&gt;
+
+                    &lt;div className=&quot;form-group&quot;&gt;
+                        &lt;label htmlFor=&quot;password&quot;&gt;Contraseña&lt;/label&gt;
+                        &lt;input type=&quot;password&quot; className=&quot;form-control&quot; id=&quot;password&quot; placeholder=&quot;Contraseña&quot;/&gt;
+                        &lt;span aria-details=&#x27;password&#x27; style={{color: &#x27;red&#x27;, display:&#x27;none&#x27;}}  id=&#x27;spanlength&#x27;&gt;*La contraseña tiene que tener mínimo 8 caracteres&lt;/span&gt;
+
+                    &lt;/div&gt;
+                    &lt;div className=&quot;form-group&quot;&gt;
+                        &lt;label htmlFor=&quot;password2&quot;&gt;Repita la contraseña&lt;/label&gt;
+                        &lt;input type=&quot;password&quot; className=&quot;form-control&quot; id=&quot;password2&quot; placeholder=&quot;Contraseña&quot;/&gt;
+                        
+                    &lt;/div&gt;
+
+                  
+                    &lt;button type=&quot;submit&quot; onClick={()=&gt;this.checkForm()} style={{width: &#x27;40%&#x27; , marginTop: &#x27;5%&#x27;, marginLeft: &#x27;30%&#x27; }}  className=&quot;btn btn-primary&quot;&gt;Registrarse&lt;/button&gt;
+                    &lt;/form&gt;
+
+                    &lt;div id=&#x27;success&#x27; style={{display: &#x27;none&#x27; , margin: &#x27;auto&#x27;, flex: &#x27;auto&#x27;, alignItems: &#x27;center&#x27; , alignContent: &#x27;center&#x27; , textAlign: &#x27;center&#x27;}}&gt;
+                            &lt;img alt=&#x27;success-icon&#x27; src={success} style={{width: 60 , marginTop: &#x27;5%&#x27;, marginBottom: &#x27;5%&#x27;}}/&gt;
+                            &lt;p id=&#x27;text-success&#x27;&gt;&lt;/p&gt;
+                            &lt;button type=&#x27;button&#x27; onClick={()=&gt;{window.location.replace(&#x27;http://localhost:3000&#x27;)}} style={{margin: &#x27;auto&#x27;, marginBottom: &#x27;3%&#x27;}}className=&quot;btn btn-primary&quot;&gt;Log in&lt;/button&gt;
+
+                    &lt;/div&gt;
+
+                    &lt;div id=&#x27;failure&#x27; style={{display: &#x27;none&#x27; , margin: &#x27;auto&#x27;, flex: &#x27;auto&#x27;, alignItems: &#x27;center&#x27; , alignContent: &#x27;center&#x27;, textAlign:&#x27;center&#x27; }}&gt;
+                        &lt;img alt=&#x27;failure-icon&#x27; src={failure} style={{width: 100 , marginTop: &#x27;5%&#x27;, marginBottom: &#x27;5%&#x27;}}/&gt;
+                            &lt;p id=&#x27;text-failure&#x27; &gt;&lt;/p&gt;
+                            &lt;button type=&#x27;button&#x27; onClick={()=&gt;{window.location.reload()}} style={{margin: &#x27;auto&#x27;, marginBottom: &#x27;3%&#x27;}} className=&quot;btn btn-primary&quot;&gt;Intentar de nuevo&lt;/button&gt;
+
+                    &lt;/div&gt;
+
+                    &lt;div id=&#x27;loader&#x27; style={{display: &#x27;none&#x27;}}&gt;
+                            &lt;label style={{marginLeft: &#x27;3%&#x27;}}htmlFor=&quot;recipient-name&quot; className=&quot;col-form-label&quot;&gt;Guardando...&lt;/label&gt;
+                            &lt;div className=&quot;loader&quot; id=&#x27;loader&#x27; &gt; &lt;/div&gt;
+
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/Container&gt;
+            &lt;Container style={{height: &#x27;10.5%&#x27; , padding: 0}} fluid&gt;
+             &lt;footer  style={{height: &#x27;100%&#x27;, width: &#x27;100%&#x27;}} className=&quot;bg-light text-center text-lg-start&quot;&gt;
+               
+                &lt;div className=&quot;text-center p-3&quot; id=&#x27;footer&#x27; &gt;
+                    © 2021 Copyright:
+                    &lt;a className=&quot;text-dark&quot; href=&quot;https://www.linkedin.com/in/miguel-garc%C3%ADa-tenorio-114352201/&quot;&gt;Miguel García Tenorio&lt;/a&gt;
+                &lt;/div&gt;
+               
+                &lt;/footer&gt;
+            &lt;/Container&gt;
+            {   
+                
+               
+            }
+            &lt;/div&gt;
+
+
+        )
+    }
+}
+
+
+export default SignUp;
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

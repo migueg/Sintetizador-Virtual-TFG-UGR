@@ -38,25 +38,55 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/Analyser.html">Analyser</a></li>
+                                <li><a href="../classes/Anlyser.html">Anlyser</a></li>
                                 <li><a href="../classes/App.html">App</a></li>
+                                <li><a href="../classes/Delay.html">Delay</a></li>
+                                <li><a href="../classes/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../classes/Effect.html">Effect</a></li>
                                 <li><a href="../classes/Envelope.html">Envelope</a></li>
+                                <li><a href="../classes/Equalizer.html">Equalizer</a></li>
+                                <li><a href="../classes/ErrorPage.html">ErrorPage</a></li>
+                                <li><a href="../classes/Filter.html">Filter</a></li>
+                                <li><a href="../classes/Header.html">Header</a></li>
                                 <li><a href="../classes/Index.html">Index</a></li>
+                                <li><a href="../classes/Library.html">Library</a></li>
                                 <li><a href="../classes/LimitedKnob.html">LimitedKnob</a></li>
+                                <li><a href="../classes/Loader.html">Loader</a></li>
+                                <li><a href="../classes/Login.html">Login</a></li>
+                                <li><a href="../classes/Midi.html">Midi</a></li>
+                                <li><a href="../classes/Modal.html">Modal</a></li>
+                                <li><a href="../classes/ModalDelete.html">ModalDelete</a></li>
+                                <li><a href="../classes/ModalLoad.html">ModalLoad</a></li>
+                                <li><a href="../classes/ModalPassword.html">ModalPassword</a></li>
+                                <li><a href="../classes/ModalSave.html">ModalSave</a></li>
                                 <li><a href="../classes/Navigator.html">Navigator</a></li>
                                 <li><a href="../classes/Oscilador.html">Oscilador</a></li>
                                 <li><a href="../classes/oscillator.html">oscillator</a></li>
                                 <li><a href="../classes/Piano.html">Piano</a></li>
+                                <li><a href="../classes/Profile.html">Profile</a></li>
+                                <li><a href="../classes/Recorder.html">Recorder</a></li>
+                                <li><a href="../classes/Reverb.html">Reverb</a></li>
+                                <li><a href="../classes/Saver.html">Saver</a></li>
+                                <li><a href="../classes/SignUp.html">SignUp</a></li>
                                 <li><a href="../classes/Synth.html">Synth</a></li>
+                                <li><a href="../classes/TableUI.html">TableUI</a></li>
                                 <li><a href="../classes/Voice.html">Voice</a></li>
                             </ul>
                 
                 
                             <ul id="api-modules" class="apis modules">
                                 <li><a href="../modules/App.html">App</a></li>
+                                <li><a href="../modules/Delay.html">Delay</a></li>
+                                <li><a href="../modules/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../modules/Filter.html">Filter</a></li>
+                                <li><a href="../modules/filterTypes.html">filterTypes</a></li>
+                                <li><a href="../modules/FX.html">FX</a></li>
                                 <li><a href="../modules/Knob.html">Knob</a></li>
                                 <li><a href="../modules/Navigator.html">Navigator</a></li>
                                 <li><a href="../modules/OscComponents.html">OscComponents</a></li>
                                 <li><a href="../modules/Piano.html">Piano</a></li>
+                                <li><a href="../modules/Reverb.html">Reverb</a></li>
                                 <li><a href="../modules/synth.html">synth</a></li>
                                 <li><a href="../modules/types.html">types</a></li>
                             </ul>
@@ -97,6 +127,16 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 import {oscillator} from &#x27;./oscillator&#x27;;
+import {Reverb} from &#x27;./reverb&#x27;;
+import {Delay} from &#x27;./delay&#x27;;
+import {Filter} from &#x27;./filter&#x27;;
+import {Distorsion} from &#x27;./distorsion&#x27;;
+import Saver from &#x27;./saver&#x27;;
+import Loader from &#x27;./loader&#x27;;
+import Midi from &#x27;./midi&#x27;;
+import Recorder from &#x27;./recorder&#x27;;
+import Analyser from &#x27;./analyser&#x27;;
+import Equalizer from &#x27;./equalizer&#x27;;
 
 /**
  * Clase Fachada del controlador que se comunica con los elementos de la vista.
@@ -109,7 +149,7 @@ import {oscillator} from &#x27;./oscillator&#x27;;
  * Instancia del osciladorA
  * 
  * @property #osciladorA 
- * @type Object
+ * @type oscillator
  * @private
  */
 
@@ -117,19 +157,326 @@ import {oscillator} from &#x27;./oscillator&#x27;;
  * Instancia del osciladorB
  * 
  * @property #osciladorB
- * @type Object
+ * @type oscillator
  * @private
  */
+
+/**
+ *  Contexto de audio para la aplicación de la Web Audio API
+ * 
+ * @property audioCtx
+ * @type BaseAudioContext
+ * @private
+ */
+
+/**
+ *  Nodo de ganancia para controlar el volumen general de la aplicación
+ * 
+ * @property masterVolumeNode
+ * @type AudioNode
+ * @private
+ */
+
+/**
+ *  Nodo de ganancia que representa a los osciladores sin aplicarle ningún efecto
+ * 
+ * @property gainCleanNode
+ * @type AudioNode
+ * @private
+ */
+
+
+/**
+ *  Efecto de reverb
+ * 
+ * @property reverb
+ * @type Reverb
+ * @private
+ */
+
+/**
+ *  Efecto de Delay
+ * 
+ * @property delay
+ * @type Delay
+ * @private
+ */
+
+/**
+ *  Efecto de Filtro
+ * 
+ * @property filter
+ * @type Filter
+ * @private
+ */
+
+/**
+ *  Efecto de distorsion
+ * 
+ * @property distorsion
+ * @type Distorsion
+ * @private
+ */
+
+/**
+ *  Objeto que se va a encargar de enviar peticiones 
+ *  a BD para almacenar objetos
+ * 
+ * @property saver
+ * @type Saver
+ * @private
+ */
+
+/**
+ *  Objeto que se va a encargar de enviar peticiones 
+ *  GET a BD para obtener objetos
+ * 
+ * @property loader
+ * @type Loader
+ * @private
+ */
+
+/**
+ *  Objeto que se va a encargar de gestionar los eventos MIDI
+ * 
+ * @property midi
+ * @type Midi
+ * @private
+ */
+
+/**
+ *  Objeto que se va a encargar de gestionar la grabación de sonidos
+ * 
+ * @property recorer
+ * @type Recorder
+ * @private
+ */
+
+/**
+ *  Objeto que se va a encargar de analizar el espectro de frecuencias 
+ *  producido
+ * 
+ * @property analyser
+ * @type Analyser
+ * @private
+ */
+
+/**
+ *  Objeto que se encarga de controlar el ecualizador
+ * 
+ * @property eq
+ * @type Equalizer
+ * @private
+ */
+
 class Synth{
     #oscillatorA;
     #oscillatorB;
+    #audioCtx;
+    #masterVolumeNode;
+    #gainCleanNode;
+    #reverb;
+    #delay;
+    #filter;
+    #distorsion;
+    #saver;
+    #loader;
+    #midi;
+    #recorder;
+    #analyser;
+    #eq;
+    #eqGain;
 
-    constructor(){
-        this.#oscillatorA = new oscillator();
-        this.#oscillatorB = new oscillator();
+
     
+    constructor(){
+        //Nodos
+        var AudioContext = window.AudioContext // Default
+        || window.webkitAudioContext;
+        this.#audioCtx = new AudioContext();
+        this.#masterVolumeNode = this.#audioCtx.createGain();
+        this.#gainCleanNode = this.#audioCtx.createGain();
+        this.#eqGain = this.#audioCtx.createGain();
+
+        //Osciladores
+        this.#oscillatorA = new oscillator(this.#masterVolumeNode,this.#audioCtx,this.#gainCleanNode);
+        this.#oscillatorB = new oscillator(this.#masterVolumeNode,this.#audioCtx,this.#gainCleanNode);
+        
+        //Cargador y salvador
+        this.#saver = new Saver(this.#oscillatorA,this.#oscillatorB,this);
+        this.#loader = new Loader();
+
+        //Interprete MIDI.
+        this.#midi = new Midi(this);
+        //Efectos
+        this.#reverb = new Reverb(this.#audioCtx,this.#gainCleanNode,this.#masterVolumeNode);
+        this.#delay = new Delay(this.#audioCtx,this.#gainCleanNode,this.#masterVolumeNode);
+        this.#filter = new Filter(this.#audioCtx,this.#gainCleanNode,this.#masterVolumeNode,&quot;highpass&quot;);
+        this.#distorsion = new Distorsion(this.#audioCtx,this.#gainCleanNode,this.#masterVolumeNode);
+
+        
+         //Recorder
+         this.#recorder = new Recorder(this.#masterVolumeNode,this.#audioCtx)
+
+         //Equalizador
+          this.#eq = new Equalizer(this.#masterVolumeNode,this.#audioCtx,this.#eqGain)
+
+         //Analizador
+         this.#analyser = new Analyser(this.#eqGain,this.#audioCtx)
+        
+        
+        
+        //this.#masterVolumeNode.connect(this.#audioCtx.destination)
        
+
+       
+        
+        
     }
+
+   
+    /**
+     * Método que se encarga de activar un efecto
+     * 
+     * @method applyEffect
+     * @param {String} effect Efecto que se va a aplicar
+     */
+
+    applyEffect(effect){
+        switch(effect){
+            case &#x27;reverb&#x27;:
+                this.#reverb.apply();
+                break;
+            case &#x27;delay&#x27;:
+                this.#delay.apply();
+                
+                break;
+            case &#x27;filter&#x27;:
+                this.#filter.apply();
+                break;
+            case &#x27;distorsion&#x27;:
+                this.#distorsion.apply();
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    /**
+     * Método que se encarga de cominacar al saver que tiene que mandar una petición
+     * 
+     * @mehtod delete
+     * @param {String} id Id del sonido a eliminar
+     * @returns Json con el resultado de la petición
+     */
+    async delete(id){
+        return await this.#saver.delete(id)
+    }
+    /**
+     * Método que se encarga de desactivar un efecto
+     * 
+     * @method disapplyEffect
+     * @param {String} effect Efecto que se va a desactivar
+     */
+
+     disapplyEffect(effect){
+        switch(effect){
+            case &#x27;reverb&#x27;:
+                this.#reverb.disapply();
+                break;
+            case &#x27;delay&#x27;:
+                this.#delay.disapply();
+                break;
+            
+            case &#x27;filter&#x27;:
+                this.#filter.disapply();
+                break;
+            case &#x27;distorsion&#x27;:
+                this.#distorsion.disapply();
+                
+            default:
+                break;
+        }
+    }
+
+    /**
+     * Método que se encarga de enviar al ecualizador que banda
+     * hay que atenuar o incrementar
+     * 
+     * @method equalize
+     * @param {String} freq Banda del ecualizador
+     * @param {Float} value Decremento o incremento en db
+     */
+    equalize(freq,value){
+        this.#eq.equalize(freq,value)
+    }
+
+    /**
+     * Método que se encarga de comunicar al cargargador que se 
+     * requiere obtener información de la BD
+     * 
+     * @method fetchThings
+     * @async
+     * @param {String} thing Información que se quiere obtener
+     * @return JSON 
+     */
+    async fetchThings(thing){
+        var data;
+
+        switch(thing){
+            case &#x27;categories&#x27;:
+                data =  await this.#loader.fetchCategories();
+                return data;
+            case &#x27;metadata&#x27;:
+                data = await this.#loader.fetchStatesMetadata();
+                return data;
+            default:
+                console.error(&#x27;Tipo incompatible&#x27;);
+                break;
+        }
+    }
+
+    /**
+     * Método que se encarga de redirigir  las peticiones del cliente
+     * en el perfil
+     * 
+     * @method fetchProfile
+     * @param {String} action Acción que el usuario desea realizar
+     * @param {JSON} data Datos a mandar al servidor
+     * @returns Respuesta del servidor
+     */
+    async fetchProfile(action,data){
+        switch(action){
+            case &#x27;edit&#x27;:
+                return await this.#saver.editProfile(data);
+            case &#x27;profile&#x27;:
+                return await this.#loader.fetchProfile();
+            case &#x27;maxSize&#x27;:
+                return await this.#loader.fetchMaxSize();
+            case &#x27;password&#x27;:
+                return await this.#saver.editPassword(data);
+            default:
+                console.error(&#x27;ERROR: Acción incorrecta&#x27;);
+                break;
+        }
+    }
+    
+    /**
+     * Método que se encarga de llamar al módulo de carga para que
+     * cargue un sonido
+     *  
+     * @method load
+     * @async
+     * @param {string} id Identificador del sonido
+     */
+    async load(id){
+        const resp = await this.#loader.fetchState(id);
+        return resp;
+    }
+
+    
+
 
     /**
      * Método que se encarga de encender un oscilador
@@ -176,9 +523,19 @@ class Synth{
     playNote(key){
         this.#oscillatorA.play(key)
         this.#oscillatorB.play(key)
+        //this.#analyser.consoledomain();
+    
     }
 
-   
+    /**
+     * Delega la petición de grabación al objeto encargado de ello
+     * 
+     * @method rec
+     * @param {JSON} state Estado a salvar
+     */
+    rec(state){
+        this.#recorder.rec(state)
+    }
     /**
      * Método que se encarga de seleccionar el tipo de onda de los osciladores
      * 
@@ -200,6 +557,68 @@ class Synth{
         }
     }
 
+
+    /**
+     * Método que se encarga de llamar al saver para que mande el estado actual
+     * del sintetizador a la base de datos para su almacenamiento
+     *  
+     * @method save
+     * @async
+     * @param {JSON} data Metadatos del sonido
+     */
+    async save(data){
+        const resp = await this.#saver.save(data)
+        return resp;
+    }
+
+    /******* GETTERS *********/
+
+    /**
+     * Getter de la disponibilidad de los osciladores
+     * 
+     * @method getAvailable
+     * @param {Char} osc Id del oscilador
+     * @returns Boolean
+     */
+       getAvailable(osc){
+        if(osc === &#x27;A&#x27;){
+            return this.#oscillatorA.getAvailable();
+        }
+
+        if(osc === &#x27;B&#x27;){
+            return this.#oscillatorB.getAvailable();
+        }
+    }
+
+    /**
+     * Getter del flag de selección del oscilador
+     * 
+     * @method getChecked
+     * @param {Char} osc Id del oscilador
+     * @returns Booleano
+     */
+    getChecked(osc){
+        if(osc === &#x27;A&#x27;){return this.#oscillatorA.getChecked()}
+        if(osc === &#x27;B&#x27;){return this.#oscillatorB.getChecked()}
+    }
+
+    
+    /**
+     * Método que devuelve el estado de todos los efectos
+     * 
+     * @method getEffects
+     * @returns JSON
+     */
+    getEffects(){
+        var effects={};
+
+        effects[&#x27;delay&#x27;] = this.#delay.getState();
+        effects[&#x27;distorsion&#x27;] = this.#distorsion.getState();
+        effects[&#x27;filter&#x27;] = this.#filter.getState();
+        effects[&#x27;reverb&#x27;] = this.#reverb.getState();
+        
+        return effects;
+    }
     /**
      * Getter del volumen de los osciladores
      * 
@@ -217,28 +636,98 @@ class Synth{
         }
 
     }
+  
     /**
-     * Setter del volumen de los osciladores
+     * Getter de distintos parámetros del Analizador
      * 
-     * @method setVolum
-     * @param {Char} osc Id del oscilador
+     * @method getThingsAnalyser
+     * @param {String} thing Parámetro que se quiere
+     * @returns Parámetro
      */
-    setVolum(osc, vol){
-        switch(osc){
-            case &#x27;A&#x27;:
-              
-                this.#oscillatorA.setVolum(vol);
-            break;
-            
-            case &#x27;B&#x27;:
-                this.#oscillatorB.setVolum(vol);
-                break;
-            default:
-                break;
+     getThingsAnalyser(thing){
+        switch(thing){
+            case &#x27;size&#x27;:
+                return this.#analyser.getSize();
+            case &#x27;data&#x27;:
+                return this.#analyser.getData();
+            case &#x27;separation&#x27;:
+                return this.#analyser.getSeparation();
         }
     }
 
+    /******* SETTERS *********/
+    /**
+     * Setter del flag checked que indica si el oscilador
+     * esta seleccionado 
+     * 
+     * @method setChecked
+     * @param {Char} osc Id del oscilador
+     * @param {Boolean} val 
+     */
+    setChecked(osc,val){
+        if(osc === &#x27;A&#x27;){this.#oscillatorA.setChecked(val)}
+        if(osc === &#x27;B&#x27;){this.#oscillatorB.setChecked(val)}
+    }
 
+    /**
+     * Setter del jwt de autenticacion y del id del usario
+     * 
+     * @method setCookies
+     * @param {String} token Token
+     * @param {String} user Id del usuario
+     */
+     setCookies(token,user){
+        this.#saver.setToken(token);
+        this.#saver.setUser(user);
+        this.#loader.setToken(token);
+        this.#loader.setUser(user);
+
+    }
+
+    /**
+     * Setter de los parámetros del delay
+     * 
+     * @method setDelay
+     * @param {Char} param Parámetro a modificar
+     * @param {String} val Valor a cambiar
+     */
+    setDelay(param,val){
+        switch(param){
+            case &#x27;time&#x27;:
+                this.#delay.setTime(val);
+                break;
+            case &#x27;feedback&#x27;:
+                this.#delay.setFeedback(val);
+                break;
+            case &#x27;wet&#x27;:
+                this.#delay.setWet(val);
+                break;
+            default:
+                console.error(&#x27;ERROR: valor incorrecto&#x27;);
+                break;
+        }
+    }
+    
+    /**
+     * Setter de los parámetros del delay
+     * 
+     * @method setDistorsion
+     * @param {Char} param Parámetro a modificar
+     * @param {String} val Valor a cambiar
+     */
+    setDistorsion(param,val){
+        switch(param){
+            case &#x27;amount&#x27;:
+                this.#distorsion.setDistorsionCurve(val);
+                break;
+            case &#x27;wet&#x27;:
+                this.#distorsion.setWet(val);
+                break;
+            default:
+                console.error(&quot;ERROR: parametro incompatible&quot;);
+                break;
+        }
+    }
     /**
      * Setter de los parámetros de la envolvente de los osciladores
      * 
@@ -291,6 +780,115 @@ class Synth{
         }
         
     }
+
+    /**
+     * Setter del volume general de la aplicación
+     * 
+     * @method setFilter
+     * @param {String} param Parametro a modificar
+     * @param {String} val  Valor del parametro a modificar
+     */
+     setFilter(param,val){
+        switch(param){
+            case &#x27;wet&#x27;:
+                this.#filter.setWet(val);
+                break;
+            case &#x27;freq&#x27;:
+                this.#filter.setFrecuency(val);
+                break;
+            case &#x27;type&#x27;:
+                this.#filter.setType(val);
+                break;
+            default:
+                console.error(&quot;Error: valor incorrecto &quot;)
+                break;
+        }
+    }
+
+    /**
+     * Setter del volume general de la aplicación
+     * 
+     * @method setMaster
+     * @param {Float} val Valor de volumen en db
+     */
+    setMaster(val){
+        this.#masterVolumeNode.gain.value = val;
+    }
+
+   
+    /**
+     * Setter de la octava del midi
+     * 
+     * @method setOctave
+     * @param {Integer} oct Octava
+     */
+    setOctave(oct){
+        this.#midi.setOctave(oct)
+    }
+
+     /**
+     * Setter del nivle de paneo de los osciladores
+     * 
+     * @method setPan
+     * @param {Char} osc id del oscilador
+     * @param {Float} value valor de paneo
+     */
+      setPan(osc,value){
+        if(osc === &#x27;A&#x27;){
+            this.#oscillatorA.setPan(value);
+        }else if(osc === &#x27;B&#x27;){
+            this.#oscillatorB.setPan(value);
+        }
+    }
+    
+    /**
+     * Modificador del efecto reverb
+     * 
+     * @method setReverbWet
+     * @param {Float} val Nivel de Reverb que se quiere aplicar
+     */
+    setReverb(val,param){
+        switch(param){
+            case &quot;wet&quot;:
+                this.#reverb.setWet(val);
+                break;
+            case &quot;decay&quot;:
+                this.#reverb.setDecay(val);
+                break;
+            case &quot;hpf&quot;:
+                this.#reverb.setHPF(val);
+                break;
+            case &quot;lpf&quot;:
+                this.#reverb.setLPF(val);
+                break;
+            default:
+                break;
+        }
+        
+    }
+
+    
+    /**
+     * Setter del volumen de los osciladores
+     * 
+     * @method setVolum
+     * @param {Char} osc Id del oscilador
+     */
+     setVolum(osc, vol){
+        switch(osc){
+            case &#x27;A&#x27;:
+                this.#oscillatorA.setVolum(vol);
+            break;
+            
+            case &#x27;B&#x27;:
+                this.#oscillatorB.setVolum(vol);
+                break;
+            default:
+                break;
+        }
+    }
+
+
 }
 
 /**

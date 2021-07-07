@@ -4,13 +4,31 @@ import failure from '../../../img/failure.png';
 
 import $ from 'jquery';
 
+/**
+ * Clase que genera el modal de la interfaz para cargar sonidos
+ *
+ * @class ModalLoad
+ * @constructor
+ * @see Modal
+ */
+
+/**
+ * @property id
+ * @type string
+ */
 class ModalLoad extends Modal{
     constructor(){
         super('load');
         this.id = '';
     }
 
-    
+    /**
+     * Se encarga de comunicar a la fachada que el usuario quiere cargar un sonido. 
+     * Cuando reciba una respuesta, la interpretará
+     * 
+     * @method delete
+     * @async
+     */
     async load(){
         $('#load-buttom').attr('disabled',true);
         $('#close-load-buttom').attr('disabled',true);
@@ -29,12 +47,27 @@ class ModalLoad extends Modal{
         this.__handleResponse(response)
 
     }
+
+    /**
+     * Se encarga de mostrar el modal
+     * 
+     * @method show 
+     * @param {string} id Identidicador del modal
+     */
     show(id){
         this.id = id;
         document.getElementById("backdrop").style.display = "block"
         document.getElementById("modalLoad").style.display = "block"
         document.getElementById("modalLoad").className += "show" 
     }
+
+    /**
+     * Método que devuelve el componente ModalLoad para ser renderizado
+     * 
+     * @method render
+     * @return Código html del componente Distorsion
+     * 
+     */
     render(){
         return(
             <div>

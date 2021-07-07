@@ -10,6 +10,11 @@ import failure from '../img/failure.png';
 import '../css/login.css';
 import '../css/loader.css';
 
+/**
+ * Proporciona el componente para el registro
+ * @class SignUp
+ * @constructor 
+ */
 
 class SignUp extends React.Component{
     constructor(){
@@ -17,10 +22,24 @@ class SignUp extends React.Component{
         this.data= {}
     }
 
+    /**
+     * Enseña el cargador
+     * 
+     * @method showLoader
+     * @private
+     */
     __showLoader(){
         document.getElementById('form').style.display = 'none';
         document.getElementById('loader').style.display = '';
     }
+
+    /**
+     * Manda una petición para el registro e interpreta la respuesta
+     * 
+     * @method register
+     * @param {Object} reg Datos de registro
+     * @async
+     */
     async register(reg){
         const requestOptions = {
             method: 'POST',
@@ -65,6 +84,11 @@ class SignUp extends React.Component{
 
     }
 
+    /**
+     * Interpreta la respuesta del servidor
+     * 
+     * @method handleResponse
+     */
      handleResponse(){
         if( this.data.state){
             document.getElementById('success').style.display = '';
@@ -78,6 +102,11 @@ class SignUp extends React.Component{
         document.getElementById('loader').style.display = 'none';
     }   
     
+    /**
+     * Valida el formulario de registro
+     * 
+     * @method checkForm
+     */
     async checkForm(){
         document.getElementById('spanpass').style.display = 'none';
         document.getElementById('spanlength').style.display = 'none';
@@ -140,6 +169,14 @@ class SignUp extends React.Component{
         
 
     }
+
+    /**
+     * Método que devuelve el componente SignUp para ser renderizado
+     * 
+     * @method render
+     * @return Código html del componente SignUp
+     * 
+     */
     render(){
         return( 
             <div style= {{height: '94%'}}>

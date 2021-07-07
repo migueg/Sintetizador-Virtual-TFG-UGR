@@ -38,25 +38,55 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/Analyser.html">Analyser</a></li>
+                                <li><a href="../classes/Anlyser.html">Anlyser</a></li>
                                 <li><a href="../classes/App.html">App</a></li>
+                                <li><a href="../classes/Delay.html">Delay</a></li>
+                                <li><a href="../classes/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../classes/Effect.html">Effect</a></li>
                                 <li><a href="../classes/Envelope.html">Envelope</a></li>
+                                <li><a href="../classes/Equalizer.html">Equalizer</a></li>
+                                <li><a href="../classes/ErrorPage.html">ErrorPage</a></li>
+                                <li><a href="../classes/Filter.html">Filter</a></li>
+                                <li><a href="../classes/Header.html">Header</a></li>
                                 <li><a href="../classes/Index.html">Index</a></li>
+                                <li><a href="../classes/Library.html">Library</a></li>
                                 <li><a href="../classes/LimitedKnob.html">LimitedKnob</a></li>
+                                <li><a href="../classes/Loader.html">Loader</a></li>
+                                <li><a href="../classes/Login.html">Login</a></li>
+                                <li><a href="../classes/Midi.html">Midi</a></li>
+                                <li><a href="../classes/Modal.html">Modal</a></li>
+                                <li><a href="../classes/ModalDelete.html">ModalDelete</a></li>
+                                <li><a href="../classes/ModalLoad.html">ModalLoad</a></li>
+                                <li><a href="../classes/ModalPassword.html">ModalPassword</a></li>
+                                <li><a href="../classes/ModalSave.html">ModalSave</a></li>
                                 <li><a href="../classes/Navigator.html">Navigator</a></li>
                                 <li><a href="../classes/Oscilador.html">Oscilador</a></li>
                                 <li><a href="../classes/oscillator.html">oscillator</a></li>
                                 <li><a href="../classes/Piano.html">Piano</a></li>
+                                <li><a href="../classes/Profile.html">Profile</a></li>
+                                <li><a href="../classes/Recorder.html">Recorder</a></li>
+                                <li><a href="../classes/Reverb.html">Reverb</a></li>
+                                <li><a href="../classes/Saver.html">Saver</a></li>
+                                <li><a href="../classes/SignUp.html">SignUp</a></li>
                                 <li><a href="../classes/Synth.html">Synth</a></li>
+                                <li><a href="../classes/TableUI.html">TableUI</a></li>
                                 <li><a href="../classes/Voice.html">Voice</a></li>
                             </ul>
                 
                 
                             <ul id="api-modules" class="apis modules">
                                 <li><a href="../modules/App.html">App</a></li>
+                                <li><a href="../modules/Delay.html">Delay</a></li>
+                                <li><a href="../modules/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../modules/Filter.html">Filter</a></li>
+                                <li><a href="../modules/filterTypes.html">filterTypes</a></li>
+                                <li><a href="../modules/FX.html">FX</a></li>
                                 <li><a href="../modules/Knob.html">Knob</a></li>
                                 <li><a href="../modules/Navigator.html">Navigator</a></li>
                                 <li><a href="../modules/OscComponents.html">OscComponents</a></li>
                                 <li><a href="../modules/Piano.html">Piano</a></li>
+                                <li><a href="../modules/Reverb.html">Reverb</a></li>
                                 <li><a href="../modules/synth.html">synth</a></li>
                                 <li><a href="../modules/types.html">types</a></li>
                             </ul>
@@ -97,7 +127,7 @@
 
 
         <div class="foundat">
-            Defined in: <a href="../files/src_controller_synth.js.html#l3"><code>src\controller\synth.js:3</code></a>
+            Defined in: <a href="../files/src_controller_synth.js.html#l13"><code>src\controller\synth.js:13</code></a>
         </div>
 
             Module: <a href="../modules/synth.html">synth</a>
@@ -127,7 +157,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_controller_synth.js.html#l3"><code>src\controller\synth.js:3</code></a>
+        <a href="../files/src_controller_synth.js.html#l13"><code>src\controller\synth.js:13</code></a>
         </p>
 
 
@@ -161,7 +191,47 @@
 
                     <ul class="index-list methods">
                             <li class="index-item method">
+                                <a href="#method_applyEffect">applyEffect</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_disapplyEffect">disapplyEffect</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_equalize">equalize</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_fetchProfile">fetchProfile</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_fetchThings">fetchThings</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getAvailable">getAvailable</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getChecked">getChecked</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getEffects">getEffects</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getThingsAnalyser">getThingsAnalyser</a>
+
+                            </li>
+                            <li class="index-item method">
                                 <a href="#method_getVolum">getVolum</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_load">load</a>
 
                             </li>
                             <li class="index-item method">
@@ -177,11 +247,55 @@
 
                             </li>
                             <li class="index-item method">
+                                <a href="#method_rec">rec</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_save">save</a>
+
+                            </li>
+                            <li class="index-item method">
                                 <a href="#method_selectWave">selectWave</a>
 
                             </li>
                             <li class="index-item method">
+                                <a href="#method_setChecked">setChecked</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setCookies">setCookies</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setDelay">setDelay</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setDistorsion">setDistorsion</a>
+
+                            </li>
+                            <li class="index-item method">
                                 <a href="#method_setEnvolve">setEnvolve</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setFilter">setFilter</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setMaster">setMaster</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setOctave">setOctave</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setPan">setPan</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setReverbWet">setReverbWet</a>
 
                             </li>
                             <li class="index-item method">
@@ -203,6 +317,58 @@
                                 <a href="#property_#osciladorB">#osciladorB</a>
 
                             </li>
+                            <li class="index-item property private">
+                                <a href="#property_analyser">analyser</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_audioCtx">audioCtx</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_delay">delay</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_distorsion">distorsion</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_eq">eq</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_filter">filter</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_gainCleanNode">gainCleanNode</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_loader">loader</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_masterVolumeNode">masterVolumeNode</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_midi">midi</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_recorer">recorer</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_reverb">reverb</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_saver">saver</a>
+
+                            </li>
                     </ul>
                 </div>
 
@@ -212,6 +378,576 @@
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
+<div id="method_applyEffect" class="method item">
+    <h3 class="name"><code>applyEffect</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>effect</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l210"><code>src\controller\synth.js:210</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método que se encarga de activar un efecto</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">effect</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Efecto que se va a aplicar</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_disapplyEffect" class="method item">
+    <h3 class="name"><code>disapplyEffect</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>effect</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l248"><code>src\controller\synth.js:248</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método que se encarga de desactivar un efecto</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">effect</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Efecto que se va a desactivar</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_equalize" class="method item">
+    <h3 class="name"><code>equalize</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>freq</code>
+                </li>
+                <li class="arg">
+                        <code>value</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l275"><code>src\controller\synth.js:275</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método que se encarga de enviar al ecualizador que banda
+hay que atenuar o incrementar</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">freq</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Banda del ecualizador</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">value</code>
+                        <span class="type">Float</span>
+
+
+                    <div class="param-description">
+                        <p>Decremento o incremento en db</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_fetchProfile" class="method item">
+    <h3 class="name"><code>fetchProfile</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>action</code>
+                </li>
+                <li class="arg">
+                        <code>data</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l312"><code>src\controller\synth.js:312</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método que se encarga de redirigir  las peticiones del cliente
+en el perfil</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">action</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Acción que el usuario desea realizar</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">data</code>
+                        <span class="type">JSON</span>
+
+
+                    <div class="param-description">
+                        <p>Datos a mandar al servidor</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>Respuesta del servidor</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_fetchThings" class="method item">
+    <h3 class="name"><code>fetchThings</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>thing</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+        <span class="flag async">async</span>
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l287"><code>src\controller\synth.js:287</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método que se encarga de comunicar al cargargador que se
+requiere obtener información de la BD</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">thing</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Información que se quiere obtener</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>JSON</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getAvailable" class="method item">
+    <h3 class="name"><code>getAvailable</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>osc</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l448"><code>src\controller\synth.js:448</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Getter de la disponibilidad de los osciladores</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">osc</code>
+                        <span class="type">Char</span>
+
+
+                    <div class="param-description">
+                        <p>Id del oscilador</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>Boolean</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getChecked" class="method item">
+    <h3 class="name"><code>getChecked</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>osc</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l465"><code>src\controller\synth.js:465</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Getter del flag de selección del oscilador</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">osc</code>
+                        <span class="type">Char</span>
+
+
+                    <div class="param-description">
+                        <p>Id del oscilador</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>Booleano</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getEffects" class="method item">
+    <h3 class="name"><code>getEffects</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l478"><code>src\controller\synth.js:478</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método que devuelve el estado de todos los efectos</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>JSON</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getThingsAnalyser" class="method item">
+    <h3 class="name"><code>getThingsAnalyser</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>thing</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l512"><code>src\controller\synth.js:512</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Getter de distintos parámetros del Analizador</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">thing</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Parámetro que se quiere</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>Parámetro</p>
+
+            </div>
+        </div>
+
+
+</div>
 <div id="method_getVolum" class="method item">
     <h3 class="name"><code>getVolum</code></h3>
 
@@ -234,9 +970,10 @@
 
 
     <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_controller_synth.js.html#l105"><code>src\controller\synth.js:105</code></a>
+        <a href="../files/src_controller_synth.js.html#l494"><code>src\controller\synth.js:494</code></a>
         </p>
 
 
@@ -277,6 +1014,63 @@
 
 
 </div>
+<div id="method_load" class="method item">
+    <h3 class="name"><code>load</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>id</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+        <span class="flag async">async</span>
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l337"><code>src\controller\synth.js:337</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método que se encarga de llamar al módulo de carga para que
+cargue un sonido</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">id</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Identificador del sonido</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
 <div id="method_offOscillator" class="method item">
     <h3 class="name"><code>offOscillator</code></h3>
 
@@ -296,9 +1090,10 @@
 
 
     <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_controller_synth.js.html#l55"><code>src\controller\synth.js:55</code></a>
+        <a href="../files/src_controller_synth.js.html#l372"><code>src\controller\synth.js:372</code></a>
         </p>
 
 
@@ -350,9 +1145,10 @@
 
 
     <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_controller_synth.js.html#l36"><code>src\controller\synth.js:36</code></a>
+        <a href="../files/src_controller_synth.js.html#l353"><code>src\controller\synth.js:353</code></a>
         </p>
 
 
@@ -404,9 +1200,10 @@
 
 
     <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_controller_synth.js.html#l72"><code>src\controller\synth.js:72</code></a>
+        <a href="../files/src_controller_synth.js.html#l389"><code>src\controller\synth.js:389</code></a>
         </p>
 
 
@@ -439,6 +1236,118 @@
 
 
 </div>
+<div id="method_rec" class="method item">
+    <h3 class="name"><code>rec</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>state</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l402"><code>src\controller\synth.js:402</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Delega la petición de grabación al objeto encargado de ello</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">state</code>
+                        <span class="type">JSON</span>
+
+
+                    <div class="param-description">
+                        <p>Estado a salvar</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_save" class="method item">
+    <h3 class="name"><code>save</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>data</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+        <span class="flag async">async</span>
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l433"><code>src\controller\synth.js:433</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método que se encarga de llamar al saver para que mande el estado actual
+del sintetizador a la base de datos para su almacenamiento</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">data</code>
+                        <span class="type">JSON</span>
+
+
+                    <div class="param-description">
+                        <p>Metadatos del sonido</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
 <div id="method_selectWave" class="method item">
     <h3 class="name"><code>selectWave</code></h3>
 
@@ -461,9 +1370,10 @@
 
 
     <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_controller_synth.js.html#l84"><code>src\controller\synth.js:84</code></a>
+        <a href="../files/src_controller_synth.js.html#l411"><code>src\controller\synth.js:411</code></a>
         </p>
 
 
@@ -507,6 +1417,282 @@
 
 
 </div>
+<div id="method_setChecked" class="method item">
+    <h3 class="name"><code>setChecked</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>osc</code>
+                </li>
+                <li class="arg">
+                        <code>val</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l531"><code>src\controller\synth.js:531</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Setter del flag checked que indica si el oscilador
+esta seleccionado</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">osc</code>
+                        <span class="type">Char</span>
+
+
+                    <div class="param-description">
+                        <p>Id del oscilador</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">val</code>
+                        <span class="type">Boolean</span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_setCookies" class="method item">
+    <h3 class="name"><code>setCookies</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>token</code>
+                </li>
+                <li class="arg">
+                        <code>user</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l544"><code>src\controller\synth.js:544</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Setter del jwt de autenticacion y del id del usario</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">token</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Token</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">user</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Id del usuario</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_setDelay" class="method item">
+    <h3 class="name"><code>setDelay</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>param</code>
+                </li>
+                <li class="arg">
+                        <code>val</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l559"><code>src\controller\synth.js:559</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Setter de los parámetros del delay</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">param</code>
+                        <span class="type">Char</span>
+
+
+                    <div class="param-description">
+                        <p>Parámetro a modificar</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">val</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Valor a cambiar</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_setDistorsion" class="method item">
+    <h3 class="name"><code>setDistorsion</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>param</code>
+                </li>
+                <li class="arg">
+                        <code>val</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l583"><code>src\controller\synth.js:583</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Setter de los parámetros del delay</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">param</code>
+                        <span class="type">Char</span>
+
+
+                    <div class="param-description">
+                        <p>Parámetro a modificar</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">val</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Valor a cambiar</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
 <div id="method_setEnvolve" class="method item">
     <h3 class="name"><code>setEnvolve</code></h3>
 
@@ -532,9 +1718,10 @@
 
 
     <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_controller_synth.js.html#l144"><code>src\controller\synth.js:144</code></a>
+        <a href="../files/src_controller_synth.js.html#l603"><code>src\controller\synth.js:603</code></a>
         </p>
 
 
@@ -589,6 +1776,309 @@
 
 
 </div>
+<div id="method_setFilter" class="method item">
+    <h3 class="name"><code>setFilter</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>param</code>
+                </li>
+                <li class="arg">
+                        <code>val</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l656"><code>src\controller\synth.js:656</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Setter del volume general de la aplicación</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">param</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Parametro a modificar</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">val</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Valor del parametro a modificar</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_setMaster" class="method item">
+    <h3 class="name"><code>setMaster</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>val</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l680"><code>src\controller\synth.js:680</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Setter del volume general de la aplicación</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">val</code>
+                        <span class="type">Float</span>
+
+
+                    <div class="param-description">
+                        <p>Valor de volumen en db</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_setOctave" class="method item">
+    <h3 class="name"><code>setOctave</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>oct</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l691"><code>src\controller\synth.js:691</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Setter de la octava del midi</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">oct</code>
+                        <span class="type">Integer</span>
+
+
+                    <div class="param-description">
+                        <p>Octava</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_setPan" class="method item">
+    <h3 class="name"><code>setPan</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>osc</code>
+                </li>
+                <li class="arg">
+                        <code>value</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l701"><code>src\controller\synth.js:701</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Setter del nivle de paneo de los osciladores</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">osc</code>
+                        <span class="type">Char</span>
+
+
+                    <div class="param-description">
+                        <p>id del oscilador</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">value</code>
+                        <span class="type">Float</span>
+
+
+                    <div class="param-description">
+                        <p>valor de paneo</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_setReverbWet" class="method item">
+    <h3 class="name"><code>setReverbWet</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>val</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l716"><code>src\controller\synth.js:716</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Modificador del efecto reverb</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">val</code>
+                        <span class="type">Float</span>
+
+
+                    <div class="param-description">
+                        <p>Nivel de Reverb que se quiere aplicar</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
 <div id="method_setVolum" class="method item">
     <h3 class="name"><code>setVolum</code></h3>
 
@@ -608,9 +2098,10 @@
 
 
     <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_controller_synth.js.html#l122"><code>src\controller\synth.js:122</code></a>
+        <a href="../files/src_controller_synth.js.html#l743"><code>src\controller\synth.js:743</code></a>
         </p>
 
 
@@ -650,7 +2141,7 @@
 
 <div id="property_#osciladorA" class="property item private">
     <h3 class="name"><code>#osciladorA</code></h3>
-    <span class="type">Object</span>
+    <span class="type">Oscillator</span>
 
 
         <span class="flag private">private</span>
@@ -658,9 +2149,10 @@
 
 
     <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_controller_synth.js.html#l10"><code>src\controller\synth.js:10</code></a>
+        <a href="../files/src_controller_synth.js.html#l20"><code>src\controller\synth.js:20</code></a>
         </p>
 
 
@@ -676,7 +2168,7 @@
 </div>
 <div id="property_#osciladorB" class="property item private">
     <h3 class="name"><code>#osciladorB</code></h3>
-    <span class="type">Object</span>
+    <span class="type">Oscillator</span>
 
 
         <span class="flag private">private</span>
@@ -684,9 +2176,10 @@
 
 
     <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_controller_synth.js.html#l18"><code>src\controller\synth.js:18</code></a>
+        <a href="../files/src_controller_synth.js.html#l28"><code>src\controller\synth.js:28</code></a>
         </p>
 
 
@@ -694,6 +2187,360 @@
 
     <div class="description">
         <p>Instancia del osciladorB</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_analyser" class="property item private">
+    <h3 class="name"><code>analyser</code></h3>
+    <span class="type"><a href="../classes/Analyser.html" class="crosslink">Analyser</a></span>
+
+
+        <span class="flag private">private</span>
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l127"><code>src\controller\synth.js:127</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Objeto que se va a encargar de analizar el espectro de frecuencias
+producido</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_audioCtx" class="property item private">
+    <h3 class="name"><code>audioCtx</code></h3>
+    <span class="type">BaseAudioContext</span>
+
+
+        <span class="flag private">private</span>
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l36"><code>src\controller\synth.js:36</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Contexto de audio para la aplicación de la Web Audio API</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_delay" class="property item private">
+    <h3 class="name"><code>delay</code></h3>
+    <span class="type"><a href="../classes/Delay.html" class="crosslink">Delay</a></span>
+
+
+        <span class="flag private">private</span>
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l69"><code>src\controller\synth.js:69</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Efecto de Delay</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_distorsion" class="property item private">
+    <h3 class="name"><code>distorsion</code></h3>
+    <span class="type"><a href="../classes/Distorsion.html" class="crosslink">Distorsion</a></span>
+
+
+        <span class="flag private">private</span>
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l85"><code>src\controller\synth.js:85</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Efecto de distorsion</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_eq" class="property item private">
+    <h3 class="name"><code>eq</code></h3>
+    <span class="type"><a href="../classes/Equalizer.html" class="crosslink">Equalizer</a></span>
+
+
+        <span class="flag private">private</span>
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l136"><code>src\controller\synth.js:136</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Objeto que se encarga de controlar el ecualizador</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_filter" class="property item private">
+    <h3 class="name"><code>filter</code></h3>
+    <span class="type"><a href="../classes/Filter.html" class="crosslink">Filter</a></span>
+
+
+        <span class="flag private">private</span>
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l77"><code>src\controller\synth.js:77</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Efecto de Filtro</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_gainCleanNode" class="property item private">
+    <h3 class="name"><code>gainCleanNode</code></h3>
+    <span class="type">AudioNode</span>
+
+
+        <span class="flag private">private</span>
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l52"><code>src\controller\synth.js:52</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Nodo de ganancia que representa a los osciladores sin aplicarle ningún efecto</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_loader" class="property item private">
+    <h3 class="name"><code>loader</code></h3>
+    <span class="type"><a href="../classes/Loader.html" class="crosslink">Loader</a></span>
+
+
+        <span class="flag private">private</span>
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l102"><code>src\controller\synth.js:102</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Objeto que se va a encargar de enviar peticiones
+GET a BD para obtener objetos</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_masterVolumeNode" class="property item private">
+    <h3 class="name"><code>masterVolumeNode</code></h3>
+    <span class="type">AudioNode</span>
+
+
+        <span class="flag private">private</span>
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l44"><code>src\controller\synth.js:44</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Nodo de ganancia para controlar el volumen general de la aplicación</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_midi" class="property item private">
+    <h3 class="name"><code>midi</code></h3>
+    <span class="type"><a href="../classes/Midi.html" class="crosslink">Midi</a></span>
+
+
+        <span class="flag private">private</span>
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l111"><code>src\controller\synth.js:111</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Objeto que se va a encargar de gestionar los eventos MIDI</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_recorer" class="property item private">
+    <h3 class="name"><code>recorer</code></h3>
+    <span class="type"><a href="../classes/Recorder.html" class="crosslink">Recorder</a></span>
+
+
+        <span class="flag private">private</span>
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l119"><code>src\controller\synth.js:119</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Objeto que se va a encargar de gestionar la grabación de sonidos</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_reverb" class="property item private">
+    <h3 class="name"><code>reverb</code></h3>
+    <span class="type"><a href="../classes/Reverb.html" class="crosslink">Reverb</a></span>
+
+
+        <span class="flag private">private</span>
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l61"><code>src\controller\synth.js:61</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Efecto de reverb</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_saver" class="property item private">
+    <h3 class="name"><code>saver</code></h3>
+    <span class="type"><a href="../classes/Saver.html" class="crosslink">Saver</a></span>
+
+
+        <span class="flag private">private</span>
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/Reverb.html">Reverb</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_controller_synth.js.html#l93"><code>src\controller\synth.js:93</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Objeto que se va a encargar de enviar peticiones
+a BD para almacenar objetos</p>
 
     </div>
 

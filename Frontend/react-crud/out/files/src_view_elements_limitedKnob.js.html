@@ -38,25 +38,55 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/Analyser.html">Analyser</a></li>
+                                <li><a href="../classes/Anlyser.html">Anlyser</a></li>
                                 <li><a href="../classes/App.html">App</a></li>
+                                <li><a href="../classes/Delay.html">Delay</a></li>
+                                <li><a href="../classes/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../classes/Effect.html">Effect</a></li>
                                 <li><a href="../classes/Envelope.html">Envelope</a></li>
+                                <li><a href="../classes/Equalizer.html">Equalizer</a></li>
+                                <li><a href="../classes/ErrorPage.html">ErrorPage</a></li>
+                                <li><a href="../classes/Filter.html">Filter</a></li>
+                                <li><a href="../classes/Header.html">Header</a></li>
                                 <li><a href="../classes/Index.html">Index</a></li>
+                                <li><a href="../classes/Library.html">Library</a></li>
                                 <li><a href="../classes/LimitedKnob.html">LimitedKnob</a></li>
+                                <li><a href="../classes/Loader.html">Loader</a></li>
+                                <li><a href="../classes/Login.html">Login</a></li>
+                                <li><a href="../classes/Midi.html">Midi</a></li>
+                                <li><a href="../classes/Modal.html">Modal</a></li>
+                                <li><a href="../classes/ModalDelete.html">ModalDelete</a></li>
+                                <li><a href="../classes/ModalLoad.html">ModalLoad</a></li>
+                                <li><a href="../classes/ModalPassword.html">ModalPassword</a></li>
+                                <li><a href="../classes/ModalSave.html">ModalSave</a></li>
                                 <li><a href="../classes/Navigator.html">Navigator</a></li>
                                 <li><a href="../classes/Oscilador.html">Oscilador</a></li>
                                 <li><a href="../classes/oscillator.html">oscillator</a></li>
                                 <li><a href="../classes/Piano.html">Piano</a></li>
+                                <li><a href="../classes/Profile.html">Profile</a></li>
+                                <li><a href="../classes/Recorder.html">Recorder</a></li>
+                                <li><a href="../classes/Reverb.html">Reverb</a></li>
+                                <li><a href="../classes/Saver.html">Saver</a></li>
+                                <li><a href="../classes/SignUp.html">SignUp</a></li>
                                 <li><a href="../classes/Synth.html">Synth</a></li>
+                                <li><a href="../classes/TableUI.html">TableUI</a></li>
                                 <li><a href="../classes/Voice.html">Voice</a></li>
                             </ul>
                 
                 
                             <ul id="api-modules" class="apis modules">
                                 <li><a href="../modules/App.html">App</a></li>
+                                <li><a href="../modules/Delay.html">Delay</a></li>
+                                <li><a href="../modules/Distorsion.html">Distorsion</a></li>
+                                <li><a href="../modules/Filter.html">Filter</a></li>
+                                <li><a href="../modules/filterTypes.html">filterTypes</a></li>
+                                <li><a href="../modules/FX.html">FX</a></li>
                                 <li><a href="../modules/Knob.html">Knob</a></li>
                                 <li><a href="../modules/Navigator.html">Navigator</a></li>
                                 <li><a href="../modules/OscComponents.html">OscComponents</a></li>
                                 <li><a href="../modules/Piano.html">Piano</a></li>
+                                <li><a href="../modules/Reverb.html">Reverb</a></li>
                                 <li><a href="../modules/synth.html">synth</a></li>
                                 <li><a href="../modules/types.html">types</a></li>
                             </ul>
@@ -101,6 +131,7 @@ import  React from &#x27;react&#x27;;
 import {Knob} from &#x27;react-rotary-knob&#x27;;
 import {sinte} from &#x27;../osc-components&#x27;;
 import * as skins from &#x27;react-rotary-knob-skin-pack&#x27;;
+
 
 import {types as knobTypes} from &#x27;./knobtypes&#x27;;
 
@@ -154,6 +185,7 @@ const types = knobTypes;
 class LimitedKnob extends React.Component {
     #type; 
     #skin;
+    #filter
     #value; 
    
     constructor(props) {
@@ -166,8 +198,14 @@ class LimitedKnob extends React.Component {
       this.#value = props.val;
       
       this.#type = props.type;
+
+      if(props.filter){
+        this.#filter = props.filter;
+      }
    
-      if(this.#type === types.OSC_VOLUM){
+      if(this.#type === types.OSC_VOLUM || this.#type === types.REVERBWET
+          || this.#type === types.DELAYWET || this.#type === types.FILTERWET
+            || this.#type === types.DISTORSIONWET){
         this.#skin = skins.s10;
       }else{
         this.#skin = skins.s17;
@@ -195,6 +233,7 @@ class LimitedKnob extends React.Component {
         
     }
 
+   
     /**
      * Método que se encarga de llamar al controlador para que 
      * modifque el Attack del oscilador
@@ -207,8 +246,6 @@ class LimitedKnob extends React.Component {
       this.setState({ value: val });
       var attack = (2 * val ) /100;
       sinte.setEnvolve(this.osc,attack,&#x27;attack&#x27;);
-    
-
     }
     /**
      * Método que se encarga de llamar al controlador para que 
@@ -222,6 +259,101 @@ class LimitedKnob extends React.Component {
       this.setState({ value: val });
       var decay = (2 * val ) /100;
       sinte.setEnvolve(this.osc,decay,&#x27;decay&#x27;);
+    }
+
+    /**
+     * Método que se encarga de llamar al controlador para que 
+     * modifque la cantidad de feedback del efecto delay
+     * 
+     * @method handleOnChangeDelayFeedback
+     * @param {Float} val Valor del Knob
+     * @private
+     */
+    __handleOnchangeDelayFeedBack(val){
+      this.setState({ value: val });
+      sinte.setDelay(&#x27;feedback&#x27;,val);
+    }
+
+    /**
+     * Método que se encarga de llamar al controlador para que 
+     * modifque la cantidad de efecto delay que se aplica
+     * 
+     * @method handleOnChangeDelayWet
+     * @param {Float} val Valor del Knob
+     * @private
+     */
+     __handleOnchangeDelayWet(val){
+      this.setState({ value: val });
+      sinte.setDelay(&#x27;wet&#x27;,val);
+    }
+
+    /**
+     * Método que se encarga de llamar al controlador para que 
+     * modifque la cantidad de efecto distorsion que se aplica
+     * 
+     * @method handleOnChangeDistorsionwet
+     * @param {Float} val Valor del Knob
+     * @private
+     */
+    __handleOnChangeDistorsionwet(val){
+      this.setState({ value: val });
+      sinte.setDistorsion(&#x27;wet&#x27;,val);
+    
+    }
+
+    /**
+     * Método que se encarga de llamar al controlador para que 
+     * modifque el nivel de distorsion producido
+     * 
+     * @method handleOnChangeDistorsionAmount
+     * @param {Float} val Valor del Knob
+     * @private
+     */
+     __handleOnChangeDistorsionAmount(val){
+      this.setState({ value: val });
+      sinte.setDistorsion(&#x27;amount&#x27;,val);
+    
+    }
+    /**
+     * Método que se encarga de llamar al controlador para que 
+     * modifque la cantidad de filtro  que se aplica
+     * 
+     * @method handleOnChangeFilterWet
+     * @param {Float} val Valor del Knob
+     * @private
+     */
+    __handleOnchangeFilterwet(val){
+      this.setState({ value: val });
+      sinte.setFilter(&#x27;wet&#x27;,val);
+
+    }
+
+    /**
+     * Método que se encarga de llamar al controlador para que 
+     * modifque la frecuencia desde donde el  filtro se aplica
+     * 
+     * @method __handleOnChangeFilterControl
+     * @param {Float} val Valor del Knob
+     * @private
+     */
+     __handleOnChangeFilterControl(val){
+      this.setState({ value: val });
+      sinte.setFilter(&#x27;freq&#x27;,val);
+
+    }
+
+    /**
+     * Método que se encarga de llamar al controlador para que 
+     * modifque el volumen Master de la aplicacion
+     * 
+     * @method handleOnChangeMaster
+     * @param {Float} val Valor del Knob
+     * @private
+     */
+    __handleOnChangeMaster(val){
+      this.setState({ value: val });
+      var master = ( val ) /100;
+      sinte.setMaster(master)
     }
     
     /**
@@ -251,6 +383,59 @@ class LimitedKnob extends React.Component {
       sinte.setEnvolve(this.osc,release,&#x27;release&#x27;)
     }
 
+    /**
+     * Método que se encarga de llamar al controlador para que 
+     * modifque el nivel de Decay del Reverb aplicado
+     * 
+     * @method handelOnChangeReverbDecay
+     * @param {Float} val Valor del Knob
+     * @private
+     */
+    __handelOnChangeReverbDecay(val){
+      this.setState({ value: val });
+      var decay = (100 - val) / 10; //se resta el valor a 100 porque el valor es inverso a mas nivel de dacay se necesita menos valor
+      sinte.setReverb(decay,&quot;decay&quot;);
+    }
+    /**
+     * Método que se encarga de llamar al controlador para que 
+     * modifque el filtro pasa alto del Reverb aplicado
+     * 
+     * @method handelOnChangeReverbHP
+     * @param {Float} val Valor del Knob
+     * @private
+     */
+    __handleOnChangeReverbHP(val){
+      this.setState({ value: val });
+      sinte.setReverb(val,&quot;hpf&quot;)
+    }
+
+    /**
+     * Método que se encarga de llamar al controlador para que 
+     * modifque el filtro pasa bajos del Reverb aplicado
+     * 
+     * @method handelOnChangeReverbLP
+     * @param {Float} val Valor del Knob
+     * @private
+     */
+     __handleOnChangeReverbLP(val){
+      this.setState({ value: val });
+      sinte.setReverb(val,&quot;lpf&quot;)
+    }
+    
+    /**
+     * Método que se encarga de llamar al controlador para que 
+     * modifque el nivel de Reverb aplicado
+     * 
+     * @method handleOnChangeReverbWet
+     * @param {Float} val Valor del Knob
+     * @private
+     */
+    __handleOnChangeReverbWet(val){
+      this.setState({ value: val });
+      sinte.setReverb(val,&quot;wet&quot;);
+
+    }
+
     //MÉTODOS PÚBLICOS
 
     /**
@@ -265,15 +450,24 @@ class LimitedKnob extends React.Component {
     handleOnChange(val) {
       
       this.#value = val;
-      const maxDistance = 10;
+      var maxDistance = 10
+      if(this.#type === types.REVERBHPF 
+          || this.#type === types.REVERBLPF 
+            || this.#type === types.FILTERCONTROL){
+         maxDistance = 2300;
+      }
+      if(this.#type === types.DISTORSIONAMOUNT){
+        maxDistance = 60;
+      }
+      
       let distance = Math.abs(val - this.state.value);
-      if (distance &gt; maxDistance) {
+      if (distance &gt; maxDistance ) {
         
         return;
       } else {
-       
         switch(this.#type){
           case types.OSC_VOLUM:
+
             this.__handleOnChangeOscillator(val);
             break;
           case types.ATTACK:
@@ -288,8 +482,42 @@ class LimitedKnob extends React.Component {
           case types.RELEASE:
             this.__handleOnChangeRelease(val);
             break;
-          
+          case types.MASTER:
+            this.__handleOnChangeMaster(val);
+            break;
+          case types.REVERBWET:
+            this.__handleOnChangeReverbWet(val);
+            break;
+          case types.REVERBDECAY:
+            this.__handelOnChangeReverbDecay(val);
+            break;
+          case types.REVERBHPF:
+            this.__handleOnChangeReverbHP(val);
+            break;
+          case types.REVERBLPF:
+            this.__handleOnChangeReverbLP(val);
+            break;
+          case types.DELAYFEEDBACK:
+            this.__handleOnchangeDelayFeedBack(val);
+            break;
+          case types.DELAYWET:
+            this.__handleOnchangeDelayWet(val);
+            break;
+          case types.FILTERWET:
+            this.__handleOnchangeFilterwet(val);
+            break;
+          case types.FILTERCONTROL:
+            this.__handleOnChangeFilterControl(val);
+            break;
+          case types.DISTORSIONWET:
+            this.__handleOnChangeDistorsionwet(val);
+            break;
+          case types.DISTORSIONAMOUNT:
+            this.__handleOnChangeDistorsionAmount(val);
+            break;
+
           default:
+            console.error(&quot;ERROR: tipo incorrecto&quot;);
             break;
         }
         
@@ -308,7 +536,106 @@ class LimitedKnob extends React.Component {
     getState(){
       return this.state;
     }
+    /**
+     * Setter del estado del knob de ganancia
+     * 
+     * @method setGainOsc
+     * @param {Float} val Nuevo valor de ganancia
+     */
+    setGainOsc(val){
+
+      this.setState({ value: val });
+    }
   
+    /**
+     * Setter de los knobs de la envolvente
+     * 
+     * @method setEnvelope
+     * @param {String} param Parametro a cambiar
+     * @param {Float} val Nuevo valor
+     */
+    setEnvelope(param,val){
+      switch(param){
+        case &#x27;decay&#x27;:
+          this.__handleOnChangeDecay(val);
+          break;
+        case &#x27;attack&#x27;:
+          this.__handleOnChangeAttack(val)
+          break;
+        case &#x27;sustain&#x27;:
+          this.__handleOnChangeSustain(val);
+          break;
+        case &#x27;release&#x27;:
+          this.__handleOnChangeRelease(val);
+          break;
+        default:
+          break;
+
+      }
+
+    }
+    /**
+     * Setter del valor del knob wet para un efecto
+     * 
+     * @method setWet
+     * @param {String} effect Efecto al que se va a modificar el wet
+     * @param {Float} val Valor nuevo
+     */
+    setWet(effect, val){
+      switch(effect){
+        case &#x27;delay&#x27;:
+          this.__handleOnchangeDelayWet(val);
+          break;
+        case &#x27;distorsion&#x27;:
+          this.__handleOnChangeDistorsionwet(val);
+          break;
+        case &#x27;filter&#x27;:
+          this.__handleOnchangeFilterwet(val);
+          break;
+        case &#x27;reverb&#x27;:
+          this.__handleOnChangeReverbWet(val);
+          break;
+        default:
+          break;
+      }
+    }
+    
+    /**
+     * Setter del knob amount del efecto distorsion
+     * 
+     * @method setAmountDistorsion
+     * @param {Float} val Valor nuevo
+     */
+    setAmountDistorsion(val){
+      this.__handleOnChangeDistorsionAmount(val);
+    }
+    /**
+     * Setter del knob decay del efecto reverb
+     * 
+     * @method setReverbDecay
+     * @param {Float} val Valor nuevo
+     */
+    setReverbDecay(val){
+      this.__handelOnChangeReverbDecay(val);
+    }
+    /**
+     * Setter del knob feedback del efecto delay
+     * 
+     * @method setFeedback
+     * @param {Float} val Valor nuevo
+     */
+    setFeedback(val){
+      this.__handleOnchangeDelayFeedBack(val);
+    }
+    /**
+     * Setter del knob de frecuencia del efecto filtro
+     * 
+     * @method setFeedback
+     * @param {Float} val Valor nuevo
+     */
+    setFrequencies(val){
+      this.__handleOnChangeFilterControl(val);
+    }
     /**
      * Método que devuelve el componente Knob para ser renderizado
      * 

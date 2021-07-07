@@ -4,9 +4,9 @@
  * 
  * @class Distorsion
  * @constructor
- * @param {Object} context AudioContext
- * @param {Object} input Nodo de entrada sobre el que se aplica el efecto
- * @param {Object} output Node de salida con el efecto aplicado
+ * @param {BaseAudioContext} context AudioContext
+ * @param {AudioNode} input Nodo de entrada sobre el que se aplica el efecto
+ * @param {AudioNode} output Node de salida con el efecto aplicado
  * @see Effect
  */
 
@@ -14,7 +14,7 @@
  * Contiene el nodo correspondiente al efecto
  * 
  * @property effect
- * @type Object
+ * @type AudioNode
  * @protected 
  */
 
@@ -22,7 +22,7 @@
  * Contiene el nodo de ganancia sobre el que se aplica el efecto
  * 
  * @property input
- * @type Object
+ * @type AudioNode
  * @protected 
  */
 
@@ -30,7 +30,7 @@
  * Contiene el nodo de ganancia de salida con el efecto aplicao
  * 
  * @property output
- * @type Object
+ * @type AudioNode
  * @protected 
  */
 
@@ -38,7 +38,7 @@
  * Contiene el nodo para controlar el volumen del nodo del efecto
  * 
  * @property wet
- * @type Object
+ * @type AudioNode
  * @protected 
  */
 
@@ -54,7 +54,7 @@
  * Almacena el estado del efecto
  * 
  * @property state
- * @type JSON
+ * @type object
  * @protected
  */
 class Effect {

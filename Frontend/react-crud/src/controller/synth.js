@@ -37,7 +37,7 @@ import Equalizer from './equalizer';
  *  Contexto de audio para la aplicación de la Web Audio API
  * 
  * @property audioCtx
- * @type Object
+ * @type BaseAudioContext
  * @private
  */
 
@@ -45,7 +45,7 @@ import Equalizer from './equalizer';
  *  Nodo de ganancia para controlar el volumen general de la aplicación
  * 
  * @property masterVolumeNode
- * @type Object
+ * @type AudioNode
  * @private
  */
 
@@ -53,7 +53,7 @@ import Equalizer from './equalizer';
  *  Nodo de ganancia que representa a los osciladores sin aplicarle ningún efecto
  * 
  * @property gainCleanNode
- * @type Object
+ * @type AudioNode
  * @private
  */
 
