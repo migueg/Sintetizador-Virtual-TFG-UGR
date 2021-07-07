@@ -221,6 +221,13 @@ es en realidad el tiempo de retraso entre la señal original de entrada y la se�
 (37) Al igual que antes, sería interesante tener una figura con un grafo que incluya los nodos de los filtros.
 
 
+**Secc. 6.4.1.4.2.1. (Login)**
+
+(38) pág. 135, aparece _existo_ cuando debe ser _éxito_
+
+
+
+
 
 
 
