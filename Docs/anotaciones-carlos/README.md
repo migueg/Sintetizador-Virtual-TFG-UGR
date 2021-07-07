@@ -125,19 +125,9 @@ con los nodos incluyendo simplemente el nombre la clase, y luego, para cada clas
 
 **Secc 6.1.2 (conclusión del análisis de las tecnologías)**
 
-(24) En esta sección o en la anterior creo que habría que añadir algo sobre la justificación del uso de _NodeJS_, _React_ y _Express_, aunque sea breve, ya que ahora mismo no hay nada al respecto
+(24) En esta sección o en la anterior creo que habría que añadir algo sobre la justificación del uso de _NodeJS_, _React_ y _Express_, aunque sea breve, ya que ahora mismo no hay nada al respecto.
 
+**Sec. 6.2.2.1 (javascript)**
 
-
-
-
-
-
-
-
-
-
-
-
-
+(25) Se dice que Javascript es compilado y también que es interpretado, es algo confuso. Creo que en general se puede decir que Javascript es interpretado, aunque algunos interpretes del lenguaje usen compilación JIT (durante la ejecución), pero lo segundo es un detalle menos importante. Además, creo que habría que añadir que Javascript es un lenguaje no fuertemente tipado (no se declara el tipo de cada variable). También se dice que está basado en prototipos y que los objetos no  se crean mediante instanciación de clases. Sin embargo, en las últimas versiones de Javascript sí se pueden declarar clases y crear objetos como instancias de esas clases, de hecho este proyecto usa esas capacidades. Arreglarlo.
 
