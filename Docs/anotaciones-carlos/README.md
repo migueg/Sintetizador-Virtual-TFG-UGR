@@ -140,3 +140,7 @@ con los nodos incluyendo simplemente el nombre la clase, y luego, para cada clas
 **Secc. 6.3.2 (instrucciones de ejecución)**
 
 (27) No se dice si las instrucciones son válidas tanto para Linux como para Windows, aclararlo.
+
+**Secc. 6.4.1.3.1.1 (AudioContext)**
+
+(28)  Al inicio de la página 99 de define que es una _muestra_, se dice _Cada celda se corresponde con una muestra, la cual representa el valor del flujo de audio en un tipo de dato float32._. Pero no queda claro que es el _valor de flujo_, sería bueno explicarlo muy brevemente. También, en la figura 6.1 habría que decir explicitamente que se trata del constructor de la clase `Synth`.
