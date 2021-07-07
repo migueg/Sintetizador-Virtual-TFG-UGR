@@ -183,14 +183,27 @@ otro para el _clean node_ que se referencian en el texto, ya que el texto es alg
 se vería más claro si se incorpora al diagrama. Tmb los nodos de paneo que se describen en la sección 
 6.4.1.3.2.1 (pág. 105). Tmb los nodos envolventes de la 6.4.1.3.2.2.
 
-(30) En la figura 6.7 hay unas llaves mal indentadas (las que cierran el _for_), tmb. en la 6.6 (las últimas). 
+(30) En la figura 6.7 hay unas llaves mal indentadas (las que cierran el _for_), tmb. en la 6.6 (las últimas), y en la 6.13. 
 En general, se debería revisar la indentación de los trozos de código, esta es solo un ejemplo, pero creo que 
 hay más.
 
 
-**Secc. 6.4.1.3.3 (repro de audio sin midi)**
+**Secc. 6.4.1.3.2.2 (envolventes)**
 
-(31) Aparece la palabra _seteado_ (pág 106), es otro anglicismo fácilmente evitable, aquí se debe sustituir por _fijado_
+(31) Aparece la palabra _seteado_ (pág 106), es otro anglicismo fácilmente evitable, aquí se debe sustituir por _fijado_. 
+Revisar este tipo de palabras.
+
+(32)  En la página 107 aparece _Y la envolvente en su totalidad se calculará de la siguiente manera:_, pero ahí acaba la
+sección y da la sensación de que falta un texto una figura.
+
+**Secc. 6.4.1.3.2.3. (Ecualización)**
+
+(33) Se debería de incluir una figura con el grafo de nodos del sintetizador, ahora incluyendo los nodos de ecualización y/o filtro. 
+Sería una versión ampliada de la figura 6.6 con los añadidos de la nota (30), creo que ayudaría a entender mucho mejor 
+el grafo usado para generar la señal de audio.
+
+
+
 
 
 
