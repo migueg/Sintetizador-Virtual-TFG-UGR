@@ -177,12 +177,14 @@ constructor de la clase `Synth`.
 
 (29) En la figura 6.6 (pág. 103), los _Gain Node_ de cada oscilador no aparecen conectados 
 al _Gain Node_ común que controla el volumen de los altavoces. Pero en el texto se dice que sí están....
-Además, creo que sería mejor incluir en el diagrama dos globos para el _master volume node_ y 
-el _clean node_ que se referencian en el texto, ya que el texto es algo complicado de entender, y 
+Además, creo que sería mejor incluir en el diagrama dos globos, uno para el _master volume node_ y 
+otro para el _clean node_ que se referencian en el texto, ya que el texto es algo complicado de entender, y 
 se vería más claro si se incorpora al diagrama.
 
-(30) En la figura 6.7 hay unas llaves mal indentadas (las que cierran en _for_). En general, se 
+(30) En la figura 6.7 hay unas llaves mal indentadas (las que cierran el _for_). En general, se 
 debería revisar la indentación de los trozos de código, esta es solo un ejemplo, pero hay más.
+
+
 
 
 
