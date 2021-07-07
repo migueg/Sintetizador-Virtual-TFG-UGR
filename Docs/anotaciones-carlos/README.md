@@ -104,7 +104,9 @@ HU.27 se usa "hacer login"
 
 **Secc. 5.1.1**
 
-(20) En la figura 5.3 (pág.59) y su explicación, no queda claro la diferencia entre la componente "Web" y la componente "NodeJS (FrontEnd)", no me queda claro pq se usa Node JS en el front end, aclarar esto brevemente en el texto. Ver nota (26).
+(20) En la figura 5.3 (pág.59) y su explicación, no queda claro la diferencia entre la componente 
+"Web" y la componente "NodeJS (FrontEnd)", no me queda claro pq se usa Node JS en el front end, 
+aclarar esto brevemente en el texto. Ver nota (26).
 
 
 **Secc 5.2**
@@ -113,36 +115,67 @@ HU.27 se usa "hacer login"
 
 **Secc. 5.3.1, página 63-68**
 
-(21) Se introducen los diagramas de interacción entre el front-end y el back-end, pero, aparte de los diagramas, no se relacionan las distintas peticiones ni se indican para que sirve cada una, en formato de texto, creo que sería bueno añadir una lista de peticiones y de cada una al menos una frase explicativa.
+(21) Se introducen los diagramas de interacción entre el front-end y el back-end, pero, aparte 
+de los diagramas, no se relacionan las distintas peticiones ni se indican para que sirve cada 
+una, en formato de texto, creo que sería bueno añadir una lista de peticiones y de cada una 
+al menos una frase explicativa.
 
 **Secciones 5.3.2 y 5.4.1**
 
-(22) Centrar las figuras 5.8, 5.9 y 5.10. En la figura 5.4.10 no aparece explícitamente cual de los componentes que hay es la "Fachada", 
-solucionar esto (es "Synth", se puede añadir una etiqueta en el diagrama).
+(22) Centrar las figuras 5.8, 5.9 y 5.10. En la figura 5.4.10 no aparece explícitamente 
+cual de los componentes que hay es la "Fachada", solucionar esto (es "Synth", se puede
+añadir una etiqueta en el diagrama).
 
 **Sección 5.4.4 (diagrama de clases)**
 
-(23) En las figuras 5.16 y 5.17 (págs 77 y 78): no se puede leer el texto. Quizás sea mejor, en la medida que sea posible, hacer un diagrama
-con los nodos incluyendo simplemente el nombre la clase, y luego, para cada clase, incluir aparte dsu estructura (soy consciente de que no hay tiempo). Alternativamente, quizás se podrían incluir estos diagramas UML en una hoja de tamaño A3 en lugar de A4 (quizás como un anexo), de forma que ampliandolo se pudiera leer algo del texto.
+(23) En las figuras 5.16 y 5.17 (págs 77 y 78): no se puede leer el texto. Quizás sea 
+mejor, en la medida que sea posible, hacer un diagrama con los nodos incluyendo simplemente 
+el nombre la clase, y luego, para cada clase, incluir aparte dsu estructura (soy consciente 
+de que no hay tiempo). Alternativamente, quizás se podrían incluir estos diagramas UML en 
+una hoja de tamaño A3 en lugar de A4 (quizás como un anexo), de forma que ampliandolo se 
+pudiera leer algo del texto.
 
 **Secc 6.1.2 (conclusión del análisis de las tecnologías)**
 
-(24) En esta sección o en la anterior creo que habría que añadir algo sobre la justificación del uso de _NodeJS_, _React_ y _Express_, aunque sea breve, ya que ahora mismo no hay nada al respecto.
+(24) En esta sección o en la anterior creo que habría que añadir algo sobre la justificación 
+del uso de _NodeJS_, _React_ y _Express_, aunque sea breve, ya que ahora mismo no hay nada 
+al respecto.
 
 **Sec. 6.2.2.1 (javascript)**
 
-(25) Se dice que Javascript es compilado y también que es interpretado, es algo confuso. Creo que en general se puede decir que Javascript es interpretado, aunque algunos interpretes del lenguaje usen compilación JIT (durante la ejecución), pero lo segundo es un detalle menos importante. Además, creo que habría que añadir que Javascript es un lenguaje no fuertemente tipado (no se declara el tipo de cada variable). También se dice que está basado en prototipos y que los objetos no  se crean mediante instanciación de clases. Sin embargo, en las últimas versiones de Javascript (ECMAscript 6) sí se pueden declarar clases y crear objetos como instancias de esas clases, de hecho este proyecto usa esas capacidades. Arreglarlo.
+(25) Se dice que Javascript es compilado y también que es interpretado, es algo 
+confuso. Creo que en general se puede decir que Javascript es interpretado, aunque 
+algunos interpretes del lenguaje usen compilación JIT (durante la ejecución), pero lo 
+segundo es un detalle menos importante. Además, creo que habría que añadir que Javascript
+es un lenguaje no fuertemente tipado (no se declara el tipo de cada variable). También se 
+dice que está basado en prototipos y que los objetos no  se crean mediante instanciación de 
+clases. Sin embargo, en las últimas versiones de Javascript (ECMAscript 6) sí se pueden 
+declarar clases y crear objetos como instancias de esas clases, de hecho este proyecto 
+usa esas capacidades. Arreglarlo.
 
 **Secc. 6.2.3 (entorno de ejecución)**
 
-(26) No me queda claro el motivo de usar NodeJS para el front-end o para una parte del front-end, es lo mismo que digo en la nota (20). Aclararlo aquí brevemente. Creo que el motivo está relacionado con que quizás React usa Node JS, pero no lo se seguro, y en caso afirmativo, no se porque lo usa.
+(26) No me queda claro el motivo de usar NodeJS para el front-end o para una parte del 
+front-end, es lo mismo que digo en la nota (20). Aclararlo aquí brevemente. Creo que 
+el motivo está relacionado con que quizás React usa Node JS, pero no lo se seguro, 
+y en caso afirmativo, no se porque lo usa.
 
 **Secc. 6.3.2 (instrucciones de ejecución)**
 
-(27) No se dice si las instrucciones son válidas tanto para Linux como para Windows, aclararlo.
+(27) No se dice si las instrucciones son válidas tanto para Linux como para Windows, 
+aclararlo.
 
 **Secc. 6.4.1.3.1.1 (AudioContext)**
 
-(28)  Al inicio de la página 99 de define que es una _muestra_, se dice _Cada celda se corresponde con una muestra, la cual representa el valor del flujo de audio en un tipo de dato float32._. Pero no queda claro que es el _valor de flujo_, sería bueno explicarlo muy brevemente. También, en la figura 6.1 habría que decir explicitamente que se trata del constructor de la clase `Synth`.
+(28)  Al inicio de la página 99 de define que es una _muestra_, se dice _Cada celda se 
+corresponde con una muestra, la cual representa el valor del flujo de audio en un tipo 
+de dato float32._.  Pero no queda claro que es el _valor de flujo_, sería bueno explicarlo 
+muy brevemente. También, en la figura 6.1 habría que decir explicitamente que se trata del 
+constructor de la clase `Synth`.
 
---> continuar a partir de la página 100 (6.4.1.3.1.1.1)
+**Secc. 6.4.1.3.2 (repro de audio sin midi)**
+
+(29) En la figura 6.6 (pág. 103), los _Gain Node_ de cada oscilador no aparecen conectados 
+al _Gain Node_ común que controla el volumen de los altavoces. Pero en el texto se dice que sí están....
+
+
