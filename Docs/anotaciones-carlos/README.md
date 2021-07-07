@@ -115,7 +115,17 @@ HU.27 se usa "hacer login"
 
 **Secciones 5.3.2 y 5.4.1**
 
-(22) Centrar las figuras 5.8 y 5.9
+(22) Centrar las figuras 5.8, 5.9 y 5.10. En la figura 5.4.10 no aparece explícitamente cual de los componentes que hay es la "Fachada", 
+solucionar esto (es "Synth", se puede añadir una etiqueta en el diagrama).
+
+**Sección 5.4.4 (diagrama de clases)**
+
+(23) En las figuras 5.16 y 5.17 (págs 77 y 78): no se puede leer el texto. Quizás sea mejor, en la medida que sea posible, hacer un diagrama
+con los nodos incluyendo simplemente el nombre la clase, y luego, para cada clase, incluir aparte dsu estructura (soy consciente de que no hay tiempo). Alternativamente, quizás se podrían incluir estos diagramas UML en una hoja de tamaño A3 en lugar de A4 (quizás como un anexo), de forma que ampliandolo se pudiera leer algo del texto.
+
+
+
+
 
 
 
