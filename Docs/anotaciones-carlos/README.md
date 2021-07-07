@@ -135,7 +135,7 @@ con los nodos incluyendo simplemente el nombre la clase, y luego, para cada clas
 
 **Secc. 6.2.3 (entorno de ejecución)**
 
-(26) No me queda claro el motivo de usar NodeJS para el front-end o para una parte del front-end, es lo mismo que digo en la nota (20). Aclararlo aquí brevemente.
+(26) No me queda claro el motivo de usar NodeJS para el front-end o para una parte del front-end, es lo mismo que digo en la nota (20). Aclararlo aquí brevemente. Creo que el motivo está relacionado con que quizás React usa Node JS, pero no lo se seguro, y en caso afirmativo, no se porque lo usa.
 
 **Secc. 6.3.2 (instrucciones de ejecución)**
 
