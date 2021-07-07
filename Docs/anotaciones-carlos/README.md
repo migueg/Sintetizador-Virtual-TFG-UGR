@@ -25,7 +25,8 @@ más abajo.
 
 **Secc 3.1. página 21**
 
-(6) La frase "se dividen en 2 Sprint" debería ser "se dividen en 2 sprints". En general, en el texto aparece "Sprint", pero creo que se debe usar "sprint" en su lugar.
+(6) La frase "se dividen en 2 Sprint" debería ser "se dividen en 2 sprints". En general, en el
+texto aparece "Sprint", pero creo que se debe usar "sprint" en su lugar.
 
 (7) El segundo párrafo dice que se usa "Scrum", ese párrafo debería ser el primero.
 
@@ -98,6 +99,12 @@ que sería mejor evitar las palabras en Inglés (o adaptadas del Inglés al Espa
 alternativas comunmente aceptadas en Español.  En este caso, por ejemplo, se puede usar "identificarme" 
 en el lugar de "logearme". También se debe ser coherente, por ejemplo, aquí se usa "logear", pero en 
 HU.27 se usa "hacer login"
+
+**Secc. 5.1.1**
+
+(20) En la figura 5.3 (pág.59) y su explicación, no queda claro la diferencia entre la componente "Web" y la componente "NodeJS (FrontEnd)", no me queda claro pq se usa Node JS en el front end, aclarar esto brevemente en el texto.
+
+
 
 
 
