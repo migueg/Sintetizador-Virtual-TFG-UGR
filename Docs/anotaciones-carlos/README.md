@@ -228,6 +228,10 @@ es en realidad el tiempo de retraso entre la señal original de entrada y la se�
 (39) la sección 6.4.1. (Implementación del front-end) tiene 77 páginas, pero no aparece desglosada en el 
 índice, creo que sería bueno regenerar el índice con dicha sección desglosada
 
+**Secc. 6.4.2. (Backend)**
+
+(40) En general en esta sección se usa la palabra _schema_ directamente en Inglés, pero creo que quedaría mejor usa _esquema_ en su lugar.
+
 
 
 
